@@ -1,0 +1,138 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+/*
+  Design tokens from CLAUDE.md. These are the only colour values the site uses;
+  components reference the generated utilities (bg-steel, text-ink, border-line, ...)
+  rather than arbitrary values.
+
+  Cleanroom palette (client choice 2026-07-15, third canvas iteration): every neutral
+  is washed with steel, so copper is the only warm element on the page and CTAs pop by
+  temperature, not just lightness. copper-soft exists solely for small copper text on
+  steel-deep bands, where regular copper fails contrast.
+
+  Contrast notes (WCAG AA, verified):
+  - ink, steel, steel-deep, copper-deep all pass on paper and paper-warm.
+  - muted fails 4.5:1 at small sizes: large text only. Small secondary text uses
+    steel-deep instead.
+  - Text on copper must be pure white (4.51:1); the paper tones fail there.
+    Hover deepens to copper-deep at 7.55:1.
+  - copper-soft passes on steel-deep (4.84:1) but NOT on steel: dark bands only.
+*/
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  --color-steel: #4e6076;
+  --color-steel-deep: #37475b;
+  --color-copper: #a9663f;
+  --color-copper-deep: #7f4526;
+  --color-copper-soft: #e0b087;
+  --color-ink: #26303d;
+  --color-muted: #717d8b;
+  --color-line: #d3dae2;
+  --color-paper: #f4f6f8;
+  --color-paper-warm: #e7ebf0;
+
+  /* Wide tracking for eyebrow/label text and the header lockup */
+  --tracking-eyebrow: 0.18em;
+  --tracking-lockup: 0.14em;
+
+  /* Max content width: 1180px */
+  --container-content: 73.75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-steel);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-copper-deep);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-copper);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-copper-deep);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--color-steel);
+    color: var(--color-steel-deep);
+    background-color: transparent;
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-steel);
+    color: #ffffff;
+  }
+
+  /* Inverted variant for dark (steel-deep) bands */
+  .btn-secondary-inverse {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: #ffffff;
+    background-color: transparent;
+  }
+  .btn-secondary-inverse:hover {
+    background-color: #ffffff;
+    color: var(--color-steel-deep);
+  }
+
+  .eyebrow {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-copper-deep);
+  }
+
+  /* Clearly marked temporary value; replaced when the client provides the fact */
+  .placeholder-note {
+    font-style: italic;
+    color: var(--color-steel-deep);
+  }
+}

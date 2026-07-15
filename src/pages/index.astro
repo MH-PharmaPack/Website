@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import logo from '../assets/logo/mh-pharmapack-logo.svg';
+import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
+
+// Copy on this page is placed verbatim from CONTENT-SPEC.md section 4.
+// Hero headline: recommended Option A. [NEEDS: final headline confirmation]
+
+const lines = [
+  {
+    name: 'Packaging',
+    copy: 'Primary and secondary packaging sourced to your spec: vials, ampoules, closures, cartons, foils, labels, and laminates.',
+    icon: '<path d="M4.5 8 12 4.25 19.5 8v8L12 19.75 4.5 16V8Z" stroke-linejoin="round"/><path d="M4.5 8 12 11.75 19.5 8" stroke-linejoin="round"/><path d="M12 11.75v8" stroke-linecap="round"/>',
+  },
+  {
+    name: 'Formulation',
+    copy: 'Formulation development and supply across OSD, general, cephalosporin, and beta-lactam lines.',
+    icon: '<path d="M10 4h4" stroke-linecap="round"/><path d="M10.75 4v5l-4.4 7.5A2.1 2.1 0 0 0 8.2 19.7h7.6a2.1 2.1 0 0 0 1.85-3.2L13.25 9V4" stroke-linejoin="round"/><path d="M8.4 14.5h7.2" stroke-linecap="round"/>',
+  },
+  {
+    name: 'Finished Goods',
+    copy: 'Finished dosage forms: injectables, tablets, capsules, liquids, and dry powders.',
+    icon: '<path d="M7.3 7.3a3.9 3.9 0 0 1 5.5 0l3.9 3.9a3.9 3.9 0 1 1-5.5 5.5l-3.9-3.9a3.9 3.9 0 0 1 0-5.5Z" stroke-linejoin="round"/><path d="m10.05 10.05 3.9 3.9" stroke-linecap="round"/>',
+  },
+  {
+    name: 'API',
+    copy: 'Active pharmaceutical ingredients across corticosteroid, anticancer, antidepressant, and most major therapeutic categories.',
+    icon: '<path d="M12 4 19 8v8l-7 4-7-4V8l7-4Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.6"/>',
+  },
+  {
+    name: 'Sourcing',
+    copy: 'End-to-end sourcing for any one line or all five, matched to the right approved manufacturer.',
+    icon: '<path d="m9.5 14.5 5-5" stroke-linecap="round"/><path d="M11 7.5 12.7 5.8a3.4 3.4 0 0 1 4.8 4.8L15.8 12.3" stroke-linecap="round"/><path d="M13 16.5 11.3 18.2a3.4 3.4 0 0 1-4.8-4.8l1.7-1.7" stroke-linecap="round"/>',
+  },
+];
+
+const steps = [
+  {
+    title: 'You tell us the requirement.',
+    copy: 'Product, specification, quantity, market, and timeline.',
+  },
+  {
+    title: 'We match the right plant.',
+    copy: 'From our network of WHO GMP and EU GMP approved manufacturers across three regions.',
+  },
+  {
+    title: 'We coordinate the deal.',
+    copy: 'Supplier audit support, QA and QC and dossier coordination, documentation, payment terms, and logistics follow-up.',
+  },
+  {
+    title: 'You deal directly with the manufacturer.',
+    copy: 'Contracts of sale are between you and the plant. We make the introduction work and stay with it end to end.',
+  },
+];
+---
+
+<Base
+  title="MH PharmaPack | Pharmaceutical Sourcing & Supply"
+  description="MH PharmaPack connects pharmaceutical buyers to WHO GMP and EU GMP approved manufacturers across India, Latin America, and South Africa, and coordinates each deal end to end: quality, documentation, payment terms, and logistics."
+>
+  <!-- Logo intro overlay: home route only, once per session, reduced-motion safe -->
+  <Intro slot="pre-shell" />
+
+  <!-- 4.1 Hero: light steel-washed band, copper CTA as the only warm element -->
+  <section class="border-b border-line bg-paper-warm">
+    <div class="mx-auto grid max-w-content items-center gap-12 px-5 pt-16 pb-20 md:grid-cols-2 md:gap-14 md:px-8 md:pt-24 md:pb-28">
+      <div>
+        <p class="eyebrow">Pharmaceutical Sourcing &amp; Supply</p>
+        <h1 class="mt-5 text-4xl leading-[1.1] font-bold tracking-tight text-ink md:text-5xl">
+          The link between pharmaceutical buyers and the right manufacturers.
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-steel-deep">
+          We connect buyers to WHO GMP and EU GMP approved manufacturers across India, Latin
+          America, and South Africa, and coordinate the deal end to end: quality, documentation,
+          payment terms, and logistics.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+          <a href={withBase('/services')} class="btn btn-secondary">What We Do</a>
+        </div>
+      </div>
+
+      <!-- [NEEDS: real photograph] Temporary placeholder until real facility photography lands. -->
+      <figure class="relative overflow-hidden rounded-md border border-line bg-paper shadow-lg shadow-steel-deep/10">
+        <div class="flex aspect-[4/3] items-center justify-center">
+          <img src={logo.src} width={logo.width} height={logo.height} alt="" class="w-2/5 max-w-70" />
+        </div>
+        <div class="absolute inset-x-0 top-0 h-0.5 bg-copper"></div>
+        <figcaption
+          class="absolute bottom-3 left-3 rounded-sm bg-steel-deep/95 px-2.5 py-1.5 text-[0.62rem] font-semibold tracking-eyebrow text-paper uppercase"
+        >
+          Placeholder, real photography to follow
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 4.2 What we do, in one line each -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-24">
+      <p class="eyebrow">What we do</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        Five sourcing lines, one point of contact.
+      </h2>
+      <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-6">
+        {
+          lines.map((line) => (
+            <div>
+              <svg class="h-7 w-7 text-steel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
+              <h3 class="mt-4 text-base font-bold text-ink">{line.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-steel-deep">{line.copy}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-12 max-w-2xl text-base leading-relaxed text-ink">
+        Any one of these, or all five for a single programme, matched to the right approved plant
+        and coordinated by us.
+        <a href={withBase('/services')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">What We Do</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 4.3 How it works -->
+  <section class="bg-paper-warm">
+    <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-24">
+      <p class="eyebrow">How it works</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        From requirement to delivered goods.
+      </h2>
+      <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:gap-x-8">
+        {
+          steps.map((step, i) => (
+            <li class="border-t-2 border-line pt-5">
+              <span class="text-sm font-bold tracking-eyebrow text-copper-deep">0{i + 1}</span>
+              <h3 class="mt-3 text-lg font-bold text-ink">{step.title}</h3>
+              <p class="mt-2 max-w-md text-base leading-relaxed text-steel-deep">{step.copy}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4.4 Reach and quality, the credibility band -->
+  <section class="bg-steel-deep">
+    <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-20">
+      <div class="grid gap-10 md:grid-cols-3 md:gap-8">
+        <div>
+          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Sourcing regions</h2>
+          <p class="mt-4 text-base leading-relaxed text-paper">
+            India, Latin America (EU approved), South Africa (WHO GMP, PIC/S approved).
+          </p>
+        </div>
+        <div>
+          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Quality standard</h2>
+          <p class="mt-4 text-base leading-relaxed text-paper">
+            We source exclusively from WHO GMP and EU GMP approved facilities. Partner plants hold
+            WHO GMP, EU GMP, ISO, and UK MHRA approvals.
+          </p>
+        </div>
+        <div>
+          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Network</h2>
+          <!-- [NEEDS: confirm the public number] Using the spec's recommended qualitative phrasing. -->
+          <p class="mt-4 text-base leading-relaxed text-paper">
+            A growing network of approved manufacturing partners.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4.5 Services strip -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-16">
+      <p class="max-w-3xl text-lg leading-relaxed text-ink">
+        Beyond the match: supplier audit support, business development, QA and QC and dossier
+        coordination, paperwork, payment terms, collection, and logistics follow-up.
+        <a href={withBase('/services')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">What We Do</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 4.6 Proof / reference case (anonymised default; named version only with written consent) -->
+  <section class="border-y border-line bg-paper-warm">
+    <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-20">
+      <p class="eyebrow">A recent engagement</p>
+      <p class="mt-5 max-w-3xl border-l-2 border-copper pl-5 text-xl leading-relaxed font-medium text-ink md:text-2xl">
+        We recently connected an EU-approved corticosteroid API supplier with a Mumbai-based
+        formulation company, and coordinated the supply end to end.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4.7 Closing call to action -->
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 py-20 text-center md:px-8 md:py-28">
+      <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        Tell us what you need, and we will find the right plant.
+      </h2>
+      <div class="mt-9">
+        <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+      </div>
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold">
+        <a
+          href={WHATSAPP_HREF}
+          class="text-steel-deep transition-colors hover:text-ink"
+          title={WHATSAPP ? 'Chat on WhatsApp' : 'WhatsApp number to be added'}
+        >
+          WhatsApp
+        </a>
+        <a
+          href={TEL_HREF}
+          class="text-steel-deep transition-colors hover:text-ink"
+          title={PHONE ? 'Call us' : 'Phone number to be added'}
+        >
+          Call
+        </a>
+        <a href={MAILTO_HREF} class="text-steel-deep transition-colors hover:text-ink">Email</a>
+      </div>
+    </div>
+  </section>
+</Base>

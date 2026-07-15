@@ -1,0 +1,86 @@
+---
+import logo from '../assets/logo/mh-pharmapack-logo.svg';
+import { NAV, withBase } from '../config';
+
+const desktopNav = NAV.filter((item) => item.href !== withBase('/') && item.href !== withBase('/contact'));
+---
+
+<header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
+  <div class="mx-auto flex h-18 max-w-content items-center justify-between gap-6 px-5 md:px-8">
+    <!-- Lockup: mark + wordmark + descriptor. #header-logo-slot is the intro animation's
+         dock target; the intro hides the static img and lands its animated mark in the slot. -->
+    <a href={withBase('/')} class="flex min-w-0 items-center gap-3" aria-label="MH PharmaPack, home">
+      <span id="header-logo-slot" class="flex h-11 w-[55px] shrink-0 items-center justify-center">
+        <img id="header-logo-img" src={logo.src} width={logo.width} height={logo.height} alt="" class="h-11 w-auto" />
+      </span>
+      <span id="header-lockup-text" class="flex min-w-0 flex-col justify-center gap-0.5 leading-none">
+        <span class="text-[0.9rem] font-bold tracking-lockup whitespace-nowrap text-ink">MH PHARMAPACK</span>
+        <span class="text-[0.6rem] font-semibold tracking-eyebrow whitespace-nowrap text-steel-deep uppercase">
+          Pharmaceutical Sourcing &amp; Supply
+        </span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+      {
+        desktopNav.map((item) => (
+          <a href={item.href} class="text-sm font-medium text-steel-deep transition-colors hover:text-ink">
+            {item.label}
+          </a>
+        ))
+      }
+      <a href={withBase('/contact')} class="btn btn-primary !min-h-11 !px-5 text-sm">Request a Quote</a>
+    </nav>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      class="flex h-11 w-11 items-center justify-center rounded-sm border border-line text-steel-deep lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open menu"
+    >
+      <svg id="nav-icon-open" class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M2.5 5h15M2.5 10h15M2.5 15h15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+      </svg>
+      <svg id="nav-icon-close" class="hidden h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="hidden border-t border-line bg-paper lg:hidden" aria-label="Primary">
+    <ul class="px-5 py-3">
+      {
+        NAV.map((item) => (
+          <li>
+            <a href={item.href} class="block border-b border-line py-3.5 text-base font-medium text-ink last:border-b-0">
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="px-5 pt-1 pb-6">
+      <a href={withBase('/contact')} class="btn btn-primary w-full">Request a Quote</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+
+  if (toggle && panel && iconOpen && iconClose) {
+    toggle.addEventListener('click', () => {
+      const opening = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !opening);
+      iconOpen.classList.toggle('hidden', opening);
+      iconClose.classList.toggle('hidden', !opening);
+      toggle.setAttribute('aria-expanded', String(opening));
+      toggle.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
+    });
+  }
+</script>

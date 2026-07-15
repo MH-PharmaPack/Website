@@ -1,0 +1,94 @@
+---
+import logo from '../assets/logo/mh-pharmapack-logo.svg';
+import { NAV, SALES_EMAIL, MAILTO_HREF, PHONE, WHATSAPP, OFFICE_ADDRESS, withBase } from '../config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-paper-warm">
+  <div class="mx-auto max-w-content px-5 pt-14 pb-10 md:px-8">
+    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1.2fr] md:gap-8">
+      <div>
+        <a href={withBase('/')} class="flex items-center gap-3" aria-label="MH PharmaPack, home">
+          <img src={logo.src} width={logo.width} height={logo.height} alt="" class="h-10 w-auto" />
+          <span class="flex flex-col gap-0.5 leading-none">
+            <span class="text-[0.85rem] font-bold tracking-lockup text-ink">MH PHARMAPACK</span>
+            <span class="text-[0.58rem] font-semibold tracking-eyebrow text-steel-deep uppercase">
+              Pharmaceutical Sourcing &amp; Supply
+            </span>
+          </span>
+        </a>
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-steel-deep">
+          A sourcing and supply intermediary connecting pharmaceutical buyers with approved
+          manufacturers, and coordinating each engagement end to end.
+        </p>
+      </div>
+
+      <nav aria-label="Footer">
+        <h2 class="eyebrow">Navigate</h2>
+        <ul class="mt-4 space-y-2.5">
+          {
+            NAV.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm font-medium text-steel-deep transition-colors hover:text-ink">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href={withBase('/privacy')} class="text-sm font-medium text-steel-deep transition-colors hover:text-ink">
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="eyebrow">Contact</h2>
+        <ul class="mt-4 space-y-2.5 text-sm leading-relaxed">
+          <li>
+            <a href={MAILTO_HREF} class="font-medium text-steel-deep transition-colors hover:text-ink">
+              {SALES_EMAIL}
+            </a>
+          </li>
+          <li>
+            {PHONE ? (
+              <a href={`tel:${PHONE}`} class="font-medium text-steel-deep transition-colors hover:text-ink">
+                {PHONE}
+              </a>
+            ) : (
+              <span class="placeholder-note">[Phone number to be added]</span>
+            )}
+          </li>
+          <li>
+            {WHATSAPP ? (
+              <a href={`https://wa.me/${WHATSAPP}`} class="font-medium text-steel-deep transition-colors hover:text-ink">
+                WhatsApp
+              </a>
+            ) : (
+              <span class="placeholder-note">[WhatsApp number to be added]</span>
+            )}
+          </li>
+          <li class="pt-1 text-steel-deep">
+            {OFFICE_ADDRESS ? OFFICE_ADDRESS : <span class="placeholder-note">[Office address to be added]</span>}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Intermediary disclaimer, verbatim from CONTENT-SPEC.md section 8.2. Do not soften. -->
+    <div class="mt-12 border-t border-line pt-8">
+      <p class="max-w-4xl text-xs leading-relaxed text-steel-deep">
+        MH PharmaPack acts as a sourcing and supply intermediary. We facilitate introductions
+        between buyers and manufacturers and coordinate transactions. We do not manufacture
+        pharmaceutical products and do not take title to goods. Contracts of sale are entered
+        into directly between the buyer and the manufacturer. MH PharmaPack is not a party to
+        those contracts and does not guarantee, warrant, or assume liability for product
+        quality, regulatory compliance, delivery, or payment. All certifications and approvals
+        referenced belong to the respective manufacturing partners.
+      </p>
+      <p class="mt-6 text-xs text-steel-deep">&copy; {year} MH PharmaPack.</p>
+    </div>
+  </div>
+</footer>
