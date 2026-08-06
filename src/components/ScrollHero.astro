@@ -1,0 +1,186 @@
+---
+// Scroll-synced 3D hero: the light-stream journey from the experiments
+// prototype, integrated as the Home hero. Copy is verbatim from
+// CONTENT-SPEC 4.1 (headline: recommended Option A); the two beat headings
+// are placeholder narrative microcopy pending client review.
+// Mobile-first: the scroll track is shorter on phones, type and blocks are
+// sized for the ~344px cover-screen floor first, and the scene script drops
+// particle count and pixel ratio on narrow screens.
+import { withBase } from '../config';
+---
+
+<section class="sh-root" data-scroll-hero>
+  <div class="sh-stage" data-sh="stage">
+    <canvas class="sh-canvas" data-sh="canvas" aria-hidden="true"></canvas>
+    <div class="sh-grain" data-sh="grain" aria-hidden="true"></div>
+    <div class="sh-vignette" data-sh="vignette" aria-hidden="true"></div>
+
+    <div class="sh-copy" data-sh="copy">
+      <p class="sh-eyebrow">Pharmaceutical Sourcing &amp; Supply</p>
+      <h1>The link between pharmaceutical buyers and the right manufacturers.</h1>
+      <p class="sh-sub">
+        We connect buyers to WHO GMP and EU GMP approved manufacturers across
+        India, Latin America, and South Africa, and coordinate the deal end to
+        end: quality, documentation, payment terms, and logistics.
+      </p>
+      <div class="sh-ctas">
+        <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+        <a href={withBase('/services')} class="btn btn-secondary-inverse">What We Do</a>
+      </div>
+    </div>
+
+    <!-- Beat headings are placeholder microcopy for review; body lines derive
+         from CONTENT-SPEC 4.1 and 4.3. -->
+    <div class="sh-beat" data-sh="beat1">
+      <h2>Your enquiry sets off</h2>
+      <p>
+        One line of interest is enough. We qualify WHO GMP and EU GMP approved
+        manufacturers against your spec.
+      </p>
+    </div>
+    <div class="sh-beat" data-sh="beat2">
+      <h2>Two sides, one deal</h2>
+      <p>
+        Buyer and manufacturer come together: quality, documentation, payment
+        terms, and logistics, coordinated end to end.
+      </p>
+    </div>
+    <div class="sh-beat sh-finale" data-sh="beat3">
+      <h2>Delivered, end to end</h2>
+      <div class="sh-ctas">
+        <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+        <a href={withBase('/services')} class="btn btn-secondary-inverse">What We Do</a>
+      </div>
+    </div>
+
+    <div class="sh-flare" data-sh="flare" aria-hidden="true"></div>
+    <div class="sh-hint" data-sh="hint" aria-hidden="true">Scroll</div>
+    <div class="sh-poster" data-sh="poster" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+  .sh-root {
+    /* The scroll track: the ride uses the first ~82%, the strand-extraction
+       shot the rest (see rideEnd in scroll-hero.js). The stage stays dark
+       the whole way; the extraction ends with the strand on the gutter and
+       the dark stage then scrolls away as ordinary content, the strand
+       crossing the dark-to-paper boundary. */
+    height: 430vh;
+    background: linear-gradient(180deg, #050b1a 0%, #0a1428 55%, #12203a 100%);
+  }
+  @media (min-width: 768px) {
+    .sh-root { height: 500vh; }
+  }
+
+  .sh-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh; /* mobile URL-bar-safe viewport */
+    overflow: hidden;
+  }
+  /* The canvas is FIXED and full-viewport: after the hero it keeps rendering
+     the transparent gutter river above the light sections' backgrounds
+     (section text is elevated above it; see global.css). */
+  .sh-canvas {
+    position: fixed; inset: 0; width: 100%; height: 100%;
+    z-index: 3; pointer-events: none;
+  }
+
+  .sh-grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 4;
+    opacity: 0.06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 280px 280px;
+  }
+  .sh-vignette {
+    position: absolute; inset: 0; pointer-events: none; z-index: 5;
+    background: radial-gradient(ellipse 95% 80% at 50% 45%,
+      rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%, rgba(4, 10, 34, 0.5) 100%);
+  }
+
+  /* Opening copy block: real hero copy, centred in the upper part of the
+     frame, streams converging beneath it */
+  .sh-copy {
+    position: absolute; left: 50%; top: 11vh; transform: translateX(-50%);
+    z-index: 6; width: min(92vw, 780px); text-align: center;
+    color: var(--color-paper);
+    text-shadow: 0 2px 28px rgba(3, 8, 24, 0.65);
+  }
+  .sh-eyebrow {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase; color: var(--color-copper-soft);
+  }
+  .sh-copy h1 {
+    margin-top: 0.9rem;
+    font-size: clamp(1.6rem, 6.2vw, 3.4rem);
+    line-height: 1.12; font-weight: 700; letter-spacing: -0.015em;
+  }
+  .sh-sub {
+    margin: 1rem auto 0; max-width: 60ch;
+    font-size: clamp(0.875rem, 1.6vw, 1.06rem); line-height: 1.55;
+    color: rgba(224, 233, 246, 0.78);
+  }
+  .sh-ctas {
+    margin-top: 1.4rem; display: flex; flex-wrap: wrap;
+    gap: 0.75rem; justify-content: center;
+  }
+
+  /* Ride beats */
+  .sh-beat {
+    position: absolute; left: 6vw; top: 34vh; z-index: 6;
+    max-width: min(440px, 86vw);
+    opacity: 0; pointer-events: none;
+    color: var(--color-paper);
+    text-shadow: 0 2px 28px rgba(3, 8, 24, 0.65);
+  }
+  .sh-beat h2 {
+    font-size: clamp(1.35rem, 3vw, 2.1rem); line-height: 1.15;
+    font-weight: 700; letter-spacing: -0.01em;
+  }
+  .sh-beat p {
+    margin-top: 0.6rem;
+    font-size: clamp(0.875rem, 1.5vw, 1rem); line-height: 1.55;
+    color: rgba(224, 233, 246, 0.8);
+  }
+  .sh-finale {
+    left: 50%; top: 38vh; transform: translateX(-50%);
+    text-align: center; max-width: min(560px, 92vw);
+  }
+
+  .sh-flare {
+    position: absolute; inset: 0; z-index: 5; opacity: 0; pointer-events: none;
+    background: radial-gradient(circle at 50% 50%,
+      rgba(255, 244, 224, 0.95) 0%, rgba(255, 236, 205, 0.45) 38%,
+      rgba(180, 190, 240, 0) 72%);
+  }
+  .sh-hint {
+    position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
+    z-index: 6; pointer-events: none;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.34em;
+    text-transform: uppercase; color: rgba(224, 233, 246, 0.65);
+  }
+
+  /* Poster: quiet navy held over the canvas until the first frames render.
+     If WebGL is unavailable the fallback class keeps the copy readable on
+     the plain gradient. */
+  .sh-poster {
+    position: absolute; inset: 0; z-index: 7; pointer-events: none;
+    background: linear-gradient(180deg, #050b1a 0%, #0a1428 55%, #12203a 100%);
+    opacity: 1; transition: opacity 900ms ease;
+  }
+  .sh-poster.sh-hidden { opacity: 0; }
+  .sh-copy { z-index: 8; } /* copy stays readable over the poster while it fades */
+  .sh-root.sh-fallback .sh-poster { display: none; }
+  .sh-root.sh-fallback { height: auto; }
+  .sh-root.sh-fallback .sh-stage { position: relative; }
+  .sh-root.sh-fallback .sh-beat,
+  .sh-root.sh-fallback .sh-hint { display: none; }
+</style>
+
+<script>
+  import initScrollHero from '../scripts/scroll-hero.js';
+  const root = document.querySelector('[data-scroll-hero]');
+  if (root instanceof HTMLElement) initScrollHero(root);
+</script>

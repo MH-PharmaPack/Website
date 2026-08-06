@@ -135,4 +135,133 @@
     font-style: italic;
     color: var(--color-steel-deep);
   }
+
+  /* ------------------------------------------------------------------------
+     Post-hero flow system: the handoff strip, the thread, the band weave.
+     The hero's golden river hands off into a copper-to-hairline thread that
+     draws itself down the page (see src/scripts/page-flow.js).
+  ------------------------------------------------------------------------ */
+  .thread-scope { position: relative; }
+
+  /* Section text sits above the fixed river canvas (z 3); the section
+     background bands, being unpositioned, stay below it, so the river
+     flows over the bands but under the words */
+  .thread-scope > section > div {
+    position: relative;
+    z-index: 10;
+  }
+
+  .thread-line,
+  .thread-nodes {
+    position: absolute;
+    left: max(12px, calc(50% - 622px));
+    pointer-events: none;
+    z-index: 11;
+  }
+  .thread-line {
+    top: 0;
+    bottom: 140px;
+    width: 2px;
+    /* Invisible measurement track: the visible line is now the canvas
+       strand, fixed at the same gutter x. The nodes stay visible and are
+       positioned against this element by page-flow.js. */
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    background: linear-gradient(180deg,
+      #ffd076 0%, var(--color-copper) 8%, var(--color-copper) 26%,
+      var(--color-line) 55%, var(--color-line) 92%, transparent 100%);
+  }
+  .thread-nodes { top: 0; height: 100%; width: 0; }
+  .thread-node {
+    position: absolute;
+    left: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-paper);
+    border: 2px solid var(--color-line);
+    transition: background-color 0.35s ease, border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+  .thread-node.lit {
+    background: var(--color-copper);
+    border-color: var(--color-copper);
+    box-shadow: 0 0 10px rgba(169, 102, 63, 0.45);
+  }
+
+  /* Faint echo of the hero's stream weave on the dark credibility band */
+  .band-weave { position: relative; }
+  .band-weave::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-repeat: repeat-x;
+    background-size: 1200px 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cg fill='none' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath stroke='%239db6d6' d='M-40 300C200 220 420 340 640 260S1040 300 1240 240'/%3E%3Cpath stroke='%23e0b087' d='M-40 240C240 180 480 280 720 210S1080 250 1240 190'/%3E%3Cpath stroke='%239db6d6' d='M-40 200C200 260 460 140 700 200S1060 160 1240 210'/%3E%3Cpath stroke='%23e0b087' d='M-40 140C260 90 500 190 760 130S1100 170 1240 120'/%3E%3Cpath stroke='%239db6d6' d='M-40 330C300 290 560 360 820 300S1120 330 1240 300'/%3E%3Cpath stroke='%23e0b087' d='M-40 90C240 140 520 60 780 110S1100 80 1240 110'/%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+/* Reveal choreography. Deliberately unlayered so the initial hidden state
+   and the station-number colour override win over utility classes. Hidden
+   states apply only when JS is present (.js-flow); without JS or with
+   reduced motion everything is simply visible. */
+.js-flow [data-reveal],
+.js-flow [data-reveal-child] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js-flow [data-reveal].is-in,
+.js-flow [data-reveal-child].is-in {
+  opacity: 1;
+  transform: none;
+}
+/* A copper rule draws in beside each section eyebrow as it reveals */
+.js-flow p.eyebrow[data-reveal] {
+  position: relative;
+  padding-left: 38px;
+}
+.js-flow p.eyebrow[data-reveal]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 2px;
+  width: 0;
+  background: var(--color-copper);
+  transition: width 0.7s ease 0.1s;
+}
+.js-flow p.eyebrow[data-reveal].is-in::before { width: 26px; }
+
+.station-num { transition: color 0.45s ease; }
+.js-flow li[data-reveal-child]:not(.is-in) .station-num {
+  color: var(--color-muted);
+}
+/* Sourcing-line icons draw themselves in as their card reveals */
+.js-flow [data-reveal-child] svg path,
+.js-flow [data-reveal-child] svg circle {
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  transition: stroke-dashoffset 0.9s ease 0.2s;
+}
+.js-flow [data-reveal-child].is-in svg path,
+.js-flow [data-reveal-child].is-in svg circle {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-flow [data-reveal],
+  .js-flow [data-reveal-child] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js-flow [data-reveal-child] svg path,
+  .js-flow [data-reveal-child] svg circle {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+  .thread-line { transform: scaleY(1); }
 }
