@@ -13,12 +13,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      # Interim github.io project-page deploy. Remove both lines once the custom
-      # domain mhpharmapack.com is configured in Pages settings and DNS is live;
-      # astro.config.mjs then falls back to the production site and base '/'.
-      SITE_URL: https://mh-pharmapack.github.io
-      BASE_PATH: /Website
     steps:
       - name: Checkout
         uses: actions/checkout@v4
