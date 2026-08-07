@@ -157,10 +157,13 @@ export default function initScrollHero(root) {
     poster: root.querySelector('[data-sh="poster"]'),
   };
 
-  const narrow = window.matchMedia('(max-width: 520px)').matches;
-  const particlesPerThread = narrow ? 300 : CFG.particlesPerThread;
+  // Phones are budgeted, not just scaled: fill cost rises with the SQUARE of
+  // pixel ratio, so that cap is the single biggest lever, and the particle
+  // loop is main-thread work that competes with scrolling.
+  const narrow = window.matchMedia('(max-width: 820px)').matches;
+  const particlesPerThread = narrow ? 150 : CFG.particlesPerThread;
   const strandFlowCount = narrow ? 280 : CFG.strandFlowCount;
-  const pixelCap = narrow ? 1.5 : CFG.maxPixelRatio;
+  const pixelCap = narrow ? 1.15 : CFG.maxPixelRatio;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let renderer;
@@ -261,23 +264,35 @@ export default function initScrollHero(root) {
     blending: THREE.AdditiveBlending, depthWrite: false,
   });
   {
+    // All filaments in ONE LineSegments rather than a Line per thread: 24
+    // draw calls per frame collapse to 1. Segments (not a strip) because a
+    // strip would join the end of one thread to the start of the next.
     const cTmp = new THREE.Color();
+    const segs = threads.length * SAMPLES * 2;
+    const sPos = new Float32Array(segs * 3);
+    const sCol = new Float32Array(segs * 3);
+    let w = 0;
     for (const th of threads) {
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.BufferAttribute(th.pts, 3));
-      const cols = new Float32Array(th.pts.length);
-      for (let i = 0; i <= SAMPLES; i++) {
-        const t = i / SAMPLES;
-        cTmp.copy(th.stream === 0 ? buyerC : supplierC)
-          .lerp(mergedC, smooth(th.waistT, th.waistT + 0.22, t));
-        const endFade = smooth(0, 0.07, t) * smooth(1, 0.93, t);
-        cols[i * 3] = cTmp.r * endFade;
-        cols[i * 3 + 1] = cTmp.g * endFade;
-        cols[i * 3 + 2] = cTmp.b * endFade;
+      const base = th.stream === 0 ? buyerC : supplierC;
+      for (let i = 0; i < SAMPLES; i++) {
+        for (const k of [i, i + 1]) {
+          const t = k / SAMPLES;
+          cTmp.copy(base).lerp(mergedC, smooth(th.waistT, th.waistT + 0.22, t));
+          const endFade = smooth(0, 0.07, t) * smooth(1, 0.93, t);
+          sPos[w] = th.pts[k * 3];
+          sPos[w + 1] = th.pts[k * 3 + 1];
+          sPos[w + 2] = th.pts[k * 3 + 2];
+          sCol[w] = cTmp.r * endFade;
+          sCol[w + 1] = cTmp.g * endFade;
+          sCol[w + 2] = cTmp.b * endFade;
+          w += 3;
+        }
       }
-      geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
-      heroGroup.add(new THREE.Line(geo, lineMat));
     }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(sCol, 3));
+    heroGroup.add(new THREE.LineSegments(geo, lineMat));
   }
 
   const COUNT = CFG.threadCount * particlesPerThread;
@@ -333,33 +348,43 @@ export default function initScrollHero(root) {
   const tmpColor = new THREE.Color();
   let glowBoost = 1;
 
+  // Colour changes far more slowly than position, so it is recomputed and
+  // re-uploaded on alternate frames only. That halves both the per-particle
+  // maths and the CPU-to-GPU traffic (this buffer is the single largest
+  // per-frame upload in the scene) with nothing visible lost.
+  let colTick = 0;
   function updateParticles(timeSec) {
     const loopPhase = (timeSec / CFG.loopSeconds) % 1;
     const pos = posAttr.array, col = colAttr.array;
+    const doCol = (colTick++ & 1) === 0;
     for (let n = 0; n < COUNT; n++) {
       const pt = particles[n];
       const th = threads[pt.thread];
       const t = (pt.t0 + timeSec * 0.09 * CFG.flowSpeed * pt.speed) % 1;
       const f = t * SAMPLES;
-      const i0 = Math.floor(f), fr = f - i0;
-      const a = i0 * 3, b = Math.min(i0 + 1, SAMPLES) * 3;
+      const i0 = f | 0, fr = f - i0;
+      const a = i0 * 3, b = (i0 < SAMPLES ? i0 + 1 : SAMPLES) * 3;
       const px = th.pts[a] + (th.pts[b] - th.pts[a]) * fr;
       const py = th.pts[a + 1] + (th.pts[b + 1] - th.pts[a + 1]) * fr;
       const pz = th.pts[a + 2] + (th.pts[b + 2] - th.pts[a + 2]) * fr;
-      pos[n * 3] = px; pos[n * 3 + 1] = py; pos[n * 3 + 2] = pz;
+      const i3 = n * 3;
+      pos[i3] = px; pos[i3 + 1] = py; pos[i3 + 2] = pz;
+      if (!doCol) continue;
       tmpColor.copy(th.stream === 0 ? buyerC : supplierC)
         .lerp(mergedC, smooth(th.waistT, th.waistT + 0.22, t));
       const packet = 0.7 + 0.3 * Math.sin((loopPhase - t * 1.5) * Math.PI * 2);
+      // sqrt of the squared length, not Math.hypot: hypot does overflow-safe
+      // scaling we do not need and costs several times more per call
       const nearWaist = 1 + 1.3 * CFG.waistGlow *
-        smooth(0.28, 0.02, Math.hypot(px, py, pz));
+        smooth(0.28, 0.02, Math.sqrt(px * px + py * py + pz * pz));
       const endFade = smooth(0, 0.08, t) * smooth(1, 0.92, t);
       const bright = pt.bright * packet * nearWaist * endFade;
-      col[n * 3] = tmpColor.r * bright;
-      col[n * 3 + 1] = tmpColor.g * bright;
-      col[n * 3 + 2] = tmpColor.b * bright;
+      col[i3] = tmpColor.r * bright;
+      col[i3 + 1] = tmpColor.g * bright;
+      col[i3 + 2] = tmpColor.b * bright;
     }
     posAttr.needsUpdate = true;
-    colAttr.needsUpdate = true;
+    if (doCol) colAttr.needsUpdate = true;
     const surge = 0.7 + 0.3 * Math.sin((loopPhase - 0.75) * Math.PI * 2);
     const g = CFG.waistGlow * surge * glowBoost;
     waistGlow.material.opacity = 0.05 + 0.09 * g;
@@ -475,24 +500,49 @@ export default function initScrollHero(root) {
     for (let i = 0; i < PAGE_GLINTS; i++) {
       const p = pgParts[i];
       const t = (p.y0 + timeSec * p.speed) % 1;
-      pos[i * 3] = gutterNDC;
+      pos[i * 3] = lineNDC;
       pos[i * 3 + 1] = 1.1 - t * 2.2;
       pos[i * 3 + 2] = 0.01;
     }
     pgPosAttr.needsUpdate = true;
   }
 
-  let gutterNDC = -0.9;
+  let lineNDC = -0.9;
+  const STRIP_W = 72; // px of canvas kept once only the rail is drawn
+  let stripMode = false;
   function layoutPageLine() {
     // Same gutter the page rail measures: max(12px, 50% - 622px). On a phone
     // that lands 8px clear of the 20px text inset, which is a rail, not
     // crowding; the line stays at every width.
     const gutterPx = Math.max(12, stageW / 2 - 622) + 1;
-    gutterNDC = (gutterPx / stageW) * 2 - 1;
-    pageLine.position.set(gutterNDC, 0, 0);
-    // Match the 3D strand's on-screen weight (a 1px GL line) closely enough
-    // that the handover has nothing to give away
-    pageLine.scale.set((2 / stageW) * 1.5, 2.2, 1);
+    if (stripMode) {
+      // Once the hero is done the only thing left to draw is a hairline in
+      // the gutter, so the canvas shrinks to a strip around it. A
+      // viewport-filling fixed canvas has to be composited on every scroll
+      // frame; this is ~95% less of it, and it is what makes scrolling the
+      // page below the hero cheap on a phone.
+      canvas.style.left = `${gutterPx - STRIP_W / 2}px`;
+      canvas.style.width = `${STRIP_W}px`;
+      canvas.style.height = '100%';
+      renderer.setSize(STRIP_W, stageH, false);
+      lineNDC = 0;
+      pageLine.scale.set((2 / STRIP_W) * 1.5, 2.2, 1);
+    } else {
+      canvas.style.left = '0px';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      lineNDC = (gutterPx / stageW) * 2 - 1;
+      // Match the 3D strand's on-screen weight (a 1px GL line) closely enough
+      // that the handover has nothing to give away
+      pageLine.scale.set((2 / stageW) * 1.5, 2.2, 1);
+    }
+    pageLine.position.set(lineNDC, 0, 0);
+  }
+  function setStrip(on) {
+    if (on === stripMode) return;
+    stripMode = on;
+    if (on) layoutPageLine();
+    else frameCamera(); // restores full canvas, composer and camera aspect
   }
 
   /* -------------------------------------------------------------------------
@@ -510,7 +560,9 @@ export default function initScrollHero(root) {
     stageH = Math.max(1, stage.clientHeight);
     camera.aspect = stageW / stageH;
     camera.updateProjectionMatrix();
-    renderer.setSize(stageW, stageH);
+    // In strip mode layoutPageLine() owns the renderer size; sizing to the
+    // full stage here would undo the strip on every resize tick
+    if (!stripMode) renderer.setSize(stageW, stageH);
     if (composer) composer.setSize(stageW, stageH);
     isPortrait = camera.aspect < 1;
     const fitHalf = isPortrait ? FIT_HALF_PORTRAIT : FIT_HALF_WIDTH;
@@ -810,6 +862,10 @@ export default function initScrollHero(root) {
     if (heroGroup.visible) updateParticles(elapsed);
     if (glints.visible) updateGlints(elapsed, grow);
     if (pgMat.opacity > 0.01) updatePageGlints(elapsed);
+
+    // Shrink the canvas to the gutter strip for the page phase, restore it
+    // when scrolling back up into the hero
+    setStrip(pageMode);
 
     if (pageMode) {
       // Transparent canvas: only the screen-space gutter line over the page
