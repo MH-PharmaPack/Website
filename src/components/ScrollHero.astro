@@ -105,12 +105,13 @@ import { withBase } from '../config';
        the dark stage then scrolls away as ordinary content, the strand
        crossing the dark-to-paper boundary. */
     height: 380vh;
-    background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
-    /* Viewport-anchored, so it is pixel-identical to the scene's own
-       background gradient. That is what lets the canvas drop its opaque
-       background mid-shot without anything changing on screen, which in
-       turn lets the page content behind it become visible. */
-    background-attachment: fixed;
+    /* No background here: the shared fixed backdrop (body::before in
+       global.css) paints the same gradient for the whole dark run. It is
+       viewport-anchored, so it stays pixel-identical to the scene's own
+       background when the canvas drops its opaque one mid-shot, but without
+       background-attachment: fixed, which repaints on every scroll frame
+       and was a major cause of the phone jank. */
+    background: transparent;
   }
   @media (min-width: 768px) {
     .sh-root { height: 430vh; }

@@ -161,7 +161,7 @@ export default function initScrollHero(root) {
   // pixel ratio, so that cap is the single biggest lever, and the particle
   // loop is main-thread work that competes with scrolling.
   const narrow = window.matchMedia('(max-width: 820px)').matches;
-  const particlesPerThread = narrow ? 150 : CFG.particlesPerThread;
+  const particlesPerThread = narrow ? 110 : CFG.particlesPerThread;
   const strandFlowCount = narrow ? 280 : CFG.strandFlowCount;
   const pixelCap = narrow ? 1.15 : CFG.maxPixelRatio;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -584,9 +584,16 @@ export default function initScrollHero(root) {
       type: THREE.HalfFloatType,
     });
     composer = new EffectComposer(renderer, target);
-    composer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelCap));
+    // The postprocess chain is the heaviest thing on a phone: bloom alone is
+    // ~10 fullscreen passes. Running the chain at 70% linear resolution is
+    // half the pixels, and on content made entirely of soft glow it is very
+    // hard to see. The scene itself still renders at the full cap.
+    const prBase = Math.min(window.devicePixelRatio || 1, pixelCap);
+    composer.setPixelRatio(narrow ? prBase * 0.7 : prBase);
     composer.addPass(new RenderPass(scene, camera));
-    if (CFG.trails > 0 && !reducedMotion) {
+    // Trails cost a fullscreen pass plus a full texture copy every frame.
+    // Worth it on desktop, not on a phone where bloom already carries the look.
+    if (CFG.trails > 0 && !reducedMotion && !narrow) {
       afterPass = new AfterimagePass(CFG.trails);
       composer.addPass(afterPass);
     }

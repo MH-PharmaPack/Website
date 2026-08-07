@@ -84,6 +84,23 @@
     scroll-behavior: smooth;
   }
 
+  /* One viewport-anchored gradient for the whole dark run, painted by a
+     single fixed layer behind everything.
+
+     This replaces `background-attachment: fixed` on the hero and the first
+     section. That property forces the browser off its fast scrolling path
+     and repaints the background of a full-page element on every scroll
+     frame, which is one of the classic causes of mobile scroll jank; a
+     fixed layer is composited once and simply stays put. Visually
+     identical, far cheaper. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
+  }
+
   body {
     /* The page runs dark from the hero all the way down, so the document
        ground is dark too: overscroll bounce and the strip behind the fixed
@@ -196,12 +213,12 @@
 
   /* First section after the hero: the dark world continues, with the
      strand running down through it, before the page turns to paper */
-  /* Identical viewport-anchored gradient to .sh-root, so the section's top
-     edge is invisible: it is literally the same painted background. A flat
-     colour here cut from the gradient's near-black top to flat blue. */
+  /* Transparent so the shared fixed backdrop below shows through: the
+     section's top edge stays invisible because it is literally the same
+     painted gradient as the hero, without either element paying for
+     background-attachment: fixed (see .page-backdrop). */
   .sec-deep {
-    background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
-    background-attachment: fixed;
+    background: transparent;
   }
   .eyebrow-on-dark { color: var(--color-copper-soft); }
 
