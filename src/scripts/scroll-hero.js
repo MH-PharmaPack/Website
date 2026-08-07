@@ -148,6 +148,7 @@ export default function initScrollHero(root) {
   const canvas = root.querySelector('[data-sh="canvas"]');
   const ui = {
     copy: root.querySelector('[data-sh="copy"]'),
+    creds: root.querySelector('[data-sh="creds"]'),
     beat1: root.querySelector('[data-sh="beat1"]'),
     beat2: root.querySelector('[data-sh="beat2"]'),
     beat3: root.querySelector('[data-sh="beat3"]'),
@@ -668,7 +669,11 @@ export default function initScrollHero(root) {
   function updateScrollUI(u, shot = 0) {
     // Windows overlap so the ride is never text-less, and everything is
     // clear of the screen before the shot hands over to the page
-    setFade(ui.copy, 1 - smooth(0.16, 0.3, u), true);
+    const copyOut = 1 - smooth(0.16, 0.3, u);
+    setFade(ui.copy, copyOut, true);
+    // The credential row belongs to the opening frame, so it leaves on the
+    // same curve as the copy rather than lingering into the ride.
+    setFade(ui.creds, copyOut);
     setFade(ui.beat1, fadeWin(u, 0.2, 0.3, 0.46, 0.56));
     setFade(ui.beat2, fadeWin(u, 0.5, 0.6, 0.74, 0.84));
     // beat3 has no fade-out of its own: it ramps in and HOLDS at full until the

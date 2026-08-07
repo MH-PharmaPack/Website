@@ -15,20 +15,55 @@ import { withBase } from '../config';
        drawing the gutter line long after the hero has scrolled away. -->
   <canvas class="sh-canvas" data-sh="canvas" aria-hidden="true"></canvas>
   <div class="sh-stage" data-sh="stage">
+    <!-- Ambient depth. The streams enter from the left and converge high, so
+         the lower right of the opening frame was flat navy. A cool bloom low
+         and right of centre, a faint copper echo further out, and two dust
+         layers drifting at different speeds give that half something to be.
+         Screen blend, so these add light to the scene rather than veiling it
+         (the stage sits above the canvas and would otherwise grey it out). -->
+    <div class="sh-depth" aria-hidden="true"></div>
+    <div class="sh-dust sh-dust-far" aria-hidden="true"></div>
+    <div class="sh-dust sh-dust-near" aria-hidden="true"></div>
     <div class="sh-grain" data-sh="grain" aria-hidden="true"></div>
     <div class="sh-vignette" data-sh="vignette" aria-hidden="true"></div>
 
-    <div class="sh-copy" data-sh="copy">
-      <p class="sh-eyebrow">Pharmaceutical Sourcing &amp; Supply</p>
-      <h1>The link between pharmaceutical buyers and the right manufacturers.</h1>
-      <p class="sh-sub">
-        We connect buyers to WHO GMP and EU GMP approved manufacturers across
-        India, Latin America, and South Africa, and coordinate the deal end to
-        end: quality, documentation, payment terms, and logistics.
-      </p>
-      <div class="sh-ctas">
-        <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
-        <a href={withBase('/services')} class="btn btn-secondary-inverse">What We Do</a>
+    <!-- The opening frame is ONE flex column that fills the stage, not a set of
+         separately placed blocks. Previously the copy sat at top:11vh and the
+         credential row at bottom:11vh; on a phone their combined height exceeds
+         the visible stage, so the row fell past the fold, and the collapsing
+         mobile URL bar then changed the viewport mid-scroll and appeared to
+         reveal it. As a column the two share the available height, so the frame
+         always fits and scrolling only ever drives the ride. -->
+    <div class="sh-opening">
+      <div class="sh-copy" data-sh="copy">
+        <p class="sh-eyebrow">Pharmaceutical Sourcing &amp; Supply</p>
+        <h1>The link between pharmaceutical buyers and the right manufacturers.</h1>
+        <p class="sh-sub">
+          We connect buyers to WHO GMP and EU GMP approved manufacturers across
+          India, Latin America, and South Africa, and coordinate the deal end to
+          end: quality, documentation, payment terms, and logistics.
+        </p>
+        <div class="sh-ctas">
+          <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+          <a href={withBase('/services')} class="btn btn-secondary-inverse">What We Do</a>
+        </div>
+      </div>
+
+      <!-- Credential row. The one thing a pharma buyer scans for, and it earns
+           the lower band of the frame that the streams never reach.
+           Attribution is mandatory (CONTENT-SPEC guardrail 2 and the 8.2
+           disclaimer): these approvals belong to the partner plants and never
+           to MH, so the label leads and the marks follow it. Never render the
+           marks without the label. Fades with the copy; see updateScrollUI. -->
+      <div class="sh-creds" data-sh="creds">
+        <span class="sh-creds-label">Partner plants hold</span>
+        <ul class="sh-creds-list">
+          <li>WHO GMP</li>
+          <li>EU GMP</li>
+          <li>PIC/S</li>
+          <li>ISO</li>
+          <li>UK MHRA</li>
+        </ul>
       </div>
     </div>
 
@@ -105,6 +140,102 @@ import { withBase } from '../config';
     z-index: 3; pointer-events: none;
   }
 
+  /* Ambient depth for the part of the frame the streams never reach. On a wide
+     screen that is the lower right, so both blooms are pushed right and low. */
+  .sh-depth {
+    position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    mix-blend-mode: screen;
+    background:
+      radial-gradient(ellipse 62% 58% at 72% 66%,
+        rgba(72, 118, 178, 0.20) 0%, rgba(72, 118, 178, 0) 70%),
+      radial-gradient(ellipse 42% 42% at 88% 84%,
+        rgba(169, 102, 63, 0.13) 0%, rgba(169, 102, 63, 0) 72%);
+  }
+  /* In portrait the streams cross the middle diagonally and the dead area is
+     the lower CENTRE, not the lower right, so the blooms move under the copy
+     and widen. Aiming the landscape offsets at a phone put the light off in
+     the corner and left the middle of the frame flat. */
+  @media (orientation: portrait), (max-width: 640px) {
+    .sh-depth {
+      background:
+        radial-gradient(ellipse 86% 40% at 50% 72%,
+          rgba(72, 118, 178, 0.22) 0%, rgba(72, 118, 178, 0) 72%),
+        radial-gradient(ellipse 60% 28% at 58% 88%,
+          rgba(169, 102, 63, 0.12) 0%, rgba(169, 102, 63, 0) 74%);
+    }
+  }
+
+  /* Two dust sheets at different scales and speeds, so the drift reads as
+     parallax depth rather than a sliding texture. Inset is negative so the
+     tiles never expose an edge as they travel. */
+  .sh-dust {
+    position: absolute; inset: -12%; pointer-events: none; z-index: 2;
+    background-repeat: repeat;
+    will-change: transform;
+  }
+  .sh-dust-far {
+    opacity: 0.34;
+    background-size: 520px 520px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cg fill='%23cfe0f5'%3E%3Ccircle cx='60' cy='90' r='1'/%3E%3Ccircle cx='210' cy='40' r='0.8'/%3E%3Ccircle cx='380' cy='120' r='1.1'/%3E%3Ccircle cx='470' cy='260' r='0.9'/%3E%3Ccircle cx='140' cy='300' r='1'/%3E%3Ccircle cx='300' cy='390' r='0.8'/%3E%3Ccircle cx='90' cy='460' r='1'/%3E%3Ccircle cx='430' cy='430' r='0.9'/%3E%3Ccircle cx='250' cy='210' r='0.7'/%3E%3C/g%3E%3C/svg%3E");
+    animation: sh-drift-far 96s linear infinite;
+  }
+  .sh-dust-near {
+    opacity: 0.22;
+    background-size: 300px 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cg fill='%23e6d2bd'%3E%3Ccircle cx='40' cy='60' r='1.4'/%3E%3Ccircle cx='180' cy='30' r='1.1'/%3E%3Ccircle cx='260' cy='170' r='1.5'/%3E%3Ccircle cx='110' cy='220' r='1.2'/%3E%3Ccircle cx='230' cy='270' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    animation: sh-drift-near 58s linear infinite;
+  }
+  @keyframes sh-drift-far {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-520px, -260px, 0); }
+  }
+  @keyframes sh-drift-near {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(300px, -300px, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sh-dust { animation: none; }
+  }
+
+  /* Credential row, low in the frame. The label is not decorative: the
+     approvals belong to the partner plants, so it must stay with the marks. */
+  .sh-creds {
+    flex: 0 0 auto;
+    width: min(92vw, 700px); text-align: center;
+    text-shadow: 0 2px 22px rgba(3, 8, 24, 0.7);
+  }
+  .sh-creds-label {
+    display: block;
+    font-size: 0.58rem; font-weight: 600; letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase; color: rgba(224, 233, 246, 0.6);
+  }
+  .sh-creds-list {
+    margin: 0.7rem 0 0; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.45rem 1.5rem;
+  }
+  .sh-creds-list li {
+    font-size: clamp(0.68rem, 1.2vw, 0.8rem);
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--color-copper-soft);
+  }
+  /* Short viewports tighten the column before anything is dropped, so the
+     frame keeps fitting instead of overflowing. */
+  @media (max-height: 720px) {
+    .sh-opening { padding: calc(4.5rem + 8px) 0 clamp(44px, 6vh, 64px); }
+    .sh-copy h1 { font-size: clamp(1.45rem, 5.4vw, 2.3rem); }
+    .sh-sub { margin-top: 0.7rem; font-size: 0.85rem; }
+    .sh-ctas { margin-top: 1rem; }
+    .sh-creds-list { margin-top: 0.5rem; gap: 0.35rem 1.1rem; }
+  }
+  /* Below this there is genuinely no room, and the row leaves as a whole unit.
+     The label is never dropped on its own: bare approval marks under the MH
+     lockup would read as MH's own accreditations. The same proof points appear
+     in full, with their attribution, in section 4.4. */
+  @media (max-height: 560px) {
+    .sh-creds { display: none; }
+  }
+
   .sh-grain {
     position: absolute; inset: 0; pointer-events: none; z-index: 4;
     opacity: 0.06; mix-blend-mode: overlay;
@@ -117,11 +248,30 @@ import { withBase } from '../config';
       rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 55%, rgba(4, 10, 34, 0.5) 100%);
   }
 
-  /* Opening copy block: real hero copy, centred in the upper part of the
-     frame, streams converging beneath it */
+  /* The opening frame: one column filling the stage, copy high and credentials
+     low, sharing whatever height the device actually has. Padding clears the
+     sticky site header at the top and the Scroll hint at the bottom. Sized in
+     px and clamps rather than vh, because vh does not track the mobile URL bar
+     while the stage is measured in dvh, and that mismatch is what pushed the
+     credential row past the fold. */
+  .sh-opening {
+    position: absolute; inset: 0; z-index: 6;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-between;
+    /* Both paddings are generous on purpose. The copy used to start straight
+       under the header and the credential row sat about 12px off the bottom
+       edge, so the two were stretched to opposite edges of a tall phone frame
+       with a dead band between them. Pushing both inwards seats the content in
+       the middle two thirds and stops the row reading as stuck to the floor.
+       Top clears the 4.5rem sticky header before adding its own lead. */
+    padding: calc(4.5rem + clamp(14px, 7vh, 76px)) 0 clamp(88px, 17vh, 172px);
+    pointer-events: none;
+    overflow: hidden;
+  }
+  /* The copy takes the space it needs; the credential row never shrinks away */
   .sh-copy {
-    position: absolute; left: 50%; top: 11vh; transform: translateX(-50%);
-    z-index: 6; width: min(92vw, 780px); text-align: center;
+    flex: 0 1 auto;
+    width: min(92vw, 780px); text-align: center;
     color: var(--color-paper);
     text-shadow: 0 2px 28px rgba(3, 8, 24, 0.65);
   }
@@ -188,7 +338,10 @@ import { withBase } from '../config';
     opacity: 1; transition: opacity 900ms ease;
   }
   .sh-poster.sh-hidden { opacity: 0; }
-  .sh-copy { z-index: 8; } /* copy stays readable over the poster while it fades */
+  /* The opening frame stays readable over the poster while it fades. This sits
+     on .sh-opening, not .sh-copy: the copy is a static flex child now, so a
+     z-index on it would do nothing. */
+  .sh-opening { z-index: 8; }
   .sh-root.sh-fallback .sh-poster { display: none; }
   .sh-root.sh-fallback { height: auto; }
   .sh-root.sh-fallback .sh-stage { position: relative; }

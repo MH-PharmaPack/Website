@@ -2,15 +2,33 @@
 import { WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 ---
 
-<!-- Mobile-only sticky action bar: WhatsApp, Call, Request Quote. Dissolves on desktop (header CTAs take over). -->
+{/*
+  Mobile quick actions.
+
+  Deliberately NOT a persistent full-width bar. The previous version was a
+  three-column strip welded to the bottom of every screen, which read as a
+  second navigation bar and sat on top of the hero the whole way down.
+
+  Instead this stays hidden while the hero is on screen (the hero carries its
+  own Request a Quote and What We Do CTAs, so the bar was only ever competing
+  with them) and rises as a floating pill group once the reader is into the
+  page. Desktop never sees it; the header CTA covers that case.
+
+  Without JS, or on a page with no hero, it is visible from the start: the
+  reveal script only ever adds the visible state, never removes affordances.
+*/}
 <div
-  class="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-paper pb-[env(safe-area-inset-bottom)] md:hidden"
+  id="quick-actions"
+  data-quick-actions
+  class="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[calc(env(safe-area-inset-bottom)+0.7rem)] md:hidden"
   aria-label="Quick actions"
 >
-  <div class="grid grid-cols-3">
+  <div
+    class="qa-pill pointer-events-auto flex items-center gap-1 rounded-full border border-white/12 bg-band/95 p-1.5 shadow-xl shadow-black/50 backdrop-blur-sm"
+  >
     <a
       href={WHATSAPP_HREF}
-      class="flex min-h-14 flex-col items-center justify-center gap-1 text-xs font-semibold text-steel-deep"
+      class="flex h-11 w-11 items-center justify-center rounded-full text-mist transition-colors hover:text-paper"
       title={WHATSAPP ? 'Chat on WhatsApp' : 'WhatsApp number to be added'}
     >
       <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -23,11 +41,12 @@ import { WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
           d="M9.3 8.9c.2-.5.5-.5.8-.5h.6c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.5l-.5.6c-.1.2-.1.3 0 .5.4.7 1.2 1.5 2 1.9.2.1.4.1.5-.1l.5-.6c.2-.2.3-.2.5-.1l1.6.7c.3.1.4.3.4.5-.1.9-.8 1.6-1.7 1.6-2.6 0-6-2.7-6-5.6 0-.5.1-1 .2-1.4Z"
           fill="currentColor"></path>
       </svg>
-      WhatsApp
+      <span class="sr-only">WhatsApp</span>
     </a>
+
     <a
       href={TEL_HREF}
-      class="flex min-h-14 flex-col items-center justify-center gap-1 border-x border-line text-xs font-semibold text-steel-deep"
+      class="flex h-11 w-11 items-center justify-center rounded-full text-mist transition-colors hover:text-paper"
       title={PHONE ? 'Call us' : 'Phone number to be added'}
     >
       <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -37,18 +56,62 @@ import { WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
           stroke-width="1.5"
           stroke-linejoin="round"></path>
       </svg>
-      Call
+      <span class="sr-only">Call</span>
     </a>
-    <a href={withBase('/contact')} class="flex min-h-14 flex-col items-center justify-center gap-1 bg-copper text-xs font-semibold text-white">
-      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M7.5 3.75h6.75L18.75 8.25v12H7.5v-16.5Z"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linejoin="round"></path>
-        <path d="M10.25 12h5m-5 3h5m-5-6h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-      </svg>
-      Request Quote
-    </a>
+
+    <a
+      href={withBase('/contact')}
+      class="btn btn-primary !min-h-11 rounded-full px-5 text-sm">Request a Quote</a
+    >
   </div>
 </div>
+
+<style>
+  /* Hidden until the reader is past the hero. The hidden state lives behind
+     .qa-armed so that without JS the pill is simply visible. */
+  [data-quick-actions].qa-armed .qa-pill {
+    opacity: 0;
+    transform: translateY(140%);
+    transition: opacity 260ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-quick-actions].qa-armed.qa-in .qa-pill {
+    opacity: 1;
+    transform: none;
+  }
+  /* Always present while the menu is open, whatever the scroll position.
+     The mobile menu is navigation only and this pill carries every action, so
+     it cannot be conditional there. Without this the pill appeared only if the
+     menu happened to be opened past the hero, which made the menu's available
+     actions depend on where the reader had scrolled to. `html.nav-locked` is
+     set by the header's open/close handler. */
+  :global(html.nav-locked) [data-quick-actions].qa-armed .qa-pill {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-quick-actions].qa-armed .qa-pill {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const wrap = document.querySelector('[data-quick-actions]');
+  const hero = document.querySelector('[data-scroll-hero]');
+
+  if (wrap instanceof HTMLElement && hero) {
+    // Arm only once we know we can control it, so a JS failure leaves the pill
+    // on screen rather than permanently hidden.
+    wrap.classList.add('qa-armed');
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        // The hero is tall; it stops intersecting only once it is fully
+        // scrolled past, which is exactly when the reader reaches the content.
+        wrap.classList.toggle('qa-in', !entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    io.observe(hero);
+  }
+</script>

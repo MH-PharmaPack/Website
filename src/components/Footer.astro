@@ -1,6 +1,19 @@
 ---
 import logo from '../assets/logo/mh-pharmapack-logo.svg';
-import { NAV, SALES_EMAIL, MAILTO_HREF, PHONE, WHATSAPP, OFFICE_ADDRESS, withBase } from '../config';
+import {
+  NAV,
+  SALES_EMAIL,
+  MAILTO_HREF,
+  PHONE,
+  PHONE_DISPLAY,
+  TEL_HREF,
+  WHATSAPP,
+  WHATSAPP_HREF,
+  OFFICE_ADDRESS,
+  MAPS_HREF,
+  MAP_EMBED_SRC,
+  withBase,
+} from '../config';
 
 const year = new Date().getFullYear();
 ---
@@ -54,8 +67,10 @@ const year = new Date().getFullYear();
           </li>
           <li>
             {PHONE ? (
-              <a href={`tel:${PHONE}`} class="font-medium text-steel-deep transition-colors hover:text-ink">
-                {PHONE}
+              /* tel: takes the unpunctuated E.164 number; the spaced form is
+                 display only, since dialers choke on the spaces. */
+              <a href={TEL_HREF} class="font-medium text-steel-deep transition-colors hover:text-ink">
+                {PHONE_DISPLAY}
               </a>
             ) : (
               <span class="placeholder-note">[Phone number to be added]</span>
@@ -63,19 +78,73 @@ const year = new Date().getFullYear();
           </li>
           <li>
             {WHATSAPP ? (
-              <a href={`https://wa.me/${WHATSAPP}`} class="font-medium text-steel-deep transition-colors hover:text-ink">
+              /* WHATSAPP_HREF carries the prefilled enquiry message */
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-medium text-steel-deep transition-colors hover:text-ink"
+              >
                 WhatsApp
               </a>
             ) : (
               <span class="placeholder-note">[WhatsApp number to be added]</span>
             )}
           </li>
-          <li class="pt-1 text-steel-deep">
-            {OFFICE_ADDRESS ? OFFICE_ADDRESS : <span class="placeholder-note">[Office address to be added]</span>}
+          <li class="pt-1">
+            {
+              OFFICE_ADDRESS ? (
+                <a
+                  href={MAPS_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="not-italic text-steel-deep transition-colors hover:text-ink"
+                >
+                  {OFFICE_ADDRESS}
+                </a>
+              ) : (
+                <span class="placeholder-note">[Office address to be added]</span>
+              )
+            }
           </li>
         </ul>
       </div>
     </div>
+
+    <!-- Office map. The pin, the "Get directions" link, and the printed address
+         in the Contact column are all derived from OFFICE_ADDRESS in config.ts,
+         so they cannot drift apart when the address changes.
+
+         This is Google's keyless ?output=embed endpoint, so there is no Cloud
+         API key to leak or rotate. It is third-party content: it loads only
+         when scrolled to (loading="lazy") but it will set Google cookies at
+         that point, which is worth a line in the privacy policy. -->
+    {
+      OFFICE_ADDRESS && (
+        <div class="mt-12">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h2 class="eyebrow">Office</h2>
+            <a
+              href={MAPS_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-semibold text-copper-deep underline underline-offset-4 transition-colors hover:text-copper"
+            >
+              Get directions
+            </a>
+          </div>
+          <div class="footer-map mt-4 overflow-hidden rounded-md border border-line">
+            <iframe
+              src={MAP_EMBED_SRC}
+              title={`Map showing the MH PharmaPack office at ${OFFICE_ADDRESS}`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            />
+          </div>
+        </div>
+      )
+    }
 
     <!-- Intermediary disclaimer, verbatim from CONTENT-SPEC.md section 8.2. Do not soften. -->
     <div class="mt-12 border-t border-line pt-8">
@@ -92,3 +161,28 @@ const year = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  /* Google's own map is a saturated consumer blue that fights the Cleanroom
+     palette, so it sits slightly desaturated at rest and returns to full
+     colour on hover or keyboard focus, when the reader is actually using it.
+     Never filter it so hard that road labels stop being legible. */
+  .footer-map iframe {
+    display: block;
+    width: 100%;
+    height: 260px;
+    border: 0;
+    filter: saturate(0.72) contrast(1.02);
+    transition: filter 300ms ease;
+  }
+  .footer-map:hover iframe,
+  .footer-map:focus-within iframe {
+    filter: none;
+  }
+  @media (max-width: 640px) {
+    .footer-map iframe { height: 210px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .footer-map iframe { transition: none; }
+  }
+</style>

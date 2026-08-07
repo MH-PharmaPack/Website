@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PARTNERS } from '../../data/leadership';
+import { withBase } from '../../config';
+
+// CONTENT-SPEC section 9: two profiles, deliberately not padded out, and the
+// layout must look complete at exactly two rather than like a grid waiting for
+// a third.
+//
+// Gallery treatment (design review option B, chosen 2026-08-08). Two tall 4:5
+// portraits with a rule under each name and no card chrome at all. Picked on a
+// mobile-first brief: this is the only candidate that improves in one column,
+// because a 4:5 portrait at full phone width is a photograph rather than a
+// thumbnail. The alternatives lost on the same test. A staggered pair depended
+// entirely on a desktop offset that cannot survive a single column, and bordered
+// cards became this same stack carrying a border that does nothing at that width.
+---
+
+<Base
+  title="Leadership | MH PharmaPack"
+  description="The two partners behind MH PharmaPack. Both work directly on sourcing across API, packaging, formulation, and finished goods."
+>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-14 pb-20 md:px-8 md:pt-20 md:pb-28">
+      <p class="eyebrow" data-reveal>Leadership</p>
+      <h1
+        class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl"
+        data-reveal
+      >
+        The two people behind MH.
+      </h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-steel-deep" data-reveal>
+        Both partners work directly on sourcing. You will deal with one of them, not an account
+        team.
+      </p>
+
+      <!-- Two columns from `sm` up, so phones get the full-width portraits the
+           treatment is built around. Wide gutters, no borders: the photographs
+           carry the page and the rule under each name does the structure. -->
+      <ul class="mt-14 grid list-none grid-cols-1 gap-x-12 gap-y-14 p-0 sm:grid-cols-2 md:gap-x-16">
+        {
+          PARTNERS.map((p) => (
+            <li data-reveal-child>
+              <a href={withBase(`/leadership/${p.slug}`)} class="group block">
+                {p.photo ? (
+                  <img
+                    src={p.photo}
+                    alt={`${p.name}, ${p.title} at MH PharmaPack`}
+                    class="aspect-[4/5] w-full rounded-sm object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  /* Real fallback, not a mockup device: the page ships and works
+                     before the headshots land. [NEEDS: the two headshots] */
+                  <span
+                    class="flex aspect-[4/5] w-full items-center justify-center rounded-sm bg-band"
+                    aria-hidden="true"
+                  >
+                    <span class="text-4xl font-bold tracking-widest text-copper-soft">
+                      {p.initials}
+                    </span>
+                  </span>
+                )}
+
+                <span class="mt-5 flex items-baseline justify-between gap-4 border-t-2 border-ink pt-3">
+                  <span class="text-xl font-bold tracking-tight text-ink">{p.name}</span>
+                  <span class="text-xs font-semibold tracking-eyebrow text-copper-deep uppercase">
+                    {p.title}
+                  </span>
+                </span>
+                <span class="mt-3 block text-sm leading-relaxed text-steel-deep">{p.lead}</span>
+                <span class="mt-4 block text-sm font-semibold text-copper-deep underline underline-offset-4 group-hover:text-copper">
+                  View profile
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    import initPageFlow from '../../scripts/page-flow.js';
+    initPageFlow();
+  </script>
+</Base>

@@ -33,6 +33,44 @@
   --color-paper: #f4f6f8;
   --color-paper-warm: #e7ebf0;
 
+  /* Dark band ladder (Cleanroom, dark treatment 2026-08-08). Everything from
+     the hero to the footer stays in the steel/navy family so the page reads as
+     one world: the run rises to the steel credibility band, then settles into
+     the darkest tone for the close, which keeps it from going monotonous
+     without reaching for a foreign colour. Copper stays the only warm accent.
+
+     ONE tone, not a ladder. An earlier pass stepped each section through its
+     own shade and read as a gradient of navies sliding down the page; the
+     sections now all sit on this single value and the differences between them
+     come from texture, accent, and layout instead of background tone.
+
+     The tone is navy pulled toward steel: at 0.46 HSV saturation it sits
+     between the hero gradient (0.69 to 0.71, too blue on its own) and
+     steel-deep (0.40), so it still reads navy but carries the steel the rest
+     of the palette is built on.
+
+     Contrast (WCAG AA, verified 2026-08-08): paper 13.9:1, mist 7.8:1,
+     copper-soft 7.7:1. Plain steel (#4e6076) still fails copper-soft and stays
+     off-limits as a background. */
+  --color-band: #1c2634;
+
+  /* NOTE on the credibility band, so this is not relitigated: it is the one
+     section set apart from the navy run, and it does that by going LIGHT, not
+     by taking an accent colour. Two accent hues were built and rejected here.
+     A verdigris/teal (hue 176) was the only foreign colour on the page and
+     never settled. A deep bronze (hue 26, copper's own family) sat at nearly
+     the same lightness as the navy and read as a warm object floating in a
+     cold page. Steel and graphite are non-starters: both measure hue 213,
+     within two degrees of the band navy, so they read as another shade of it.
+
+     The working answer uses no new colour at all. The band takes paper, which
+     is 12.7:1 against the navy either side, so the contrast alone carries it. */
+
+  /* Secondary body text on the dark bands: 4.91:1 on steel-deep, higher below */
+  --color-mist: #aebccd;
+  /* Hairline rules on dark. --color-line is a paper-era value and glares here. */
+  --color-hairline: rgba(255, 255, 255, 0.1);
+
   /* Wide tracking for eyebrow/label text and the header lockup */
   --tracking-eyebrow: 0.18em;
   --tracking-lockup: 0.14em;
@@ -47,7 +85,10 @@
   }
 
   body {
-    background-color: var(--color-paper);
+    /* The page runs dark from the hero all the way down, so the document
+       ground is dark too: overscroll bounce and the strip behind the fixed
+       canvas no longer flash paper white. */
+    background-color: var(--color-band);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -164,6 +205,15 @@
   }
   .eyebrow-on-dark { color: var(--color-copper-soft); }
 
+  /* Every section below the hero sits on this one tone. Sections are told
+     apart by the hairline between them, by the weave on the credibility band,
+     and by their own layout, never by a different shade of navy. */
+  .band { background-color: var(--color-band); }
+
+  /* Hairline between adjacent bands: a light-side rule reads as a seam on
+     dark, so the divider is a single low-alpha white line instead. */
+  .band-edge { border-top: 1px solid var(--color-hairline); }
+
   /* Deterministic layering around the fixed canvas (z 3): section bands sit
      below it so the gutter line draws over them, section content sits above
      it so the line never crosses the words. Explicit z-index on both sides,
@@ -200,6 +250,33 @@
   /* (Station node dots removed: they sat in the gutter and read as stray
      dots floating over the hero once content moved up into it.) */
 
+  /* Light variant of the weave, for the credibility band now that it is paper.
+     Same curves, but struck in steel and copper instead of the pale tints the
+     dark version uses, which would be invisible on paper however high the
+     opacity went. Slightly stronger too, since dark-on-light reads weaker than
+     light-on-dark at equal alpha. */
+  .band-weave-light { position: relative; }
+  .band-weave-light::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.13;
+    /* ONE copy, scaled uniformly, never tiled and never stretched.
+       Two things this is avoiding. Tiling with repeat-x jumped every 1200px,
+       because these curves start and end at different heights and so do not
+       meet across a tile edge. Stretching with 100% 100% then squashed the
+       3:1 artwork into a tall phone section, compressing it about 3x across
+       and pulling it 2x down. `cover` keeps the aspect and crops the overflow,
+       so the curves hold their shape at any viewport and there is no seam
+       because there is no repeat. Explicit width/height give the SVG the
+       intrinsic ratio `cover` needs to compute against. */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Cg fill='none' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath stroke='%234e6076' d='M-40 300C200 220 420 340 640 260S1040 300 1240 240'/%3E%3Cpath stroke='%23a9663f' d='M-40 240C240 180 480 280 720 210S1080 250 1240 190'/%3E%3Cpath stroke='%234e6076' d='M-40 200C200 260 460 140 700 200S1060 160 1240 210'/%3E%3Cpath stroke='%23a9663f' d='M-40 140C260 90 500 190 760 130S1100 170 1240 120'/%3E%3Cpath stroke='%234e6076' d='M-40 330C300 290 560 360 820 300S1120 330 1240 300'/%3E%3Cpath stroke='%23a9663f' d='M-40 90C240 140 520 60 780 110S1100 80 1240 110'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
   /* Faint echo of the hero's stream weave on the dark credibility band */
   .band-weave { position: relative; }
   .band-weave::before {
@@ -208,9 +285,13 @@
     inset: 0;
     pointer-events: none;
     opacity: 0.07;
-    background-repeat: repeat-x;
-    background-size: 1200px 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'%3E%3Cg fill='none' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath stroke='%239db6d6' d='M-40 300C200 220 420 340 640 260S1040 300 1240 240'/%3E%3Cpath stroke='%23e0b087' d='M-40 240C240 180 480 280 720 210S1080 250 1240 190'/%3E%3Cpath stroke='%239db6d6' d='M-40 200C200 260 460 140 700 200S1060 160 1240 210'/%3E%3Cpath stroke='%23e0b087' d='M-40 140C260 90 500 190 760 130S1100 170 1240 120'/%3E%3Cpath stroke='%239db6d6' d='M-40 330C300 290 560 360 820 300S1120 330 1240 300'/%3E%3Cpath stroke='%23e0b087' d='M-40 90C240 140 520 60 780 110S1100 80 1240 110'/%3E%3C/g%3E%3C/svg%3E");
+    /* Same rule as .band-weave-light: one copy, scaled uniformly with cover,
+       never tiled (the curves do not meet across a tile edge) and never
+       stretched (that squashes the 3:1 artwork on narrow screens). */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Cg fill='none' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath stroke='%239db6d6' d='M-40 300C200 220 420 340 640 260S1040 300 1240 240'/%3E%3Cpath stroke='%23e0b087' d='M-40 240C240 180 480 280 720 210S1080 250 1240 190'/%3E%3Cpath stroke='%239db6d6' d='M-40 200C200 260 460 140 700 200S1060 160 1240 210'/%3E%3Cpath stroke='%23e0b087' d='M-40 140C260 90 500 190 760 130S1100 170 1240 120'/%3E%3Cpath stroke='%239db6d6' d='M-40 330C300 290 560 360 820 300S1120 330 1240 300'/%3E%3Cpath stroke='%23e0b087' d='M-40 90C240 140 520 60 780 110S1100 80 1240 110'/%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
@@ -245,6 +326,9 @@
   transition: width 0.7s ease 0.1s;
 }
 .js-flow p.eyebrow[data-reveal].is-in::before { width: 26px; }
+/* On the dark bands the copper rule sinks into the navy, so it takes the soft
+   tint the eyebrow text already uses. */
+.js-flow p.eyebrow-on-dark[data-reveal]::before { background: var(--color-copper-soft); }
 
 .station-num { transition: color 0.45s ease; }
 .js-flow li[data-reveal-child]:not(.is-in) .station-num {

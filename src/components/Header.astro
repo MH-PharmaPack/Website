@@ -1,90 +1,458 @@
 ---
 import logo from '../assets/logo/mh-pharmapack-logo.svg';
+// WHATSAPP_HREF / TEL_HREF / MAILTO_HREF are deliberately not imported here.
+// The mobile menu is navigation only: no contact row and no Request a Quote.
+// The floating quick-actions pill owns every action on small screens. See the
+// note at the end of the panel markup below.
 import { NAV, withBase } from '../config';
 
 const desktopNav = NAV.filter((item) => item.href !== withBase('/') && item.href !== withBase('/contact'));
+
+// Current-page marker. Trailing slashes are normalised because Astro emits
+// directory-style URLs (/leadership/) while config.ts writes them without.
+const here = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) => (href.replace(/\/+$/, '') || '/') === here;
 ---
 
-<header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
-  <div class="mx-auto flex h-18 max-w-content items-center justify-between gap-6 px-5 md:px-8">
-    <!-- Lockup: mark + wordmark + descriptor. #header-logo-slot is the intro animation's
-         dock target; the intro hides the static img and lands its animated mark in the slot. -->
-    <a href={withBase('/')} class="flex min-w-0 items-center gap-3" aria-label="MH PharmaPack, home">
-      <span id="header-logo-slot" class="flex h-11 w-[55px] shrink-0 items-center justify-center">
-        <img id="header-logo-img" src={logo.src} width={logo.width} height={logo.height} alt="" class="h-11 w-auto" />
-      </span>
-      <span id="header-lockup-text" class="flex min-w-0 flex-col justify-center gap-0.5 leading-none">
-        <span class="text-[0.9rem] font-bold tracking-lockup whitespace-nowrap text-ink">MH PHARMAPACK</span>
-        <!-- The descriptor is nowrap by design (CLAUDE.md: it must never be dropped,
-             the name alone under-describes the business). At 0.6rem/0.18em it is wider
-             than the space left beside the hamburger below ~430px and ran under it, so
-             narrow screens get a slightly smaller size and tighter tracking. -->
-        <span class="text-[0.5rem] tracking-[0.09em] sm:text-[0.6rem] sm:tracking-eyebrow font-semibold whitespace-nowrap text-steel-deep uppercase">
-          Pharmaceutical Sourcing &amp; Supply
-        </span>
-      </span>
-    </a>
-
-    <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
-      {
-        desktopNav.map((item) => (
-          <a href={item.href} class="text-sm font-medium text-steel-deep transition-colors hover:text-ink">
-            {item.label}
-          </a>
-        ))
-      }
-      <a href={withBase('/contact')} class="btn btn-primary !min-h-11 !px-5 text-sm">Request a Quote</a>
+<header id="site-header" class="sticky top-0 z-50">
+  <!-- The panel is a sibling of the bar and BELOW it in this header's stacking
+       context (z 0 vs z 10), so the lockup and the button stay drawn on top of
+       the navy while it is open. It is fixed rather than absolute because it
+       has to cover the viewport, not the 72px header box. -->
+  <div id="mobile-nav" class="nav-panel" aria-hidden="true">
+    <nav class="nav-inner" aria-label="Primary">
+      <ol class="nav-list">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="nav-item"
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+              >
+                <span>{item.label}</span>
+                <span class="nav-arrow" aria-hidden="true">&rsaquo;</span>
+              </a>
+              <span class="nav-rule" aria-hidden="true" />
+            </li>
+          ))
+        }
+      </ol>
+      <!-- No actions in this panel by design: no contact row and no Request a
+           Quote. The floating quick-actions pill carries all of them and paints
+           ON TOP of this panel (it sits at z-50 and comes after the header in
+           the DOM), so anything here was both duplicated and partly covered.
+           The menu is navigation only; the pill is action. -->
     </nav>
-
-    <button
-      id="nav-toggle"
-      type="button"
-      class="flex h-11 w-11 items-center justify-center rounded-sm border border-line text-steel-deep lg:hidden"
-      aria-expanded="false"
-      aria-controls="mobile-nav"
-      aria-label="Open menu"
-    >
-      <svg id="nav-icon-open" class="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <path d="M2.5 5h15M2.5 10h15M2.5 15h15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
-      </svg>
-      <svg id="nav-icon-close" class="hidden h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-        <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
-      </svg>
-    </button>
   </div>
 
-  <nav id="mobile-nav" class="hidden border-t border-line bg-paper lg:hidden" aria-label="Primary">
-    <ul class="px-5 py-3">
-      {
-        NAV.map((item) => (
-          <li>
-            <a href={item.href} class="block border-b border-line py-3.5 text-base font-medium text-ink last:border-b-0">
+  <div class="bar-row">
+    <div class="mx-auto flex h-18 max-w-content items-center justify-between gap-6 px-5 md:px-8">
+      <!-- Lockup: mark + wordmark + descriptor. #header-logo-slot is the intro animation's
+           dock target; the intro hides the static img and lands its animated mark in the slot. -->
+      <a href={withBase('/')} class="flex min-w-0 items-center gap-3" aria-label="MH PharmaPack, home">
+        <span id="header-logo-slot" class="flex h-11 w-[55px] shrink-0 items-center justify-center">
+          <img id="header-logo-img" src={logo.src} width={logo.width} height={logo.height} alt="" class="h-11 w-auto" />
+        </span>
+        <span id="header-lockup-text" class="flex min-w-0 flex-col justify-center gap-0.5 leading-none">
+          <span class="lockup-name text-[0.9rem] font-bold tracking-lockup whitespace-nowrap">MH PHARMAPACK</span>
+          <!-- The descriptor is nowrap by design (CLAUDE.md: it must never be dropped,
+               the name alone under-describes the business). At 0.6rem/0.18em it is wider
+               than the space left beside the hamburger below ~430px and ran under it, so
+               narrow screens get a slightly smaller size and tighter tracking. -->
+          <span class="lockup-desc text-[0.5rem] tracking-[0.09em] sm:text-[0.6rem] sm:tracking-eyebrow font-semibold whitespace-nowrap uppercase">
+            Pharmaceutical Sourcing &amp; Supply
+          </span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        {
+          desktopNav.map((item) => (
+            <a
+              href={item.href}
+              class="nav-link"
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+            >
               {item.label}
             </a>
-          </li>
-        ))
-      }
-    </ul>
-    <div class="px-5 pt-1 pb-6">
-      <a href={withBase('/contact')} class="btn btn-primary w-full">Request a Quote</a>
+          ))
+        }
+        <a href={withBase('/contact')} class="nav-link-cta">Request a Quote</a>
+      </nav>
+
+      <button
+        id="nav-toggle"
+        type="button"
+        class="burger"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <span class="burger-bars" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+      </button>
     </div>
-  </nav>
+  </div>
 </header>
 
+<style>
+  /* ------------------------------------------------------------------
+     THE BAR
+     Styling lives here rather than in utilities so the open state can
+     override it cleanly; an id plus class beats a Tailwind single-class
+     utility on specificity without any !important.
+  ------------------------------------------------------------------ */
+  .bar-row {
+    position: relative;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-paper) 95%, transparent);
+    border-bottom: 1px solid var(--color-line);
+    backdrop-filter: blur(6px);
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+  .lockup-name { color: var(--color-ink); transition: color 0.4s ease; }
+  .lockup-desc { color: var(--color-steel-deep); transition: color 0.4s ease; }
+
+  /* While open the header is FIXED, not sticky.
+     The scroll lock sets overflow:hidden on <html> and <body>, and an ancestor
+     with overflow:hidden becomes a scroll container, which breaks
+     position:sticky outright. The header stopped sticking and snapped back to
+     its static position at the top of the DOCUMENT, so opening the menu
+     anywhere below the fold left it off screen above the viewport, and the
+     panel looked like it had no header at all.
+     Fixed positioning is immune to that. The reflow it causes (the header
+     leaving the flow) happens entirely behind an opaque, scroll-locked panel,
+     so nothing visibly moves. */
+  #site-header.is-open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* Open: the bar STAYS a bar. An earlier pass dissolved it to transparent so
+     the navy read as one unbroken field, but that removed the only fixed
+     reference on screen and the menu looked like it had eaten the header.
+     It now darkens and keeps its hairline instead, so the header still reads
+     as a header sitting above the panel, with the lockup inverted onto it. */
+  #site-header.is-open .bar-row {
+    background: rgba(8, 15, 27, 0.55);
+    border-bottom-color: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(6px);
+  }
+  #site-header.is-open .lockup-name { color: var(--color-paper); }
+  #site-header.is-open .lockup-desc { color: var(--color-copper-soft); }
+
+  /* ------------------------------------------------------------------
+     THE BUTTON
+     Three bars that cross into an X. The middle one retracts to zero width
+     rather than merely fading, so the two halves read as being pulled apart
+     before the outer bars close on them.
+  ------------------------------------------------------------------ */
+  .burger {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 2.75rem;
+    width: 2.75rem;
+    flex: none;
+    padding: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.35s ease, border-color 0.35s ease;
+  }
+  .burger-bars { position: relative; width: 18px; height: 12px; }
+  .burger-bars i {
+    position: absolute;
+    left: 0;
+    height: 1.7px;
+    width: 100%;
+    border-radius: 2px;
+    background: var(--color-steel-deep);
+    transition:
+      transform 0.42s cubic-bezier(0.65, 0, 0.35, 1),
+      width 0.42s cubic-bezier(0.65, 0, 0.35, 1),
+      opacity 0.2s ease,
+      background-color 0.35s ease;
+  }
+  .burger-bars i:nth-child(1) { top: 0; }
+  .burger-bars i:nth-child(2) { top: 5.15px; width: 72%; }
+  .burger-bars i:nth-child(3) { top: 10.3px; }
+
+  /* Desktop visibility is owned HERE, not by a `lg:hidden` utility. Astro
+     scopes this component's rules to `.burger[data-astro-cid-...]`, which is
+     specificity (0,2,0) and outranks Tailwind's `.lg\:hidden` at (0,1,0), so
+     the utility lost silently and the button showed on wide screens. Setting
+     display in one place removes the fight instead of escalating it. */
+  @media (min-width: 1024px) {
+    .burger { display: none; }
+    .nav-panel { display: none; }
+  }
+
+  #site-header.is-open .burger {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+  #site-header.is-open .burger-bars i { background: var(--color-paper); }
+  #site-header.is-open .burger-bars i:nth-child(1) { transform: translateY(5.15px) rotate(45deg); }
+  #site-header.is-open .burger-bars i:nth-child(2) { opacity: 0; width: 0; }
+  #site-header.is-open .burger-bars i:nth-child(3) { transform: translateY(-5.15px) rotate(-45deg); }
+
+  /* ------------------------------------------------------------------
+     THE PANEL
+     Wipes down from under the bar with clip-path, so the header holds still
+     and the world beneath it changes. visibility (not display) keeps the
+     transition alive; inert is set from JS so nothing inside is focusable or
+     announced while it is closed.
+  ------------------------------------------------------------------ */
+  .nav-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    /* The exact navy of the "What we do" section: same gradient, same
+       viewport-anchored attachment as .sec-deep and .sh-root in global.css.
+       Because the panel is fixed and full-viewport, this paints pixel for
+       pixel what that section paints, so the menu opens into the site's own
+       dark world rather than a near-match of it. */
+    background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
+    background-attachment: fixed;
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+    transition:
+      clip-path 0.58s cubic-bezier(0.76, 0, 0.24, 1),
+      visibility 0s linear 0.58s;
+  }
+  #site-header.is-open .nav-panel {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition:
+      clip-path 0.58s cubic-bezier(0.76, 0, 0.24, 1),
+      visibility 0s linear 0s;
+  }
+
+  /* The hero's stream weave, echoed behind the links. One copy scaled with
+     cover, never tiled and never stretched, for the same reasons as
+     .band-weave in global.css. At this opacity it reads as depth, not pattern. */
+  .nav-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Lighter and more translucent than the section bands use. Two changes,
+       not one: the opacity drops from 0.10 to 0.055, AND the strokes are paler
+       (#cfe0f5 / #f0d8c1 rather than #9db6d6 / #e0b087). Opacity alone would
+       have made it merely fainter; paler strokes are what make it read as
+       light rather than as a dimmed version of the same lines. It has to sit
+       further back here than on a section band, because full-height nav type
+       is laid directly over it. */
+    opacity: 0.055;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='400' viewBox='0 0 1200 400'%3E%3Cg fill='none' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath stroke='%23cfe0f5' d='M-40 300C200 220 420 340 640 260S1040 300 1240 240'/%3E%3Cpath stroke='%23f0d8c1' d='M-40 240C240 180 480 280 720 210S1080 250 1240 190'/%3E%3Cpath stroke='%23cfe0f5' d='M-40 200C200 260 460 140 700 200S1060 160 1240 210'/%3E%3Cpath stroke='%23f0d8c1' d='M-40 140C260 90 500 190 760 130S1100 170 1240 120'/%3E%3Cpath stroke='%23cfe0f5' d='M-40 330C300 290 560 360 820 300S1120 330 1240 300'/%3E%3Cpath stroke='%23f0d8c1' d='M-40 90C240 140 520 60 780 110S1100 80 1240 110'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .nav-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Centred, not top-aligned. Once the CTA and contact row moved out to the
+       pill, five links pinned to the top of a tall phone left most of the panel
+       as empty navy. Centring seats them between the header above and the pill
+       below so the panel reads as composed rather than half-filled. */
+    justify-content: center;
+    /* Bottom padding is clearance, not taste: the quick-actions pill is fixed
+       to the bottom of the viewport and paints over this panel, so a long list
+       would otherwise end underneath it. */
+    padding: calc(4.5rem + 1.25rem) 1.25rem calc(env(safe-area-inset-bottom) + 5.25rem);
+    overflow-y: auto;
+  }
+  .nav-list { margin: 0; padding: 0; list-style: none; }
+  /* The mask each item slides out from */
+  .nav-list li { overflow: hidden; }
+
+  .nav-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.7rem 0;
+    color: var(--color-paper);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    text-decoration: none;
+    transform: translateY(115%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-item[aria-current='page'] { color: var(--color-copper-soft); }
+  .nav-arrow { font-size: 0.9rem; font-weight: 600; color: var(--color-copper-soft); opacity: 0.75; }
+  /* Engraved rather than merely brighter. A dark line sits under a lighter
+     one, so the separator reads as cut into the navy: the shadow supplies the
+     "darker" and the pairing supplies the "more apparent". A single white line
+     at higher opacity just looked washed out over the weave, and a purely dark
+     line would have disappeared into the gradient's own darker passages. */
+  .nav-rule {
+    display: block;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.62);
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.3);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #site-header.is-open .nav-item { transform: translateY(0); }
+  #site-header.is-open .nav-rule { transform: scaleX(1); }
+
+  /* Stagger. Written out rather than computed so the order is legible; five
+     items is the full nav and a sixth would need a line here. */
+  .nav-list li:nth-child(1) .nav-item { transition-delay: 0.06s; }
+  .nav-list li:nth-child(2) .nav-item { transition-delay: 0.12s; }
+  .nav-list li:nth-child(3) .nav-item { transition-delay: 0.18s; }
+  .nav-list li:nth-child(4) .nav-item { transition-delay: 0.24s; }
+  .nav-list li:nth-child(5) .nav-item { transition-delay: 0.3s; }
+  .nav-list li:nth-child(1) .nav-rule { transition-delay: 0.1s; }
+  .nav-list li:nth-child(2) .nav-rule { transition-delay: 0.16s; }
+  .nav-list li:nth-child(3) .nav-rule { transition-delay: 0.22s; }
+  .nav-list li:nth-child(4) .nav-rule { transition-delay: 0.28s; }
+  .nav-list li:nth-child(5) .nav-rule { transition-delay: 0.34s; }
+
+
+  /* ------------------------------------------------------------------
+     DESKTOP NAV
+     A copper rule wipes in from the left on hover and leaves to the right,
+     so the motion has direction instead of simply appearing. The current
+     page holds the rule permanently, which the build had no indicator for.
+  ------------------------------------------------------------------ */
+  .nav-link {
+    position: relative;
+    padding: 0.25rem 0;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-copper);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-link:hover { color: var(--color-ink); }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+  .nav-link[aria-current='page'] { color: var(--color-ink); font-weight: 600; }
+  .nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+    background: var(--color-copper-deep);
+  }
+
+  .nav-link-cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 1.25rem;
+    border-radius: 0.25rem;
+    background: var(--color-copper-deep);
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.25s ease;
+  }
+  .nav-link-cta:hover { background: var(--color-copper); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar-row,
+    .lockup-name,
+    .lockup-desc,
+    .burger,
+    .burger-bars i,
+    .nav-panel,
+    .nav-item,
+    .nav-rule,
+    .nav-link,
+    .nav-link::after {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0s !important;
+    }
+  }
+</style>
+
+<style is:global>
+  /* Scroll lock. Set on <html> rather than <body> so it holds on iOS Safari,
+     where a body-only lock still lets the page rubber-band behind the panel. */
+  html.nav-locked,
+  html.nav-locked body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+</style>
+
 <script>
+  const header = document.getElementById('site-header');
   const toggle = document.getElementById('nav-toggle');
   const panel = document.getElementById('mobile-nav');
-  const iconOpen = document.getElementById('nav-icon-open');
-  const iconClose = document.getElementById('nav-icon-close');
 
-  if (toggle && panel && iconOpen && iconClose) {
+  if (header && toggle && panel) {
+    const setState = (open: boolean) => {
+      header.classList.toggle('is-open', open);
+      document.documentElement.classList.toggle('nav-locked', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.setAttribute('aria-hidden', String(!open));
+      // inert keeps the closed panel out of the tab order and the a11y tree.
+      // Without it the links stay focusable behind a panel nobody can see.
+      if (open) panel.removeAttribute('inert');
+      else panel.setAttribute('inert', '');
+    };
+
+    const open = () => {
+      setState(true);
+      // Land focus on the first link so a keyboard user is inside the menu
+      // they just opened, not still parked on the button behind it.
+      panel.querySelector<HTMLAnchorElement>('.nav-item')?.focus();
+    };
+    const close = (returnFocus = true) => {
+      setState(false);
+      if (returnFocus) toggle.focus();
+    };
+
+    setState(false);
+
     toggle.addEventListener('click', () => {
-      const opening = panel.classList.contains('hidden');
-      panel.classList.toggle('hidden', !opening);
-      iconOpen.classList.toggle('hidden', opening);
-      iconClose.classList.toggle('hidden', !opening);
-      toggle.setAttribute('aria-expanded', String(opening));
-      toggle.setAttribute('aria-label', opening ? 'Close menu' : 'Open menu');
+      if (header.classList.contains('is-open')) close();
+      else open();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && header.classList.contains('is-open')) close();
+    });
+
+    // Following a link closes the menu. Matters for same-page anchors, where
+    // no navigation happens and the panel would otherwise stay up.
+    panel.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) close(false);
+    });
+
+    // Crossing into the desktop layout hides the button, so a menu left open
+    // would be stuck with nothing to close it.
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    desktop.addEventListener('change', (e) => {
+      if (e.matches && header.classList.contains('is-open')) close(false);
     });
   }
 </script>

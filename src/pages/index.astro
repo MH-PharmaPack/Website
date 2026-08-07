@@ -62,9 +62,10 @@ const steps = [
   <!-- Logo intro overlay: home route only, once per session, reduced-motion safe -->
   <Intro slot="pre-shell" />
 
-  <!-- 4.1 Hero: scroll-synced light-stream journey (dark navy band). The
-       hero copy, beats, and CTAs live inside the component; the page's
-       light Cleanroom sections resume below. -->
+  <!-- 4.1 Hero: scroll-synced light-stream journey (dark navy band). The hero
+       copy, beats, credential row, and CTAs all live inside the component.
+       The page stays dark from here down and only turns to steel-white at the
+       closing call to action. -->
   <ScrollHero />
 
   <!-- Post-hero flow: the handoff happens inside the hero's canvas (the
@@ -74,9 +75,10 @@ const steps = [
   <div class="thread-scope" data-thread-scope>
   <div class="thread-line" data-thread-line aria-hidden="true"></div>
 
-  <!-- 4.2 What we do, in one line each. Dark band: the hero's world carries
-       on into the first section (the strand runs down through it) before the
-       page turns to paper below. -->
+  <!-- 4.2 What we do, in one line each. This one keeps the hero's own fixed
+       gradient rather than the flat band tone, so the seam where the strand
+       runs down out of the canvas stays invisible. Every section below it
+       uses the single flat .band tone instead. -->
   <section class="sec-deep" data-thread-station>
     <div class="mx-auto max-w-content px-5 pt-14 pb-16 md:px-8 md:pt-16 md:pb-24">
       <p class="eyebrow eyebrow-on-dark" data-reveal>What we do</p>
@@ -101,20 +103,23 @@ const steps = [
     </div>
   </section>
 
-  <!-- 4.3 How it works -->
-  <section class="bg-paper-warm" data-thread-station>
+  <!-- 4.3 How it works. Flat band tone, like every section from here to the
+       close except the credibility band. Told apart from its neighbours by the
+       hairline above it, the copper numerals, and its own two-column list,
+       never by a different shade of navy. -->
+  <section class="band band-edge" data-thread-station>
     <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-24">
-      <p class="eyebrow" data-reveal>How it works</p>
-      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
+      <p class="eyebrow eyebrow-on-dark" data-reveal>How it works</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-paper md:text-4xl" data-reveal>
         From requirement to delivered goods.
       </h2>
       <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:gap-x-8">
         {
           steps.map((step, i) => (
-            <li class="border-t-2 border-line pt-5" data-reveal-child>
-              <span class="station-num text-sm font-bold tracking-eyebrow text-copper-deep">0{i + 1}</span>
-              <h3 class="mt-3 text-lg font-bold text-ink">{step.title}</h3>
-              <p class="mt-2 max-w-md text-base leading-relaxed text-steel-deep">{step.copy}</p>
+            <li class="border-t-2 border-hairline pt-5" data-reveal-child>
+              <span class="station-num text-sm font-bold tracking-eyebrow text-copper-soft">0{i + 1}</span>
+              <h3 class="mt-3 text-lg font-bold text-paper">{step.title}</h3>
+              <p class="mt-2 max-w-md text-base leading-relaxed text-mist">{step.copy}</p>
             </li>
           ))
         }
@@ -124,26 +129,40 @@ const steps = [
 
   <!-- 4.4 Reach and quality, the credibility band. The weave texture is a
        faint static echo of the hero's streams; see .band-weave in global.css -->
-  <section class="band-weave bg-steel-deep" data-thread-station>
-    <div class="relative mx-auto max-w-content px-5 py-16 md:px-8 md:py-20">
-      <div class="grid gap-10 md:grid-cols-3 md:gap-8">
+  <!-- The one section lifted out of the navy run, and it does it by going
+       light rather than by taking an accent colour (see the note in
+       global.css: teal and bronze were both tried and both read as foreign
+       objects). Paper is 12.7:1 against the navy either side, so the contrast
+       alone carries it. Deeper padding than its neighbours and hairline edges
+       top and bottom, so it reads as a deliberate inset rather than a slab
+       dropped into the page. -->
+  <section class="border-y border-line bg-paper band-weave-light" data-thread-station>
+    <div class="relative mx-auto max-w-content px-5 py-20 md:px-8 md:py-28">
+      <p class="eyebrow" data-reveal>Reach and quality</p>
+      <!-- [NEEDS: confirm headline] Authored to match the section pattern; the
+           spec gives 4.4 proof points but no heading. Says only what 4.4's own
+           bullets say (three named regions, all approved), so it adds no claim. -->
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
+        Approved plants across three regions.
+      </h2>
+      <div class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
         <div data-reveal-child>
-          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Sourcing regions</h2>
-          <p class="mt-4 text-base leading-relaxed text-paper">
+          <h3 class="text-xs font-semibold tracking-eyebrow text-copper-deep uppercase">Sourcing regions</h3>
+          <p class="mt-4 text-base leading-relaxed text-steel-deep">
             India, Latin America (EU approved), South Africa (WHO GMP, PIC/S approved).
           </p>
         </div>
         <div data-reveal-child>
-          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Quality standard</h2>
-          <p class="mt-4 text-base leading-relaxed text-paper">
+          <h3 class="text-xs font-semibold tracking-eyebrow text-copper-deep uppercase">Quality standard</h3>
+          <p class="mt-4 text-base leading-relaxed text-steel-deep">
             We source exclusively from WHO GMP and EU GMP approved facilities. Partner plants hold
             WHO GMP, EU GMP, ISO, and UK MHRA approvals.
           </p>
         </div>
         <div data-reveal-child>
-          <h2 class="text-xs font-semibold tracking-eyebrow text-line uppercase">Network</h2>
+          <h3 class="text-xs font-semibold tracking-eyebrow text-copper-deep uppercase">Network</h3>
           <!-- [NEEDS: confirm the public number] Using the spec's recommended qualitative phrasing. -->
-          <p class="mt-4 text-base leading-relaxed text-paper">
+          <p class="mt-4 text-base leading-relaxed text-steel-deep">
             A growing network of approved manufacturing partners.
           </p>
         </div>
@@ -151,22 +170,25 @@ const steps = [
     </div>
   </section>
 
-  <!-- 4.5 Services strip -->
-  <section class="bg-paper">
+  <!-- 4.5 Services strip. Quiet-statement pattern, shared with 4.6: eyebrow
+       plus one large line, no heading, because the spec gives this section a
+       single sentence and a heading would only restate it. -->
+  <section class="band band-edge" data-thread-station>
     <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-16">
-      <p class="max-w-3xl text-lg leading-relaxed text-ink" data-reveal>
+      <p class="eyebrow eyebrow-on-dark" data-reveal>Services</p>
+      <p class="mt-5 max-w-3xl text-lg leading-relaxed text-paper" data-reveal>
         Beyond the match: supplier audit support, business development, QA and QC and dossier
         coordination, paperwork, payment terms, collection, and logistics follow-up.
-        <a href={withBase('/services')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">What We Do</a>
+        <a href={withBase('/services')} class="font-semibold text-copper-soft underline underline-offset-4 hover:text-paper">What We Do</a>
       </p>
     </div>
   </section>
 
   <!-- 4.6 Proof / reference case (anonymised default; named version only with written consent) -->
-  <section class="border-y border-line bg-paper-warm" data-thread-station>
+  <section class="band band-edge" data-thread-station>
     <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-20">
-      <p class="eyebrow" data-reveal>A recent engagement</p>
-      <p class="mt-5 max-w-3xl border-l-2 border-copper pl-5 text-xl leading-relaxed font-medium text-ink md:text-2xl" data-reveal>
+      <p class="eyebrow eyebrow-on-dark" data-reveal>A recent engagement</p>
+      <p class="mt-5 max-w-3xl border-l-2 border-copper pl-5 text-xl leading-relaxed font-medium text-paper md:text-2xl" data-reveal>
         We recently connected an EU-approved corticosteroid API supplier with a Mumbai-based
         formulation company, and coordinated the supply end to end.
       </p>
@@ -174,6 +196,10 @@ const steps = [
   </section>
 
   <!-- 4.7 Closing call to action -->
+  <!-- The page turns to steel-white here and stays that way through the
+       footer: after a long dark run the close reads as daylight, and the
+       copper button is the only saturated thing on a pale ground.
+       No eyebrow by design; the spec calls this section simple. -->
   <section class="bg-paper" data-thread-station>
     <div class="mx-auto max-w-content px-5 py-20 text-center md:px-8 md:py-28">
       <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
