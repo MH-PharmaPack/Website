@@ -46,32 +46,20 @@ export default function initPageFlow() {
     for (const el of targets) io.observe(el);
   }
 
-  /* The thread */
+  /* The thread rail. It is invisible (the visible line is the canvas
+     strand); this only measures, so the reveal choreography above stays
+     tied to the same geometry. */
   const scope = document.querySelector('[data-thread-scope]');
   const line = document.querySelector('[data-thread-line]');
-  const nodesWrap = document.querySelector('[data-thread-nodes]');
   if (!scope || !line) return;
-  const stations = [...scope.querySelectorAll('[data-thread-station]')];
 
-  let lineTop = 0, lineH = 1, nodeEls = [];
+  let lineTop = 0, lineH = 1;
 
   function measure() {
     const scopeTop = scope.getBoundingClientRect().top + window.scrollY;
     // offsetTop/offsetHeight are layout values, unaffected by the scaleY
     lineTop = scopeTop + line.offsetTop;
     lineH = Math.max(1, line.offsetHeight);
-    if (nodesWrap) {
-      nodesWrap.textContent = '';
-      nodeEls = stations.map((s) => {
-        const y = s.getBoundingClientRect().top + window.scrollY + 92;
-        const n = document.createElement('div');
-        n.className = 'thread-node';
-        n.style.top = `${y - scopeTop}px`;
-        n.dataset.y = y;
-        nodesWrap.appendChild(n);
-        return n;
-      });
-    }
   }
 
   function update() {
@@ -79,8 +67,6 @@ export default function initPageFlow() {
     const trigger = window.scrollY + window.innerHeight * 0.62;
     const p = Math.min(1, Math.max(0, (trigger - lineTop) / lineH));
     line.style.transform = `scaleY(${p})`;
-    const passY = lineTop + lineH * p;
-    for (const n of nodeEls) n.classList.toggle('lit', passY >= +n.dataset.y);
   }
 
   let ticking = false;
@@ -94,7 +80,6 @@ export default function initPageFlow() {
   if (reduced) {
     measure();
     line.style.transform = 'scaleY(1)';
-    for (const n of nodeEls) n.classList.add('lit');
     return;
   }
 

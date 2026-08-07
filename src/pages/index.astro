@@ -73,30 +73,30 @@ const steps = [
        canvas river flows along the same gutter. -->
   <div class="thread-scope" data-thread-scope>
   <div class="thread-line" data-thread-line aria-hidden="true"></div>
-  <div class="thread-nodes" data-thread-nodes aria-hidden="true"></div>
 
-  <!-- 4.2 What we do, in one line each -->
-  <section class="bg-paper" data-thread-station>
-    <div class="mx-auto max-w-content px-5 py-16 md:px-8 md:py-24">
-      <p class="eyebrow" data-reveal>What we do</p>
-      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
+  <!-- 4.2 What we do, in one line each. Dark band: the hero's world carries
+       on into the first section (the strand runs down through it) before the
+       page turns to paper below. -->
+  <section class="sec-deep" data-thread-station>
+    <div class="mx-auto max-w-content px-5 pt-14 pb-16 md:px-8 md:pt-16 md:pb-24">
+      <p class="eyebrow eyebrow-on-dark" data-reveal>What we do</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-paper md:text-4xl" data-reveal>
         Five sourcing lines, one point of contact.
       </h2>
       <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-6">
         {
           lines.map((line) => (
             <div data-reveal-child>
-              <svg class="h-7 w-7 text-steel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
-              <h3 class="mt-4 text-base font-bold text-ink">{line.name}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-steel-deep">{line.copy}</p>
+              <svg class="h-7 w-7 text-copper-soft" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
+              <h3 class="mt-4 text-base font-bold text-paper">{line.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-line">{line.copy}</p>
             </div>
           ))
         }
       </div>
-      <p class="mt-12 max-w-2xl text-base leading-relaxed text-ink" data-reveal>
+      <p class="mt-12 max-w-2xl text-base leading-relaxed text-paper" data-reveal>
         Any one of these, or all five for a single programme, matched to the right approved plant
-        and coordinated by us.
-        <a href={withBase('/services')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">What We Do</a>
+        and coordinated by us.{' '}<a href={withBase('/services')} class="font-semibold text-copper-soft underline underline-offset-4 hover:text-paper">What We Do</a>
       </p>
     </div>
   </section>

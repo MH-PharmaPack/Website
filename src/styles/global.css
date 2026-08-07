@@ -141,18 +141,43 @@
      The hero's golden river hands off into a copper-to-hairline thread that
      draws itself down the page (see src/scripts/page-flow.js).
   ------------------------------------------------------------------------ */
-  .thread-scope { position: relative; }
+  /* The page content starts where the hero animation ends, inside the
+     stage's final viewport, instead of a screen-height later. This is only
+     seamless because the first section below is the same navy the scene
+     ends on, so the canvas turning transparent over it shows no step. */
+  .thread-scope {
+    position: relative;
+    /* No overlap needed: the hero's scroll-away IS the extraction shot (see
+       scroll-hero.js, the ride ends exactly when the sticky stage releases),
+       so this section rises into view in step with the strand being drawn,
+       against the same viewport-anchored navy. */
+  }
 
-  /* Section text sits above the fixed river canvas (z 3); the section
-     background bands, being unpositioned, stay below it, so the river
-     flows over the bands but under the words */
+  /* First section after the hero: the dark world continues, with the
+     strand running down through it, before the page turns to paper */
+  /* Identical viewport-anchored gradient to .sh-root, so the section's top
+     edge is invisible: it is literally the same painted background. A flat
+     colour here cut from the gradient's near-black top to flat blue. */
+  .sec-deep {
+    background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
+    background-attachment: fixed;
+  }
+  .eyebrow-on-dark { color: var(--color-copper-soft); }
+
+  /* Deterministic layering around the fixed canvas (z 3): section bands sit
+     below it so the gutter line draws over them, section content sits above
+     it so the line never crosses the words. Explicit z-index on both sides,
+     never left to paint order. */
+  .thread-scope > section {
+    position: relative;
+    z-index: 0;
+  }
   .thread-scope > section > div {
     position: relative;
     z-index: 10;
   }
 
-  .thread-line,
-  .thread-nodes {
+  .thread-line {
     position: absolute;
     left: max(12px, calc(50% - 622px));
     pointer-events: none;
@@ -172,23 +197,8 @@
       #ffd076 0%, var(--color-copper) 8%, var(--color-copper) 26%,
       var(--color-line) 55%, var(--color-line) 92%, transparent 100%);
   }
-  .thread-nodes { top: 0; height: 100%; width: 0; }
-  .thread-node {
-    position: absolute;
-    left: -3px;
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: var(--color-paper);
-    border: 2px solid var(--color-line);
-    transition: background-color 0.35s ease, border-color 0.35s ease,
-      box-shadow 0.35s ease;
-  }
-  .thread-node.lit {
-    background: var(--color-copper);
-    border-color: var(--color-copper);
-    box-shadow: 0 0 10px rgba(169, 102, 63, 0.45);
-  }
+  /* (Station node dots removed: they sat in the gutter and read as stray
+     dots floating over the hero once content moved up into it.) */
 
   /* Faint echo of the hero's stream weave on the dark credibility band */
   .band-weave { position: relative; }

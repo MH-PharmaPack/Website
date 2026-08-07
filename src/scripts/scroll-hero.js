@@ -58,11 +58,16 @@ const CFG = {
   cameraAzimuthDeg: 10,
   cameraRollDeg: -6,
   cameraDriftDeg: 0.8,
-  bgTop: '#050b1a',
-  bgMid: '#0a1428',
+  // Kept close together and ending exactly on the first section's navy, so
+  // that when the canvas turns transparent over that section there is no
+  // visible tone step
+  bgTop: '#0c1729',
+  bgMid: '#0f1c33',
   bgBottom: '#12203a',
-  rideEnd: 0.82,           // fraction of the track used by the ride; the
-                           // rest is the strand extraction shot
+  // NOTE: the ride/extraction split is not a constant. The ride occupies
+  // exactly the sticky range, and the extraction plays through the stage's
+  // scroll-away, so page content rises in step with the strand instead of
+  // waiting for an empty frame. See rideEnd, computed in frameCamera().
   strandColor: 0xe0a85c,   // warm copper-gold; reads on navy AND on paper
   strandFlowCount: 420,    // particles riding the strand (280 narrow)
   maxPixelRatio: 1.75,
@@ -88,10 +93,11 @@ const MERGE = new THREE.Vector3(-1.35, -0.18, -0.72);
 const STRAND_PTS = [
   [5.2, 1.7, 1.0], [3.2, 2.1, 0.8], [0.8, 1.5, 0.55],
   [-1.4, 0.8, 0.35], [-2.0, -0.2, 0.18],
-  [-2.1, -1.6, 0.12], [-2.1, -3.4, 0.1], [-2.1, -6.0, 0.1],
+  [-2.1, -1.6, 0.12], [-2.1, -3.5, 0.1], [-2.1, -6.2, 0.1],
 ];
-const STRAND_X = -2.1;  // world x of the vertical run
-const STRAND_Z = 0.1;   // world z of the vertical run
+const STRAND_X = -2.1;        // world x of the vertical run
+const STRAND_Z = 0.1;         // world z of the vertical run
+const STRAND_STRAIGHT_Y = -1.6; // where the curve has finished turning down
 const STRAND_SAMPLES = 260;
 
 const SAMPLES = 240;
@@ -103,7 +109,14 @@ const smooth = (a, b, x) => {
   const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
   return t * t * (3 - 2 * t);
 };
-const fadeWin = (u, a, b, c, d) => smooth(a, b, u) * smooth(d, c, u);
+/* Fade window: ramp up over a..b, hold, ramp down over c..d.
+   A zero-width edge (a===b or c===d) would divide by zero inside smooth() and
+   silently blank the element for the whole range, so guard both edges. To hold
+   an element on with no fade-out at all, use smooth(a, b, u) directly rather
+   than a degenerate window. */
+const fadeWin = (u, a, b, c, d) =>
+  (a === b ? (u < a ? 0 : 1) : smooth(a, b, u)) *
+  (c === d ? (u < c ? 1 : 0) : smooth(d, c, u));
 
 function mulberry32(seed) {
   return function () {
@@ -169,8 +182,12 @@ export default function initScrollHero(root) {
   scene.fog = new THREE.Fog(0x0c1830, 6.5, 14);
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 60);
 
-  // Static in-scene navy gradient; the postprocess chain needs an opaque
-  // backdrop, and there is no colour crossfade anymore by design
+  // The canvas is ALWAYS transparent: the navy comes from the DOM
+  // (.sh-root, viewport-anchored so it matches what the scene used to
+  // paint). That is what lets the next section scroll up into view behind
+  // the live scene instead of being unveiled all at once when the canvas
+  // stopped painting. Kept here in case an opaque backdrop is ever wanted.
+  // eslint-disable-next-line no-unused-vars
   const bgTex = (() => {
     const c = document.createElement('canvas');
     c.width = 2; c.height = 512;
@@ -185,7 +202,6 @@ export default function initScrollHero(root) {
     tex.colorSpace = THREE.SRGBColorSpace;
     return tex;
   })();
-  scene.background = bgTex;
 
   const rand = mulberry32(1624);
 
@@ -375,60 +391,107 @@ export default function initScrollHero(root) {
   strandLine.renderOrder = 6;
   scene.add(strandLine);
 
-  const strandTip = new THREE.Sprite(new THREE.SpriteMaterial({
-    map: glowTex, color: 0xffd076, transparent: true, opacity: 0,
-    blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false,
-  }));
-  strandTip.scale.setScalar(0.42);
-  strandTip.renderOrder = 7;
-  scene.add(strandTip);
+  // (No tip sprite: a bright point riding the growth read as a stray dot
+  // sitting on the line. The line's own leading edge is enough.)
 
-  const flowParts = new Array(strandFlowCount);
-  const fPosAttr = new THREE.BufferAttribute(new Float32Array(strandFlowCount * 3), 3);
-  const fColAttr = new THREE.BufferAttribute(new Float32Array(strandFlowCount * 3), 3);
-  fPosAttr.setUsage(THREE.DynamicDrawUsage);
-  const fGeo = new THREE.BufferGeometry();
-  fGeo.setAttribute('position', fPosAttr);
-  fGeo.setAttribute('color', fColAttr);
-  fGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 20);
-  const flowMat = new THREE.PointsMaterial({
-    map: dotTex, size: 0.06, sizeAttenuation: true,
-    vertexColors: true, transparent: true, opacity: 0, depthWrite: false,
+  /* Light travelling down the strand. Deliberately FINE and dense: the
+     earlier version used few large soft sprites, which read as blobs and
+     as stray dots whenever the strand was short. These are small, always
+     spread over real drawn length, and never rendered before the strand
+     has one. */
+  const GLINTS = narrow ? 220 : 340;
+  const glintParts = new Array(GLINTS);
+  const gPosAttr = new THREE.BufferAttribute(new Float32Array(GLINTS * 3), 3);
+  gPosAttr.setUsage(THREE.DynamicDrawUsage);
+  const gGeo = new THREE.BufferGeometry();
+  gGeo.setAttribute('position', gPosAttr);
+  gGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 20);
+  const glintMat = new THREE.PointsMaterial({
+    map: dotTex, color: 0xffd9a0, size: 0.022, sizeAttenuation: true,
+    transparent: true, opacity: 0, depthWrite: false,
+    blending: THREE.AdditiveBlending,
   });
-  const flowPoints = new THREE.Points(fGeo, flowMat);
-  flowPoints.renderOrder = 7;
-  scene.add(flowPoints);
-  {
-    const palette = [
-      new THREE.Color(0xe0a85c), new THREE.Color(0xc9924f),
-      new THREE.Color(0xa9663f), new THREE.Color(0xd9b878),
-    ];
-    const col = fColAttr.array;
-    for (let i = 0; i < strandFlowCount; i++) {
-      const c = palette[Math.floor(rand() * palette.length)];
-      const dim = 0.8 + rand() * 0.2;
-      col[i * 3] = c.r * dim; col[i * 3 + 1] = c.g * dim; col[i * 3 + 2] = c.b * dim;
-      flowParts[i] = {
-        t0: rand(),
-        speed: 0.035 + rand() * 0.03, // curve fraction per second
-        jitter: (rand() - 0.5) * 0.03,
-      };
-    }
+  const glints = new THREE.Points(gGeo, glintMat);
+  glints.renderOrder = 7;
+  scene.add(glints);
+  for (let i = 0; i < GLINTS; i++) {
+    glintParts[i] = { t0: rand(), speed: 0.055 + rand() * 0.05 };
   }
-  function updateStrandFlow(timeSec, grow) {
-    const pos = fPosAttr.array;
-    const range = Math.max(0.02, grow);
-    for (let i = 0; i < strandFlowCount; i++) {
-      const p = flowParts[i];
+  function updateGlints(timeSec, grow) {
+    const pos = gPosAttr.array;
+    const range = Math.max(0.25, grow);
+    for (let i = 0; i < GLINTS; i++) {
+      const p = glintParts[i];
       const t = ((p.t0 + timeSec * p.speed) % 1) * range;
       const f = t * STRAND_SAMPLES;
       const i0 = Math.floor(f), fr = f - i0;
       const a = i0 * 3, b = Math.min(i0 + 1, STRAND_SAMPLES) * 3;
-      pos[i * 3] = strandPos[a] + (strandPos[b] - strandPos[a]) * fr + p.jitter;
+      pos[i * 3] = strandPos[a] + (strandPos[b] - strandPos[a]) * fr;
       pos[i * 3 + 1] = strandPos[a + 1] + (strandPos[b + 1] - strandPos[a + 1]) * fr;
       pos[i * 3 + 2] = strandPos[a + 2] + (strandPos[b + 2] - strandPos[a + 2]) * fr;
     }
-    fPosAttr.needsUpdate = true;
+    gPosAttr.needsUpdate = true;
+  }
+
+  /* -------------------------------------------------------------------------
+     The page line: a screen-space continuation of the strand. Once the
+     extraction ends, a 3D strand cannot keep being a page-length line (it
+     has finite world length and a frozen camera runs out of it, which is
+     what made the line vanish and then reappear as its own curve). So the
+     page phase draws the line in normalised device space with an
+     orthographic camera: always exactly on the gutter, always spanning the
+     full viewport, at any width, with the same particles flowing down it.
+  ------------------------------------------------------------------------- */
+  const pageScene = new THREE.Scene();
+  const pageCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 10);
+  pageCam.position.z = 5;
+
+  const pageLineMat = new THREE.MeshBasicMaterial({
+    color: CFG.strandColor, transparent: true, opacity: 0, depthWrite: false,
+  });
+  const pageLine = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), pageLineMat);
+  pageScene.add(pageLine);
+
+  // The same fine glints, continuing down the page-phase line
+  const PAGE_GLINTS = narrow ? 70 : 110;
+  const pgParts = new Array(PAGE_GLINTS);
+  const pgPosAttr = new THREE.BufferAttribute(new Float32Array(PAGE_GLINTS * 3), 3);
+  pgPosAttr.setUsage(THREE.DynamicDrawUsage);
+  const pgGeo = new THREE.BufferGeometry();
+  pgGeo.setAttribute('position', pgPosAttr);
+  pgGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 4);
+  const pgMat = new THREE.PointsMaterial({
+    map: dotTex, color: 0xffd9a0, size: 4, sizeAttenuation: false,
+    transparent: true, opacity: 0, depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+  pageScene.add(new THREE.Points(pgGeo, pgMat));
+  for (let i = 0; i < PAGE_GLINTS; i++) {
+    pgParts[i] = { y0: rand(), speed: 0.16 + rand() * 0.14 };
+  }
+  function updatePageGlints(timeSec) {
+    const pos = pgPosAttr.array;
+    for (let i = 0; i < PAGE_GLINTS; i++) {
+      const p = pgParts[i];
+      const t = (p.y0 + timeSec * p.speed) % 1;
+      pos[i * 3] = gutterNDC;
+      pos[i * 3 + 1] = 1.1 - t * 2.2;
+      pos[i * 3 + 2] = 0.01;
+    }
+    pgPosAttr.needsUpdate = true;
+  }
+
+  let gutterNDC = -0.9;
+  function layoutPageLine() {
+    // Same gutter the page rail measures: max(12px, 50% - 622px). On a phone
+    // that lands 8px clear of the 20px text inset, which is a rail, not
+    // crowding; the line stays at every width.
+    const gutterPx = Math.max(12, stageW / 2 - 622) + 1;
+    gutterNDC = (gutterPx / stageW) * 2 - 1;
+    pageLine.position.set(gutterNDC, 0, 0);
+    // Match the 3D strand's on-screen weight (a 1px GL line) closely enough
+    // that the handover has nothing to give away
+    pageLine.scale.set((2 / stageW) * 1.5, 2.2, 1);
   }
 
   /* -------------------------------------------------------------------------
@@ -436,6 +499,10 @@ export default function initScrollHero(root) {
   ------------------------------------------------------------------------- */
   let stageW = 1, stageH = 1, isPortrait = false, baseDistance = CFG.cameraDistance;
   let composer = null, bloomPass = null, afterPass = null;
+  // Progress is measured over the WHOLE hero element, so it keeps advancing
+  // while the stage scrolls away; rideEnd is the point where the sticky
+  // range ends, i.e. where that scroll-away begins.
+  let rideEnd = 0.8, scrollSpan = 1;
 
   function frameCamera() {
     stageW = Math.max(1, stage.clientWidth);
@@ -450,6 +517,12 @@ export default function initScrollHero(root) {
     const needed = fitHalf / (halfTan * camera.aspect);
     baseDistance = Math.max(CFG.cameraDistance,
       Math.min(needed, CFG.cameraDistance * 2.2));
+    layoutPageLine();
+    // The extraction gets the stage's scroll-away PLUS a stretch of the
+    // page below it, so the shot has room to breathe instead of racing
+    const total = Math.max(1, root.offsetHeight);
+    scrollSpan = total + stageH * 0.9;
+    rideEnd = Math.min(0.95, Math.max(0.4, (total - stageH) / scrollSpan));
   }
   frameCamera();
 
@@ -494,13 +567,17 @@ export default function initScrollHero(root) {
   let scrollTarget = 0, scrollP = 0;
   function readScroll() {
     const rect = root.getBoundingClientRect();
-    const span = root.offsetHeight - stageH;
-    scrollTarget = span > 0 ? Math.min(1, Math.max(0, -rect.top / span)) : 0;
+    scrollTarget = scrollSpan > 0
+      ? Math.min(1, Math.max(0, -rect.top / scrollSpan)) : 0;
   }
   addEventListener('scroll', readScroll, { passive: true });
 
   let posCurve = null, tgtCurve = null;
-  let descPos = null, descTgt = null;
+  // Extraction camera solve, recomputed on resize
+  const desc = {
+    fromPos: new THREE.Vector3(), fromTgt: new THREE.Vector3(),
+    camX: 0, camY: 0, dist: 6.0, halfH: 2,
+  };
   const RIDE_ROLLS = [0, -4, -3, -2, -5];
   const tmpTarget = new THREE.Vector3();
 
@@ -525,27 +602,25 @@ export default function initScrollHero(root) {
     buildDescent();
   }
 
-  // The extraction camera: pans left and tilts down with the strand, ending
-  // in a frontal pose solved so the strand's vertical run projects exactly
-  // onto the page's left-gutter x for the current viewport
+  // The extraction camera: pans left and travels DOWN with the strand. The
+  // end pose is solved twice over so the last frame of the shot and the
+  // first frame of the page line are the same pixels:
+  //   x, so the straight run projects exactly onto the page gutter, and
+  //   y, so the straight run fills the whole frame height (the curve is
+  //      above the top edge by then).
+  // Without the y solve, the strand only covered the lower half and the
+  // top half read as empty navy.
   function buildDescent() {
-    const D = 6.0;
+    const depth = desc.dist - STRAND_Z;
+    const halfTan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    desc.halfH = halfTan * depth;
+    const halfW = desc.halfH * camera.aspect;
     const gutterPx = Math.max(12, stageW / 2 - 622) + 1;
     const gNDC = (gutterPx / stageW) * 2 - 1;
-    const halfW = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) *
-      camera.aspect * (D - STRAND_Z);
-    const camX = STRAND_X - gNDC * halfW;
-    const camY = -1.3;
-    descPos = new THREE.CatmullRomCurve3([
-      posCurve.getPoint(1),
-      new THREE.Vector3(0.9, 0.7, 6.2),
-      new THREE.Vector3(camX, camY, D),
-    ]);
-    descTgt = new THREE.CatmullRomCurve3([
-      tgtCurve.getPoint(1),
-      new THREE.Vector3(-0.7, 0.4, 0.4),
-      new THREE.Vector3(camX, camY, STRAND_Z),
-    ]);
+    desc.camX = STRAND_X - gNDC * halfW;
+    desc.camY = STRAND_STRAIGHT_Y - desc.halfH + 0.12;
+    posCurve.getPoint(1, desc.fromPos);
+    tgtCurve.getPoint(1, desc.fromTgt);
   }
 
   function rollAt(u) {
@@ -559,12 +634,30 @@ export default function initScrollHero(root) {
     camera.lookAt(tmpTarget);
     camera.rotateZ(THREE.MathUtils.degToRad(rollAt(u)));
   }
-  function placeDescent(d) {
-    descPos.getPoint(d, camera.position);
-    descTgt.getPoint(d, tmpTarget);
+  // The extraction camera moves on separated axes, which is what keeps the
+  // finished line still:
+  //   x and z settle EARLY (by d 0.45, while the strand is still drawing its
+  //     curve). Horizontal motion is the only thing that can slide a vertical
+  //     line sideways, so it is over before the vertical run exists.
+  //   y KEEPS FOLLOWING the growing tip down, and a pure vertical move
+  //     cannot change the line's screen x. This is what stops the frame from
+  //     emptying out while the strand is still somewhere off-screen.
+  function placeDescent(d, tipY) {
+    const settleXZ = smooth(0, 0.45, d);
+    const blendY = smooth(0, 0.22, d);
+    const followY = Math.max(desc.camY, tipY + desc.halfH * 0.5);
+    const x = THREE.MathUtils.lerp(desc.fromPos.x, desc.camX, settleXZ);
+    const z = THREE.MathUtils.lerp(desc.fromPos.z, desc.dist, settleXZ);
+    const y = THREE.MathUtils.lerp(desc.fromPos.y, followY, blendY);
+    camera.position.set(x, y, z);
+    tmpTarget.set(
+      THREE.MathUtils.lerp(desc.fromTgt.x, x, blendY),
+      THREE.MathUtils.lerp(desc.fromTgt.y, y, blendY),
+      THREE.MathUtils.lerp(desc.fromTgt.z, STRAND_Z, blendY));
     camera.lookAt(tmpTarget);
     // Roll levels out to zero for the frontal page pose
-    camera.rotateZ(THREE.MathUtils.degToRad(RIDE_ROLLS[4] * (1 - d)));
+    camera.rotateZ(THREE.MathUtils.degToRad(
+      RIDE_ROLLS[4] * (1 - smooth(0, 0.35, d))));
   }
 
   const setFade = (el, v, interactive) => {
@@ -572,12 +665,17 @@ export default function initScrollHero(root) {
     el.style.opacity = v;
     if (interactive) el.style.pointerEvents = v > 0.4 ? 'auto' : 'none';
   };
-  function updateScrollUI(u, descent = 0) {
-    setFade(ui.copy, smooth(0.12, 0.03, u), true);
-    setFade(ui.beat1, fadeWin(u, 0.14, 0.22, 0.36, 0.46));
-    setFade(ui.beat2, fadeWin(u, 0.44, 0.52, 0.62, 0.7));
+  function updateScrollUI(u, shot = 0) {
+    // Windows overlap so the ride is never text-less, and everything is
+    // clear of the screen before the shot hands over to the page
+    setFade(ui.copy, 1 - smooth(0.16, 0.3, u), true);
+    setFade(ui.beat1, fadeWin(u, 0.2, 0.3, 0.46, 0.56));
+    setFade(ui.beat2, fadeWin(u, 0.5, 0.6, 0.74, 0.84));
+    // beat3 has no fade-out of its own: it ramps in and HOLDS at full until the
+    // extraction shot takes it off screen via the `shot` factor below. Expressing
+    // that as a fadeWin ending 1.0..1.0 divided by zero and blanked it entirely.
     setFade(ui.beat3,
-      smooth(0.86, 0.94, u) * (1 - smooth(0.05, 0.35, descent)), true);
+      smooth(0.8, 0.9, u) * (1 - smooth(0, 0.12, shot)), true);
     if (ui.flare) ui.flare.style.opacity = reducedMotion ? 0
       : 0.85 * fadeWin(u, 0.7, 0.75, 0.77, 0.84);
     if (ui.hint) ui.hint.style.opacity = smooth(0.05, 0.01, u);
@@ -626,41 +724,103 @@ export default function initScrollHero(root) {
       scrollP += (scrollTarget - scrollP) * Math.min(1, dt * 5);
     }
 
-    const uRide = Math.min(1, scrollP / CFG.rideEnd);
-    const descent = smooth(CFG.rideEnd, 1, scrollP);
-    const pageMode = descent >= 0.995;
+    /* TIMELINE. The whole point of this split is that the hero's river and
+       the page's content must never share the screen: the extraction runs
+       inside the pinned stage, the river is gone before the stage releases,
+       and only the line remains while the page scrolls up.
+         scrollP  0        -> shotStart : the ride (river + copy beats)
+         shotStart-> ~+0.12: strand pulled, river fades out, still pinned
+         rideEnd            : stage releases, page content starts rising
+         .. shotEnd         : line completes, hands to the page line      */
+    const shotStart = Math.max(0.3, rideEnd - 0.14);
+    const shotEnd = Math.min(0.99, rideEnd + 0.22);
+    const shot = smooth(shotStart, shotEnd, scrollP);
+    const uRide = Math.min(1, scrollP / shotStart);
 
-    // The strand grows with the extraction; its tip glows while growing
-    const grow = descent;
+    // The river clears early in the shot, well before the stage releases,
+    // so it can never be drawn over section text
+    const riverOut = smooth(0.04, 0.3, shot);
+    lineMat.opacity = CFG.filamentOpacity * (1 - riverOut);
+    pMat.opacity = 1 - riverOut;
+    backGlow.material.opacity = 0.32 * (1 - riverOut);
+    waistGlow.visible = riverOut < 0.98;
+    heroGroup.visible = riverOut < 0.999;
+
+    // The screen-space line takes over only in the final sliver of the
+    // shot, by which point the camera solve has the strand vertical, on the
+    // gutter, and filling the frame: the two are the same pixels, so the
+    // handover cannot read as two lines swapping.
+    /* The rail continues onto the page at EVERY width: the whole point of the
+       extraction is that the strand carries on down the page, so dropping it
+       on phones breaks the idea. Narrow screens get a slimmer inset instead
+       (see layoutPageLine), not a missing line. */
+    const pageIn = smooth(0.94, 1, shot);
+    const pageMode = shot >= 0.997;
+    // CRITICAL: the postprocess chain (bloom + afterimage) writes OPAQUE
+    // BLACK where the scene is empty, so a composited frame can never be
+    // see-through. It covered the whole page and made the handoff look like
+    // an instant jump. So: composer while the river is on screen (it needs
+    // the glow and an opaque backdrop anyway), then a plain transparent
+    // render once the river is gone, with the navy coming from the DOM.
+    const seeThrough = riverOut >= 0.995;
+    scene.background = seeThrough ? null : bgTex;
+    pageLineMat.opacity = pageIn * 0.85;
+    pgMat.opacity = pageIn * 0.9;
+
+    // Growth completes just before the crossfade so the swap happens
+    // between two full-height lines.
+    const grow = Math.min(1, shot / 0.93);
+    // Nothing of the strand exists until it has real length on screen
+    const strandIn = smooth(0.06, 0.2, grow);
     strandGeo.setDrawRange(0,
       Math.max(0, Math.floor(grow * (STRAND_SAMPLES + 1))));
-    if (grow > 0.01 && grow < 0.99) {
-      const gi = Math.min(STRAND_SAMPLES, Math.floor(grow * STRAND_SAMPLES)) * 3;
-      strandTip.position.set(strandPos[gi], strandPos[gi + 1], strandPos[gi + 2]);
-      strandTip.material.opacity = 0.85;
-    } else {
-      strandTip.material.opacity = 0;
-    }
-    flowMat.opacity = smooth(0.05, 0.35, descent);
-    heroGroup.visible = !pageMode;
+    const gi = Math.min(STRAND_SAMPLES, Math.floor(grow * STRAND_SAMPLES)) * 3;
+    const tipY = strandPos[gi + 1];
+    // The 3D strand hands off to the screen-space line, then stops drawing.
+    // It stays fully lit until the very end so the shot is one continuous
+    // object rather than a fade between two of them.
+    const strandFade = 1 - smooth(0.96, 1, shot);
+    strandMat.opacity = 0.9 * strandFade * strandIn;
+    strandLine.visible = strandMat.opacity > 0.01;
+    glintMat.opacity = 0.85 * strandFade * strandIn;
+    glints.visible = glintMat.opacity > 0.01;
 
-    if (descent > 0) placeDescent(descent); else placeRide(uRide);
+    // The camera finishes its whole move while the strand is still drawing
+    // its CURVE, and is locked by the time the vertical run begins. A camera
+    // still moving after that is what made the finished line drift sideways
+    // and smear across to its final x.
+    if (shot > 0) placeDescent(shot, tipY);
+    else placeRide(uRide);
+    // Wind down with the river, so that when the composer is dropped for the
+    // transparent render there is nothing left to lose and no visible switch
+    const preFade = riverOut;
+    if (afterPass) {
+      afterPass.uniforms.damp.value = CFG.trails * (1 - preFade);
+    }
+    if (bloomPass) {
+      bloomPass.strength = CFG.bloomStrength * (1 - preFade);
+    }
     glowBoost = 1 + 1.6 * fadeWin(uRide, 0.7, 0.75, 0.77, 0.84);
-    updateScrollUI(uRide, descent);
+    updateScrollUI(uRide, shot);
     if (heroGroup.visible) updateParticles(elapsed);
-    if (flowMat.opacity > 0) updateStrandFlow(elapsed, grow);
+    if (glints.visible) updateGlints(elapsed, grow);
+    if (pgMat.opacity > 0.01) updatePageGlints(elapsed);
 
     if (pageMode) {
-      // Transparent canvas: just the strand and its flow over the page
+      // Transparent canvas: only the screen-space gutter line over the page
       renderer.clear();
-      scene.background = null;
-      renderer.render(scene, camera);
-      scene.background = bgTex;
-    } else if (composer) {
-      composer.render();
+      renderer.render(pageScene, pageCam);
     } else {
-      renderer.clear();
-      renderer.render(scene, camera);
+      if (composer && !seeThrough) {
+        composer.render();
+      } else {
+        renderer.clear();
+        renderer.render(scene, camera);
+      }
+      if (pageIn > 0) {
+        renderer.clearDepth();
+        renderer.render(pageScene, pageCam);
+      }
     }
     if (++warmed > 12) hidePoster();
   };

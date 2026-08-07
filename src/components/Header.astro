@@ -15,7 +15,11 @@ const desktopNav = NAV.filter((item) => item.href !== withBase('/') && item.href
       </span>
       <span id="header-lockup-text" class="flex min-w-0 flex-col justify-center gap-0.5 leading-none">
         <span class="text-[0.9rem] font-bold tracking-lockup whitespace-nowrap text-ink">MH PHARMAPACK</span>
-        <span class="text-[0.6rem] font-semibold tracking-eyebrow whitespace-nowrap text-steel-deep uppercase">
+        <!-- The descriptor is nowrap by design (CLAUDE.md: it must never be dropped,
+             the name alone under-describes the business). At 0.6rem/0.18em it is wider
+             than the space left beside the hamburger below ~430px and ran under it, so
+             narrow screens get a slightly smaller size and tighter tracking. -->
+        <span class="text-[0.5rem] tracking-[0.09em] sm:text-[0.6rem] sm:tracking-eyebrow font-semibold whitespace-nowrap text-steel-deep uppercase">
           Pharmaceutical Sourcing &amp; Supply
         </span>
       </span>
