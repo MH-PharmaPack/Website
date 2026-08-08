@@ -13,11 +13,11 @@ import { MAILTO_HREF, SALES_EMAIL, OFFICE_ADDRESS, MAPS_HREF, withBase } from '.
 //
 // WIDE (>= 768px): full-bleed split (client's choice, Option B of the
 // wide-screen study). No card and no container: a navy identity panel runs to
-// the left edge of the window at 38% of its width, with everything actionable
-// on paper beside it. The page fills the screen by construction rather than by
-// stretching a card, which matches the home page's own full-bleed bands and
-// gives the portrait real size. The landscape-card replica that used to be
-// here was rejected.
+// the left edge of the window and down to the bottom of it, with everything
+// actionable on paper beside it. The panel is a FIXED width and the split is
+// one viewport tall, so the whole profile is on screen at any window size and
+// the portrait stays a portrait instead of scaling with the monitor. The
+// landscape-card replica that used to be here was rejected.
 //
 // Split by width, never by user agent. UA sniffing misreads tablets and resized
 // desktop windows, and cannot resolve at build time on a static site, so it
@@ -38,7 +38,7 @@ const { partner } = Astro.props;
 const vcardHref = withBase(`/leadership/${partner.slug}.vcf`);
 
 const actionClass =
-  'flex flex-col items-center gap-1.5 rounded-sm border border-line py-3 text-xs font-semibold text-steel-deep transition-colors hover:border-steel hover:text-ink md:flex-1';
+  'flex flex-col items-center gap-1.5 rounded-sm border border-line py-3 text-xs font-semibold text-steel-deep transition-colors hover:border-steel hover:text-ink lg:flex-1';
 ---
 
 <Base
@@ -51,176 +51,211 @@ const actionClass =
     <div
       class="mx-auto w-full max-w-md px-5 pt-10 pb-16 md:max-w-none md:px-0 md:pt-0 md:pb-0"
     >
-      <div class="md:grid md:min-h-[34rem] md:grid-cols-[38%_1fr]">
+      <!-- Four tracks: bleed gutter, fixed panel, capped paper, bleed gutter.
+           The navy still runs to the left edge of the window because the panel
+           spans tracks 1-2, but the two 1fr gutters centre the composition, so
+           the portrait and the copy land on the same vertical lines as the
+           header lockup instead of drifting left of it. 23rem + 52rem = 1200px
+           of content, which is the site's own 1180px band give or take its
+           padding.
+           A percentage panel was tried and rejected: at 38% of a 1920 window
+           the track is 730px and a w-full 4:5 portrait in it is 700px tall on
+           its own, which is what pushed the page past the fold.
+           Height follows content with a floor. A full-viewport row was also
+           tried and rejected: it stranded the regions line 300px under the
+           name with nothing but navy between. -->
+      <div
+        class="md:grid md:min-h-[36rem] md:grid-cols-[minmax(0,1fr)_20rem_minmax(0,52rem)_minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_23rem_minmax(0,52rem)_minmax(0,1fr)]"
+      >
         <!-- ---------- identity ---------- -->
-        <div
-          class="panel-deep md:flex md:flex-col md:justify-between md:p-10 lg:p-12"
-        >
-          <img
-            src={logo.src}
-            width={logo.width}
-            height={logo.height}
-            alt=""
-            class="mx-auto h-12 w-auto md:mx-0 md:h-10"
-          />
+        <div class="panel-deep md:col-start-1 md:col-end-3 md:flex md:justify-end">
+          <!-- The navy is the full track; this holds the content to the panel
+               column at the right of it, so the bleed is colour only. -->
+          <div class="md:flex md:w-80 md:flex-col md:p-8 lg:w-[23rem] lg:p-10">
+            <!-- Phone only. On a wide screen the site header sits directly
+                 above this panel with the full lockup in it, so a second bare
+                 mark two centimetres below it read as a stray. -->
+            <img
+              src={logo.src}
+              width={logo.width}
+              height={logo.height}
+              alt=""
+              class="mx-auto h-12 w-auto md:hidden"
+            />
 
-          <div class="mt-8 md:mt-0">
-            {
-              partner.photo ? (
-                <img
-                  src={partner.photo}
-                  alt={`${partner.name}, ${partner.title} at MH PharmaPack`}
-                  class="mx-auto h-32 w-32 rounded-sm object-cover md:mx-0 md:h-auto md:w-full md:aspect-[4/5]"
-                />
-              ) : (
-                /* Real fallback, not a mockup device: the page ships and works
-                   before the headshots land. [NEEDS: the two headshots] */
-                <span
-                  class="mx-auto flex h-32 w-32 items-center justify-center rounded-sm bg-band md:mx-0 md:h-auto md:w-full md:aspect-[4/5] md:bg-white/5 md:ring-1 md:ring-white/10"
-                  aria-hidden="true"
-                >
-                  <span class="text-4xl font-bold tracking-widest text-copper-soft md:text-5xl">
-                    {partner.initials}
+            <div class="mt-8 md:mt-0">
+              {
+                partner.photo ? (
+                  <img
+                    src={partner.photo}
+                    alt={`${partner.name}, ${partner.title} at MH PharmaPack`}
+                    class="mx-auto h-32 w-32 rounded-sm object-cover md:mx-0 md:h-auto md:w-full md:aspect-[4/5]"
+                  />
+                ) : (
+                  /* Real fallback, not a mockup device: the page ships and works
+                     before the headshots land. [NEEDS: the two headshots] */
+                  <span
+                    class="mx-auto flex h-32 w-32 items-center justify-center rounded-sm bg-band md:mx-0 md:h-auto md:w-full md:aspect-[4/5] md:bg-white/5 md:ring-1 md:ring-white/10"
+                    aria-hidden="true"
+                  >
+                    <span class="text-4xl font-bold tracking-widest text-copper-soft md:text-5xl">
+                      {partner.initials}
+                    </span>
                   </span>
-                </span>
-              )
-            }
+                )
+              }
 
-            <h1
-              class="mt-5 text-center text-2xl font-bold tracking-tight text-ink md:mt-6 md:text-left md:text-3xl md:text-paper"
-            >
-              {partner.name}
-            </h1>
-            <p
-              class="mt-1 text-center text-xs font-semibold tracking-eyebrow text-copper-deep uppercase md:mt-2 md:text-left md:text-copper-soft"
-            >
-              {partner.title}, MH PharmaPack
+              <h1
+                class="mt-5 text-center text-2xl font-bold tracking-tight text-ink md:mt-6 md:text-left md:text-3xl md:text-paper"
+              >
+                {partner.name}
+              </h1>
+              <p
+                class="mt-1 text-center text-xs font-semibold tracking-eyebrow text-copper-deep uppercase md:mt-2 md:text-left md:text-copper-soft"
+              >
+                {partner.title}, MH PharmaPack
+              </p>
+            </div>
+
+            <!-- Anchors the panel's foot on wide screens; the phone layout has
+                 no room for it and drops it. mt-auto does the pushing and
+                 padding does the gap: mt-8 and mt-auto are the same property,
+                 so one of them would have silently won. -->
+            <p class="hidden md:mt-auto md:block md:pt-8 md:text-[0.68rem] md:leading-relaxed md:text-mist">
+              India &middot; Latin America &middot; South Africa
             </p>
           </div>
-
-          <!-- Anchors the panel's foot on wide screens; the phone layout has no
-               room for it and drops it. -->
-          <p class="hidden md:mt-8 md:block md:text-[0.68rem] md:leading-relaxed md:text-mist">
-            India &middot; Latin America &middot; South Africa
-          </p>
         </div>
 
         <!-- ---------- actions and detail ----------
-             Capped inside the panel: at 38%/62% on a very wide window the
-             paper side is wider than any line of text should be. -->
-        <div class="md:max-w-3xl md:p-10 lg:p-12">
-          <!-- The one action this page exists for. copper-deep rather than the
-               lighter copper: it reads as copper instead of orange, and lifts
-               white text from 4.51:1 to 7.55:1 at the same time. -->
-          <div class="mt-8 md:mt-0 md:flex md:items-stretch md:gap-2.5">
-            <a
-              href={vcardHref}
-              download={`${partner.slug}.vcf`}
-              class="flex min-h-13 w-full items-center justify-center gap-2.5 rounded-sm bg-copper-deep px-5 text-base font-semibold text-white transition-colors hover:bg-copper md:w-auto md:min-w-[15rem] md:flex-none"
-            >
-              <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                <path d="M12 3v11" stroke-linecap="round"></path>
-                <path d="m7.5 10.5 4.5 4.5 4.5-4.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path d="M4.5 16.5v2.25A1.25 1.25 0 0 0 5.75 20h12.5a1.25 1.25 0 0 0 1.25-1.25V16.5" stroke-linecap="round"></path>
-              </svg>
-              Save to contacts
-            </a>
+             No max-width of its own: the 52rem track is the cap. -->
+        <div class="md:col-start-3 md:p-10 lg:p-12">
+          <!-- Wide screens get the way out at the top, where it is on screen.
+               The phone keeps its approved copy at the very bottom. -->
+          <a
+            href={withBase('/leadership')}
+            class="hidden text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper md:inline-block"
+          >
+            &lsaquo; Leadership
+          </a>
 
-            <!-- Stacked under the button on a phone, inline beside it on a wide
-                 screen, so the whole action set is one row. -->
-            <div class="mt-2 grid grid-cols-3 gap-2 md:mt-0 md:flex md:flex-1 md:gap-2.5">
-              <a href={`tel:${partner.phone}`} class={actionClass}>
-                <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                  <path d="M5.1 4.5h3l1.4 3.6-1.8 1.4a11.3 11.3 0 0 0 4.8 4.8l1.4-1.8 3.6 1.4v3a1.5 1.5 0 0 1-1.6 1.5C9.6 18 6 14.4 5.6 8.1 5.5 6 4.9 5.6 5.1 4.5Z" stroke-linejoin="round"></path>
+          <!-- Top-aligned with the portrait opposite, not centred: the two
+               columns start together and end where their content ends. -->
+          <div class="md:mt-8">
+            <!-- The one action this page exists for. copper-deep rather than the
+                 lighter copper: it reads as copper instead of orange, and lifts
+                 white text from 4.51:1 to 7.55:1 at the same time.
+                 One row only from lg: between 768 and 1024 the paper track is
+                 narrow enough that four actions abreast leave ~35px per label,
+                 so the phone's stacked arrangement holds until there is room. -->
+            <div class="mt-8 md:mt-0 lg:flex lg:items-stretch lg:gap-2.5">
+              <a
+                href={vcardHref}
+                download={`${partner.slug}.vcf`}
+                class="flex min-h-13 w-full items-center justify-center gap-2.5 rounded-sm bg-copper-deep px-5 text-base font-semibold text-white transition-colors hover:bg-copper lg:w-auto lg:min-w-[15rem] lg:flex-none"
+              >
+                <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M12 3v11" stroke-linecap="round"></path>
+                  <path d="m7.5 10.5 4.5 4.5 4.5-4.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M4.5 16.5v2.25A1.25 1.25 0 0 0 5.75 20h12.5a1.25 1.25 0 0 0 1.25-1.25V16.5" stroke-linecap="round"></path>
                 </svg>
-                Call
+                Save to contacts
               </a>
-              <a href={partnerWhatsApp(partner)} target="_blank" rel="noopener noreferrer" class={actionClass}>
-                <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                  <path d="M12 3.75a8.25 8.25 0 0 0-7.1 12.45L3.75 20.25l4.2-1.1A8.25 8.25 0 1 0 12 3.75Z" stroke-linejoin="round"></path>
-                </svg>
-                WhatsApp
-              </a>
-              <a href={MAILTO_HREF} class={actionClass}>
-                <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                  <rect x="3.4" y="5.4" width="17.2" height="13.2" rx="1.6"></rect>
-                  <path d="m3.9 6.4 8.1 6 8.1-6" stroke-linejoin="round"></path>
-                </svg>
-                Email
-              </a>
-            </div>
-          </div>
 
-          <!-- Written out too, because a number you can read is a number you can
-               dictate to someone else. Right-aligned on a phone to sit opposite
-               its label; left-aligned in the wide card where there is room. -->
-          <dl class="mt-8 border-t border-line pt-6 text-sm md:mt-9 md:pt-7">
-            <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
-              <dt class="text-muted md:w-24 md:shrink-0">Direct</dt>
-              <dd>
-                <a href={`tel:${partner.phone}`} class="font-medium text-steel-deep hover:text-ink">
-                  {partner.phoneDisplay}
+              <!-- Stacked under the button on a phone, inline beside it on a
+                   wide screen, so the whole action set is one row. -->
+              <div class="mt-2 grid grid-cols-3 gap-2 lg:mt-0 lg:flex lg:flex-1 lg:gap-2.5">
+                <a href={`tel:${partner.phone}`} class={actionClass}>
+                  <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="M5.1 4.5h3l1.4 3.6-1.8 1.4a11.3 11.3 0 0 0 4.8 4.8l1.4-1.8 3.6 1.4v3a1.5 1.5 0 0 1-1.6 1.5C9.6 18 6 14.4 5.6 8.1 5.5 6 4.9 5.6 5.1 4.5Z" stroke-linejoin="round"></path>
+                  </svg>
+                  Call
                 </a>
-              </dd>
-            </div>
-            <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
-              <dt class="text-muted md:w-24 md:shrink-0">Email</dt>
-              <dd>
-                <a href={MAILTO_HREF} class="font-medium text-steel-deep hover:text-ink">{SALES_EMAIL}</a>
-              </dd>
-            </div>
-            <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
-              <dt class="shrink-0 text-muted md:w-24">Office</dt>
-              <dd class="text-right md:text-left">
-                <a
-                  href={MAPS_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-medium text-steel-deep hover:text-ink"
-                >
-                  {OFFICE_ADDRESS}
+                <a href={partnerWhatsApp(partner)} target="_blank" rel="noopener noreferrer" class={actionClass}>
+                  <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="M12 3.75a8.25 8.25 0 0 0-7.1 12.45L3.75 20.25l4.2-1.1A8.25 8.25 0 1 0 12 3.75Z" stroke-linejoin="round"></path>
+                  </svg>
+                  WhatsApp
                 </a>
-              </dd>
+                <a href={MAILTO_HREF} class={actionClass}>
+                  <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <rect x="3.4" y="5.4" width="17.2" height="13.2" rx="1.6"></rect>
+                    <path d="m3.9 6.4 8.1 6 8.1-6" stroke-linejoin="round"></path>
+                  </svg>
+                  Email
+                </a>
+              </div>
             </div>
-          </dl>
 
-          <!-- Bio last on purpose: wanted least by the person who just tapped,
-               and still wanted by anyone who arrived by browsing. -->
-          <div class="mt-8 border-t border-line pt-6 md:mt-9 md:pt-7">
-            <p class="text-xs font-semibold tracking-eyebrow text-muted uppercase">About</p>
-            {
-              partner.bio ? (
-                <p class="mt-3 max-w-prose text-sm leading-relaxed text-steel-deep">{partner.bio}</p>
-              ) : (
-                <p class="mt-3 max-w-prose text-sm leading-relaxed text-steel-deep">
-                  {partner.title} at MH PharmaPack. {partner.lead}
-                  <span class="placeholder-note mt-2 block text-xs">
-                    [Bio pending: years in the trade, prior companies, languages spoken.]
-                  </span>
-                </p>
-              )
-            }
-            {
-              partner.linkedin && (
-                <a
-                  href={partner.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-4 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper"
-                >
-                  LinkedIn
-                </a>
-              )
-            }
+            <!-- Written out too, because a number you can read is a number you
+                 can dictate to someone else. Right-aligned on a phone to sit
+                 opposite its label; left-aligned where there is room. -->
+            <dl class="mt-8 border-t border-line pt-6 text-sm md:mt-9 md:pt-7">
+              <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
+                <dt class="text-muted md:w-24 md:shrink-0">Direct</dt>
+                <dd>
+                  <a href={`tel:${partner.phone}`} class="font-medium text-steel-deep hover:text-ink">
+                    {partner.phoneDisplay}
+                  </a>
+                </dd>
+              </div>
+              <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
+                <dt class="text-muted md:w-24 md:shrink-0">Email</dt>
+                <dd>
+                  <a href={MAILTO_HREF} class="font-medium text-steel-deep hover:text-ink">{SALES_EMAIL}</a>
+                </dd>
+              </div>
+              <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
+                <dt class="shrink-0 text-muted md:w-24">Office</dt>
+                <dd class="text-right md:text-left">
+                  <a
+                    href={MAPS_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-medium text-steel-deep hover:text-ink"
+                  >
+                    {OFFICE_ADDRESS}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+
+            <!-- Bio last on purpose: wanted least by the person who just tapped,
+                 and still wanted by anyone who arrived by browsing. -->
+            <div class="mt-8 border-t border-line pt-6 md:mt-9 md:pt-7">
+              <p class="text-xs font-semibold tracking-eyebrow text-muted uppercase">About</p>
+              {
+                partner.bio ? (
+                  <p class="mt-3 max-w-prose text-sm leading-relaxed text-steel-deep">{partner.bio}</p>
+                ) : (
+                  <p class="mt-3 max-w-prose text-sm leading-relaxed text-steel-deep">
+                    {partner.title} at MH PharmaPack. {partner.lead}
+                    <span class="placeholder-note mt-2 block text-xs">
+                      [Bio pending: years in the trade, prior companies, languages spoken.]
+                    </span>
+                  </p>
+                )
+              }
+              {
+                partner.linkedin && (
+                  <a
+                    href={partner.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-4 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper"
+                  >
+                    LinkedIn
+                  </a>
+                )
+              }
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Sits in the paper column on wide screens, where the container has no
-           padding of its own any more -->
       <a
         href={withBase('/leadership')}
-        class="mt-10 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper md:mt-0 md:mb-12 md:ml-[38%] md:pl-10 lg:pl-12"
+        class="mt-10 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper md:hidden"
       >
         &lsaquo; Leadership
       </a>
