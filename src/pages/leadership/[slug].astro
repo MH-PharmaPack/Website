@@ -11,11 +11,13 @@ import { MAILTO_HREF, SALES_EMAIL, OFFICE_ADDRESS, MAPS_HREF, withBase } from '.
 // someone who met this partner ten seconds ago and wants to save them. Order is
 // identity, then the one action they came for, then the bio.
 //
-// WIDE (>= 768px): a landscape card. The phone column stranded in a 1900px
-// window read as a screenshot pasted onto a page, so wide screens instead get
-// the proportions of the real thing: the printed visiting card is 88.9 x 50.8mm
-// landscape (see visiting-card/card-data.json), so the page becomes a navy
-// identity panel beside a paper face carrying everything actionable.
+// WIDE (>= 768px): full-bleed split (client's choice, Option B of the
+// wide-screen study). No card and no container: a navy identity panel runs to
+// the left edge of the window at 38% of its width, with everything actionable
+// on paper beside it. The page fills the screen by construction rather than by
+// stretching a card, which matches the home page's own full-bleed bands and
+// gives the portrait real size. The landscape-card replica that used to be
+// here was rejected.
 //
 // Split by width, never by user agent. UA sniffing misreads tablets and resized
 // desktop windows, and cannot resolve at build time on a static site, so it
@@ -43,15 +45,17 @@ const actionClass =
   title={`${partner.name}, ${partner.title} | MH PharmaPack`}
   description={`${partner.name}, ${partner.title} at MH PharmaPack. ${partner.lead} Direct contact details and vCard.`}
 >
-  <!-- Paper on a phone so the card IS the screen; paper-warm on wide screens so
-       the card reads as an object resting on a surface. -->
-  <section class="bg-paper md:bg-paper-warm">
-    <div class="mx-auto w-full max-w-md px-5 pt-10 pb-16 md:max-w-4xl md:px-8 md:pt-16 md:pb-24">
-      <div
-        class="md:grid md:grid-cols-[260px_1fr] md:overflow-hidden md:rounded-md md:border md:border-line md:bg-paper md:shadow-[0_18px_44px_rgba(28,38,52,0.10)] lg:grid-cols-[320px_1fr]"
-      >
+  <!-- Paper on a phone so the card IS the screen. On wide screens the page is
+       full bleed: no surface, no card, the navy simply runs to the edge. -->
+  <section class="bg-paper">
+    <div
+      class="mx-auto w-full max-w-md px-5 pt-10 pb-16 md:max-w-none md:px-0 md:pt-0 md:pb-0"
+    >
+      <div class="md:grid md:min-h-[34rem] md:grid-cols-[38%_1fr]">
         <!-- ---------- identity ---------- -->
-        <div class="md:flex md:flex-col md:justify-between md:bg-band md:p-8">
+        <div
+          class="panel-deep md:flex md:flex-col md:justify-between md:p-10 lg:p-12"
+        >
           <img
             src={logo.src}
             width={logo.width}
@@ -101,8 +105,10 @@ const actionClass =
           </p>
         </div>
 
-        <!-- ---------- actions and detail ---------- -->
-        <div class="md:p-8">
+        <!-- ---------- actions and detail ----------
+             Capped inside the panel: at 38%/62% on a very wide window the
+             paper side is wider than any line of text should be. -->
+        <div class="md:max-w-3xl md:p-10 lg:p-12">
           <!-- The one action this page exists for. copper-deep rather than the
                lighter copper: it reads as copper instead of orange, and lifts
                white text from 4.51:1 to 7.55:1 at the same time. -->
@@ -210,9 +216,11 @@ const actionClass =
         </div>
       </div>
 
+      <!-- Sits in the paper column on wide screens, where the container has no
+           padding of its own any more -->
       <a
         href={withBase('/leadership')}
-        class="mt-10 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper"
+        class="mt-10 inline-block text-sm font-semibold text-copper-deep underline underline-offset-4 hover:text-copper md:mt-0 md:mb-12 md:ml-[38%] md:pl-10 lg:pl-12"
       >
         &lsaquo; Leadership
       </a>

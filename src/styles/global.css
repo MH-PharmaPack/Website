@@ -222,6 +222,16 @@
   }
   .eyebrow-on-dark { color: var(--color-copper-soft); }
 
+  /* Full-bleed identity panel on the partner profile (wide screens only: the
+     approved phone layout is a single paper column and must not change).
+     Same navy gradient as the hero band, painted on the element rather than
+     viewport-anchored, so it travels with the panel as the page scrolls. */
+  @media (min-width: 768px) {
+    .panel-deep {
+      background: linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
+    }
+  }
+
   /* Every section below the hero sits on this one tone. Sections are told
      apart by the hairline between them, by the weave on the credibility band,
      and by their own layout, never by a different shade of navy. */
