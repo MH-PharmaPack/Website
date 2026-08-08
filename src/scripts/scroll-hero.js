@@ -160,7 +160,11 @@ export default function initScrollHero(root) {
   // Phones are budgeted, not just scaled: fill cost rises with the SQUARE of
   // pixel ratio, so that cap is the single biggest lever, and the particle
   // loop is main-thread work that competes with scrolling.
-  const narrow = window.matchMedia('(max-width: 820px)').matches;
+  // Mutable: the tier is re-evaluated on resize (see frameCamera). Read once,
+  // it stuck at whatever the window happened to be at load, so testing a
+  // phone width in devtools and switching back left the desktop running the
+  // phone's resolution until a reload.
+  let narrow = window.matchMedia('(max-width: 820px)').matches;
   const particlesPerThread = narrow ? 110 : CFG.particlesPerThread;
   const strandFlowCount = narrow ? 280 : CFG.strandFlowCount;
   const pixelCap = narrow ? 1.15 : CFG.maxPixelRatio;
@@ -555,9 +559,19 @@ export default function initScrollHero(root) {
   // range ends, i.e. where that scroll-away begins.
   let rideEnd = 0.8, scrollSpan = 1;
 
+  // Resolution follows the CURRENT viewport, not whatever it was at load
+  function applyQuality() {
+    const cap = narrow ? 1.15 : CFG.maxPixelRatio;
+    const pr = Math.min(window.devicePixelRatio || 1, cap);
+    renderer.setPixelRatio(pr);
+    if (composer) composer.setPixelRatio(narrow ? pr * 0.7 : pr);
+  }
+
   function frameCamera() {
     stageW = Math.max(1, stage.clientWidth);
     stageH = Math.max(1, stage.clientHeight);
+    const nowNarrow = stageW <= 820;
+    if (nowNarrow !== narrow) { narrow = nowNarrow; applyQuality(); }
     camera.aspect = stageW / stageH;
     camera.updateProjectionMatrix();
     // In strip mode layoutPageLine() owns the renderer size; sizing to the
@@ -580,8 +594,15 @@ export default function initScrollHero(root) {
   frameCamera();
 
   try {
+    // MSAA on the composer target. Without it every filament is a hard
+    // aliased hairline (the renderer's own antialias flag does nothing once
+    // rendering goes through a composer target), which reads as a
+    // low-resolution image no matter what the pixel ratio is. Phones skip
+    // it: they cannot spare the bandwidth and their pixel density hides the
+    // stair-stepping anyway.
     const target = new THREE.WebGLRenderTarget(stageW, stageH, {
       type: THREE.HalfFloatType,
+      samples: narrow ? 0 : 4,
     });
     composer = new EffectComposer(renderer, target);
     // The postprocess chain is the heaviest thing on a phone: bloom alone is
