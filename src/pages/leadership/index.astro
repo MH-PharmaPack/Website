@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { PARTNERS } from '../../data/leadership';
 import { withBase } from '../../config';
+import { ORG_ID, abs } from '../../lib/seo';
 
 // CONTENT-SPEC section 9: two profiles, deliberately not padded out, and the
 // layout must look complete at exactly two rather than like a grid waiting for
@@ -14,11 +15,36 @@ import { withBase } from '../../config';
 // thumbnail. The alternatives lost on the same test. A staggered pair depended
 // entirely on a desktop offset that cannot survive a single column, and bordered
 // cards became this same stack carrying a border that does nothing at that width.
+//
+// Both names go in the title on purpose. This page has no category demand to
+// win; the searches that reach it are a person's name plus the company, from
+// someone who has just met one of them or been handed a card. Putting the names
+// in the title is the difference between ranking for that and not.
+
+// One ItemList of the two people, each Person tied back to the organisation by
+// @id. This produces no rich result, and should not be sold as one: it is
+// entity signal, the groundwork that lets a search engine treat "Mittal Shah"
+// on LinkedIn and "Mittal Shah" here as one person rather than two.
+const partnerNodes = PARTNERS.map((p) => ({
+  '@type': 'Person',
+  '@id': `${abs(`/leadership/${p.slug}`, Astro.site)}#person`,
+  name: p.name,
+  jobTitle: p.title,
+  worksFor: { '@id': ORG_ID },
+  description: p.lead,
+  url: abs(`/leadership/${p.slug}`, Astro.site),
+  telephone: p.phone,
+  ...(p.linkedin ? { sameAs: [p.linkedin] } : {}),
+}));
 ---
 
 <Base
-  title="Leadership | MH PharmaPack"
-  description="The two partners behind MH PharmaPack. Both work directly on sourcing across API, packaging, formulation, and finished goods."
+  title="Leadership: Mittal Shah and Himanshu Shah | MH PharmaPack"
+  name="Leadership"
+  description="The two partners behind MH PharmaPack. Both work directly on sourcing across API, packaging, formulation and finished goods. Direct lines, no account team."
+  pageType="AboutPage"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Leadership' }]}
+  schema={partnerNodes}
 >
   <section class="bg-paper">
     <div class="mx-auto max-w-content px-5 pt-14 pb-20 md:px-8 md:pt-20 md:pb-28">

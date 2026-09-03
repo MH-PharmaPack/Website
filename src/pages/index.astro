@@ -3,33 +3,55 @@ import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
 import ScrollHero from '../components/ScrollHero.astro';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
+import { sourcingService } from '../lib/seo';
 
 // Copy on this page is placed verbatim from CONTENT-SPEC.md section 4.
 // Hero headline: recommended Option A. [NEEDS: final headline confirmation]
+//
+// `items` on each line is not display copy. It feeds the OfferCatalog in this
+// page's JSON-LD, and every entry in it is a word already printed in that
+// line's own `copy` below. Google's structured-data policy is that markup
+// describes what a reader can actually see, so the two must not drift: if a
+// category leaves the sentence, it leaves the list.
 
 const lines = [
   {
     name: 'Packaging',
+    items: ['Vials', 'Ampoules', 'Closures', 'Cartons', 'Foils', 'Labels', 'Laminates'],
     copy: 'Primary and secondary packaging sourced to your spec: vials, ampoules, closures, cartons, foils, labels, and laminates.',
     icon: '<path d="M4.5 8 12 4.25 19.5 8v8L12 19.75 4.5 16V8Z" stroke-linejoin="round"/><path d="M4.5 8 12 11.75 19.5 8" stroke-linejoin="round"/><path d="M12 11.75v8" stroke-linecap="round"/>',
   },
   {
     name: 'Formulation',
+    items: [
+      'Oral solid dosage (OSD)',
+      'General formulation',
+      'Cephalosporins',
+      'Beta-lactams',
+    ],
     copy: 'Formulation development and supply across OSD, general, cephalosporin, and beta-lactam lines.',
     icon: '<path d="M10 4h4" stroke-linecap="round"/><path d="M10.75 4v5l-4.4 7.5A2.1 2.1 0 0 0 8.2 19.7h7.6a2.1 2.1 0 0 0 1.85-3.2L13.25 9V4" stroke-linejoin="round"/><path d="M8.4 14.5h7.2" stroke-linecap="round"/>',
   },
   {
     name: 'Finished Goods',
+    items: ['Injectables', 'Tablets', 'Capsules', 'Liquids', 'Dry powders'],
     copy: 'Finished dosage forms: injectables, tablets, capsules, liquids, and dry powders.',
     icon: '<path d="M7.3 7.3a3.9 3.9 0 0 1 5.5 0l3.9 3.9a3.9 3.9 0 1 1-5.5 5.5l-3.9-3.9a3.9 3.9 0 0 1 0-5.5Z" stroke-linejoin="round"/><path d="m10.05 10.05 3.9 3.9" stroke-linecap="round"/>',
   },
   {
     name: 'API',
+    items: [
+      'Corticosteroid APIs',
+      'Anticancer APIs',
+      'Antidepressant APIs',
+      'Most major therapeutic categories',
+    ],
     copy: 'Active pharmaceutical ingredients across corticosteroid, anticancer, antidepressant, and most major therapeutic categories.',
     icon: '<path d="M12 4 19 8v8l-7 4-7-4V8l7-4Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.6"/>',
   },
   {
     name: 'Sourcing',
+    items: [],
     copy: 'End-to-end sourcing for any one line or all five, matched to the right approved manufacturer.',
     icon: '<path d="m9.5 14.5 5-5" stroke-linecap="round"/><path d="M11 7.5 12.7 5.8a3.4 3.4 0 0 1 4.8 4.8L15.8 12.3" stroke-linecap="round"/><path d="M13 16.5 11.3 18.2a3.4 3.4 0 0 1-4.8-4.8l1.7-1.7" stroke-linecap="round"/>',
   },
@@ -53,11 +75,25 @@ const steps = [
     copy: 'Contracts of sale are between you and the plant. We make the introduction work and stay with it end to end.',
   },
 ];
+
+// Title: category first, brand last. Nobody is searching the brand yet, so the
+// first forty characters have to say what this is. "Pharmaceutical sourcing"
+// and "India" are the two phrases a buyer actually types, and the descriptor is
+// the same one carried in the header lockup, so the title, the hero eyebrow,
+// and the nav anchor text all agree. That agreement is what stops Google
+// substituting a title of its own.
+//
+// Description: written to survive truncation at roughly 155 characters, with
+// the four product lines and both approval standards in the first sentence,
+// because that is the half that always shows.
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <Base
-  title="MH PharmaPack | Pharmaceutical Sourcing & Supply"
-  description="MH PharmaPack connects pharmaceutical buyers to WHO GMP and EU GMP approved manufacturers across India, Latin America, and South Africa, and coordinates each deal end to end: quality, documentation, payment terms, and logistics."
+  title="Pharmaceutical Sourcing & Supply from India | MH PharmaPack"
+  name="Pharmaceutical sourcing and supply"
+  description="Sourcing packaging, formulation, finished goods and API from WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Ahmedabad based."
+  schema={[sourcingService(lines, pageUrl, Astro.site)]}
 >
   <!-- Logo intro overlay: home route only, once per session, reduced-motion safe -->
   <Intro slot="pre-shell" />

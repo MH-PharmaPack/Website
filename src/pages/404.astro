@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { NAV, MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, withBase } from '../config';
+
+// GitHub Pages serves a root-level 404.html for any unmatched path, with a real
+// 404 status. Astro emits this route as 404.html even under directory build
+// format, so the two conventions line up with no extra config.
+//
+// A dead link from a cold email is the worst possible first impression, and
+// this is exactly the traffic the site expects: mistyped URLs, an old link
+// from a printed card, a truncated URL in a mail client. So this page does not
+// apologise, it routes. Every section of the site is one tap away and the three
+// contact affordances are right here, because someone who landed on a dead URL
+// still has the enquiry they arrived with.
+---
+
+<Base
+  title="Page not found | MH PharmaPack"
+  description="That page does not exist on mhpharmapack.com. Find what you need, or send your sourcing enquiry straight to our desk."
+  noindex
+>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-16 pb-24 md:px-8 md:pt-24 md:pb-32">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl">
+        That page is not here.
+      </h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-steel-deep">
+        The link may be out of date, or the address mistyped. Everything on the site is one tap
+        below, and if you came here with a requirement you can send it to us directly.
+      </p>
+
+      <nav aria-label="All pages" class="mt-12 max-w-xl border-t border-line">
+        <ul class="list-none p-0">
+          {
+            NAV.map((item) => (
+              <li class="border-b border-line">
+                <a
+                  href={item.href}
+                  class="flex min-h-14 items-center justify-between gap-4 text-base font-semibold text-steel-deep transition-colors hover:text-ink"
+                >
+                  {item.label}
+                  <span class="text-copper-deep" aria-hidden="true">&rsaquo;</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="mt-12">
+        <a href={withBase('/contact')} class="btn btn-primary">Request a Quote</a>
+      </div>
+      <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-semibold">
+        <a href={WHATSAPP_HREF} class="text-steel-deep transition-colors hover:text-ink">WhatsApp</a>
+        <a href={TEL_HREF} class="text-steel-deep transition-colors hover:text-ink">Call</a>
+        <a href={MAILTO_HREF} class="text-steel-deep transition-colors hover:text-ink">Email</a>
+      </div>
+    </div>
+  </section>
+</Base>

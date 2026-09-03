@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: 'InterVar';
+    src: url('../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: 'InterVar', system-ui, sans-serif;
+    background: #e7ebf0;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Faint steel wash so the flat paper ground has some depth, matching the
+     Cleanroom direction. Nothing saturated: copper is the only warm element. */
+  .top {
+    flex: 1;
+    position: relative;
+    padding: 60px 72px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      radial-gradient(ellipse 70% 90% at 88% 12%, rgba(78, 96, 118, 0.16) 0%, rgba(78, 96, 118, 0) 68%),
+      radial-gradient(ellipse 50% 60% at 96% 78%, rgba(169, 102, 63, 0.10) 0%, rgba(169, 102, 63, 0) 70%);
+  }
+
+  .lockup { display: flex; align-items: center; gap: 18px; }
+  .lockup img { height: 74px; width: auto; display: block; }
+  .lockup .names { display: flex; flex-direction: column; gap: 5px; line-height: 1; }
+  .name {
+    font-size: 25px; font-weight: 700; letter-spacing: 0.16em; color: #26303d;
+  }
+  .desc {
+    font-size: 13.5px; font-weight: 600; letter-spacing: 0.19em;
+    text-transform: uppercase; color: #37475b;
+  }
+
+  h1 {
+    font-size: 55px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.021em;
+    color: #26303d;
+    max-width: 21ch;
+  }
+  .sub {
+    margin-top: 22px;
+    font-size: 21px;
+    line-height: 1.45;
+    color: #37475b;
+    max-width: 46ch;
+  }
+  .rule { width: 92px; height: 4px; background: #a9663f; margin-bottom: 26px; }
+
+  .band {
+    height: 104px;
+    background: #37475b;
+    border-top: 3px solid #a9663f;
+    padding: 0 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .domain {
+    font-size: 22px; font-weight: 700; letter-spacing: 0.045em; color: #f4f6f8;
+  }
+  .lines {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: #e0b087;
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="lockup">
+      <img src="../../src/assets/logo/mh-pharmapack-logo.svg" alt="">
+      <div class="names">
+        <div class="name">MH PHARMAPACK</div>
+        <div class="desc">Pharmaceutical Sourcing &amp; Supply</div>
+      </div>
+    </div>
+    <div>
+      <div class="rule"></div>
+      <h1>The link between pharmaceutical buyers and the right manufacturers.</h1>
+      <p class="sub">
+        WHO GMP and EU GMP approved plants across India, Latin America, and South Africa.
+        Coordinated end to end.
+      </p>
+    </div>
+  </div>
+  <div class="band">
+    <div class="domain">mhpharmapack.com</div>
+    <div class="lines">Packaging &middot; Formulation &middot; Finished Goods &middot; API</div>
+  </div>
+</body>
+</html>

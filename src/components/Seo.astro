@@ -1,0 +1,129 @@
+---
+// Everything that goes in <head> for search, social, and structured data.
+//
+// Hand-rolled rather than pulling in astro-seo or one of its forks: the whole
+// job is forty lines of tags, and owning it means the CONTENT-SPEC guardrails
+// (no registration identifier, no certification claimed as MH's own) are
+// enforced in code rather than trusted to a dependency's defaults.
+//
+// Sits in Base.astro, once, so no page can forget a canonical or ship an
+// og:image as a relative path (which every unfurler silently drops).
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import {
+  buildGraph,
+  abs,
+  OG_IMAGE,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_ALT,
+  type Crumb,
+} from '../lib/seo';
+import { SITE_TITLE, SITE_URL, withBase } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Page name for structured data. Defaults to the title minus the brand. */
+  name?: string;
+  /** Root-relative path. Absolutised below; social crawlers do not resolve
+   *  relative URLs the way a browser does. */
+  image?: string;
+  imageAlt?: string;
+  /** WebPage subtype. ContactPage / AboutPage / CollectionPage / ProfilePage
+   *  carry no rich result but are the semantically correct node. */
+  pageType?: string;
+  /** Two or more crumbs emits a BreadcrumbList, which IS a live rich result
+   *  and replaces the raw URL in the desktop snippet. */
+  breadcrumbs?: Crumb[];
+  /** Extra @graph nodes (Person, Service, ItemList) for this page. */
+  schema?: Record<string, unknown>[];
+  /** @id of the node this page is primarily about, if not the organisation. */
+  mainEntityId?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  name,
+  image = OG_IMAGE,
+  imageAlt = OG_IMAGE_ALT,
+  pageType = 'WebPage',
+  breadcrumbs,
+  schema = [],
+  mainEntityId,
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(SITE_URL);
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(withBase(image), site).href;
+
+// index,follow plus the three "show me everything" caps. Without max-snippet
+// and max-image-preview Google applies conservative defaults in some regions,
+// which shortens the snippet and drops the thumbnail: pure downside for a site
+// whose whole job is to look like a serious counterparty in the result list.
+const robots = noindex
+  ? 'noindex, follow'
+  : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+
+const graph = buildGraph({
+  url: canonical,
+  name: name ?? title.split('|')[0].trim(),
+  description,
+  pageType,
+  breadcrumbs,
+  nodes: schema,
+  mainEntityId,
+  site,
+});
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonical} />
+
+{/* Comments in this file use the JSX form, not <!-- -->. Astro strips these at
+    compile time; HTML comments ship to every visitor, and the head is the
+    worst place on the page to spend bytes on notes for developers.
+
+    The body font, fetched in parallel with the CSS that asks for it rather
+    than after it. Without this the first paint is the fallback face and the
+    swap to Inter reflows every line of text, which is CLS you can watch happen
+    on a slow connection. crossorigin is not optional on a font preload,
+    same-origin or not: without it the browser makes a second, separate request
+    and the preload does nothing. */}
+<link rel="preload" as="font" type="font/woff2" href={interLatin} crossorigin />
+
+<link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
+<link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+<link rel="icon" href={withBase('/favicon-32.png')} type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+<meta name="theme-color" content="#f4f6f8" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#26303d" media="(prefers-color-scheme: dark)" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+<meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+<meta property="og:image:alt" content={imageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+{/* Discovery hint for the crawlers that read it. robots.txt carries the
+    authoritative Sitemap: line; this costs one tag and is one more place a
+    crawler can find it. */}
+<link rel="sitemap" type="application/xml" href={withBase('/sitemap-index.xml')} />
+
+{/* One graph per page, one @context, nodes cross-referenced by @id. See
+    src/lib/seo.ts for what is deliberately absent from it and why. */}
+<script type="application/ld+json" set:html={JSON.stringify(graph)} is:inline />

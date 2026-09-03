@@ -54,11 +54,36 @@ export const OFFICE_ADDRESS_PARTS = {
 // keep the key here so swapping providers is a one-line change.
 export const FORM_ENDPOINT = '';
 
+// Profiles that are unambiguously this company, elsewhere on the web. These
+// feed schema.org sameAs, which is how a search engine decides that the
+// "MH PharmaPack" on this domain and the "MH PharmaPack" on LinkedIn are one
+// entity rather than two coincidences. For a company with no press coverage
+// this is the single strongest entity signal available, and it is the one
+// thing on this page that cannot be written, only earned: each URL has to be a
+// profile that actually exists and actually links back here.
+//
+// [NEEDS: company LinkedIn page, and any trade directory listings the client
+// wants claimed.] Leave entries out rather than guessing a URL; a sameAs
+// pointing at a 404 is worse than no sameAs at all, because it teaches the
+// crawler that this site's claims do not check out.
+export const ORG_SAME_AS: string[] = [];
+
 // Prefixes a root-relative path with Astro's configured base. Needed while the site
 // serves from the github.io project subpath; a no-op once the custom domain (base '/')
 // is live. Use for every internal link and every public/ asset reference.
+//
+// It also normalises page links to the trailing-slash form, which is the one the
+// build actually emits (astro.config.mjs sets trailingSlash: 'always' with a
+// directory-format build). Without this, every nav click hit /contact, which
+// GitHub Pages answers with a 301 to /contact/: a wasted round trip on a mobile
+// connection, and two URL shapes for one page in anything that reads our links.
+// Asset paths are left alone; anything with a file extension is not a page.
+const HAS_EXTENSION = /\.[a-z0-9]+$/i;
+
 export function withBase(path: string): string {
-  return import.meta.env.BASE_URL.replace(/\/$/, '') + path;
+  const prefix = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const needsSlash = !path.endsWith('/') && !HAS_EXTENSION.test(path) && !path.includes('#');
+  return prefix + path + (needsSlash ? '/' : '');
 }
 
 export const NAV = [

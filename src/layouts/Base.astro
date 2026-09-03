@@ -3,15 +3,27 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyBar from '../components/StickyBar.astro';
-import { SITE_TITLE, SITE_URL, withBase } from '../config';
+import Seo from '../components/Seo.astro';
+import type { Crumb } from '../lib/seo';
 
 interface Props {
   title: string;
   description: string;
+  /** Page name for structured data; defaults to the title minus the brand. */
+  name?: string;
+  /** WebPage subtype: ContactPage, AboutPage, CollectionPage, ProfilePage. */
+  pageType?: string;
+  /** Two or more crumbs emits a BreadcrumbList rich result. */
+  breadcrumbs?: Crumb[];
+  /** Extra JSON-LD nodes merged into this page's @graph. */
+  schema?: Record<string, unknown>[];
+  /** @id of the node this page is primarily about, if not the organisation. */
+  mainEntityId?: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE_URL).href;
+const { title, description, name, pageType, breadcrumbs, schema, mainEntityId, noindex } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -19,23 +31,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE_URL).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonical} />
-
-    <link rel="icon" href={withBase('/favicon.ico')} sizes="any" />
-    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
-    <link rel="icon" href={withBase('/favicon-32.png')} type="image/png" sizes="32x32" />
-    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE_TITLE} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <!-- og:image lands in a later pass, with a raster export of the flat mark -->
-    <meta name="twitter:card" content="summary" />
+    {/* Titles, canonical, robots, Open Graph, Twitter, favicons, font preload,
+        and the page's JSON-LD graph all live in one component so a page cannot
+        ship with half a head. See src/components/Seo.astro. */}
+    <Seo
+      title={title}
+      description={description}
+      name={name}
+      pageType={pageType}
+      breadcrumbs={breadcrumbs}
+      schema={schema}
+      mainEntityId={mainEntityId}
+      noindex={noindex}
+    />
   </head>
   <body class="pb-20 md:pb-0">
     <!-- Intro overlay (home page only) renders here, before the shell, so its gate runs first -->
