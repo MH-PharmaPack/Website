@@ -1,5 +1,8 @@
 ---
-import logo from '../assets/logo/mh-pharmapack-logo.svg';
+// Build-time resized logo (see Header.astro): 110 KB SVG-wrapped raster
+// replaced by a few-KB webp for a mark shown at 40 CSS px.
+import { Image } from 'astro:assets';
+import logo from '../assets/logo/mh-pharmapack-logo.webp';
 import {
   NAV,
   SALES_EMAIL,
@@ -23,7 +26,7 @@ const year = new Date().getFullYear();
     <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1.2fr] md:gap-8">
       <div>
         <a href={withBase('/')} class="flex items-center gap-3" aria-label="MH PharmaPack, home">
-          <img src={logo.src} width={logo.width} height={logo.height} alt="" class="h-10 w-auto" />
+          <Image src={logo} height={120} quality={82} alt="" class="h-10 w-auto" />
           <span class="flex flex-col gap-0.5 leading-none">
             <span class="text-[0.85rem] font-bold tracking-lockup text-ink">MH PHARMAPACK</span>
             <span class="text-[0.58rem] font-semibold tracking-eyebrow text-steel-deep uppercase">

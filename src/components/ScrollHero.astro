@@ -237,6 +237,12 @@ import { withBase } from '../config';
     .sh-creds { display: none; }
   }
 
+  /* Phones skip the grain: a full-viewport mix-blend-mode layer forces the
+     compositor to re-blend it over the live canvas every frame, a real cost
+     on mobile GPUs for a texture that is barely perceptible at 0.06. */
+  @media (max-width: 820px) {
+    .sh-grain { display: none; }
+  }
   .sh-grain {
     position: absolute; inset: 0; pointer-events: none; z-index: 4;
     opacity: 0.06; mix-blend-mode: overlay;
@@ -353,5 +359,9 @@ import { withBase } from '../config';
 <script>
   import initScrollHero from '../scripts/scroll-hero.js';
   const root = document.querySelector('[data-scroll-hero]');
+  // Init immediately, even while the intro overlay is up: the scene builds
+  // and warms its shaders behind the intro sheet, then idles its render loop
+  // until the intro docks. See the startup sequencing note at the end of
+  // scroll-hero.js - the gating lives there, next to the loop it gates.
   if (root instanceof HTMLElement) initScrollHero(root);
 </script>

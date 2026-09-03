@@ -1,5 +1,9 @@
 ---
-import logo from '../assets/logo/mh-pharmapack-logo.svg';
+// The keyed-alpha webp extracted from the pipeline's logo SVG, resized at
+// build time: the full asset is 110 KB for a mark this component shows at
+// 44 CSS px. Same pixels, a fraction of the bytes, on every page.
+import { Image } from 'astro:assets';
+import logo from '../assets/logo/mh-pharmapack-logo.webp';
 // WHATSAPP_HREF / TEL_HREF / MAILTO_HREF are deliberately not imported here.
 // The mobile menu is navigation only: no contact row and no Request a Quote.
 // The floating quick-actions pill owns every action on small screens. See the
@@ -47,12 +51,17 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, '') || '/') === here;
   </div>
 
   <div class="bar-row">
-    <div class="mx-auto flex h-18 max-w-content items-center justify-between gap-6 px-5 md:px-8">
+    <!-- Full-width bar, not the 1180px content container: on wide monitors
+         the container left ~400px of dead bar either side of the lockup and
+         nav. Both design references (Knowde, Gerresheimer) run edge-to-edge
+         headers with padding, and the intro's dock measures the slot's real
+         position at dock time, so the target moves with the layout. -->
+    <div class="flex h-18 items-center justify-between gap-6 px-5 md:px-8 xl:px-10">
       <!-- Lockup: mark + wordmark + descriptor. #header-logo-slot is the intro animation's
            dock target; the intro hides the static img and lands its animated mark in the slot. -->
       <a href={withBase('/')} class="flex min-w-0 items-center gap-3" aria-label="MH PharmaPack, home">
         <span id="header-logo-slot" class="flex h-11 w-[55px] shrink-0 items-center justify-center">
-          <img id="header-logo-img" src={logo.src} width={logo.width} height={logo.height} alt="" class="h-11 w-auto" />
+          <Image id="header-logo-img" src={logo} height={132} quality={82} alt="" class="h-11 w-auto" loading="eager" />
         </span>
         <span id="header-lockup-text" class="flex min-w-0 flex-col justify-center gap-0.5 leading-none">
           <span class="lockup-name text-[0.9rem] font-bold tracking-lockup whitespace-nowrap">MH PHARMAPACK</span>
@@ -109,7 +118,11 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, '') || '/') === here;
     z-index: 10;
     background: color-mix(in srgb, var(--color-paper) 95%, transparent);
     border-bottom: 1px solid var(--color-line);
-    backdrop-filter: blur(6px);
+    /* No backdrop-filter here: at 95% opacity the blur was invisible, but the
+       browser still re-blurred whatever sat under the bar (the live hero
+       canvas) on every scroll frame, a permanent per-frame tax on phones.
+       The open-menu state below keeps its blur: it is genuinely translucent
+       and the page is scroll-locked while it shows. */
     transition: background-color 0.4s ease, border-color 0.4s ease;
   }
   .lockup-name { color: var(--color-ink); transition: color 0.4s ease; }

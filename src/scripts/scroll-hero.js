@@ -71,6 +71,13 @@ const CFG = {
   strandColor: 0xe0a85c,   // warm copper-gold; reads on navy AND on paper
   strandFlowCount: 420,    // particles riding the strand (280 narrow)
   maxPixelRatio: 1.75,
+  // Total pixel budget for the canvas. Fill cost is passes x pixels, and the
+  // postprocess chain is ~12 fullscreen passes: a 1440p or 4K desktop left to
+  // render at its native ratio pushed 4-8 MP through that chain every frame,
+  // which is what dropped frames on otherwise capable PCs. The budget scales
+  // the pixel ratio down so the chain costs roughly the same at any screen
+  // size; the content is soft glow, so the downscale is very hard to see.
+  maxRenderPixels: 2.6e6,
 };
 
 // Spine: one grand rising stroke, lower left corner through the waist and
@@ -559,19 +566,24 @@ export default function initScrollHero(root) {
   // range ends, i.e. where that scroll-away begins.
   let rideEnd = 0.8, scrollSpan = 1;
 
-  // Resolution follows the CURRENT viewport, not whatever it was at load
+  // Resolution follows the CURRENT viewport, not whatever it was at load.
+  // Three caps on the scene ratio: device ratio, tier cap, and the pixel
+  // budget (see CFG.maxRenderPixels). The composer additionally carries the
+  // adaptive degrade scale, stepped down at runtime if frames drop.
+  let degradeScale = 1;
   function applyQuality() {
     const cap = narrow ? 1.15 : CFG.maxPixelRatio;
-    const pr = Math.min(window.devicePixelRatio || 1, cap);
+    const budget = Math.sqrt(CFG.maxRenderPixels / Math.max(1, stageW * stageH));
+    const pr = Math.max(0.65, Math.min(window.devicePixelRatio || 1, cap, budget));
     renderer.setPixelRatio(pr);
-    if (composer) composer.setPixelRatio(narrow ? pr * 0.7 : pr);
+    if (composer) composer.setPixelRatio((narrow ? pr * 0.7 : pr) * degradeScale);
   }
 
   function frameCamera() {
     stageW = Math.max(1, stage.clientWidth);
     stageH = Math.max(1, stage.clientHeight);
-    const nowNarrow = stageW <= 820;
-    if (nowNarrow !== narrow) { narrow = nowNarrow; applyQuality(); }
+    narrow = stageW <= 820;
+    applyQuality();
     camera.aspect = stageW / stageH;
     camera.updateProjectionMatrix();
     // In strip mode layoutPageLine() owns the renderer size; sizing to the
@@ -609,8 +621,6 @@ export default function initScrollHero(root) {
     // ~10 fullscreen passes. Running the chain at 70% linear resolution is
     // half the pixels, and on content made entirely of soft glow it is very
     // hard to see. The scene itself still renders at the full cap.
-    const prBase = Math.min(window.devicePixelRatio || 1, pixelCap);
-    composer.setPixelRatio(narrow ? prBase * 0.7 : prBase);
     composer.addPass(new RenderPass(scene, camera));
     // Trails cost a fullscreen pass plus a full texture copy every frame.
     // Worth it on desktop, not on a phone where bloom already carries the look.
@@ -626,9 +636,113 @@ export default function initScrollHero(root) {
     }
     composer.addPass(new OutputPass());
     composer.setSize(stageW, stageH);
+    applyQuality(); // composer exists now; give it the budgeted ratio
   } catch (e) {
     console.warn('ScrollHero: postprocessing unavailable, direct render.', e);
     composer = null;
+  }
+
+  /* Adaptive degrade: whatever the device claims, the ride must hold frame
+     rate. Sustained long frames shed composer resolution first, then the
+     afterimage pass (a fullscreen copy per frame). Steps are one-way:
+     flipping back up re-janks at the exact moment the headroom returns. */
+  let slowFrames = 0, degradeLevel = 0;
+  let loopStartAt = -1; // elapsed-seconds when the visible loop first engaged
+  const DEGRADE_SCALES = [1, 0.85, 0.7, 0.55];
+  function applyDegrade(level) {
+    degradeLevel = level;
+    slowFrames = 0;
+    degradeScale = DEGRADE_SCALES[level];
+    if (level >= 2 && afterPass) afterPass.enabled = false;
+    applyQuality();
+  }
+  function stepDown() {
+    if (degradeLevel >= DEGRADE_SCALES.length - 1) return;
+    applyDegrade(degradeLevel + 1);
+  }
+
+  /* Startup calibration, run behind the intro sheet after shader warmup:
+     time a few real composer frames with a forced GPU sync and START at
+     the quality level whose estimated cost fits the frame budget, instead
+     of opening at full quality and shedding reactively while the visitor
+     watches the jank. Measured on the client's own Iris Xe: full quality
+     costs ~30 ms/frame (33 fps); the reactive ladder took ~4 s to react.
+     Cost scales with composer pixel count, so each level's factor is
+     roughly scale^2 (level 2+ also drops the afterimage copy). 12 ms fits
+     a 60 Hz frame and a 144 Hz half-rate beat alike. */
+  const LEVEL_COST_FACTOR = [1, 0.72, 0.42, 0.26];
+  let calibratedCost = -1, levelPicked = false;
+  /* The GPU measurement is the expensive half (~100 ms of forced sync), so
+     it runs SYNCHRONOUSLY in the init task, before the intro's first
+     visual frame can possibly paint. Deferring it to the display-rate
+     sample put its stall ~200 ms into the visible intro, right on the
+     wordmark's landing beat, which read as the logo animation dropping
+     frames. Picking the level from the measurement is pure arithmetic and
+     happens later, once the display rate is known. */
+  function measureCost() {
+    if (!composer) return;
+    try {
+      const gl = renderer.getContext();
+      const px = new Uint8Array(4);
+      // gl.finish() on ANGLE/D3D11 returns without waiting for the GPU
+      // (measured 0 ms for a pipeline that takes ~30 ms), so force a real
+      // sync by reading a pixel back: readPixels cannot return until every
+      // queued command has executed.
+      const syncRead = () => gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      composer.render(); syncRead(); // settle, untimed
+      const N = 2;
+      const t0 = performance.now();
+      for (let i = 0; i < N; i++) { composer.render(); syncRead(); }
+      calibratedCost = (performance.now() - t0) / N;
+    } catch (e) { /* measurement is best-effort; the watchdog still runs */ }
+  }
+  function pickLevel() {
+    // Cheap: called at display-sample completion, the 700 ms fallback, or
+    // at latest in begin() before the first visible frame.
+    if (levelPicked) return;
+    levelPicked = true;
+    if (calibratedCost < 2) return; // no valid measurement; watchdog takes over
+    // Budget = the interval of one rendered beat (two vsyncs when paced)
+    // minus ~4 ms headroom for everything else the page does per frame.
+    const beat = paceHalf ? displayInterval * 2 : displayInterval;
+    const budget = Math.min(14, Math.max(7, beat - 4));
+    let level = DEGRADE_SCALES.length - 1;
+    for (let l = 0; l < DEGRADE_SCALES.length; l++) {
+      if (calibratedCost * LEVEL_COST_FACTOR[l] <= budget) { level = l; break; }
+    }
+    console.info(`ScrollHero: calibrated ${calibratedCost.toFixed(1)}ms/frame, budget ${budget.toFixed(1)}ms -> level ${level}`);
+    if (level > 0) applyDegrade(level);
+  }
+
+  /* Display cadence, sampled while the intro owns the screen. On fast
+     panels (>105 Hz) the hero renders every SECOND vsync: a rock-steady
+     72 fps on a 144 Hz display reads as smooth, while chasing 144 and
+     landing on an oscillating 30-50 reads as broken. Unmeasured (hidden
+     tab) leaves the default 60 Hz assumption and full-rate rendering. */
+  let displayInterval = 16.7, paceHalf = false, paceFlip = 0;
+  {
+    const samples = [];
+    let sLast = 0, sCount = 0;
+    const sampleTick = (now) => {
+      if (sLast > 0) {
+        const d = now - sLast;
+        if (d > 2 && d < 50) samples.push(d);
+      }
+      sLast = now;
+      if (++sCount < 30) requestAnimationFrame(sampleTick);
+      else {
+        if (samples.length >= 10) {
+          samples.sort((a, b) => a - b);
+          displayInterval = samples[Math.floor(samples.length / 2)];
+          paceHalf = displayInterval < 9.5;
+        }
+        pickLevel(); // display rate known; pick the starting level now
+      }
+    };
+    requestAnimationFrame(sampleTick);
+    // Occluded tabs never finish the sample; pick on wall clock so the
+    // level is still chosen before any plausible first visible frame.
+    setTimeout(pickLevel, 700);
   }
 
   function placeCamera(driftPhase) {
@@ -801,6 +915,18 @@ export default function initScrollHero(root) {
 
   const tick = () => {
     const elapsed = (performance.now() - start) / 1000;
+    // Pacing: on fast displays render every SECOND vsync (see paceHalf).
+    // During the dock window (first 1.2 s after the loop engages) halve
+    // again: the flying logo is the most-watched pixels on the page, and
+    // hero GPU work contending with the compositor there made the fly
+    // judder. The river is behind the lifting sheet for most of it anyway.
+    // dt derives from elapsed, so rendered frames integrate skipped beats.
+    const docking = loopStartAt >= 0 && elapsed - loopStartAt < 1.2;
+    const paceDiv = (paceHalf ? 2 : 1) * (docking ? 2 : 1);
+    if (paceDiv > 1) {
+      paceFlip = (paceFlip + 1) % paceDiv;
+      if (paceFlip !== 0) return;
+    }
     const dt = Math.min(0.1, (elapsed - lastT) || 0.016);
     lastT = elapsed;
     if (DEBUG_P !== null) {
@@ -895,6 +1021,16 @@ export default function initScrollHero(root) {
     // when scrolling back up into the hero
     setStrip(pageMode);
 
+    // Frame-rate watchdog. Grace period counts from when the VISIBLE loop
+    // engaged (warmup frames and the intro idle don't count); after that,
+    // ~0.7s of sustained >26 ms frames sheds quality.
+    if (!pageMode && composer && degradeLevel < DEGRADE_SCALES.length - 1 &&
+        loopStartAt >= 0 && elapsed - loopStartAt > 1.5) {
+      if (dt > 0.022) slowFrames += 1;
+      else if (slowFrames > 0) slowFrames -= 0.5;
+      if (slowFrames >= 15) stepDown();
+    }
+
     if (pageMode) {
       // Transparent canvas: only the screen-space gutter line over the page
       renderer.clear();
@@ -911,13 +1047,123 @@ export default function initScrollHero(root) {
         renderer.render(pageScene, pageCam);
       }
     }
-    if (++warmed > 12) hidePoster();
+    // Two warmup frames already proved the pipeline renders real content, so
+    // the poster can go after a couple of live frames. It used to wait 12,
+    // which pushed its 900 ms fade past the intro's dock and made the river
+    // read as arriving late.
+    if (++warmed > 3) hidePoster();
   };
 
-  renderer.setAnimationLoop(tick);
-  document.addEventListener('visibilitychange', () => {
-    renderer.setAnimationLoop(document.hidden ? null : tick);
-  });
+  /* Startup sequencing. WebGL's real cost is the FIRST frame: every material
+     compiles its shaders and every render target allocates on first use,
+     which blocks the main thread for hundreds of ms. Deferring init until
+     the intro docked put that stall at the exact moment the page became
+     visible: the river appeared late and its first seconds dropped frames.
+     So the scene builds and WARMS UP here, immediately - two full composer
+     frames behind the intro sheet, before the intro's first visual beat
+     (this module evaluates at DOMContentLoaded; the intro waits on a font
+     race) - then the loop idles while the intro owns the screen and resumes
+     the moment the dock begins. The first visible frame runs pre-compiled
+     shaders only, so the river is flowing as the sheet lifts. */
+  let loopOn = false;
+  function setLoop(on) {
+    loopOn = on;
+    if (on && !document.hidden) {
+      // Stamp the watchdog's grace clock only when the loop genuinely
+      // engages on a VISIBLE page: a dock that happens in a hidden tab
+      // (autoDock is a plain timer and keeps running there) enables the
+      // loop without rendering a single frame, and stamping then would
+      // hand the first real frames after refocus straight to the watchdog
+      // with the grace already spent. Also forgive any jank debt across a
+      // pause; refocus frames are always rough.
+      if (loopStartAt < 0) loopStartAt = (performance.now() - start) / 1000;
+      slowFrames = 0;
+    }
+    renderer.setAnimationLoop(on && !document.hidden ? tick : null);
+  }
+  document.addEventListener('visibilitychange', () => setLoop(loopOn));
+
+  /* Diagnostic HUD, activated only by a ?shd URL param. Runs its OWN rAF
+     loop so it measures the page's real frame cadence during every phase,
+     including while the hero loop is idled behind the intro. Each 500 ms
+     window is drawn on screen and appended to localStorage 'shd-log' so a
+     run in any same-origin tab can be read back afterwards. */
+  if (new URLSearchParams(location.search).has('shd')) {
+    const el = document.createElement('div');
+    el.style.cssText =
+      'position:fixed;left:8px;bottom:8px;z-index:99999;background:rgba(0,0,0,.78);' +
+      'color:#7fff9f;font:11px/1.5 monospace;padding:6px 9px;pointer-events:none;' +
+      'white-space:pre;border-radius:4px';
+    el.textContent = 'shd: warming';
+    document.body.appendChild(el);
+    const log = [];
+    let hLast = performance.now(), hFrames = 0, hWorst = 0, hWin = hLast;
+    const hudLoop = () => {
+      const now = performance.now(), hDt = now - hLast;
+      hLast = now;
+      hFrames += 1;
+      if (hDt > hWorst) hWorst = hDt;
+      if (now - hWin >= 500) {
+        const entry = {
+          t: Math.round(now),
+          fps: Math.round((hFrames * 1000) / (now - hWin)),
+          worst: Math.round(hWorst),
+          lvl: degradeLevel,
+          loop: loopOn ? 1 : 0,
+          pace: paceHalf ? 2 : 1,
+        };
+        log.push(entry);
+        if (log.length > 240) log.shift();
+        try { localStorage.setItem('shd-log', JSON.stringify(log)); } catch (e) { /* full/blocked */ }
+        entry.cal = Math.round(calibratedCost);
+        el.textContent =
+          `fps ${entry.fps}  worst ${entry.worst}ms\n` +
+          `level ${degradeLevel}  loop ${loopOn ? 'on' : 'idle'}  pace ${paceHalf ? '1/2' : 'full'}\n` +
+          `pr ${renderer.getPixelRatio().toFixed(2)}  buf ${renderer.domElement.width}x${renderer.domElement.height}  ` +
+          `hz ${Math.round(1000 / displayInterval)}  cal ${calibratedCost < 0 ? '?' : Math.round(calibratedCost) + 'ms'}`;
+        hFrames = 0; hWorst = 0; hWin = now;
+      }
+      requestAnimationFrame(hudLoop);
+    };
+    requestAnimationFrame(hudLoop);
+  }
+
+  tick();
+  tick(); // second frame catches programs the first one's state changes gated
+  measureCost(); // sync GPU timing, inside the same invisible init task
+
+  const introUp =
+    document.documentElement.classList.contains('intro-pending') &&
+    !window.__mhIntroDone;
+  if (introUp) {
+    let began = false;
+    const begin = () => {
+      if (began) return;
+      began = true;
+      // Scroll is never locked while the intro is up, so the visitor may be
+      // anywhere on the page by now. Snap the eased scroll state to reality
+      // before the first frame; otherwise the reveal spends ~half a second
+      // sweeping the hero scene across whatever section they scrolled to.
+      readScroll();
+      scrollP = scrollTarget;
+      pickLevel(); // no-op if already run; covers a click-skip early dock
+      setLoop(true);
+    };
+    addEventListener('mh:intro-done', begin, { once: true });
+    // Belt-and-braces floor in case the intro never signals, counted in
+    // VISIBLE time (in a hidden tab the intro legitimately waits for focus,
+    // and there is nothing to render for anyway).
+    let floorTimer = null;
+    const armFloor = () => {
+      if (floorTimer) { clearTimeout(floorTimer); floorTimer = null; }
+      if (began) return;
+      if (document.visibilityState === 'visible') floorTimer = setTimeout(begin, 10000);
+    };
+    document.addEventListener('visibilitychange', armFloor);
+    armFloor();
+  } else {
+    setLoop(true);
+  }
 
   new ResizeObserver(() => { frameCamera(); buildRide(); }).observe(stage);
 }

@@ -12,6 +12,34 @@
   // Every load of the home route plays the intro; the class gates the overlay CSS
   // and hides the site shell until the mark docks into the header.
   document.documentElement.classList.add('intro-pending');
+  // Stall safety: if the intro has not docked after 7s of the page being
+  // VISIBLE (script failed to load, an exception mid-animation, anything),
+  // reveal the site instead of leaving the visitor on a blank sheet forever.
+  // Visible time only: in a hidden or occluded tab requestAnimationFrame
+  // never fires, so the intro legitimately waits for focus; a wall-clock
+  // timer there would tear the intro down before anyone saw it. The timer
+  // re-arms from zero whenever the tab becomes visible. A successful dock
+  // sets __mhIntroDone and the firing becomes a no-op.
+  (function () {
+    var stallTimer = null;
+    function fire() {
+      if (window.__mhIntroDone) return;
+      document.documentElement.classList.remove('intro-pending');
+      ['sheet', 'lockup', 'replay'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.remove();
+      });
+      window.__mhIntroDone = true;
+      dispatchEvent(new Event('mh:intro-done'));
+    }
+    function arm() {
+      if (stallTimer) { clearTimeout(stallTimer); stallTimer = null; }
+      if (window.__mhIntroDone) return;
+      if (document.visibilityState === 'visible') stallTimer = setTimeout(fire, 7000);
+    }
+    document.addEventListener('visibilitychange', arm);
+    arm();
+  })();
 </script>
 
 <div class="sheet" id="sheet" aria-hidden="true"></div>
@@ -87,10 +115,14 @@
     gap: 26px;
     pointer-events: none;
   }
-  /* The shell and the header lockup start hidden; the intro's dock animates them in */
-  html.intro-pending #site-shell {
-    opacity: 0;
-  }
+  /* The site shell is NOT hidden: the sheet above it is opaque paper, so the
+     page sits fully rendered beneath it from first paint and its entire
+     rasterization happens during load instead of at the dock. The earlier
+     `#site-shell { opacity: 0 }` plus a dock-time fade-in animated group
+     opacity across the whole page (header, live canvas, every section)
+     exactly while the mark was flying to the header, which is what dropped
+     the dock's frames. The sheet's own fade is the one and only reveal.
+     Only the header lockup stays hidden, so the docked mark replaces it. */
   html.intro-pending #header-logo-img {
     display: none;
   }
@@ -336,13 +368,23 @@ function run(){
 /* ---- hand the mark over to the header ---- */
 let docked=false;
 function dock(){
-  if(docked) return; docked=true;
+  /* lock.isConnected: if the stall-safety already tore the overlay down,
+     a late dock must not fly a detached svg into the header next to the
+     restored static logo. */
+  if(docked || !lock.isConnected) return; docked=true;
+  /* Handshake for the rest of the page, at the START of the dock so the
+     hero's pre-warmed render loop resumes while the mark is still flying:
+     by the time the sheet lifts, the river is already in motion.
+     Integration wiring, not animation logic. */
+  window.__mhIntroDone = true;
+  dispatchEvent(new Event('mh:intro-done'));
   const a=svg.getBoundingClientRect(), b=slot.getBoundingClientRect();
   const s=b.width/a.width;
   const dx=(b.left+b.width/2)-(a.left+a.width/2);
   const dy=(b.top+b.height/2)-(a.top+a.height/2);
 
-  site.animate([{opacity:0},{opacity:1}], {duration:T(380), delay:T(60), fill:'both', easing:'ease-out'});
+  /* No site fade-in here: the page is already rendered under the opaque
+     sheet (see the CSS note above), so the sheet fading is the reveal. */
   sheet.animate([{opacity:1},{opacity:0}], {duration:T(330), delay:T(100), fill:'both', easing:'ease-in'});
   [wordEl,tagEl].forEach(el=>el.animate(
     [{opacity:1},{opacity:0, transform:'translateY(-8px)'}],
@@ -386,8 +428,19 @@ if (matchMedia('(prefers-reduced-motion: reduce)').matches){
   $$('.safe').forEach(r=>r.style.opacity=1);
   dock();
 } else {
-  if (document.readyState === 'complete') requestAnimationFrame(run);
-  else addEventListener('load', ()=>requestAnimationFrame(run));
+  /* Start as soon as the intro's own dependencies are ready, NOT on
+     window.load. The intro is fully self-contained (inline SVG, inline
+     texture); waiting for load meant waiting for the ~500 KB hero chunk,
+     the fonts, and every image before the first frame, which is what made
+     the site feel dead on arrival. The only external dependency is the
+     wordmark's font, so wait for that alone, capped at 900 ms so a slow
+     font can never hold the page hostage (fallback type is better than a
+     blank sheet). */
+  const startRun = () => requestAnimationFrame(run);
+  const fontReady = document.fonts && document.fonts.load
+    ? document.fonts.load('700 25px "Inter Variable"').catch(() => {})
+    : Promise.resolve();
+  Promise.race([fontReady, new Promise((r) => setTimeout(r, 900))]).then(startRun);
 }
 
 }

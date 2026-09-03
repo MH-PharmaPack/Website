@@ -1,8 +1,18 @@
 ---
 import Base from '../../layouts/Base.astro';
-import logo from '../../assets/logo/mh-pharmapack-logo.svg';
+// Build-time resized logo (see Header.astro): shown at 48 CSS px here.
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo/mh-pharmapack-logo.webp';
 import { PARTNERS, partnerWhatsApp, type Partner } from '../../data/leadership';
-import { MAILTO_HREF, SALES_EMAIL, OFFICE_ADDRESS, MAPS_HREF, withBase } from '../../config';
+import {
+  MAILTO_HREF,
+  SALES_EMAIL,
+  OFFICE_ADDRESS,
+  OFFICE_ADDRESS_PARTS,
+  MAPS_HREF,
+  withBase,
+} from '../../config';
+import { ORG_ID, abs } from '../../lib/seo';
 
 // The page an NFC card tap opens. Two layouts, one document.
 //
@@ -42,6 +52,36 @@ interface Props {
 const { partner } = Astro.props;
 const vcardHref = withBase(`/leadership/${partner.slug}.vcf`);
 
+// The Person node this page is about, tied to the organisation by @id so the
+// two are one graph rather than two unrelated claims. No rich result comes of
+// this; it is entity disambiguation, which is the part that matters when the
+// name is as common as these two are.
+const personId = `${abs(`/leadership/${partner.slug}`, Astro.site)}#person`;
+const personNode = {
+  '@type': 'Person',
+  '@id': personId,
+  name: partner.name,
+  jobTitle: partner.title,
+  worksFor: { '@id': ORG_ID },
+  description: partner.bio || `${partner.title} at MH PharmaPack. ${partner.lead}`,
+  telephone: partner.phone,
+  email: SALES_EMAIL,
+  workLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: OFFICE_ADDRESS_PARTS.street,
+      addressLocality: OFFICE_ADDRESS_PARTS.city,
+      addressRegion: OFFICE_ADDRESS_PARTS.region,
+      postalCode: OFFICE_ADDRESS_PARTS.postcode,
+      addressCountry: 'IN',
+    },
+  },
+  // Only real profiles. An invented LinkedIn URL is worse than none: it teaches
+  // the crawler that this site's identity claims do not resolve.
+  ...(partner.linkedin ? { sameAs: [partner.linkedin] } : {}),
+};
+
 const actionClass =
   'flex flex-col items-center gap-1.5 rounded-sm border border-line py-3 text-xs font-semibold text-steel-deep transition-colors hover:border-steel hover:text-ink xl:flex-1';
 
@@ -51,7 +91,15 @@ const backClass =
 
 <Base
   title={`${partner.name}, ${partner.title} | MH PharmaPack`}
-  description={`${partner.name}, ${partner.title} at MH PharmaPack. ${partner.lead} Direct contact details and vCard.`}
+  name={partner.name}
+  description={`${partner.name}, ${partner.title} at MH PharmaPack, pharmaceutical sourcing and supply in Ahmedabad. ${partner.lead} Direct line, WhatsApp, and vCard.`}
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'Leadership', path: '/leadership' },
+    { name: partner.name },
+  ]}
+  schema={[personNode]}
+  mainEntityId={personId}
 >
   <!-- bg-paper lives on the section, never on the band itself: .panel-deep is a
        component-layer rule and any bg-* utility on the same element would
@@ -67,13 +115,7 @@ const backClass =
           <!-- Phone only. On a wide screen the site header sits directly above
                this band with the full lockup in it, so a second bare mark two
                centimetres below it read as a stray. -->
-          <img
-            src={logo.src}
-            width={logo.width}
-            height={logo.height}
-            alt=""
-            class="mx-auto h-12 w-auto md:hidden"
-          />
+          <Image src={logo} height={144} quality={82} alt="" class="mx-auto h-12 w-auto md:hidden" />
 
           <div class="mt-8 md:mt-0 md:w-56 md:shrink-0">
             {
