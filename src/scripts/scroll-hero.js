@@ -193,7 +193,12 @@ export default function initScrollHero(root) {
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({
-      canvas, antialias: false, alpha: true, powerPreference: 'high-performance',
+      // antialias applies to the DEFAULT framebuffer only, which the
+      // composer path never draws the scene into (its passes render to
+      // offscreen targets; the composer supplies its own MSAA there). It
+      // exists for degrade level 4's direct render, where it is the only
+      // thing keeping the filament hairlines from aliasing.
+      canvas, antialias: true, alpha: true, powerPreference: 'high-performance',
     });
   } catch (e) {
     console.warn('ScrollHero: WebGL unavailable, static fallback.', e);
@@ -442,7 +447,7 @@ export default function initScrollHero(root) {
       const nearWaist = 1 + 1.3 * CFG.waistGlow *
         smooth(0.28, 0.02, Math.sqrt(px * px + py * py + pz * pz));
       const endFade = smooth(0, 0.08, t) * smooth(1, 0.92, t);
-      const bright = pt.bright * packet * nearWaist * endFade;
+      const bright = pt.bright * packet * nearWaist * endFade * brightBoost;
       col[i3] = tmpColor.r * bright;
       col[i3 + 1] = tmpColor.g * bright;
       col[i3 + 2] = tmpColor.b * bright;
@@ -451,7 +456,7 @@ export default function initScrollHero(root) {
     if (doCol) colAttr.needsUpdate = true;
     const surge = 0.7 + 0.3 * Math.sin((loopPhase - 0.75) * Math.PI * 2);
     const g = CFG.waistGlow * surge * glowBoost;
-    waistGlow.material.opacity = 0.05 + 0.09 * g;
+    waistGlow.material.opacity = (0.05 + 0.09 * g) * levelGlowBoost;
     waistGlow.scale.setScalar(0.5 + 0.3 * g);
   }
 
@@ -644,6 +649,20 @@ export default function initScrollHero(root) {
     if (composer) composer.setPixelRatio((narrow ? pr * 0.7 : pr) * degradeScale);
   }
 
+  /* Look compensation. A degrade level that only REMOVES things (bloom,
+     trails, particles, atmosphere) reads as a stripped scene, which is the
+     confirmed failure mode of the first floor implementation. What the
+     deep levels shed is postprocess RESOLUTION, which is the expensive
+     axis; presence is cheap, so each level buys some back: bigger and
+     brighter particles, denser filament opacity, a stronger waist sprite.
+     Both this and the tall staging scale the same materials, so the two
+     factors compose in one place. */
+  let levelSizeBoost = 1, levelLineBoost = 1, levelGlowBoost = 1, brightBoost = 1;
+  function applyLook() {
+    pMat.size = CFG.particleSize * (1 + 0.9 * STAGE.tall) * levelSizeBoost;
+    glintMat.size = 0.022 * (1 + 0.8 * STAGE.tall);
+  }
+
   /* Re-stage the composition for the current aspect. Rebuilds are cheap
      (once per orientation change, never per frame) and keyed on a real
      threshold so resize jitter does not thrash them. */
@@ -663,12 +682,10 @@ export default function initScrollHero(root) {
     buildStrand();
     // The tall framing pulls the camera much further back, which halves the
     // apparent size of everything; give the primitives their presence back.
-    pMat.size = CFG.particleSize * (1 + 0.9 * tall);
+    // (Sizes are set in applyLook so the level boost composes with this.)
     lineBoost = 1 + 0.5 * tall;
     backGlow.scale.set(16 - 5 * tall, 10 + 4 * tall, 1);
-    // The extraction reads thinner on a tall frame (the 1px strand is all
-    // there is for a beat); heavier glints keep the line alive there
-    glintMat.size = 0.022 * (1 + 0.8 * tall);
+    applyLook();
   }
 
   function frameCamera() {
@@ -761,14 +778,24 @@ export default function initScrollHero(root) {
     slowFrames = 0;
     degradeScale = DEGRADE_SCALES[level];
     if (level >= 2 && afterPass) afterPass.enabled = false;
-    // Weak GPUs usually ship with weak CPUs: halve the per-frame particle
-    // loop and its buffer upload along with the pixel work.
-    particleActive = level >= 3 ? COUNT >> 1 : COUNT;
+    // Weak GPUs usually ship with weak CPUs: trim the per-frame particle
+    // loop and its buffer upload along with the pixel work, but never by
+    // half at level 3 - the density loss read as a stripped scene. Each
+    // cut is paid back in size and brightness (see applyLook).
+    particleActive = level >= 4 ? COUNT >> 1
+      : level >= 3 ? Math.floor(COUNT * 0.75) : COUNT;
     pGeo.setDrawRange(0, particleActive);
+    levelSizeBoost = level >= 4 ? 1.5 : level >= 3 ? 1.18 : 1;
+    brightBoost = level >= 4 ? 1.35 : level >= 3 ? 1.12 : 1;
+    // Without bloom (level 4) the filaments and waist carry the glow alone
+    levelLineBoost = level >= 4 ? 1.9 : 1;
+    levelGlowBoost = level >= 4 ? 1.8 : 1;
     // Full-viewport mix-blend-mode layers (grain) and the near dust sheet
-    // force an extra composite over the changing canvas every frame; shed
-    // them once the machine has told us it is struggling.
-    root.classList.toggle('sh-lite', level >= 2);
+    // force an extra composite over the changing canvas every frame. Shed
+    // only at level 3+: losing them at 2 flattened a look that machines at
+    // that tier can actually afford.
+    root.classList.toggle('sh-lite', level >= 3);
+    applyLook();
     applyQuality();
   }
   function stepDown() {
@@ -789,7 +816,7 @@ export default function initScrollHero(root) {
   // removes MSAA resolve, HalfFloat bandwidth, the bloom chain and the
   // output pass, leaving one plain pass; that is roughly a tenth of the
   // full pipeline, not half.
-  const LEVEL_COST_FACTOR = [1, 0.72, 0.42, 0.26, 0.08];
+  const LEVEL_COST_FACTOR = [1, 0.72, 0.42, 0.26, 0.12];
   let calibratedCost = -1, levelPicked = false;
   // ?shl=N pins the starting level (diagnosis on real devices in the
   // field, same spirit as ?shd and ?shp). The watchdog can still step
@@ -816,10 +843,15 @@ export default function initScrollHero(root) {
       // queued command has executed.
       const syncRead = () => gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
       composer.render(); syncRead(); // settle, untimed
-      const N = 2;
-      const t0 = performance.now();
-      for (let i = 0; i < N; i++) { composer.render(); syncRead(); }
-      calibratedCost = (performance.now() - t0) / N;
+      // Min of the samples, not the mean: a transient main-thread hitch
+      // during one sample must not over-degrade the whole session.
+      let best = Infinity;
+      for (let i = 0; i < 2; i++) {
+        const t0 = performance.now();
+        composer.render(); syncRead();
+        best = Math.min(best, performance.now() - t0);
+      }
+      calibratedCost = best;
     } catch (e) { /* measurement is best-effort; the watchdog still runs */ }
   }
   function pickLevel() {
@@ -1104,7 +1136,7 @@ export default function initScrollHero(root) {
     // between river-out and strand-in was reading empty); it is still fully
     // gone before any section text can arrive.
     const riverOut = smooth(0.04, 0.3 + 0.12 * STAGE.tall, shot);
-    lineMat.opacity = CFG.filamentOpacity * lineBoost * (1 - riverOut);
+    lineMat.opacity = CFG.filamentOpacity * lineBoost * levelLineBoost * (1 - riverOut);
     pMat.opacity = 1 - riverOut;
     backGlow.material.opacity = 0.32 * (1 - riverOut);
     waistGlow.visible = riverOut < 0.98;
