@@ -155,7 +155,14 @@ import logoTexture from '../assets/logo/mh-pharmapack-logo.webp?url';
     width: min(31vh, 300px);
     height: auto;
     overflow: visible;
-    filter: drop-shadow(0 16px 26px rgba(38, 48, 61, 0.13));
+    /* No drop-shadow filter here, deliberately. A CSS filter on the svg
+       forces a full re-rasterization of the textured mark on EVERY frame
+       that any of its children animate (the ring draws, the icon settles)
+       and again throughout the dock flight's scale-down, on the main
+       thread, on every machine. That re-raster was a measured cause of the
+       intro and dock dropping frames, for a 13%-alpha shadow. The static
+       header logo on interior pages never had a shadow, so the docked mark
+       is now consistent with it too. */
   }
   #mark #ringSteel,
   #mark #ringCopper,
@@ -399,6 +406,8 @@ function dock(){
     [{opacity:1},{opacity:0, transform:'translateY(-8px)'}],
     {duration:T(220), fill:'both', easing:'ease-in'}));
 
+  /* Compositor hint for the flight; the cssText reset in onfinish clears it */
+  svg.style.willChange='transform';
   const fly=svg.animate([{transform:'none'},{transform:'translate('+dx+'px,'+dy+'px) scale('+s+')'}],
     {duration:T(480), fill:'both', easing:'cubic-bezier(.6,.02,.2,1)'});
 

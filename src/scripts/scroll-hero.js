@@ -111,6 +111,19 @@ const SAMPLES = 240;
 const Z_UNIT = new THREE.Vector3(0, 0, 1);
 const FIT_HALF_WIDTH = 2.6;
 const FIT_HALF_PORTRAIT = 1.5;
+/* Tall-screen staging. Portrait framing shows only a narrow horizontal
+   slice of the composition (about x -1.5..1.6), but the tributaries only
+   separate further left than that, so on a phone both streams entered the
+   frame as one blob at the left edge while the tall frame's vertical range
+   went unused. Rather than a second hand-authored composition, the SAME
+   approved stroke is rotated toward the tall diagonal (buyer enters from
+   the bottom, supplier from the left, merged river exits top right) and
+   compressed in x, so every approved relationship (confluence angle,
+   braid, taper) survives. tall runs 0 (aspect >= 1, identity) to 1
+   (aspect <= 0.5, full re-stage); see setStaging(). */
+const TALL_ROT_DEG = 44;
+const TALL_SX = 0.68;
+const TALL_SY = 1.06;
 
 const smooth = (a, b, x) => {
   const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
@@ -220,11 +233,26 @@ export default function initScrollHero(root) {
 
   const rand = mulberry32(1624);
 
+  /* Staging state: identity on wide screens, rotate + scale on tall ones.
+     built=false forces the first frameCamera() call to do the initial
+     geometry build whatever the aspect is. */
+  const STAGE = { tall: 0, cos: 1, sin: 0, sx: 1, sy: 1, built: false };
+  const MERGE_S = MERGE.clone();
+  const stageXY = (x, y) => [
+    (x * STAGE.cos - y * STAGE.sin) * STAGE.sx,
+    (x * STAGE.sin + y * STAGE.cos) * STAGE.sy,
+  ];
+  const stagePts = (list) => list.map(([x, y, z]) => {
+    const [nx, ny] = stageXY(x, y);
+    return [nx, ny, z];
+  });
+  let lineBoost = 1;
+
   /* Threads: offset helices around the joined spine. Per-thread randomness
      is deliberate; the structure lives in the spine. */
-  function buildThread(inPoints, theta0, baseR, twist) {
+  function buildThread(inPoints, outPoints, theta0, baseR, twist) {
     const spine = new THREE.CatmullRomCurve3(
-      [...inPoints, ...OUT].map((p) => new THREE.Vector3(...p)));
+      [...inPoints, ...outPoints].map((p) => new THREE.Vector3(...p)));
     const pts = new Float32Array((SAMPLES + 1) * 3);
     const p = new THREE.Vector3(), T = new THREE.Vector3();
     const side = new THREE.Vector3(), up = new THREE.Vector3();
@@ -237,7 +265,7 @@ export default function initScrollHero(root) {
       if (side.lengthSq() < 1e-6) side.set(0, 1, 0); else side.normalize();
       up.crossVectors(side, T).normalize();
       const dWaist = p.length();
-      const dMerge = p.distanceTo(MERGE);
+      const dMerge = p.distanceTo(MERGE_S);
       if (dWaist < waistD) { waistD = dWaist; waistT = t; }
       const waistScale = 0.04 + 0.96 * smooth(0.05, 1.5, dWaist);
       const mergeScale = 0.32 + 0.68 * smooth(0.1, 1.0, dMerge);
@@ -253,17 +281,29 @@ export default function initScrollHero(root) {
   const heroGroup = new THREE.Group();
   scene.add(heroGroup);
 
+  /* Per-thread randomness is drawn ONCE (stable across staging rebuilds, so
+     an orientation change re-poses the same fibres rather than rerolling
+     them); geometry is (re)built from it in buildAllThreads(). */
   const threads = [];
   const perStream = CFG.threadCount / 2;
   for (let s = 0; s < 2; s++) {
-    const inPts = s === 0 ? IN_A : IN_B;
     for (let i = 0; i < perStream; i++) {
-      const theta0 = (i / perStream) * Math.PI * 2 + rand() * 0.5;
-      const baseR = 0.18 + rand() * 0.26;
-      const twist = 0.22 + rand() * 0.33;
-      const th = buildThread(inPts, theta0, baseR, twist);
-      th.stream = s;
-      threads.push(th);
+      threads.push({
+        stream: s,
+        theta0: (i / perStream) * Math.PI * 2 + rand() * 0.5,
+        baseR: 0.18 + rand() * 0.26,
+        twist: 0.22 + rand() * 0.33,
+        pts: null, waistT: 0,
+      });
+    }
+  }
+  function buildAllThreads() {
+    const inA = stagePts(IN_A), inB = stagePts(IN_B), out = stagePts(OUT);
+    for (const th of threads) {
+      const built = buildThread(th.stream === 0 ? inA : inB, out,
+        th.theta0, th.baseR, th.twist);
+      th.pts = built.pts;
+      th.waistT = built.waistT;
     }
   }
 
@@ -274,14 +314,15 @@ export default function initScrollHero(root) {
     vertexColors: true, transparent: true, opacity: CFG.filamentOpacity,
     blending: THREE.AdditiveBlending, depthWrite: false,
   });
-  {
-    // All filaments in ONE LineSegments rather than a Line per thread: 24
-    // draw calls per frame collapse to 1. Segments (not a strip) because a
-    // strip would join the end of one thread to the start of the next.
+  // All filaments in ONE LineSegments rather than a Line per thread: 24
+  // draw calls per frame collapse to 1. Segments (not a strip) because a
+  // strip would join the end of one thread to the start of the next.
+  const segCount = threads.length * SAMPLES * 2;
+  const segPosAttr = new THREE.BufferAttribute(new Float32Array(segCount * 3), 3);
+  const segColAttr = new THREE.BufferAttribute(new Float32Array(segCount * 3), 3);
+  function fillSegments() {
     const cTmp = new THREE.Color();
-    const segs = threads.length * SAMPLES * 2;
-    const sPos = new Float32Array(segs * 3);
-    const sCol = new Float32Array(segs * 3);
+    const sPos = segPosAttr.array, sCol = segColAttr.array;
     let w = 0;
     for (const th of threads) {
       const base = th.stream === 0 ? buyerC : supplierC;
@@ -300,18 +341,29 @@ export default function initScrollHero(root) {
         }
       }
     }
+    segPosAttr.needsUpdate = true;
+    segColAttr.needsUpdate = true;
+  }
+  {
     const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(sCol, 3));
+    geo.setAttribute('position', segPosAttr);
+    geo.setAttribute('color', segColAttr);
+    // Explicit: the auto-computed sphere would go stale on staging rebuilds
+    geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 14);
     heroGroup.add(new THREE.LineSegments(geo, lineMat));
   }
 
   const COUNT = CFG.threadCount * particlesPerThread;
   const particles = new Array(COUNT);
   {
+    // Interleaved thread-last, NOT thread-first: the degrade ladder trims
+    // the particle count by drawing a contiguous prefix of this array, and
+    // a prefix of a thread-first ordering would strip entire threads (the
+    // whole buyer stream keeps its glints, the supplier stream goes bare).
+    // Ordered this way, any prefix covers every thread evenly.
     let n = 0;
-    for (let th = 0; th < threads.length; th++) {
-      for (let i = 0; i < particlesPerThread; i++) {
+    for (let i = 0; i < particlesPerThread; i++) {
+      for (let th = 0; th < threads.length; th++) {
         particles[n++] = {
           thread: th, t0: rand(),
           speed: 0.85 + rand() * 0.3,
@@ -368,7 +420,8 @@ export default function initScrollHero(root) {
     const loopPhase = (timeSec / CFG.loopSeconds) % 1;
     const pos = posAttr.array, col = colAttr.array;
     const doCol = (colTick++ & 1) === 0;
-    for (let n = 0; n < COUNT; n++) {
+    // particleActive, not COUNT: the degrade ladder halves the live prefix
+    for (let n = 0; n < particleActive; n++) {
       const pt = particles[n];
       const th = threads[pt.thread];
       const t = (pt.t0 + timeSec * 0.09 * CFG.flowSpeed * pt.speed) % 1;
@@ -408,18 +461,30 @@ export default function initScrollHero(root) {
      and a glowing tip while it grows. Warm copper-gold, normal blending,
      so it reads on the navy AND later on the paper.
   ------------------------------------------------------------------------- */
-  const strandCurve = new THREE.CatmullRomCurve3(
-    STRAND_PTS.map((p) => new THREE.Vector3(...p)));
   const strandPos = new Float32Array((STRAND_SAMPLES + 1) * 3);
-  {
+  const strandPosAttr = new THREE.BufferAttribute(strandPos, 3);
+  function buildStrand() {
+    // The head follows the staged river exit; the tail (the vertical dive
+    // the gutter camera solve depends on) is never staged. The bridge point
+    // eases the staged head into the fixed dive.
+    const pts = STRAND_PTS.map((p) => [...p]);
+    for (let i = 0; i < 4; i++) {
+      const [x, y] = stageXY(pts[i][0], pts[i][1]);
+      pts[i][0] = x; pts[i][1] = y;
+    }
+    pts[4][1] = THREE.MathUtils.lerp(pts[4][1], -0.9, STAGE.tall);
+    const curve = new THREE.CatmullRomCurve3(
+      pts.map((p) => new THREE.Vector3(...p)));
     const p = new THREE.Vector3();
     for (let i = 0; i <= STRAND_SAMPLES; i++) {
-      strandCurve.getPointAt(i / STRAND_SAMPLES, p);
+      curve.getPointAt(i / STRAND_SAMPLES, p);
       strandPos[i * 3] = p.x; strandPos[i * 3 + 1] = p.y; strandPos[i * 3 + 2] = p.z;
     }
+    strandPosAttr.needsUpdate = true;
   }
   const strandGeo = new THREE.BufferGeometry();
-  strandGeo.setAttribute('position', new THREE.BufferAttribute(strandPos, 3));
+  strandGeo.setAttribute('position', strandPosAttr);
+  strandGeo.boundingSphere = new THREE.Sphere(new THREE.Vector3(), 12);
   strandGeo.setDrawRange(0, 0);
   const strandMat = new THREE.LineBasicMaterial({
     color: CFG.strandColor, transparent: true, opacity: 0.9, depthWrite: false,
@@ -579,6 +644,33 @@ export default function initScrollHero(root) {
     if (composer) composer.setPixelRatio((narrow ? pr * 0.7 : pr) * degradeScale);
   }
 
+  /* Re-stage the composition for the current aspect. Rebuilds are cheap
+     (once per orientation change, never per frame) and keyed on a real
+     threshold so resize jitter does not thrash them. */
+  function setStaging(tall) {
+    if (STAGE.built && Math.abs(tall - STAGE.tall) < 0.015) return;
+    STAGE.tall = tall;
+    STAGE.built = true;
+    const rot = THREE.MathUtils.degToRad(TALL_ROT_DEG * tall);
+    STAGE.cos = Math.cos(rot);
+    STAGE.sin = Math.sin(rot);
+    STAGE.sx = 1 + (TALL_SX - 1) * tall;
+    STAGE.sy = 1 + (TALL_SY - 1) * tall;
+    const [mx, my] = stageXY(MERGE.x, MERGE.y);
+    MERGE_S.set(mx, my, MERGE.z);
+    buildAllThreads();
+    fillSegments();
+    buildStrand();
+    // The tall framing pulls the camera much further back, which halves the
+    // apparent size of everything; give the primitives their presence back.
+    pMat.size = CFG.particleSize * (1 + 0.9 * tall);
+    lineBoost = 1 + 0.5 * tall;
+    backGlow.scale.set(16 - 5 * tall, 10 + 4 * tall, 1);
+    // The extraction reads thinner on a tall frame (the 1px strand is all
+    // there is for a beat); heavier glints keep the line alive there
+    glintMat.size = 0.022 * (1 + 0.8 * tall);
+  }
+
   function frameCamera() {
     stageW = Math.max(1, stage.clientWidth);
     stageH = Math.max(1, stage.clientHeight);
@@ -591,11 +683,18 @@ export default function initScrollHero(root) {
     if (!stripMode) renderer.setSize(stageW, stageH);
     if (composer) composer.setSize(stageW, stageH);
     isPortrait = camera.aspect < 1;
+    setStaging(smooth(1.0, 0.5, camera.aspect));
     const fitHalf = isPortrait ? FIT_HALF_PORTRAIT : FIT_HALF_WIDTH;
     const halfTan = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     const needed = fitHalf / (halfTan * camera.aspect);
     baseDistance = Math.max(CFG.cameraDistance,
       Math.min(needed, CFG.cameraDistance * 2.2));
+    // Depth cueing tracks the framing distance. The bounds used to be fixed
+    // at the DESKTOP framing distance, so the portrait camera (pulled back
+    // to ~11 to fit the slice) left the entire scene in the fog's dim end:
+    // a large part of why the hero read as washed out on phones.
+    scene.fog.near = baseDistance + 1.1;
+    scene.fog.far = baseDistance + 8.6;
     layoutPageLine();
     // The extraction gets the stage's scroll-away PLUS a stretch of the
     // page below it, so the shot has room to breathe instead of racing
@@ -648,12 +747,28 @@ export default function initScrollHero(root) {
      flipping back up re-janks at the exact moment the headroom returns. */
   let slowFrames = 0, degradeLevel = 0;
   let loopStartAt = -1; // elapsed-seconds when the visible loop first engaged
-  const DEGRADE_SCALES = [1, 0.85, 0.7, 0.55];
+  /* Five levels now. The old floor (level 3) still ran the full composer:
+     4x MSAA on a HalfFloat target plus the ~10-pass bloom chain, just at
+     0.55 scale. A UHD-620-class laptop iGPU cannot hold that at ANY scale,
+     which is why low-end machines stayed janky however far the ladder
+     went. Level 4 is a genuinely different floor: no composer at all, one
+     plain render pass. The additive materials still self-glow against the
+     navy, so it reads as a lighter cousin of the look, not a broken one. */
+  const DEGRADE_SCALES = [1, 0.85, 0.7, 0.55, 0.5];
+  let particleActive = COUNT;
   function applyDegrade(level) {
     degradeLevel = level;
     slowFrames = 0;
     degradeScale = DEGRADE_SCALES[level];
     if (level >= 2 && afterPass) afterPass.enabled = false;
+    // Weak GPUs usually ship with weak CPUs: halve the per-frame particle
+    // loop and its buffer upload along with the pixel work.
+    particleActive = level >= 3 ? COUNT >> 1 : COUNT;
+    pGeo.setDrawRange(0, particleActive);
+    // Full-viewport mix-blend-mode layers (grain) and the near dust sheet
+    // force an extra composite over the changing canvas every frame; shed
+    // them once the machine has told us it is struggling.
+    root.classList.toggle('sh-lite', level >= 2);
     applyQuality();
   }
   function stepDown() {
@@ -670,8 +785,19 @@ export default function initScrollHero(root) {
      Cost scales with composer pixel count, so each level's factor is
      roughly scale^2 (level 2+ also drops the afterimage copy). 12 ms fits
      a 60 Hz frame and a 144 Hz half-rate beat alike. */
-  const LEVEL_COST_FACTOR = [1, 0.72, 0.42, 0.26];
+  // Level 4's factor is measured, not scale^2: dropping the composer
+  // removes MSAA resolve, HalfFloat bandwidth, the bloom chain and the
+  // output pass, leaving one plain pass; that is roughly a tenth of the
+  // full pipeline, not half.
+  const LEVEL_COST_FACTOR = [1, 0.72, 0.42, 0.26, 0.08];
   let calibratedCost = -1, levelPicked = false;
+  // ?shl=N pins the starting level (diagnosis on real devices in the
+  // field, same spirit as ?shd and ?shp). The watchdog can still step
+  // further down from a pinned level; it never steps up.
+  const FORCED_LEVEL = (() => {
+    const v = parseInt(new URLSearchParams(location.search).get('shl'), 10);
+    return Number.isInteger(v) && v >= 0 && v < DEGRADE_SCALES.length ? v : -1;
+  })();
   /* The GPU measurement is the expensive half (~100 ms of forced sync), so
      it runs SYNCHRONOUSLY in the init task, before the intro's first
      visual frame can possibly paint. Deferring it to the display-rate
@@ -701,17 +827,30 @@ export default function initScrollHero(root) {
     // at latest in begin() before the first visible frame.
     if (levelPicked) return;
     levelPicked = true;
-    if (calibratedCost < 2) return; // no valid measurement; watchdog takes over
-    // Budget = the interval of one rendered beat (two vsyncs when paced)
-    // minus ~4 ms headroom for everything else the page does per frame.
-    const beat = paceHalf ? displayInterval * 2 : displayInterval;
-    const budget = Math.min(14, Math.max(7, beat - 4));
-    let level = DEGRADE_SCALES.length - 1;
-    for (let l = 0; l < DEGRADE_SCALES.length; l++) {
-      if (calibratedCost * LEVEL_COST_FACTOR[l] <= budget) { level = l; break; }
+    let level = 0;
+    if (FORCED_LEVEL >= 0) {
+      level = FORCED_LEVEL;
+    } else {
+      if (calibratedCost < 2) return; // no valid measurement; watchdog takes over
+      // Budget = the interval of one rendered beat (two vsyncs when paced)
+      // minus ~4 ms headroom for everything else the page does per frame.
+      const beat = paceHalf ? displayInterval * 2 : displayInterval;
+      const budget = Math.min(14, Math.max(7, beat - 4));
+      level = DEGRADE_SCALES.length - 1;
+      for (let l = 0; l < DEGRADE_SCALES.length; l++) {
+        if (calibratedCost * LEVEL_COST_FACTOR[l] <= budget) { level = l; break; }
+      }
     }
-    console.info(`ScrollHero: calibrated ${calibratedCost.toFixed(1)}ms/frame, budget ${budget.toFixed(1)}ms -> level ${level}`);
-    if (level > 0) applyDegrade(level);
+    console.info(`ScrollHero: calibrated ${calibratedCost.toFixed(1)}ms/frame -> level ${level}${FORCED_LEVEL >= 0 ? ' (forced)' : ''}`);
+    if (level > 0) {
+      applyDegrade(level);
+      // Changing the composer's pixel ratio only takes effect at the next
+      // render, so without this the resized bloom targets were ALLOCATED at
+      // the first visible frame, i.e. exactly at the dock: a 20-80 ms GPU
+      // stall right as the logo starts flying. Absorb it here, while the
+      // intro sheet still covers everything.
+      if (!loopOn) tick();
+    }
   }
 
   /* Display cadence, sampled while the intro owns the screen. On fast
@@ -745,6 +884,10 @@ export default function initScrollHero(root) {
     setTimeout(pickLevel, 700);
   }
 
+  // Portrait used to multiply the roll 2.4x to tip the (then horizontal)
+  // composition toward the diagonal; the staging now rotates the geometry
+  // itself, so the roll only breathes a little with tallness.
+  const rollMul = () => 1 + 0.3 * STAGE.tall;
   function placeCamera(driftPhase) {
     const az = THREE.MathUtils.degToRad(
       CFG.cameraAzimuthDeg + Math.sin(driftPhase * Math.PI * 2) * CFG.cameraDriftDeg);
@@ -754,8 +897,7 @@ export default function initScrollHero(root) {
       baseDistance * Math.sin(el),
       baseDistance * Math.cos(el) * Math.cos(az));
     camera.lookAt(isPortrait ? 0.1 : 0.4, 0.08, 0);
-    camera.rotateZ(THREE.MathUtils.degToRad(
-      CFG.cameraRollDeg * (isPortrait ? 2.4 : 1)));
+    camera.rotateZ(THREE.MathUtils.degToRad(CFG.cameraRollDeg * rollMul()));
   }
 
   const DEBUG_P = new URLSearchParams(location.search).get('shp');
@@ -778,21 +920,23 @@ export default function initScrollHero(root) {
 
   function buildRide() {
     placeCamera(0);
-    RIDE_ROLLS[0] = CFG.cameraRollDeg * (isPortrait ? 2.4 : 1);
-    const side = isPortrait ? 0.7 : 1;
+    RIDE_ROLLS[0] = CFG.cameraRollDeg * rollMul();
+    // Keyframes ride THROUGH the staged geometry, so they take the same
+    // staging transform as the spine (this replaces the old blanket 0.7 x
+    // squeeze for portrait). The opening pose and its target stay unstaged:
+    // they come from placeCamera(0), which frames whatever the staging is.
+    const rp = stagePts([
+      [-3.9, -0.6, 1.1], [-1.6, 0.45, 1.0], [0.05, 0.0, 0.7], [2.3, 1.3, 6.3],
+    ]);
+    const rt = stagePts([
+      [-2.9, -0.85, -1.15], [-1.0, -0.15, -0.6], [1.1, 0.4, 0.55], [1.6, 0.5, 0.5],
+    ]);
     posCurve = new THREE.CatmullRomCurve3([
-      camera.position.clone(),
-      new THREE.Vector3(-3.9 * side, -0.6, 1.1),
-      new THREE.Vector3(-1.6 * side, 0.45, 1.0),
-      new THREE.Vector3(0.05, 0.0, 0.7),
-      new THREE.Vector3(2.3 * side, 1.3, 6.3),
+      camera.position.clone(), ...rp.map((p) => new THREE.Vector3(...p)),
     ]);
     tgtCurve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(isPortrait ? 0.1 : 0.4, 0.08, 0),
-      new THREE.Vector3(-2.9 * side, -0.85, -1.15),
-      new THREE.Vector3(-1.0 * side, -0.15, -0.6),
-      new THREE.Vector3(1.1, 0.4, 0.55),
-      new THREE.Vector3(1.6 * side, 0.5, 0.5),
+      ...rt.map((p) => new THREE.Vector3(...p)),
     ]);
     buildDescent();
   }
@@ -922,7 +1066,13 @@ export default function initScrollHero(root) {
     // judder. The river is behind the lifting sheet for most of it anyway.
     // dt derives from elapsed, so rendered frames integrate skipped beats.
     const docking = loopStartAt >= 0 && elapsed - loopStartAt < 1.2;
-    const paceDiv = (paceHalf ? 2 : 1) * (docking ? 2 : 1);
+    // The dock multiplier adapts to the measured frame cost: on a GPU whose
+    // hero frame costs more than ~half a 60 Hz budget, even a quarter-rate
+    // beat drops the compositor frame it lands on, so weak machines render
+    // only a handful of frames across the whole flight.
+    const estCost = calibratedCost > 0
+      ? calibratedCost * LEVEL_COST_FACTOR[degradeLevel] : 8;
+    const paceDiv = (paceHalf ? 2 : 1) * (docking ? (estCost > 9 ? 4 : 2) : 1);
     if (paceDiv > 1) {
       paceFlip = (paceFlip + 1) % paceDiv;
       if (paceFlip !== 0) return;
@@ -949,9 +1099,12 @@ export default function initScrollHero(root) {
     const uRide = Math.min(1, scrollP / shotStart);
 
     // The river clears early in the shot, well before the stage releases,
-    // so it can never be drawn over section text
-    const riverOut = smooth(0.04, 0.3, shot);
-    lineMat.opacity = CFG.filamentOpacity * (1 - riverOut);
+    // so it can never be drawn over section text. Tall screens hold it a
+    // little longer (the release comes at shot ~0.36 there and the frame
+    // between river-out and strand-in was reading empty); it is still fully
+    // gone before any section text can arrive.
+    const riverOut = smooth(0.04, 0.3 + 0.12 * STAGE.tall, shot);
+    lineMat.opacity = CFG.filamentOpacity * lineBoost * (1 - riverOut);
     pMat.opacity = 1 - riverOut;
     backGlow.material.opacity = 0.32 * (1 - riverOut);
     waistGlow.visible = riverOut < 0.98;
@@ -1036,7 +1189,10 @@ export default function initScrollHero(root) {
       renderer.clear();
       renderer.render(pageScene, pageCam);
     } else {
-      if (composer && !seeThrough) {
+      // Level 4 skips the composer entirely (see the ladder note): one
+      // plain pass, scene.background still supplies the opaque navy while
+      // the river is on screen, exactly like the post-river direct path.
+      if (composer && !seeThrough && degradeLevel < 4) {
         composer.render();
       } else {
         renderer.clear();

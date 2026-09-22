@@ -243,6 +243,11 @@ import { withBase } from '../config';
   @media (max-width: 820px) {
     .sh-grain { display: none; }
   }
+  /* The scene script adds sh-lite once the machine has degraded to level 2
+     or below: grain (blend-mode composite) and the near dust sheet go, the
+     far sheet and the depth glow stay so the frame keeps its atmosphere. */
+  .sh-root.sh-lite .sh-grain,
+  .sh-root.sh-lite .sh-dust-near { display: none; }
   .sh-grain {
     position: absolute; inset: 0; pointer-events: none; z-index: 4;
     opacity: 0.06; mix-blend-mode: overlay;
