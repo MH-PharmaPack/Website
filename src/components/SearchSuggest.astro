@@ -446,7 +446,9 @@
       p.className = 'ss-empty';
       p.textContent = `Nothing in the catalogue matches “${raw}” yet. We can very likely still source it.`;
       list.append(p);
-      list.append(option(contactUrl, icon(ICON_CHAT), 'Ask us to source it', 'Request a Quote', undefined, 'ss-all'));
+      list.append(
+        option(`${contactUrl}?q=${encodeURIComponent(raw)}`, icon(ICON_CHAT), 'Ask us to source it', 'Request a Quote', undefined, 'ss-all'),
+      );
     }
   }
 

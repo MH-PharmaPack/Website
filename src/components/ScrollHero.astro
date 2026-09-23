@@ -51,10 +51,12 @@ import SearchSuggest from './SearchSuggest.astro';
         </p>
         <!-- Catalogue search as the opening frame's main action (client choice
              2026-09-23, "placement A" of three rendered). It posts nothing:
-             a plain GET to /catalogue/?q=, which the catalogue reads. The two
-             hero buttons became the text links under it; Request a Quote also
-             stays in the header on desktop and in the phone pill below the
-             hero. On short screens the "Try" shortcuts give way first. -->
+             a plain GET to /catalogue/?q=, which the catalogue reads. The text
+             links that stood under it (Request a Quote, What We Do) were
+             removed at the client's request (2026-09-23): Request a Quote
+             stays in the header on desktop, in the phone pill below the hero,
+             and in the finale beat. On short screens the "Try" shortcuts give
+             way first. -->
         <form class="sh-search" action={withBase('/catalogue')} method="get" role="search" data-suggest>
           <label class="sr-only" for="hero-search">What are you looking for?</label>
           <div class="sh-field" data-suggest-anchor>
@@ -72,11 +74,6 @@ import SearchSuggest from './SearchSuggest.astro';
             <a href={`${withBase('/catalogue')}?group=bottles&type=pet-bottles`}>PET bottles</a>
             <a href={`${withBase('/catalogue')}?group=closures&type=crc`}>Child-resistant caps</a>
             <a href={`${withBase('/catalogue')}?group=vial-seals`}>Vial seals</a>
-          </p>
-          <p class="sh-textlinks">
-            <a href={withBase('/contact')}>Request a Quote</a>
-            <span aria-hidden="true">·</span>
-            <a href={withBase('/services')}>What We Do</a>
           </p>
         </form>
       </div>
@@ -210,24 +207,19 @@ import SearchSuggest from './SearchSuggest.astro';
     color: var(--color-paper); text-decoration: none;
   }
   .sh-try a:hover { border-color: var(--color-copper-soft); color: var(--color-copper-soft); }
-  .sh-textlinks {
-    margin: 1rem 0 0;
-    display: flex; justify-content: center; align-items: center; gap: 0.75rem;
-    font-size: 0.9375rem; font-weight: 600;
-  }
-  .sh-textlinks a { color: var(--color-copper-soft); text-decoration: underline; text-underline-offset: 4px; }
-  .sh-textlinks span { color: rgba(224, 233, 246, 0.5); }
   @media (max-height: 720px) {
     .sh-search { margin-top: 1rem; }
     .sh-field { height: 3rem; }
-    .sh-textlinks { margin-top: 0.6rem; }
-    /* Short phones: the suggestion chips go first, so the links still fit
-       above the credential row. */
+  }
+  /* Short phones: the suggestion chips give way, so the field keeps clear
+     air above the credential row. With the text links gone (2026-09-23)
+     they fit down to about 690px of height. */
+  @media (max-height: 690px) {
     .sh-try { display: none; }
   }
   /* Short screens also lose the subhead's second clause; the section right
      under the hero says the same thing, and the frame keeps a gap between
-     the links and the credential row instead of running them together. */
+     the search and the credential row instead of running them together. */
   @media (max-height: 800px) {
     .sh-sub-more { display: none; }
   }

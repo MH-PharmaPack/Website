@@ -71,6 +71,11 @@
   /* Hairline rules on dark. --color-line is a paper-era value and glares here. */
   --color-hairline: rgba(255, 255, 255, 0.1);
 
+  /* Form errors only (the quote form). The palette has no red, and an error
+     in copper would read as an ordinary accent. Always paired with a message,
+     never colour alone. */
+  --color-error: #a4262c;
+
   /* Wide tracking for eyebrow/label text and the header lockup */
   --tracking-eyebrow: 0.18em;
   --tracking-lockup: 0.14em;

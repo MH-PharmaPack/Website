@@ -1,5 +1,10 @@
 ---
 import { WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
+
+// On the quote page itself, Request a Quote jumps to the form instead of
+// reloading the page the reader is already on.
+const onContact = Astro.url.pathname === withBase('/contact');
+const quoteHref = onContact ? '#rfq' : withBase('/contact');
 ---
 
 {/*
@@ -60,7 +65,7 @@ import { WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
     </a>
 
     <a
-      href={withBase('/contact')}
+      href={quoteHref}
       class="btn btn-primary !min-h-11 rounded-full px-5 text-sm">Request a Quote</a
     >
   </div>

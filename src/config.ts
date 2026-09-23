@@ -50,9 +50,23 @@ export const OFFICE_ADDRESS_PARTS = {
   country: 'India',
 };
 
-// RFQ form backend endpoint (Web3Forms or equivalent). Wired in a later pass;
-// keep the key here so swapping providers is a one-line change.
+// Quote form backend: the web app URL of the Google Apps Script in
+// tools/rfq-backend (it runs on the sales@ Workspace account, emails the
+// enquiry to the sales desk and sends the buyer a confirmation from
+// sales@). Web3Forms was the original default, but its free tier cannot send
+// that confirmation. Any backend that accepts the same JSON can replace it
+// here in one line.
+//
+// [NEEDS: deploy tools/rfq-backend and paste its /exec URL.] While empty,
+// the form still works: Send opens the buyer's email app with the enquiry
+// written out, addressed to the sales desk.
 export const FORM_ENDPOINT = '';
+
+// Cloudflare Turnstile site key (the public half; the secret lives only in
+// the backend's script properties). Empty = no spam check on the page. The
+// backend enforces the check whenever it holds a secret, so set both or
+// neither. [NEEDS: Turnstile widget for mhpharmapack.com.]
+export const TURNSTILE_SITE_KEY = '';
 
 // Profiles that are unambiguously this company, elsewhere on the web. These
 // feed schema.org sameAs, which is how a search engine decides that the

@@ -277,7 +277,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
             ))}
           </ul>
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href={withBase('/contact')} class="btn btn-primary">
+            <a href={`${withBase('/contact')}?line=${line.id}`} class="btn btn-primary">
               Request a Quote
             </a>
             <a href={MAILTO_HREF} class="btn btn-secondary">
@@ -299,7 +299,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
     <p class="mt-6 max-w-xl text-base leading-relaxed text-steel-deep" data-cat-empty hidden>
       Nothing in the catalogue matches <span class="font-semibold text-ink" data-cat-empty-q></span>. We can
       very likely still source it:{' '}
-      <a href={withBase('/contact')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">
+      <a href={withBase('/contact')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper" data-cat-empty-link>
         tell us what you need
       </a>.
     </p>
@@ -1011,6 +1011,8 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
     const moreBtn = root.querySelector<HTMLButtonElement>('[data-cat-more]');
     const emptyEl = root.querySelector<HTMLElement>('[data-cat-empty]');
     const emptyQ = root.querySelector<HTMLElement>('[data-cat-empty-q]');
+    const emptyLink = root.querySelector<HTMLAnchorElement>('[data-cat-empty-link]');
+    const contactUrl = emptyLink?.getAttribute('href') ?? '';
 
     const liveLines = new Set(groupRows.map((r) => r.dataset.groupRow ?? ''));
     const groupLine = new Map(groupBtns.filter((b) => b.dataset.groupBtn).map((b) => [b.dataset.groupBtn!, b.dataset.line!]));
@@ -1211,6 +1213,11 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
       }
       if (emptyEl) emptyEl.hidden = matched !== 0;
       if (emptyQ) emptyQ.textContent = q && search ? `“${search.value.trim()}”` : 'that selection';
+      // The quote form opens with what they searched for already in it.
+      if (emptyLink) {
+        const typed = q && search ? search.value.trim() : '';
+        emptyLink.href = typed ? `${contactUrl}?q=${encodeURIComponent(typed)}` : contactUrl;
+      }
       grid.hidden = matched === 0;
       syncUrl();
     };

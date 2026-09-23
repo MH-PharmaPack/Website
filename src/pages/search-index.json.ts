@@ -4,15 +4,16 @@
 //
 //   cats:  every group and type that holds items, with its count and the
 //          catalogue link that opens it
-//   items: every item, with its page, a short category line, a detail line,
-//          a 96px thumbnail, and the same normalised search text the
-//          catalogue filters on (so counts agree)
+//   items: every item, with its slug and line, its page, a short category
+//          line, a detail line, a 96px thumbnail, and the same normalised
+//          search text the catalogue filters on (so counts agree). The quote
+//          form also reads this, to name items linked to it by slug.
 //
 // Only words already printed on the site go in here.
 
 import type { APIRoute } from 'astro';
 import { TAXONOMY } from '../data/catalogue';
-import { ITEMS, placeOf, itemPath, searchText, scopeHref, enquiryAttrs } from '../lib/catalogue';
+import { ITEMS, placeOf, itemPath, itemSlug, searchText, scopeHref, enquiryAttrs } from '../lib/catalogue';
 import { normalizeSearch } from '../scripts/search-normalize';
 
 export const GET: APIRoute = async ({ site }) => {
@@ -21,6 +22,8 @@ export const GET: APIRoute = async ({ site }) => {
       const p = placeOf(item);
       const enq = await enquiryAttrs(item, site);
       return {
+        k: itemSlug(item),
+        l: p.line.name,
         n: item.name,
         h: itemPath(item),
         c: [p.group.name, p.type?.short].filter(Boolean).join(' · '),

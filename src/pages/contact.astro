@@ -1,0 +1,1262 @@
+---
+import Base from '../layouts/Base.astro';
+import ChipField from '../components/ChipField.astro';
+import {
+  SALES_EMAIL,
+  MAILTO_HREF,
+  WHATSAPP_HREF,
+  TEL_HREF,
+  PHONE,
+  PHONE_DISPLAY,
+  WHATSAPP,
+  OFFICE_ADDRESS,
+  MAPS_HREF,
+  FORM_ENDPOINT,
+  TURNSTILE_SITE_KEY,
+  withBase,
+} from '../config';
+import { SOURCING_LINES } from '../data/lines';
+import { TIMELINES, UNITS } from '../data/rfq';
+
+// CONTACT / REQUEST A QUOTE (CONTENT-SPEC section 7), the three-path model:
+//   Path 1  I have a spec sheet    mailto: with the RFQ template (CLAUDE.md)
+//   Path 2  fill in the RFQ        the form (src/scripts/rfq-form.ts)
+//   Path 3  just talk              WhatsApp, Call, Email
+// Layout (client, 2026-09-23): on a phone, paths 1 and 3 are two slim rows
+// above the form so the form is not pushed down a screen; from 1024px they
+// sit beside it as equal choices. Office and reach (7.4) follows.
+//
+// Copy sources: intro 7.1 verbatim; path lines 7.2 verbatim; consent line
+// 7.3 verbatim; field names 7.3. The success wording is authored at the
+// client's direction ("as soon as possible, but more professional"), with no
+// response time promised.
+
+const lines = SOURCING_LINES;
+
+// Path 1: the spec-sheet email. Subject and body per CLAUDE.md, in the same
+// key: value lines as every other enquiry.
+const specBody = [
+  'Line of interest: ',
+  'Product / molecule / item: ',
+  'Quantity / volume: ',
+  'Destination market / country: ',
+  'Required timeline: ',
+  'Regulatory requirement: ',
+  '',
+  'Name: ',
+  'Company: ',
+  'Phone / WhatsApp: ',
+  '',
+  'Please attach your specification sheet to this email.',
+].join('\r\n');
+const SPEC_MAILTO = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('RFQ: [Company]')}&body=${encodeURIComponent(specBody)}`;
+
+const svg = {
+  doc: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6',
+  wa: 'M12 3.75a8.25 8.25 0 0 0-7.1 12.45L3.75 20.25l4.2-1.1A8.25 8.25 0 1 0 12 3.75Z',
+  call: 'M5.1 4.5h3l1.4 3.6-1.8 1.4a11.3 11.3 0 0 0 4.8 4.8l1.4-1.8 3.6 1.4v3a1.5 1.5 0 0 1-1.6 1.5C9.6 18 6 14.4 5.6 8.1 5.5 6 4.9 5.6 5.1 4.5Z',
+  mail: 'M3.5 6h17v12h-17zM4 6.5l8 6 8-6',
+  pin: 'M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 1 1 13 0c0 5.4-6.5 11-6.5 11ZM12 12.3a2.3 2.3 0 1 0 0-4.6 2.3 2.3 0 0 0 0 4.6Z',
+  tick: 'M5 12.5 10 17l9-10',
+};
+---
+
+<Base
+  title="Request a Quote: Pharmaceutical Sourcing Enquiry | MH PharmaPack"
+  name="Request a Quote"
+  pageType="ContactPage"
+  description="Tell us what you need across API, finished formulations and pharmaceutical packaging. Email a specification sheet, fill in a short request for quotation, or message us on WhatsApp."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Request a Quote' }]}
+>
+  <section class="rfq-page bg-paper" data-rfq-page>
+    <div class="rfq-wrap mx-auto max-w-content">
+      <!-- 7.1 -->
+      <header class="rfq-intro">
+        <p class="eyebrow">Contact</p>
+        <h1 class="rfq-h1">Request a Quote</h1>
+        <p class="rfq-lede">
+          Tell us what you need and we will come back with the right plant and a quote. If you already
+          have a specification sheet, email it to us directly. If not, fill in the short form below. Or
+          just message us.
+        </p>
+      </header>
+
+      <!-- Paths 1 and 3, compact, phones and tablets -->
+      <div class="rfq-quick" aria-label="Other ways to reach us">
+        <div class="rfq-quick-row">
+          <span class="rfq-quick-q">Have a spec sheet?</span>
+          <a href={SPEC_MAILTO} class="rfq-quick-go">
+            Email it to us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </a>
+        </div>
+        <div class="rfq-quick-row">
+          <span class="rfq-quick-q">Rather talk?</span>
+          <span class="rfq-quick-btns">
+            <a href={WHATSAPP_HREF} class="rfq-pill" target="_blank" rel="noopener noreferrer" title={WHATSAPP ? undefined : 'WhatsApp number to be added'}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.wa} stroke-linejoin="round" /></svg>
+              WhatsApp
+            </a>
+            <a href={TEL_HREF} class="rfq-pill" title={PHONE ? undefined : 'Phone number to be added'}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.call} stroke-linejoin="round" /></svg>
+              Call
+            </a>
+          </span>
+        </div>
+      </div>
+
+      <div class="rfq-layout">
+        <div class="rfq-main">
+          <!-- Path 2: the form -->
+          <div class="rfq-card" id="rfq" data-rfq-card>
+            <div class="rfq-card-head">
+              <h2 class="rfq-h2">Request for quotation</h2>
+              <p class="rfq-sub">No sheet ready? Give us the essentials and we will quote.</p>
+            </div>
+
+            <noscript>
+              <p class="rfq-noscript">
+                This form needs JavaScript to send. You can email your requirement to{' '}
+                <a href={SPEC_MAILTO}>{SALES_EMAIL}</a> instead.
+              </p>
+            </noscript>
+
+            <form
+              class="rfq"
+              data-rfq
+              novalidate
+              data-endpoint={FORM_ENDPOINT}
+              data-sitekey={TURNSTILE_SITE_KEY}
+              aria-label="Request for quotation"
+            >
+              <!-- 1. What you need -->
+              <fieldset class="rfq-set">
+                <legend class="rfq-legend"><span class="rfq-step" aria-hidden="true">1</span>What you need</legend>
+
+                <fieldset class="rfq-f rfq-subset" data-f="lines">
+                  <legend class="rfq-label">Line of interest</legend>
+                  <p class="rfq-hint" id="rfq-lines-hint">Choose one or more.</p>
+                  <div class="rfq-chips">
+                    {
+                      lines.map((l) => (
+                        <label class="rfq-chip">
+                          <input type="checkbox" name="line" value={l.id} data-name={l.name} aria-describedby="rfq-lines-hint" data-describedby="rfq-lines-hint" />
+                          <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d={svg.tick} stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            {l.name}
+                          </span>
+                        </label>
+                      ))
+                    }
+                  </div>
+                  <p class="rfq-err" id="rfq-lines-err" hidden></p>
+                </fieldset>
+
+                <div class="rfq-listprompt" data-rfq-listprompt hidden>
+                  <p>You have <b data-rfq-listcount></b> in your enquiry list.</p>
+                  <button type="button" class="rfq-textbtn" data-rfq-uselist>Include them</button>
+                </div>
+
+                <div class="rfq-f" data-rfq-items-wrap hidden>
+                  <p class="rfq-label">Items from the catalogue</p>
+                  <p class="rfq-hint">Give a quantity for each, in numbers.</p>
+                  <ul class="rfq-items" data-rfq-items></ul>
+                  <a href={withBase('/catalogue')} class="rfq-textlink">Add more from the catalogue</a>
+                </div>
+
+                <div class="rfq-f" data-f="product">
+                  <label class="rfq-label" for="rfq-product">
+                    <span data-product-label>Product / molecule / item</span>
+                    <span class="opt-badge" data-product-opt hidden>Optional</span>
+                  </label>
+                  <input id="rfq-product" name="product" type="text" class="rfq-input" maxlength="200" autocomplete="off" />
+                  <p class="rfq-err" id="rfq-product-err" hidden></p>
+                </div>
+
+                <div class="rfq-f" data-f="quantity" data-rfq-qty-wrap>
+                  <label class="rfq-label" for="rfq-qty">Quantity / volume</label>
+                  <div class="rfq-qty">
+                    <input id="rfq-qty" name="quantity" type="text" class="rfq-input" placeholder="e.g. 50,000" maxlength="20" />
+                    <select id="rfq-unit" name="unit" class="rfq-input rfq-unit" aria-label="Unit">
+                      {UNITS.map((u) => <option value={u}>{u}</option>)}
+                    </select>
+                  </div>
+                  <p class="rfq-err" id="rfq-qty-err" hidden></p>
+                </div>
+              </fieldset>
+
+              <!-- 2. Your details -->
+              <fieldset class="rfq-set">
+                <legend class="rfq-legend"><span class="rfq-step" aria-hidden="true">2</span>Your details</legend>
+                <div class="rfq-grid">
+                  <div class="rfq-f" data-f="name">
+                    <label class="rfq-label" for="rfq-name">Name</label>
+                    <input id="rfq-name" name="name" type="text" class="rfq-input" autocomplete="name" maxlength="120" />
+                    <p class="rfq-err" id="rfq-name-err" hidden></p>
+                  </div>
+                  <div class="rfq-f" data-f="company">
+                    <label class="rfq-label" for="rfq-company">Company</label>
+                    <input id="rfq-company" name="company" type="text" class="rfq-input" autocomplete="organization" maxlength="160" />
+                    <p class="rfq-err" id="rfq-company-err" hidden></p>
+                  </div>
+                  <div class="rfq-f" data-f="email">
+                    <label class="rfq-label" for="rfq-email">Email</label>
+                    <input id="rfq-email" name="email" type="email" class="rfq-input" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" maxlength="200" />
+                    <p class="rfq-err" id="rfq-email-err" hidden></p>
+                  </div>
+                  <div class="rfq-f" data-f="phone">
+                    <label class="rfq-label" for="rfq-phone">Phone / WhatsApp <span class="opt-badge">Optional</span></label>
+                    <input id="rfq-phone" name="phone" type="tel" class="rfq-input" placeholder="+91 98250 00000" maxlength="24" />
+                    <p class="rfq-err" id="rfq-phone-err" hidden></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- 3. Optional: every field carries its own badge (client, 2026-09-23) -->
+              <fieldset class="rfq-set">
+                <legend class="rfq-legend">
+                  <span class="rfq-step" aria-hidden="true">3</span>Helps us quote faster
+                </legend>
+
+                <div class="rfq-f" data-f="spec">
+                  <label class="rfq-label" for="rfq-spec">Specification details <span class="opt-badge">Optional</span></label>
+                  <textarea id="rfq-spec" name="spec" class="rfq-input rfq-area" rows="3" maxlength="2000"></textarea>
+                </div>
+
+                <div class="rfq-f" data-f="market">
+                  <ChipField
+                    kind="country"
+                    id="rfq-market"
+                    name="market"
+                    label="Destination market / country"
+                    hint="Choose one or more from the list."
+                    placeholder="Start typing a country"
+                    listLabel="Countries and markets"
+                    optional
+                  />
+                </div>
+
+                <fieldset class="rfq-f rfq-subset" data-f="timeline">
+                  <legend class="rfq-label">Required timeline <span class="opt-badge">Optional</span></legend>
+                  <div class="rfq-chips">
+                    {
+                      TIMELINES.map((t) => (
+                        <label class="rfq-chip rfq-chip-radio">
+                          <input type="radio" name="timeline" value={t} />
+                          <span>{t}</span>
+                        </label>
+                      ))
+                    }
+                  </div>
+                </fieldset>
+
+                <div class="rfq-f" data-f="regulatory">
+                  <ChipField
+                    kind="regulatory"
+                    id="rfq-reg"
+                    name="regulatory"
+                    label="Regulatory requirement"
+                    hint="Approvals, filings, grades or standards the order must meet. Pick from the list or type your own."
+                    placeholder="For example, WHO GMP or CEP"
+                    listLabel="Regulatory requirements"
+                    optional
+                  />
+                </div>
+
+                <div class="rfq-f" data-f="notes">
+                  <label class="rfq-label" for="rfq-notes">Anything else <span class="opt-badge">Optional</span></label>
+                  <textarea id="rfq-notes" name="notes" class="rfq-input rfq-area" rows="3" maxlength="2000"></textarea>
+                </div>
+              </fieldset>
+
+              <!-- Consent, 7.3 verbatim -->
+              <div class="rfq-f rfq-consent" data-f="consent">
+                <input id="rfq-consent" name="consent" type="checkbox" value="yes" />
+                <label for="rfq-consent">
+                  I agree to MH PharmaPack contacting me about this enquiry. See our{' '}
+                  <a href={withBase('/privacy')}>Privacy Policy</a>.
+                </label>
+                <p class="rfq-err" id="rfq-consent-err" hidden></p>
+              </div>
+
+              <!-- Not for people: bots fill every field, people never see this one. -->
+              <div class="rfq-hp" aria-hidden="true">
+                <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" data-rfq-hp /></label>
+              </div>
+
+              <div class="rfq-captcha" data-rfq-captcha></div>
+
+              <div class="rfq-alert" role="alert" data-rfq-error hidden>
+                <p class="rfq-alert-h" data-rfq-error-msg>We could not send your enquiry just now.</p>
+                <p>Everything you typed is still here. Try again, or send the same enquiry by email.</p>
+                <div class="rfq-alert-acts">
+                  <a href="#" class="btn btn-secondary" data-rfq-error-mail>Email it instead</a>
+                  <button type="button" class="rfq-textbtn" data-rfq-copy>Copy the enquiry</button>
+                </div>
+              </div>
+
+              <div class="rfq-send">
+                <button type="submit" class="btn btn-primary rfq-submit" data-rfq-submit>Send enquiry</button>
+                <p class="rfq-send-note">
+                  {
+                    FORM_ENDPOINT
+                      ? 'It goes straight to our sales desk, and you will receive a confirmation by email.'
+                      : 'This opens your email app with the enquiry written out, addressed to our sales desk.'
+                  }
+                </p>
+              </div>
+
+              <div class="rfq-alert rfq-alert-info" role="status" data-rfq-handoff hidden>
+                <p class="rfq-alert-h">Your email app should now be open.</p>
+                <p>
+                  The enquiry is written out in a new email to {SALES_EMAIL}. Press send there and it reaches
+                  our sales desk.
+                </p>
+                <div class="rfq-alert-acts">
+                  <a href="#" class="btn btn-secondary" data-rfq-handoff-mail>Open it again</a>
+                  <button type="button" class="rfq-textbtn" data-rfq-copy>Copy the enquiry</button>
+                </div>
+              </div>
+
+              <div class="rfq-foot">
+                <button type="button" class="rfq-textbtn rfq-reset" data-rfq-reset>Clear the form</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Sent -->
+          <div class="rfq-card rfq-done" data-rfq-done hidden>
+            <span class="rfq-done-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d={svg.tick} stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <h2 class="rfq-h2" tabindex="-1" data-rfq-done-title>Thank you. Your enquiry has reached our sales desk.</h2>
+            <p class="rfq-done-p">We will review your requirement and respond at the earliest opportunity.</p>
+            <p class="rfq-done-p" data-rfq-done-conf hidden>
+              A confirmation with a summary of your enquiry is on its way to <b data-rfq-done-email></b>.
+            </p>
+
+            <details class="rfq-summary">
+              <summary>What you sent</summary>
+              <dl data-rfq-summary></dl>
+            </details>
+
+            <div class="rfq-listoffer" data-rfq-listoffer hidden>
+              <p>Your enquiry list still holds <b data-rfq-listoffer-n></b>. Clear it now that the enquiry is sent?</p>
+              <button type="button" class="btn btn-secondary" data-rfq-clearlist>Clear the enquiry list</button>
+              <p class="rfq-listoffer-msg" data-rfq-listoffer-msg hidden>Enquiry list cleared.</p>
+            </div>
+
+            <div class="rfq-done-acts">
+              <button type="button" class="btn btn-secondary" data-rfq-again>Send another enquiry</button>
+              <a href={withBase('/catalogue')} class="rfq-textlink">Browse the catalogue</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="rfq-aside" aria-label="Other ways to reach us, and our office">
+          <!-- Path 1 -->
+          <div class="rfq-side rfq-side-path">
+            <h2 class="rfq-side-h">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.doc} stroke-linejoin="round" /></svg>
+              I have a spec sheet
+            </h2>
+            <p>Already have your requirement documented? Email it straight to our sales desk and we will take it from there.</p>
+            <a href={SPEC_MAILTO} class="btn btn-secondary rfq-side-btn">Email your spec</a>
+          </div>
+
+          <!-- Path 3 -->
+          <div class="rfq-side rfq-side-path">
+            <h2 class="rfq-side-h">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.wa} stroke-linejoin="round" /></svg>
+              Just talk to us
+            </h2>
+            <div class="rfq-talk">
+              <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer" class="rfq-talk-a">WhatsApp</a>
+              <a href={TEL_HREF} class="rfq-talk-a">Call</a>
+              <a href={MAILTO_HREF} class="rfq-talk-a">Email</a>
+            </div>
+          </div>
+
+          <!-- 7.4 Office and reach -->
+          <div class="rfq-side rfq-office">
+            <h2 class="rfq-side-h">Office and reach</h2>
+            <ul class="rfq-reach">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.mail} stroke-linejoin="round" /></svg>
+                <a href={MAILTO_HREF}>{SALES_EMAIL}</a>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.call} stroke-linejoin="round" /></svg>
+                {PHONE ? <a href={TEL_HREF}>{PHONE_DISPLAY}</a> : <span class="placeholder-note">[Phone number to be added]</span>}
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.wa} stroke-linejoin="round" /></svg>
+                {WHATSAPP ? <a href={WHATSAPP_HREF} target="_blank" rel="noopener noreferrer">WhatsApp {PHONE_DISPLAY}</a> : <span class="placeholder-note">[WhatsApp number to be added]</span>}
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d={svg.pin} stroke-linejoin="round" /></svg>
+                <span>
+                  {OFFICE_ADDRESS}
+                  <a href={MAPS_HREF} target="_blank" rel="noopener noreferrer" class="rfq-textlink rfq-dir">Get directions</a>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    /* Global, scoped by .rfq-page: the regulatory field is its own component
+       and the item rows, errors and summary are built by the script, and
+       Astro's scoped styles reach neither. No margin rules sit on elements
+       that also carry Tailwind margin utilities. */
+
+    .rfq-wrap {
+      padding: 2.25rem 1.25rem 4rem;
+    }
+    @media (min-width: 768px) {
+      .rfq-wrap {
+        padding: 3.5rem 2rem 6rem;
+      }
+    }
+    .rfq-h1 {
+      margin-top: 0.75rem;
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--color-ink);
+    }
+    .rfq-lede {
+      margin-top: 1rem;
+      max-width: 42rem;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--color-steel-deep);
+    }
+    @media (min-width: 768px) {
+      .rfq-h1 {
+        font-size: 2.25rem;
+      }
+    }
+
+    /* ---- Paths 1 and 3, compact (below 1024px) ------------------------ */
+    .rfq-quick {
+      margin-top: 1.5rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.5rem;
+      background: #ffffff;
+    }
+    .rfq-quick-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.4rem 0.75rem;
+      min-height: 3.5rem;
+      padding: 0.45rem 0.6rem 0.45rem 1rem;
+    }
+    .rfq-quick-row + .rfq-quick-row {
+      border-top: 1px solid var(--color-line);
+    }
+    .rfq-quick-q {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+    .rfq-quick-go {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      min-height: 2.75rem;
+      padding: 0 0.4rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-copper-deep);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .rfq-quick-go svg {
+      width: 1rem;
+      height: 1rem;
+    }
+    .rfq-quick-btns {
+      display: inline-flex;
+      gap: 0.4rem;
+    }
+    .rfq-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.75rem;
+      padding: 0 0.85rem;
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      color: var(--color-steel-deep);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .rfq-pill:hover {
+      border-color: var(--color-steel);
+      color: var(--color-ink);
+    }
+    .rfq-pill svg {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+    @media (min-width: 1024px) {
+      .rfq-quick {
+        display: none;
+      }
+    }
+
+    /* ---- Layout ------------------------------------------------------- */
+    .rfq-layout {
+      display: grid;
+      gap: 2rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 1024px) {
+      .rfq-layout {
+        grid-template-columns: minmax(0, 1fr) 19.5rem;
+        gap: 2.5rem;
+        align-items: start;
+        margin-top: 2.25rem;
+      }
+      .rfq-aside {
+        position: sticky;
+        top: 6.5rem;
+      }
+    }
+    .rfq-main {
+      min-width: 0;
+    }
+
+    .rfq-card {
+      padding: 1.25rem 1rem 1.25rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.5rem;
+      background: #ffffff;
+      scroll-margin-top: 5.5rem;
+    }
+    @media (min-width: 400px) {
+      .rfq-card {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+    @media (min-width: 768px) {
+      .rfq-card {
+        padding: 2rem 2.25rem 2.25rem;
+      }
+    }
+    .rfq-h2 {
+      font-size: 1.3125rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      color: var(--color-ink);
+    }
+    .rfq-sub {
+      margin-top: 0.35rem;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--color-steel-deep);
+    }
+    .rfq-noscript {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-left: 3px solid var(--color-copper);
+      background: var(--color-paper);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+    .rfq-noscript a {
+      color: var(--color-copper-deep);
+      font-weight: 600;
+    }
+
+    /* ---- Sections of the form ---------------------------------------- */
+    .rfq-set {
+      min-width: 0;
+      margin: 1.75rem 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .rfq-set + .rfq-set {
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--color-line);
+    }
+    /* Floated so it lays out like any block (a legend otherwise straddles
+       the fieldset border); its bottom margin is the gap to the first field,
+       since clearance swallows that field's own top margin. */
+    .rfq-legend {
+      float: left;
+      width: 100%;
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.6rem;
+      padding: 0;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--color-ink);
+    }
+    .rfq-legend + * {
+      clear: both;
+    }
+    .rfq-step {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 999px;
+      background: var(--color-steel-deep);
+      color: #ffffff;
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+    /* ---- Fields ------------------------------------------------------- */
+    .rfq-f {
+      margin-top: 1.25rem;
+    }
+    .rfq-subset {
+      min-width: 0;
+      padding: 0;
+      border: 0;
+    }
+    .rfq-subset > legend {
+      padding: 0;
+    }
+    /* Flex, so the Optional badge sits beside the words with its own gap
+       (no reliance on source whitespace, which the HTML minifier drops). */
+    .rfq-label {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 0.5rem;
+      margin-bottom: 0.45rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--color-ink);
+    }
+    .rfq-hint {
+      margin: -0.15rem 0 0.55rem;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--color-steel-deep);
+    }
+    .rfq-input {
+      width: 100%;
+      height: 3rem;
+      padding: 0 0.85rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.25rem;
+      background: #ffffff;
+      color: var(--color-ink);
+      font: inherit;
+      font-size: 1rem;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+    .rfq-input::placeholder {
+      color: var(--color-muted);
+    }
+    .rfq-input:focus {
+      border-color: var(--color-steel);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(78, 96, 118, 0.16);
+    }
+    .rfq-area {
+      height: auto;
+      min-height: 6.25rem;
+      padding: 0.7rem 0.85rem;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    .rfq-qty {
+      display: flex;
+      gap: 0.5rem;
+      max-width: 26rem;
+    }
+    .rfq-qty .rfq-input:first-child {
+      flex: 1;
+      min-width: 0;
+    }
+    .rfq-unit {
+      flex: none;
+      width: 7.25rem;
+      padding: 0 0.6rem;
+    }
+    .rfq-grid {
+      display: grid;
+      column-gap: 1rem;
+    }
+    /* The legend's margin already spaces the first row. */
+    .rfq-grid > .rfq-f:first-child {
+      margin-top: 0;
+    }
+    @media (min-width: 640px) {
+      .rfq-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .rfq-grid > .rfq-f:nth-child(2) {
+        margin-top: 0;
+      }
+    }
+
+    /* Errors: colour plus words, never colour alone. */
+    .rfq-err {
+      display: flex;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--color-error);
+    }
+    .rfq-err::before {
+      content: '!';
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      margin-top: 0.05rem;
+      border-radius: 999px;
+      background: var(--color-error);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .rfq-err[hidden] {
+      display: none;
+    }
+    .has-err .rfq-input {
+      border-color: var(--color-error);
+    }
+
+    /* Chips: line of interest (several) and timeline (one). */
+    .rfq-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .rfq-chip {
+      position: relative;
+      display: inline-flex;
+    }
+    .rfq-chip input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .rfq-chip span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.75rem;
+      padding: 0 1rem;
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--color-steel-deep);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+    .rfq-chip svg {
+      display: none;
+      width: 1rem;
+      height: 1rem;
+    }
+    .rfq-chip:hover span {
+      border-color: var(--color-steel);
+      color: var(--color-ink);
+    }
+    .rfq-chip input:checked + span {
+      border-color: var(--color-steel-deep);
+      background: var(--color-steel-deep);
+      color: #ffffff;
+    }
+    .rfq-chip input:checked + span svg {
+      display: block;
+    }
+    .rfq-chip input:focus-visible + span {
+      outline: 2px solid var(--color-copper-deep);
+      outline-offset: 2px;
+    }
+    .rfq-chip-radio span {
+      font-weight: 500;
+      font-size: 0.875rem;
+      padding: 0 0.9rem;
+    }
+    .has-err .rfq-chip span {
+      border-color: var(--color-error);
+    }
+
+    /* The enquiry-list offer and the items taken from it. */
+    .rfq-listprompt {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.25rem 1rem;
+      margin-top: 1.25rem;
+      padding: 0.5rem 0.5rem 0.5rem 1rem;
+      border-radius: 0.375rem;
+      background: var(--color-paper-warm);
+      font-size: 0.9375rem;
+      color: var(--color-ink);
+    }
+    .rfq-listprompt[hidden] {
+      display: none;
+    }
+    .rfq-items {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--color-line);
+    }
+    .rfq-item {
+      display: grid;
+      grid-template-columns: 3.25rem minmax(0, 1fr) 2.75rem;
+      grid-template-areas:
+        'th name rm'
+        'th q q'
+        'th err err';
+      column-gap: 0.75rem;
+      row-gap: 0.45rem;
+      align-items: center;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .rfq-item-th {
+      grid-area: th;
+      align-self: start;
+      width: 3.25rem;
+      height: 3.25rem;
+      padding: 0.2rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.25rem;
+      background: #ffffff;
+      object-fit: contain;
+    }
+    .rfq-item-name {
+      grid-area: name;
+      min-width: 0;
+      font-size: 0.9375rem;
+      line-height: 1.35;
+    }
+    .rfq-item-name a {
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+    .rfq-item-name a:hover {
+      color: var(--color-copper-deep);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .rfq-item-name span {
+      display: block;
+      margin-top: 0.1rem;
+      font-size: 0.8125rem;
+      color: var(--color-steel-deep);
+    }
+    .rfq-item-q {
+      grid-area: q;
+      display: flex;
+      gap: 0.5rem;
+      max-width: 20rem;
+    }
+    .rfq-item-q .rfq-input {
+      height: 2.75rem;
+    }
+    .rfq-item-q .rfq-input:first-child {
+      flex: 1;
+      min-width: 0;
+    }
+    .rfq-item-err {
+      grid-area: err;
+      margin-top: 0;
+    }
+    /* Narrowest phones: the quantity row takes the full width under the
+       item, so the number is never clipped. */
+    @media (max-width: 419px) {
+      .rfq-item {
+        grid-template-areas:
+          'th name rm'
+          'q q q'
+          'err err err';
+      }
+      .rfq-item-q {
+        max-width: none;
+      }
+    }
+    .rfq-item-rm {
+      grid-area: rm;
+      display: grid;
+      place-items: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--color-steel-deep);
+      cursor: pointer;
+    }
+    .rfq-item-rm:hover {
+      background: var(--color-paper-warm);
+      color: var(--color-ink);
+    }
+    .rfq-item-rm svg {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+    .rfq-item.has-err .rfq-input:first-child {
+      border-color: var(--color-error);
+    }
+
+    .rfq-textlink,
+    .rfq-textbtn {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.75rem;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--color-copper-deep);
+      font: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+    }
+    .rfq-textlink:hover,
+    .rfq-textbtn:hover {
+      color: var(--color-copper);
+    }
+    .rfq-listprompt .rfq-textbtn {
+      padding: 0 0.5rem;
+    }
+
+    /* Consent */
+    .rfq-consent {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: 0.75rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-line);
+    }
+    .rfq-consent input {
+      width: 1.35rem;
+      height: 1.35rem;
+      margin: 0.1rem 0 0;
+      accent-color: var(--color-copper-deep);
+    }
+    .rfq-consent label {
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--color-ink);
+      cursor: pointer;
+    }
+    .rfq-consent a {
+      color: var(--color-copper-deep);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .rfq-consent .rfq-err {
+      grid-column: 1 / -1;
+    }
+
+    .rfq-hp {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .rfq-captcha:empty {
+      display: none;
+    }
+    .rfq-captcha {
+      margin-top: 1rem;
+    }
+
+    .rfq-send {
+      margin-top: 1.5rem;
+    }
+    .rfq-submit {
+      width: 100%;
+    }
+    .rfq-submit[disabled] {
+      opacity: 0.7;
+      cursor: progress;
+    }
+    @media (min-width: 640px) {
+      .rfq-submit {
+        width: auto;
+        min-width: 13rem;
+      }
+    }
+    .rfq-send-note {
+      margin-top: 0.7rem;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--color-steel-deep);
+    }
+    .rfq-foot {
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--color-line);
+    }
+    .rfq-reset {
+      font-size: 0.875rem;
+      color: var(--color-steel-deep);
+    }
+
+    .rfq-alert {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid var(--color-error);
+      border-left-width: 4px;
+      border-radius: 0.375rem;
+      background: #fdf5f5;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--color-ink);
+    }
+    .rfq-alert[hidden] {
+      display: none;
+    }
+    .rfq-alert-info {
+      border-color: var(--color-steel);
+      background: var(--color-paper);
+    }
+    .rfq-alert-h {
+      font-weight: 700;
+    }
+    .rfq-alert-acts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1.25rem;
+      margin-top: 0.85rem;
+    }
+
+    /* ---- Sent --------------------------------------------------------- */
+    .rfq-done-icon {
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 1rem;
+      border-radius: 999px;
+      background: var(--color-steel-deep);
+      color: #ffffff;
+    }
+    .rfq-done-icon svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    .rfq-done .rfq-h2:focus {
+      outline: none;
+    }
+    .rfq-done-p {
+      margin-top: 0.75rem;
+      max-width: 38rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--color-steel-deep);
+    }
+    .rfq-done-p b {
+      color: var(--color-ink);
+      overflow-wrap: anywhere;
+    }
+    .rfq-summary {
+      margin-top: 1.5rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.375rem;
+    }
+    .rfq-summary summary {
+      display: flex;
+      align-items: center;
+      min-height: 3rem;
+      padding: 0 1rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      cursor: pointer;
+    }
+    .rfq-summary dl {
+      display: grid;
+      gap: 0.15rem 1rem;
+      margin: 0;
+      padding: 0.25rem 1rem 1rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    .rfq-summary dt {
+      color: var(--color-steel-deep);
+    }
+    .rfq-summary dd {
+      margin: 0 0 0.5rem;
+      color: var(--color-ink);
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+    @media (min-width: 640px) {
+      .rfq-summary dl {
+        grid-template-columns: 12rem minmax(0, 1fr);
+      }
+      .rfq-summary dd {
+        margin-bottom: 0.35rem;
+      }
+    }
+    .rfq-listoffer {
+      margin-top: 1.25rem;
+      padding: 1rem 1.1rem;
+      border-radius: 0.375rem;
+      background: var(--color-paper-warm);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+    .rfq-listoffer[hidden] {
+      display: none;
+    }
+    .rfq-listoffer .btn {
+      margin-top: 0.75rem;
+    }
+    .rfq-listoffer-msg {
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    .rfq-done-acts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.5rem;
+      margin-top: 1.75rem;
+    }
+
+    /* ---- Beside the form (1024px and up), and office below it --------- */
+    .rfq-side-path {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .rfq-side-path {
+        display: block;
+      }
+    }
+    .rfq-side {
+      padding: 1.25rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.5rem;
+      background: #ffffff;
+    }
+    .rfq-side + .rfq-side {
+      margin-top: 1rem;
+    }
+    .rfq-side-h {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-ink);
+    }
+    .rfq-side-h svg {
+      width: 1.3rem;
+      height: 1.3rem;
+      color: var(--color-copper-deep);
+    }
+    .rfq-side p {
+      margin-top: 0.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: var(--color-steel-deep);
+    }
+    .rfq-side-btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+    .rfq-talk {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
+      margin-top: 0.85rem;
+    }
+    .rfq-talk-a {
+      display: grid;
+      place-items: center;
+      min-height: 2.75rem;
+      border: 1px solid var(--color-steel);
+      border-radius: 0.25rem;
+      color: var(--color-steel-deep);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .rfq-talk-a:hover {
+      background: var(--color-steel);
+      color: #ffffff;
+    }
+    .rfq-reach {
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .rfq-reach li {
+      display: flex;
+      gap: 0.65rem;
+      padding: 0.5rem 0;
+      color: var(--color-steel-deep);
+    }
+    .rfq-reach li + li {
+      border-top: 1px solid var(--color-line);
+    }
+    .rfq-reach svg {
+      flex: none;
+      width: 1.15rem;
+      height: 1.15rem;
+      margin-top: 0.15rem;
+      color: var(--color-steel);
+    }
+    .rfq-reach a {
+      color: var(--color-ink);
+      font-weight: 600;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+    .rfq-reach a:hover {
+      color: var(--color-copper-deep);
+    }
+    .rfq-reach .rfq-dir {
+      display: flex;
+      min-height: 2.25rem;
+      font-size: 0.875rem;
+      color: var(--color-copper-deep);
+      text-decoration: underline;
+    }
+  </style>
+
+  <script>
+    import { initRfqForm } from '../scripts/rfq-form';
+    const form = document.querySelector<HTMLFormElement>('[data-rfq]');
+    if (form) initRfqForm(form);
+  </script>
+</Base>

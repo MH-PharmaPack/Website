@@ -1,0 +1,217 @@
+---
+import Base from '../layouts/Base.astro';
+import { SALES_EMAIL, FORM_ENDPOINT, TURNSTILE_SITE_KEY, withBase } from '../config';
+
+// PRIVACY POLICY (CONTENT-SPEC 8.1) and the full intermediary disclaimer
+// (8.2, verbatim). Plain and specific to what this site actually does; every
+// processor named here is one the site really uses, and the form paragraphs
+// follow config.ts, so the page cannot describe a spam check or a form
+// backend that is not switched on.
+//
+// [NEEDS: review before launch, ideally by someone qualified (8.1).]
+// [NEEDS: client to confirm two practice statements: when buyer contact
+//  details are shared with a manufacturer, and how long enquiry emails are
+//  kept.] Both are written as the business model implies, not invented
+//  policies, and are marked below.
+
+const UPDATED = '23 September 2026';
+const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy request')}`;
+---
+
+<Base
+  title="Privacy Policy | MH PharmaPack"
+  name="Privacy Policy"
+  description="What MH PharmaPack collects through this website, why, who processes it, and how to ask for a copy or deletion of your information."
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Privacy Policy' }]}
+>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-12 pb-20 md:px-8 md:pt-16 md:pb-28">
+      <article class="legal">
+        <p class="eyebrow">Legal</p>
+        <h1>Privacy Policy</h1>
+        <p class="legal-updated">Last updated {UPDATED}</p>
+
+        <p>
+          This policy explains what MH PharmaPack collects through this website, why we collect it, who
+          handles it for us, and how to ask us for a copy of it or to delete it.
+        </p>
+
+        <h2>What we collect</h2>
+        <p><strong>When you send an enquiry through our quote form</strong>, we receive what you enter:</p>
+        <ul>
+          <li>your name, company and email address, and a phone or WhatsApp number if you give one;</li>
+          <li>
+            the details of your requirement: line of interest, product, molecule or item, quantities,
+            specification details, destination market, timeline, regulatory requirements, and anything
+            else you add;
+          </li>
+          <li>any catalogue items you include, with links to their pages.</li>
+        </ul>
+        <p>
+          <strong>When you email, call or message us on WhatsApp</strong>, we receive whatever you choose
+          to send, including any files you attach.
+        </p>
+        <p>
+          We do not run analytics or advertising trackers on this website, and there is no account to
+          sign up for.
+        </p>
+
+        <h2>Why we use it</h2>
+        <p>
+          To respond to your enquiry, find suitable approved manufacturers for your requirement, and
+          coordinate the engagement that follows. To prepare a quote, we share the requirement itself
+          (product, specification, quantity, market and timeline) with the manufacturers we approach.
+          {/* [NEEDS: client to confirm] */}
+          If you decide to go ahead, we introduce you to the manufacturer, which includes sharing your
+          name, company and contact details with them.
+        </p>
+        <p>We do not sell your information, and we do not use it for advertising.</p>
+
+        <h2>How an enquiry reaches us</h2>
+        {
+          FORM_ENDPOINT ? (
+            <p>
+              The quote form is processed by a script on our own Google Workspace account (Google Apps
+              Script). It delivers your enquiry by email to our sales desk at {SALES_EMAIL}, and sends a
+              confirmation with a summary of your enquiry to the email address you give. Enquiries are
+              held in our Google Workspace email.
+            </p>
+          ) : (
+            <p>
+              The quote form does not send anything by itself: it opens your own email app with your
+              enquiry written out, addressed to our sales desk at {SALES_EMAIL}, and you send it. It then
+              reaches us as an ordinary email, held in our Google Workspace email.
+            </p>
+          )
+        }
+        {
+          TURNSTILE_SITE_KEY && (
+            <p>
+              To keep automated spam out, the form uses Cloudflare Turnstile. It loads only once you
+              start filling in the form, and it processes technical information from your browser, such
+              as your IP address, to tell people from bots. Cloudflare's own privacy policy applies to
+              that check.
+            </p>
+          )
+        }
+        <p>
+          {/* [NEEDS: client to confirm retention] */}
+          We keep enquiries for as long as they are needed to respond to you, to coordinate any order
+          that follows, and for our business records.
+        </p>
+
+        <h2>Stored on your own device</h2>
+        <p>
+          Some conveniences on this site are kept in your browser's local storage, on your device only:
+          your enquiry list, a draft of the quote form until you send it (cleared after 30 days), and
+          your place in the catalogue so the back link returns you to it. None of this reaches us
+          unless you send it yourself. Clearing your browser's site data removes it. We do not set
+          cookies of our own.
+        </p>
+
+        <h2>Other services this site uses</h2>
+        <ul>
+          <li>
+            <strong>Hosting.</strong> The site is hosted on GitHub Pages. GitHub states that when a GitHub
+            Pages site is visited, the visitor's IP address is logged and stored for security purposes.
+          </li>
+          <li>
+            <strong>Map.</strong> The office map at the foot of each page is a Google Maps embed. It
+            loads from Google when you scroll to it, and Google may set cookies at that point. Google's
+            privacy policy applies to it.
+          </li>
+          <li>
+            <strong>WhatsApp.</strong> If you message us on WhatsApp, WhatsApp's own terms and privacy
+            policy apply to that conversation.
+          </li>
+        </ul>
+        <p>The site's fonts and images are served from this website itself, not from third parties.</p>
+
+        <h2>Your choices</h2>
+        <p>
+          You can ask us for a copy of the information we hold about you, ask us to correct it, or ask
+          us to delete it. Email <a href={privacyMail}>{SALES_EMAIL}</a> with the subject "Privacy
+          request". The same address answers any question about this policy.
+        </p>
+
+        <h2 id="disclaimer">Intermediary disclaimer</h2>
+        <!-- Verbatim, CONTENT-SPEC 8.2. Do not soften. -->
+        <p>
+          MH PharmaPack acts as a sourcing and supply intermediary. We facilitate introductions between
+          buyers and manufacturers and coordinate transactions. We do not manufacture pharmaceutical
+          products and do not take title to goods. Contracts of sale are entered into directly between
+          the buyer and the manufacturer. MH PharmaPack is not a party to those contracts and does not
+          guarantee, warrant, or assume liability for product quality, regulatory compliance, delivery,
+          or payment. All certifications and approvals referenced belong to the respective manufacturing
+          partners.
+        </p>
+
+        <p class="legal-back">
+          <a href={withBase('/contact')}>Request a Quote</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <style>
+    .legal {
+      max-width: 44rem;
+      color: var(--color-steel-deep);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .legal h1 {
+      margin-top: 0.75rem;
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--color-ink);
+    }
+    @media (min-width: 768px) {
+      .legal h1 {
+        font-size: 2.25rem;
+      }
+    }
+    .legal-updated {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .legal h2 {
+      margin-top: 2.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-ink);
+      scroll-margin-top: 6rem;
+    }
+    .legal p,
+    .legal ul {
+      margin-top: 0.9rem;
+    }
+    .legal ul {
+      padding-left: 1.25rem;
+      list-style: disc;
+    }
+    .legal li + li {
+      margin-top: 0.4rem;
+    }
+    .legal strong {
+      color: var(--color-ink);
+    }
+    .legal a {
+      color: var(--color-copper-deep);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .legal a:hover {
+      color: var(--color-copper);
+    }
+    .legal-back {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-line);
+    }
+  </style>
+</Base>

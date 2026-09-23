@@ -11,6 +11,8 @@
 //
 // Sheet: a native <dialog>, so focus is held inside it and Escape closes it
 // without any script of ours. Bottom sheet on a phone, centred panel above.
+import { TIMELINES } from '../data/rfq';
+import ChipField from './ChipField.astro';
 ---
 
 <div class="sr-only" aria-live="polite" data-enq-live></div>
@@ -46,13 +48,21 @@
     <ul class="enq-list" data-enq-list></ul>
 
     <div class="enq-fields">
-      <label class="enq-field">
-        <span>Destination market</span>
-        <input type="text" autocomplete="country-name" placeholder="Country or region" data-enq-field="market" />
-      </label>
+      <ChipField
+        kind="country"
+        id="enq-market"
+        name="market"
+        label="Destination market"
+        placeholder="Start typing a country"
+        listLabel="Countries and markets"
+        compact
+      />
       <label class="enq-field">
         <span>Required timeline</span>
-        <input type="text" placeholder="For example, within 8 weeks" data-enq-field="timeline" />
+        <select data-enq-field="timeline">
+          <option value="">Choose</option>
+          {TIMELINES.map((t) => <option value={t}>{t}</option>)}
+        </select>
       </label>
     </div>
 
@@ -296,19 +306,33 @@
     font-size: 0.75rem;
     color: var(--color-steel-deep);
   }
-  .enq-list :global(.enq-qty) {
+  .enq-list :global(.enq-q) {
     grid-area: qty;
-    width: 100%;
-    max-width: 16rem;
+    display: flex;
+    gap: 0.5rem;
+    max-width: 19rem;
+  }
+  .enq-list :global(.enq-qty),
+  .enq-list :global(.enq-unit) {
     height: 2.75rem;
-    padding: 0 0.75rem;
     border: 1px solid var(--color-line);
     border-radius: 0.25rem;
     background: var(--color-paper);
     color: var(--color-ink);
     font-size: 1rem;
   }
-  .enq-list :global(.enq-qty:focus) {
+  .enq-list :global(.enq-qty) {
+    flex: 1;
+    min-width: 0;
+    padding: 0 0.75rem;
+  }
+  .enq-list :global(.enq-unit) {
+    flex: none;
+    width: 6.75rem;
+    padding: 0 0.5rem;
+  }
+  .enq-list :global(.enq-qty:focus),
+  .enq-list :global(.enq-unit:focus) {
     border-color: var(--color-steel);
     outline: none;
     background: #ffffff;
@@ -351,7 +375,8 @@
     font-weight: 600;
     color: var(--color-steel-deep);
   }
-  .enq-field input {
+  .enq-field input,
+  .enq-field select {
     width: 100%;
     height: 2.75rem;
     padding: 0 0.75rem;
@@ -361,7 +386,8 @@
     color: var(--color-ink);
     font-size: 1rem;
   }
-  .enq-field input:focus {
+  .enq-field input:focus,
+  .enq-field select:focus {
     border-color: var(--color-steel);
     outline: none;
   }
@@ -426,6 +452,10 @@
     plainText,
     type EnquiryItem,
   } from '../scripts/enquiry-list';
+  import { numericOnly, formatQuantity } from '../scripts/numeric';
+  import { initChipField } from '../scripts/chip-field';
+  import { COUNTRY_GROUPS } from '../data/countries';
+  import { UNITS } from '../data/rfq';
 
   const bar = document.querySelector<HTMLElement>('[data-enq-bar]');
   const dialog = document.querySelector<HTMLDialogElement>('[data-enq-dialog]');
@@ -436,10 +466,24 @@
   const rfq = document.querySelector<HTMLAnchorElement>('[data-enq-rfq]');
   const copyBtn = document.querySelector<HTMLButtonElement>('[data-enq-copy]');
   const clearBtn = document.querySelector<HTMLButtonElement>('[data-enq-clear]');
-  const fields = [...document.querySelectorAll<HTMLInputElement>('[data-enq-field]')];
+  const fields = [...document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-enq-field]')];
+
+  // Destination market: chosen from the country list only, like the quote
+  // form. Stored in the list as one string, markets joined with "; ".
+  const marketRoot = dialog?.querySelector<HTMLElement>('[data-cf="country"]') ?? null;
+  const marketField = marketRoot
+    ? initChipField(marketRoot, {
+        groups: COUNTRY_GROUPS,
+        strict: true,
+        strictMessage: 'Choose a country from the list.',
+      })
+    : null;
+  marketRoot?.querySelector('[data-cf-value]')?.addEventListener('input', () => {
+    if (marketField) setField('market', marketField.get().join('; '));
+  });
 
   const addButtons = () => [...document.querySelectorAll<HTMLButtonElement>('[data-enq-add]')];
-  const itemFrom = (b: HTMLElement): Omit<EnquiryItem, 'qty'> => ({
+  const itemFrom = (b: HTMLElement): Omit<EnquiryItem, 'qty' | 'unit'> => ({
     slug: b.dataset.enqSlug ?? '',
     name: b.dataset.enqName ?? '',
     category: b.dataset.enqCategory ?? '',
@@ -484,13 +528,25 @@
         cat.className = 'enq-cat';
         cat.textContent = [it.category, it.detail].filter(Boolean).join(' · ');
         name.append(a, cat);
+        // Quantity: numbers only, with the unit beside it.
+        const q = document.createElement('div');
+        q.className = 'enq-q';
         const qty = document.createElement('input');
         qty.type = 'text';
         qty.className = 'enq-qty';
-        qty.placeholder = 'Quantity, e.g. 50,000';
-        qty.value = it.qty;
+        qty.placeholder = 'Quantity';
+        qty.value = formatQuantity(it.qty);
         qty.setAttribute('aria-label', `Quantity for ${it.name}`);
-        qty.addEventListener('input', () => setQty(it.slug, qty.value.trim()));
+        numericOnly(qty, 'quantity');
+        const unit = document.createElement('select');
+        unit.className = 'enq-unit';
+        unit.setAttribute('aria-label', `Unit for ${it.name}`);
+        for (const u of UNITS) unit.add(new Option(u, u));
+        unit.value = it.unit || 'pieces';
+        const store = () => setQty(it.slug, qty.value.trim(), unit.value);
+        qty.addEventListener('input', store);
+        unit.addEventListener('change', store);
+        q.append(qty, unit);
         const rm = document.createElement('button');
         rm.type = 'button';
         rm.className = 'enq-rm';
@@ -500,7 +556,7 @@
           remove(it.slug);
           if (live) live.textContent = `Removed ${it.name}.`;
         });
-        li.append(name, qty, rm);
+        li.append(name, q, rm);
         return li;
       }),
     );
@@ -526,6 +582,12 @@
     for (const f of fields) {
       const key = f.dataset.enqField as 'market' | 'timeline';
       if (document.activeElement !== f) f.value = s[key];
+    }
+    // Only when the stored markets differ, so typing in the field (or a
+    // change from another tab) never wipes a half-typed name.
+    if (marketField) {
+      const stored = s.market.split(/\s*;\s*/).filter(Boolean);
+      if (stored.join('; ') !== marketField.get().join('; ')) marketField.set(stored);
     }
     if (mail) mail.href = mailtoHref(s);
     if (wa) wa.href = whatsappHref(s);

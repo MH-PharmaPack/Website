@@ -22,8 +22,10 @@ export interface EnquiryItem {
   url: string;
   /** Small image for the list, or empty */
   thumb: string;
-  /** Free text the buyer types, e.g. "50,000 pcs" */
+  /** Number the buyer types, e.g. "50,000" (numbers only) */
   qty: string;
+  /** Unit for qty, one of UNITS in src/data/rfq.ts; empty means pieces */
+  unit: string;
 }
 
 export interface EnquiryState {
@@ -56,7 +58,9 @@ export function load(): EnquiryState {
           detail: str(i.detail),
           url: str(i.url),
           thumb: str(i.thumb),
-          qty: str(i.qty),
+          // Lists saved before quantities went numbers-only may hold "50,000 pcs".
+          qty: str(i.qty).replace(/[^0-9.,]/g, ''),
+          unit: str(i.unit),
         })),
       market: str(s?.market),
       timeline: str(s?.timeline),
@@ -90,10 +94,10 @@ export function onChange(fn: () => void): void {
 
 export const has = (state: EnquiryState, slug: string) => state.items.some((i) => i.slug === slug);
 
-export function toggle(item: Omit<EnquiryItem, 'qty'>): boolean {
+export function toggle(item: Omit<EnquiryItem, 'qty' | 'unit'>): boolean {
   const s = load();
   const added = !has(s, item.slug);
-  s.items = added ? [...s.items, { ...item, qty: '' }] : s.items.filter((i) => i.slug !== item.slug);
+  s.items = added ? [...s.items, { ...item, qty: '', unit: '' }] : s.items.filter((i) => i.slug !== item.slug);
   save(s);
   return added;
 }
@@ -104,12 +108,19 @@ export function remove(slug: string): void {
   save(s);
 }
 
-export function setQty(slug: string, qty: string): void {
+export function setQty(slug: string, qty: string, unit?: string): void {
   const s = load();
   const it = s.items.find((i) => i.slug === slug);
-  if (it) it.qty = qty;
+  if (it) {
+    it.qty = qty;
+    if (unit !== undefined) it.unit = unit;
+  }
   save(s);
 }
+
+/** "50,000 pieces", or empty when no quantity was given. */
+export const qtyText = (it: Pick<EnquiryItem, 'qty' | 'unit'>) =>
+  it.qty ? `${it.qty} ${it.unit || 'pieces'}` : '';
 
 export function setField(field: 'market' | 'timeline', value: string): void {
   const s = load();
@@ -139,7 +150,7 @@ function lines(s: EnquiryState, withUrls: boolean): string[] {
         `${k}: ${it.name}`,
         `${k} category: ${it.category}`,
         ...(it.detail ? [`${k} detail: ${it.detail}`] : []),
-        `${k} quantity: ${it.qty}`,
+        `${k} quantity: ${qtyText(it)}`,
         ...(withUrls && it.url ? [`${k} page: ${it.url}`] : []),
         '',
       ];
@@ -173,7 +184,7 @@ export function mailtoHref(s: EnquiryState): string {
 
 export function whatsappHref(s: EnquiryState): string {
   if (!WHATSAPP) return '#';
-  const list = s.items.map((it, n) => `${n + 1}. ${it.name}${it.qty ? ` (quantity: ${it.qty})` : ''}`).join('\n');
+  const list = s.items.map((it, n) => `${n + 1}. ${it.name}${it.qty ? ` (quantity: ${qtyText(it)})` : ''}`).join('\n');
   const text =
     `Hello MH PharmaPack, I would like a quote for these items:\n\n${list}\n\n` +
     `Destination market: ${s.market}\nRequired timeline: ${s.timeline}`;
