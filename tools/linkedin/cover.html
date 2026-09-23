@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--
+  LinkedIn Page cover, 1512 x 256 (LinkedIn's recommended size), shot at 2x.
+  Navy like the site's hero. No logo mark here: the textured mark breaks on a
+  dark ground, and LinkedIn lays the Page logo over the cover's lower left
+  anyway, which is also why the words sit to the right. Headline is the
+  site's H1; lines are src/data/lines.ts. No certification marks
+  (CONTENT-SPEC guardrail 2).
+-->
+<style>
+  @font-face {
+    font-family: 'InterVar';
+    src: url('../../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1512px; height: 256px; overflow: hidden; }
+  body {
+    position: relative;
+    font-family: 'InterVar', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(ellipse 45% 120% at 18% 110%, rgba(169, 102, 63, 0.22) 0%, rgba(169, 102, 63, 0) 70%),
+      radial-gradient(ellipse 55% 140% at 70% -20%, rgba(78, 96, 118, 0.45) 0%, rgba(78, 96, 118, 0) 70%),
+      linear-gradient(180deg, #0c1729 0%, #0f1c33 55%, #12203a 100%);
+  }
+  /* The thread: two fine strands crossing, the site's copper-to-steel motif. */
+  svg.thread { position: absolute; inset: 0; }
+  .copy {
+    position: absolute;
+    right: 88px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 820px;
+    text-align: right;
+  }
+  .eyebrow {
+    font-size: 15px; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #e0b087;
+  }
+  h1 {
+    margin-top: 12px;
+    font-size: 38px; line-height: 1.15; font-weight: 700;
+    letter-spacing: -0.02em; color: #f4f6f8;
+  }
+  .lines {
+    margin-top: 14px;
+    font-size: 18px; font-weight: 500; letter-spacing: 0.02em; color: #aebccd;
+  }
+  .lines b { color: #f4f6f8; font-weight: 600; }
+  .lines i { font-style: normal; color: #e0b087; padding: 0 10px; }
+</style>
+</head>
+<body>
+  <svg class="thread" viewBox="0 0 1512 256" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cu" x1="0" x2="1">
+        <stop offset="0" stop-color="#a9663f" stop-opacity="0" />
+        <stop offset="0.35" stop-color="#e0b087" stop-opacity="0.75" />
+        <stop offset="1" stop-color="#e0b087" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="st" x1="0" x2="1">
+        <stop offset="0" stop-color="#aebccd" stop-opacity="0" />
+        <stop offset="0.4" stop-color="#aebccd" stop-opacity="0.55" />
+        <stop offset="1" stop-color="#aebccd" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path d="M -20 196 C 140 196, 230 78, 380 92 S 520 190, 600 160" fill="none" stroke="url(#cu)" stroke-width="1.6" />
+    <path d="M -20 70 C 130 64, 240 200, 390 172 S 530 66, 600 96" fill="none" stroke="url(#st)" stroke-width="1.2" />
+  </svg>
+  <div class="copy">
+    <div class="eyebrow">Pharmaceutical Sourcing &amp; Supply</div>
+    <h1>The link between pharmaceutical buyers and the right manufacturers.</h1>
+    <div class="lines"><b>API</b><i>&middot;</i><b>Finished Formulations</b><i>&middot;</i><b>Packaging</b><i>&middot;</i>mhpharmapack.com</div>
+  </div>
+</body>
+</html>

@@ -15,6 +15,7 @@ import {
   OFFICE_ADDRESS,
   MAPS_HREF,
   MAP_EMBED_SRC,
+  LINKEDIN_URL,
   withBase,
 } from '../config';
 
@@ -94,6 +95,16 @@ const year = new Date().getFullYear();
             ) : (
               <span class="placeholder-note">[WhatsApp number to be added]</span>
             )}
+          </li>
+          <li>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-medium text-steel-deep transition-colors hover:text-ink"
+            >
+              LinkedIn
+            </a>
           </li>
           <li class="pt-1">
             {

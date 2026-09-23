@@ -79,11 +79,13 @@ export const TURNSTILE_SITE_KEY = '';
 // thing on this page that cannot be written, only earned: each URL has to be a
 // profile that actually exists and actually links back here.
 //
-// [NEEDS: company LinkedIn page, and any trade directory listings the client
-// wants claimed.] Leave entries out rather than guessing a URL; a sameAs
-// pointing at a 404 is worse than no sameAs at all, because it teaches the
-// crawler that this site's claims do not check out.
-export const ORG_SAME_AS: string[] = [];
+// LinkedIn Page created by the client 2026-09-24 (its Website field points
+// here). [NEEDS: any trade directory listings the client wants claimed.]
+// Leave entries out rather than guessing a URL; a sameAs pointing at a 404
+// is worse than no sameAs at all, because it teaches the crawler that this
+// site's claims do not check out.
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/mh-pharmapack/';
+export const ORG_SAME_AS: string[] = [LINKEDIN_URL];
 
 // Prefixes a root-relative path with Astro's configured base. Needed while the site
 // serves from the github.io project subpath; a no-op once the custom domain (base '/')
