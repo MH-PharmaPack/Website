@@ -35,7 +35,7 @@ var SITE = 'https://mhpharmapack.com';
 var PHONE_DISPLAY = '+91 98250 12519';
 var PHONE_TEL = '+919825012519';
 var WHATSAPP = '919825012519';
-var ADDRESS = 'C-303, Siddhivinayak Business Towers, Makarba, Ahmedabad, Gujarat, 380051';
+var ADDRESS = 'C-303, Siddhivinayak Towers, Makarba, Ahmedabad, Gujarat, 380051';
 var LOGO = SITE + '/email/mh-logo.png';
 var TIMEZONE = 'Asia/Kolkata';
 

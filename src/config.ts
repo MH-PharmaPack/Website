@@ -17,8 +17,12 @@ export const PHONE_DISPLAY = '+91 98250 12519';
 export const WHATSAPP = '919825012519';
 
 // The printed address, unit number included. Display only.
+// Building name settled by the client 2026-09-24: "Siddhivinayak Towers",
+// as on the visiting cards, used everywhere (site, emails, letterhead,
+// Google Business Profile, LinkedIn). It replaced "Siddhivinayak Business
+// Towers"; keep every listing on this one wording.
 export const OFFICE_ADDRESS =
-  'C-303, Siddhivinayak Business Towers, Makarba, Ahmedabad, Gujarat, 380051';
+  'C-303, Siddhivinayak Towers, Makarba, Ahmedabad, Gujarat, 380051';
 
 // What the map and the directions link geocode against. Deliberately WITHOUT
 // the "C-303" unit: with it, Google resolves to the wrong building, because it
@@ -26,24 +30,20 @@ export const OFFICE_ADDRESS =
 // address. Keep these two constants separate; merging them back into one
 // breaks either the printed address or the pin.
 //
-// [PIN NOT INDEPENDENTLY VERIFIED] The building name is the client's own.
-// OpenStreetMap has no "Siddhivinayak Business Towers" anywhere in Makarba.
-// The only nearby match is "B Wing, Siddhivinayak Towers, NH147, Makarba,
-// Sarkhej, Ahmedabad 380051" at 22.9938, 72.4986 (checked 2026-08-08).
-// Google's POI coverage of Indian commercial buildings is far better than
-// OSM's, so this most likely resolves correctly there, but that has not been
-// confirmed. If the embed ever lands on the wrong spot, fall back to the
-// OSM-known name:
-//   'Siddhivinayak Towers, Makarba, Ahmedabad, Gujarat, 380051'
+// [PIN NOT INDEPENDENTLY VERIFIED IN GOOGLE] "Siddhivinayak Towers" is also
+// the name OpenStreetMap knows: "B Wing, Siddhivinayak Towers, NH147,
+// Makarba, Sarkhej, Ahmedabad 380051" at 22.9938, 72.4986 (checked
+// 2026-08-08). Nobody has yet confirmed that Google's pin for this query
+// lands on the right building; check the footer map and "Get directions".
 export const OFFICE_MAP_QUERY =
-  'Siddhivinayak Business Towers, Makarba, Ahmedabad, Gujarat, 380051';
+  'Siddhivinayak Towers, Makarba, Ahmedabad, Gujarat, 380051';
 
 // The same address broken into vCard ADR components. A .vcf cannot take one
 // flat string: it needs street, locality, region, postcode, and country as
 // separate fields or phones file the contact with a blank city. Keep in step
 // with OFFICE_ADDRESS above.
 export const OFFICE_ADDRESS_PARTS = {
-  street: 'C-303, Siddhivinayak Business Towers, Makarba',
+  street: 'C-303, Siddhivinayak Towers, Makarba',
   city: 'Ahmedabad',
   region: 'Gujarat',
   postcode: '380051',
