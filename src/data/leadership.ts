@@ -42,7 +42,7 @@ export const PARTNERS: Partner[] = [
     phone: '+919825012519',
     phoneDisplay: '+91 98250 12519',
     whatsapp: '919825012519',
-    lead: 'Sourcing across API, packaging, and finished goods.',
+    lead: 'Sourcing across API, finished formulations, and packaging.',
     // [NEEDS: bio] Years in the trade, prior companies, what they personally
     // do in the business, languages spoken.
     bio: '',

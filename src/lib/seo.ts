@@ -46,7 +46,7 @@ export const OG_IMAGE = '/og-image.png';
 export const OG_IMAGE_WIDTH = 1200;
 export const OG_IMAGE_HEIGHT = 630;
 export const OG_IMAGE_ALT =
-  'MH PharmaPack, pharmaceutical sourcing and supply. Packaging, formulation, finished goods, and API.';
+  'MH PharmaPack, pharmaceutical sourcing and supply. API, finished formulations, and packaging.';
 
 /** Google's logo requirements: crawlable, at least 112x112, a raster format
  *  Google Images supports, and legible on a plain white background. The
@@ -105,7 +105,7 @@ function organization(site?: URL): Record<string, unknown> {
     image: abs(OG_IMAGE, site),
     // Verbatim from the footer's visible one-line description.
     description:
-      'A sourcing and supply intermediary connecting pharmaceutical buyers with approved manufacturers, and coordinating each engagement end to end.',
+      'A sourcing and supply intermediary connecting pharmaceutical buyers with approved manufacturers of API, finished formulations, and packaging, and coordinating each engagement end to end.',
     email: SALES_EMAIL,
     telephone: PHONE,
     address: {
@@ -129,7 +129,7 @@ function organization(site?: URL): Record<string, unknown> {
       'Pharmaceutical sourcing',
       'Active pharmaceutical ingredients',
       'Pharmaceutical packaging',
-      'Pharmaceutical formulation development',
+      'Finished pharmaceutical formulations',
       'Finished dosage forms',
       'WHO GMP and EU GMP approved manufacturing',
       'Supplier qualification and audit support',
@@ -231,7 +231,7 @@ export function buildGraph(opts: GraphOptions): Record<string, unknown> {
 }
 
 /**
- * The five sourcing lines, as a Service with an OfferCatalog of categories.
+ * The three sourcing lines, as a Service with an OfferCatalog of categories.
  *
  * Deliberately NOT Product schema. Product implies MH is the seller of record
  * for each item, which is exactly the "our products" framing CONTENT-SPEC
@@ -251,7 +251,7 @@ export function sourcingService(
     serviceType: 'Pharmaceutical sourcing and supply intermediary',
     provider: { '@id': ORG_ID },
     description:
-      'Sourcing across packaging, formulation, finished goods, and API from WHO GMP and EU GMP approved manufacturers, with the deal coordinated end to end.',
+      'Sourcing API, finished formulations, and pharmaceutical packaging from WHO GMP and EU GMP approved manufacturers, with the deal coordinated end to end.',
     areaServed: [
       { '@type': 'Country', name: 'India' },
       { '@type': 'Place', name: 'Latin America' },

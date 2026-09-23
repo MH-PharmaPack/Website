@@ -4,58 +4,17 @@ import Intro from '../components/Intro.astro';
 import ScrollHero from '../components/ScrollHero.astro';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 import { sourcingService } from '../lib/seo';
+import { SOURCING_LINES } from '../data/lines';
 
-// Copy on this page is placed verbatim from CONTENT-SPEC.md section 4.
+// Copy on this page is placed from CONTENT-SPEC.md section 4, updated for the
+// client's change of 2026-09-23: three sourcing lines (API, Finished
+// Formulations, Packaging) instead of five, and packaging named up front.
 // Hero headline: recommended Option A. [NEEDS: final headline confirmation]
 //
-// `items` on each line is not display copy. It feeds the OfferCatalog in this
-// page's JSON-LD, and every entry in it is a word already printed in that
-// line's own `copy` below. Google's structured-data policy is that markup
-// describes what a reader can actually see, so the two must not drift: if a
-// category leaves the sentence, it leaves the list.
-
-const lines = [
-  {
-    name: 'Packaging',
-    items: ['Vials', 'Ampoules', 'Closures', 'Cartons', 'Foils', 'Labels', 'Laminates'],
-    copy: 'Primary and secondary packaging sourced to your spec: vials, ampoules, closures, cartons, foils, labels, and laminates.',
-    icon: '<path d="M4.5 8 12 4.25 19.5 8v8L12 19.75 4.5 16V8Z" stroke-linejoin="round"/><path d="M4.5 8 12 11.75 19.5 8" stroke-linejoin="round"/><path d="M12 11.75v8" stroke-linecap="round"/>',
-  },
-  {
-    name: 'Formulation',
-    items: [
-      'Oral solid dosage (OSD)',
-      'General formulation',
-      'Cephalosporins',
-      'Beta-lactams',
-    ],
-    copy: 'Formulation development and supply across OSD, general, cephalosporin, and beta-lactam lines.',
-    icon: '<path d="M10 4h4" stroke-linecap="round"/><path d="M10.75 4v5l-4.4 7.5A2.1 2.1 0 0 0 8.2 19.7h7.6a2.1 2.1 0 0 0 1.85-3.2L13.25 9V4" stroke-linejoin="round"/><path d="M8.4 14.5h7.2" stroke-linecap="round"/>',
-  },
-  {
-    name: 'Finished Goods',
-    items: ['Injectables', 'Tablets', 'Capsules', 'Liquids', 'Dry powders'],
-    copy: 'Finished dosage forms: injectables, tablets, capsules, liquids, and dry powders.',
-    icon: '<path d="M7.3 7.3a3.9 3.9 0 0 1 5.5 0l3.9 3.9a3.9 3.9 0 1 1-5.5 5.5l-3.9-3.9a3.9 3.9 0 0 1 0-5.5Z" stroke-linejoin="round"/><path d="m10.05 10.05 3.9 3.9" stroke-linecap="round"/>',
-  },
-  {
-    name: 'API',
-    items: [
-      'Corticosteroid APIs',
-      'Anticancer APIs',
-      'Antidepressant APIs',
-      'Most major therapeutic categories',
-    ],
-    copy: 'Active pharmaceutical ingredients across corticosteroid, anticancer, antidepressant, and most major therapeutic categories.',
-    icon: '<path d="M12 4 19 8v8l-7 4-7-4V8l7-4Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.6"/>',
-  },
-  {
-    name: 'Sourcing',
-    items: [],
-    copy: 'End-to-end sourcing for any one line or all five, matched to the right approved manufacturer.',
-    icon: '<path d="m9.5 14.5 5-5" stroke-linecap="round"/><path d="M11 7.5 12.7 5.8a3.4 3.4 0 0 1 4.8 4.8L15.8 12.3" stroke-linecap="round"/><path d="M13 16.5 11.3 18.2a3.4 3.4 0 0 1-4.8-4.8l1.7-1.7" stroke-linecap="round"/>',
-  },
-];
+// The lines come from src/data/lines.ts, shared with every other page. The
+// structured data names the lines only; their categories are printed in
+// running sentences here, not as a list the markup could mirror.
+const lines = SOURCING_LINES;
 
 const steps = [
   {
@@ -84,7 +43,7 @@ const steps = [
 // substituting a title of its own.
 //
 // Description: written to survive truncation at roughly 155 characters, with
-// the four product lines and both approval standards in the first sentence,
+// the three sourcing lines and both approval standards in the first sentence,
 // because that is the half that always shows.
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
@@ -92,8 +51,8 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 <Base
   title="Pharmaceutical Sourcing & Supply from India | MH PharmaPack"
   name="Pharmaceutical sourcing and supply"
-  description="Sourcing packaging, formulation, finished goods and API from WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Ahmedabad based."
-  schema={[sourcingService(lines, pageUrl, Astro.site)]}
+  description="Sourcing API, finished formulations and pharmaceutical packaging from WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Ahmedabad based."
+  schema={[sourcingService(lines.map((l) => ({ name: l.name })), pageUrl, Astro.site)]}
 >
   <!-- Logo intro overlay: home route only, once per session, reduced-motion safe -->
   <Intro slot="pre-shell" />
@@ -119,22 +78,30 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     <div class="mx-auto max-w-content px-5 pt-14 pb-16 md:px-8 md:pt-16 md:pb-24">
       <p class="eyebrow eyebrow-on-dark" data-reveal>What we do</p>
       <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-paper md:text-4xl" data-reveal>
-        Five sourcing lines, one point of contact.
+        Three sourcing lines, one point of contact.
       </h2>
-      <div class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-x-6">
+      <div class="mt-12 grid gap-x-10 gap-y-10 md:grid-cols-3">
         {
           lines.map((line) => (
             <div data-reveal-child>
               <svg class="h-7 w-7 text-copper-soft" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
-              <h3 class="mt-4 text-base font-bold text-paper">{line.name}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-line">{line.copy}</p>
+              <h3 class="mt-4 text-lg font-bold text-paper">{line.name}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-line md:text-base">{line.blurb}</p>
+              {line.id === 'packaging' && (
+                <a href={withBase('/catalogue')} class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-copper-soft hover:text-paper">
+                  Browse the packaging catalogue
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              )}
             </div>
           ))
         }
       </div>
       <p class="mt-12 max-w-2xl text-base leading-relaxed text-paper" data-reveal>
-        Any one of these, or all five for a single programme, matched to the right approved plant
-        and coordinated by us.{' '}<a href={withBase('/services')} class="font-semibold text-copper-soft underline underline-offset-4 hover:text-paper">What We Do</a>
+        Any one of these, or all three for a single programme, matched to the right approved plant
+        and coordinated by us from first enquiry to delivered goods.{' '}<a href={withBase('/services')} class="font-semibold text-copper-soft underline underline-offset-4 hover:text-paper">What We Do</a>
       </p>
     </div>
   </section>

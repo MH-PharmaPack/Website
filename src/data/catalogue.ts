@@ -27,6 +27,8 @@
 // Formulations have their groups defined and no items yet; the catalogue
 // shows them as "coming soon" until the first item names one of their groups.
 
+import { lineById } from './lines';
+
 export interface CatalogueType {
   id: string;
   /** Full name, as used on item pages and in breadcrumbs */
@@ -45,16 +47,23 @@ export interface CatalogueGroup {
 export interface CatalogueLine {
   id: string;
   name: string;
-  /** One line under the line's name, verbatim from CONTENT-SPEC 5.2 */
+  /** One line under the line's name (from src/data/lines.ts) */
   summary: string;
   groups: CatalogueGroup[];
 }
 
+// Line names and summaries come from the site-wide definition of the three
+// sourcing lines, so the catalogue can never name a line differently from
+// the rest of the site. Packaging is listed first here because it is the
+// line the catalogue opens on.
+const line = (id: 'api' | 'finished' | 'packaging') => {
+  const l = lineById(id);
+  return { id: l.id, name: l.name, summary: l.summary };
+};
+
 export const TAXONOMY: CatalogueLine[] = [
   {
-    id: 'packaging',
-    name: 'Packaging',
-    summary: 'Primary and secondary packaging, sourced to specification.',
+    ...line('packaging'),
     groups: [
       {
         id: 'bottles',
@@ -94,9 +103,7 @@ export const TAXONOMY: CatalogueLine[] = [
     ],
   },
   {
-    id: 'api',
-    name: 'API',
-    summary: 'Active pharmaceutical ingredients across therapeutic categories.',
+    ...line('api'),
     // CONTENT-SPEC 5.2: corticosteroids, anticancer, antidepressants, and
     // most major API categories. More groups get added as listings arrive.
     groups: [
@@ -106,16 +113,16 @@ export const TAXONOMY: CatalogueLine[] = [
     ],
   },
   {
-    id: 'finished',
-    name: 'Finished Formulations',
-    summary: 'Finished dosage forms, ready for your market.',
-    // CONTENT-SPEC 5.2, finished goods: injectables, tablets and capsules,
-    // liquids, and dry powders.
+    ...line('finished'),
+    // Formulation and Finished Goods merged (2026-09-23): dosage forms, plus
+    // the antibiotic lines that run in segregated plants.
     groups: [
       { id: 'injectables', name: 'Injectables' },
       { id: 'tablets-capsules', name: 'Tablets & Capsules' },
       { id: 'liquids', name: 'Liquids' },
       { id: 'dry-powders', name: 'Dry Powders' },
+      { id: 'cephalosporins', name: 'Cephalosporins' },
+      { id: 'beta-lactams', name: 'Beta-lactams' },
     ],
   },
 ];
