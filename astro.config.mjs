@@ -31,7 +31,7 @@ export default defineConfig({
       // The build emits more than pages. The vCard endpoints are downloads for
       // NFC taps, not documents anyone should land on from a search result, and
       // 404 is not a destination. Everything else is a real page.
-      filter: (page) => !page.endsWith('.vcf') && !/\/404\/?$/.test(page),
+      filter: (page) => !page.endsWith('.vcf') && !page.endsWith('.json') && !/\/404\/?$/.test(page),
       // No changefreq and no priority: Google ignores both (confirmed in its own
       // sitemap docs), and emitting them just adds bytes and a false impression
       // of control. lastmod is likewise omitted rather than stamped with the

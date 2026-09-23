@@ -1,0 +1,553 @@
+---
+// Search suggestions for any form marked [data-suggest] (the home hero's
+// catalogue search, for now). As the visitor types they see matching
+// catalogue categories and items, each a link, and a last row that runs the
+// full search. Keyboard: arrows move, Enter opens, Escape closes.
+//
+// Two presentations, one set of suggestions:
+//   desktop (fine pointer, 768px and up): a dropdown under the field. It is
+//     fixed-positioned outside the hero, because the hero's frame clips its
+//     own content, and it closes if the page scrolls (scrolling drives the
+//     hero animation, which fades the field away);
+//   phones and touch screens: tapping the field opens a full-screen search
+//     sheet with its own input at the top. The on-screen keyboard would
+//     otherwise push the page, scroll the hero animation on, and fade the
+//     field out mid-typing; the sheet sits above all of that.
+//
+// The data (/search-index.json, see src/pages/search-index.json.ts) loads
+// the first time someone reaches for the search, not with the page.
+//
+// PLANNED (client, 2026-09-23): natural-language search with AI, in a later
+// update. This panel is where it would appear.
+---
+
+<div class="ss-drop" data-ss-drop hidden>
+  <div class="ss-list" role="listbox" id="ss-drop-list" aria-label="Search suggestions"></div>
+</div>
+
+<dialog class="ss-sheet" data-ss-sheet aria-label="Search the catalogue">
+  <form class="ss-sheet-bar" data-ss-sheet-form method="get" role="search">
+    <button type="button" class="ss-back" data-ss-close aria-label="Close search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m14.5 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <label class="sr-only" for="ss-sheet-input">What are you looking for?</label>
+    <input
+      id="ss-sheet-input"
+      class="ss-sheet-input"
+      name="q"
+      type="search"
+      placeholder="What are you looking for?"
+      autocomplete="off"
+      enterkeyhint="search"
+      autofocus
+      role="combobox"
+      aria-autocomplete="list"
+      aria-controls="ss-sheet-list"
+      aria-expanded="true"
+    />
+  </form>
+  <div class="ss-list ss-sheet-list" role="listbox" id="ss-sheet-list" aria-label="Search suggestions"></div>
+</dialog>
+
+<style is:global>
+  /* Rows are built by the script, so these rules are global on purpose. */
+  .ss-drop {
+    position: fixed;
+    z-index: 60;
+    max-height: min(26rem, 60vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: #ffffff;
+    box-shadow: 0 24px 60px -18px rgba(3, 8, 24, 0.55);
+    text-align: left;
+    text-shadow: none;
+  }
+  .ss-list {
+    padding: 0.35rem;
+  }
+  .ss-h {
+    margin: 0;
+    padding: 0.6rem 0.75rem 0.3rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-steel-deep);
+  }
+  .ss-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.375rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ss-opt:hover,
+  .ss-opt[aria-selected='true'] {
+    background: var(--color-paper-warm);
+  }
+  .ss-opt-main {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.9375rem;
+    line-height: 1.3;
+  }
+  .ss-opt-main mark {
+    background: none;
+    color: inherit;
+    font-weight: 700;
+  }
+  .ss-opt-sub {
+    display: block;
+    margin-top: 0.1rem;
+    font-size: 0.75rem;
+    color: var(--color-steel-deep);
+  }
+  .ss-opt-n {
+    flex: none;
+    font-size: 0.75rem;
+    color: var(--color-steel-deep);
+  }
+  .ss-th {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.15rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    background: #ffffff;
+    object-fit: contain;
+  }
+  .ss-ic {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.25rem;
+    background: var(--color-paper);
+    color: var(--color-steel-deep);
+  }
+  .ss-ic svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .ss-all {
+    margin-top: 0.25rem;
+    border-top: 1px solid var(--color-line);
+    border-radius: 0 0 0.375rem 0.375rem;
+    color: var(--color-copper-deep);
+    font-weight: 600;
+  }
+  .ss-all .ss-ic {
+    background: var(--color-copper);
+    color: #ffffff;
+  }
+  .ss-empty {
+    margin: 0;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-steel-deep);
+  }
+  .ss-loading {
+    margin: 0;
+    padding: 0.9rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-steel-deep);
+  }
+
+  /* The phone sheet: full screen, input bar on top, suggestions below. */
+  .ss-sheet {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: #ffffff;
+    color: var(--color-ink);
+  }
+  .ss-sheet::backdrop {
+    background: rgba(28, 38, 52, 0.4);
+  }
+  .ss-sheet-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: calc(env(safe-area-inset-top) + 0.5rem) 0.75rem 0.5rem 0.25rem;
+    border-bottom: 1px solid var(--color-line);
+    background: #ffffff;
+  }
+  .ss-back {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-steel-deep);
+    cursor: pointer;
+  }
+  .ss-back svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+  .ss-sheet-input {
+    flex: 1;
+    min-width: 0;
+    height: 2.75rem;
+    padding: 0 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.375rem;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-size: 1rem;
+    outline: none;
+  }
+  .ss-sheet-input:focus {
+    border-color: var(--color-steel);
+    background: #ffffff;
+  }
+  .ss-sheet-list {
+    padding: 0.5rem 0.5rem calc(env(safe-area-inset-bottom) + 1rem);
+  }
+</style>
+
+<script>
+  import { withBase } from '../config';
+  import { normalizeSearch, searchTokens, matchesTokens } from '../scripts/search-normalize';
+
+  type Cat = { l: string; u: string; h: string; n: number; s: string; top: boolean };
+  type Item = { n: string; h: string; c: string; d: string; t: string; s: string };
+  type Index = { cats: Cat[]; items: Item[] };
+
+  const drop = document.querySelector<HTMLElement>('[data-ss-drop]');
+  const dropList = drop?.querySelector<HTMLElement>('[role="listbox"]') ?? null;
+  const sheet = document.querySelector<HTMLDialogElement>('[data-ss-sheet]');
+  const sheetForm = document.querySelector<HTMLFormElement>('[data-ss-sheet-form]');
+  const sheetInput = document.getElementById('ss-sheet-input') as HTMLInputElement | null;
+  const sheetList = document.getElementById('ss-sheet-list');
+  const catalogueUrl = withBase('/catalogue');
+  const contactUrl = withBase('/contact');
+
+  let indexP: Promise<Index> | null = null;
+  let index: Index | null = null;
+  const loadIndex = () =>
+    (indexP ??= fetch(withBase('/search-index.json'))
+      .then((r) => r.json() as Promise<Index>)
+      .then((d) => (index = d))
+      .catch(() => {
+        indexP = null;
+        return { cats: [], items: [] };
+      }));
+
+  const useSheet = () => window.matchMedia('(max-width: 767px), (pointer: coarse)').matches;
+
+  // ---- Matching and ranking -------------------------------------------
+  // Inclusion is the catalogue's own rule (every typed word appears), so the
+  // "see all" count matches the page it opens. Ranking prefers words that
+  // START with what was typed, and matches in the name over matches elsewhere.
+  const words = (s: string) => ` ${normalizeSearch(s)} `;
+  const scoreItem = (it: Item, toks: string[]) => {
+    const name = words(it.n);
+    let s = 0;
+    for (const t of toks) {
+      if (name.includes(` ${t}`)) s += 4;
+      else if (name.includes(t)) s += 2;
+      else if (` ${it.s} `.includes(` ${t}`)) s += 1;
+    }
+    if (name.startsWith(` ${toks[0]}`)) s += 2;
+    return s;
+  };
+  function suggest(q: string) {
+    const toks = searchTokens(q);
+    if (!index || toks.length === 0) return null;
+    const matched = index.items.filter((it) => matchesTokens(it.s, toks));
+    const items = matched
+      .map((it, i) => ({ it, i, s: scoreItem(it, toks) }))
+      .sort((a, b) => b.s - a.s || a.i - b.i)
+      .slice(0, 6)
+      .map((x) => x.it);
+    const cats = index.cats
+      .filter((c) => toks.every((t) => ` ${c.s} `.includes(` ${t}`)))
+      .slice(0, 3);
+    return { toks, items, cats, total: matched.length };
+  }
+
+  // ---- Rendering --------------------------------------------------------
+  const svg = (d: string) =>
+    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="${d}" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const ICON_GRID = 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z';
+  const ICON_SEARCH = 'M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13ZM15.5 15.5 20 20';
+  const ICON_CHAT = 'M4 5h16v11H8l-4 4V5Z';
+
+  // Bold the parts of a name that match what was typed. Built from text
+  // nodes, never HTML strings, so no item name can inject markup.
+  function highlighted(text: string, toks: string[]): DocumentFragment {
+    const frag = document.createDocumentFragment();
+    const lower = text.toLowerCase();
+    const marks: [number, number][] = [];
+    for (const t of toks) {
+      let i = lower.indexOf(t);
+      while (i >= 0) {
+        marks.push([i, i + t.length]);
+        i = lower.indexOf(t, i + t.length);
+      }
+    }
+    marks.sort((a, b) => a[0] - b[0]);
+    const merged: [number, number][] = [];
+    for (const m of marks) {
+      const last = merged[merged.length - 1];
+      if (last && m[0] <= last[1]) last[1] = Math.max(last[1], m[1]);
+      else merged.push([...m] as [number, number]);
+    }
+    let pos = 0;
+    for (const [a, b] of merged) {
+      if (a > pos) frag.append(text.slice(pos, a));
+      const mk = document.createElement('mark');
+      mk.textContent = text.slice(a, b);
+      frag.append(mk);
+      pos = b;
+    }
+    if (pos < text.length) frag.append(text.slice(pos));
+    return frag;
+  }
+
+  let optSeq = 0;
+  function option(href: string, lead: HTMLElement, main: Node | string, sub?: string, count?: string, extra = '') {
+    const a = document.createElement('a');
+    a.className = `ss-opt ${extra}`.trim();
+    a.href = href;
+    a.id = `ss-opt-${++optSeq}`;
+    a.setAttribute('role', 'option');
+    a.setAttribute('aria-selected', 'false');
+    a.tabIndex = -1;
+    a.append(lead);
+    const m = document.createElement('span');
+    m.className = 'ss-opt-main';
+    m.append(main);
+    if (sub) {
+      const s = document.createElement('span');
+      s.className = 'ss-opt-sub';
+      s.textContent = sub;
+      m.append(s);
+    }
+    a.append(m);
+    if (count) {
+      const n = document.createElement('span');
+      n.className = 'ss-opt-n';
+      n.textContent = count;
+      a.append(n);
+    }
+    // Keep focus in the input while choosing with the mouse.
+    a.addEventListener('pointerdown', (e) => e.preventDefault());
+    return a;
+  }
+  const icon = (d: string) => {
+    const s = document.createElement('span');
+    s.className = 'ss-ic';
+    s.innerHTML = svg(d);
+    return s;
+  };
+  const thumb = (src: string) => {
+    if (!src) return icon(ICON_GRID);
+    const img = document.createElement('img');
+    img.className = 'ss-th';
+    img.src = src;
+    img.alt = '';
+    img.loading = 'lazy';
+    return img;
+  };
+  const heading = (text: string) => {
+    const h = document.createElement('p');
+    h.className = 'ss-h';
+    h.setAttribute('role', 'presentation');
+    h.textContent = text;
+    return h;
+  };
+
+  function render(list: HTMLElement, q: string) {
+    list.replaceChildren();
+    if (!index) {
+      const p = document.createElement('p');
+      p.className = 'ss-loading';
+      p.textContent = 'Loading the catalogue…';
+      list.append(p);
+      return;
+    }
+    const r = suggest(q);
+    if (!r) {
+      // Nothing typed yet: offer the catalogue's groups to browse.
+      list.append(heading('Browse the catalogue'));
+      for (const c of index.cats.filter((c) => c.top)) {
+        list.append(option(c.h, icon(ICON_GRID), c.l, c.u, `${c.n}`));
+      }
+      return;
+    }
+    const raw = q.trim();
+    if (r.cats.length) {
+      list.append(heading('Categories'));
+      for (const c of r.cats) list.append(option(c.h, icon(ICON_GRID), highlighted(c.l, r.toks), `in ${c.u}`, `${c.n}`));
+    }
+    if (r.items.length) {
+      list.append(heading('Items'));
+      for (const it of r.items) list.append(option(it.h, thumb(it.t), highlighted(it.n, r.toks), [it.c, it.d].filter(Boolean).join(' · ')));
+    }
+    if (r.total > 0) {
+      list.append(
+        option(
+          `${catalogueUrl}?q=${encodeURIComponent(raw)}`,
+          icon(ICON_SEARCH),
+          `See all ${r.total} result${r.total === 1 ? '' : 's'} for “${raw}”`,
+          undefined,
+          undefined,
+          'ss-all',
+        ),
+      );
+    } else if (!r.cats.length) {
+      const p = document.createElement('p');
+      p.className = 'ss-empty';
+      p.textContent = `Nothing in the catalogue matches “${raw}” yet. We can very likely still source it.`;
+      list.append(p);
+      list.append(option(contactUrl, icon(ICON_CHAT), 'Ask us to source it', 'Request a Quote', undefined, 'ss-all'));
+    }
+  }
+
+  // ---- Keyboard ----------------------------------------------------------
+  function keyNav(e: KeyboardEvent, input: HTMLInputElement, list: HTMLElement, close: () => void) {
+    const opts = [...list.querySelectorAll<HTMLAnchorElement>('[role="option"]')];
+    const cur = opts.findIndex((o) => o.getAttribute('aria-selected') === 'true');
+    const select = (i: number) => {
+      opts.forEach((o, j) => o.setAttribute('aria-selected', String(j === i)));
+      if (i >= 0) {
+        input.setAttribute('aria-activedescendant', opts[i].id);
+        opts[i].scrollIntoView({ block: 'nearest' });
+      } else input.removeAttribute('aria-activedescendant');
+    };
+    if (e.key === 'ArrowDown' && opts.length) {
+      e.preventDefault();
+      select(cur < opts.length - 1 ? cur + 1 : 0);
+    } else if (e.key === 'ArrowUp' && opts.length) {
+      e.preventDefault();
+      select(cur > 0 ? cur - 1 : opts.length - 1);
+    } else if (e.key === 'Enter' && cur >= 0) {
+      e.preventDefault();
+      window.location.href = opts[cur].href;
+    } else if (e.key === 'Escape') {
+      close();
+    }
+  }
+
+  // ---- Wiring each [data-suggest] form ---------------------------------------
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-suggest]')) {
+    const input = form.querySelector<HTMLInputElement>('input[name="q"]');
+    const anchor = form.querySelector<HTMLElement>('[data-suggest-anchor]') ?? input;
+    if (!input || !anchor || !drop || !dropList) continue;
+
+    input.setAttribute('role', 'combobox');
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-controls', 'ss-drop-list');
+    input.setAttribute('aria-expanded', 'false');
+
+    // Warm the data as soon as someone heads for the field.
+    for (const ev of ['pointerenter', 'touchstart', 'focus']) {
+      input.addEventListener(ev, () => void loadIndex(), { passive: true, once: true });
+    }
+
+    // Desktop dropdown.
+    let openAtY = 0;
+    const place = () => {
+      const r = anchor.getBoundingClientRect();
+      drop.style.left = `${r.left}px`;
+      drop.style.top = `${r.bottom + 8}px`;
+      drop.style.width = `${r.width}px`;
+    };
+    const openDrop = () => {
+      if (useSheet()) return;
+      place();
+      render(dropList, input.value);
+      drop.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      openAtY = window.scrollY;
+      if (!index) loadIndex().then(() => !drop.hidden && render(dropList, input.value));
+    };
+    const closeDrop = () => {
+      drop.hidden = true;
+      input.setAttribute('aria-expanded', 'false');
+      input.removeAttribute('aria-activedescendant');
+    };
+    input.addEventListener('focus', () => {
+      if (useSheet()) return;
+      openDrop();
+    });
+    input.addEventListener('input', () => {
+      if (useSheet()) return;
+      if (drop.hidden) openDrop();
+      else render(dropList, input.value);
+    });
+    input.addEventListener('blur', () => closeDrop());
+    input.addEventListener('keydown', (e) => {
+      if (!drop.hidden) keyNav(e, input, dropList, () => closeDrop());
+    });
+    window.addEventListener('resize', () => !drop.hidden && place());
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (drop.hidden) return;
+        if (Math.abs(window.scrollY - openAtY) > 40) {
+          closeDrop();
+          input.blur();
+        } else place();
+      },
+      { passive: true },
+    );
+
+    // Phone sheet. Taps on the field open the sheet instead of focusing the
+    // field (so the keyboard never pushes the hero); keyboard focus opens it
+    // too. The sheet's input autofocuses inside the same tap.
+    const openSheet = () => {
+      if (!sheet || !sheetInput || !sheetList || sheet.open) return;
+      input.blur();
+      sheetInput.value = input.value;
+      render(sheetList, sheetInput.value);
+      sheet.showModal();
+      sheetInput.focus();
+      if (!index) loadIndex().then(() => sheet.open && render(sheetList, sheetInput.value));
+    };
+    input.addEventListener('pointerdown', (e) => {
+      if (!useSheet()) return;
+      e.preventDefault();
+      void loadIndex();
+    });
+    input.addEventListener('click', () => {
+      if (useSheet()) openSheet();
+    });
+    input.addEventListener('focus', () => {
+      if (useSheet()) openSheet();
+    });
+
+    if (sheet && sheetInput && sheetList && sheetForm) {
+      sheetForm.action = form.action;
+      sheetInput.addEventListener('input', () => render(sheetList, sheetInput.value));
+      sheetInput.addEventListener('keydown', (e) => keyNav(e, sheetInput, sheetList, () => sheet.close()));
+      sheet.addEventListener('close', () => {
+        input.value = sheetInput.value;
+      });
+      sheet.querySelector('[data-ss-close]')?.addEventListener('click', () => sheet.close());
+    }
+  }
+</script>

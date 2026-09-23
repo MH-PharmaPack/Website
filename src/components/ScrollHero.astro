@@ -7,6 +7,7 @@
 // sized for the ~344px cover-screen floor first, and the scene script drops
 // particle count and pixel ratio on narrow screens.
 import { withBase } from '../config';
+import SearchSuggest from './SearchSuggest.astro';
 ---
 
 <section class="sh-root" data-scroll-hero>
@@ -49,9 +50,9 @@ import { withBase } from '../config';
              hero buttons became the text links under it; Request a Quote also
              stays in the header on desktop and in the phone pill below the
              hero. On short screens the "Try" shortcuts give way first. -->
-        <form class="sh-search" action={withBase('/catalogue')} method="get" role="search">
+        <form class="sh-search" action={withBase('/catalogue')} method="get" role="search" data-suggest>
           <label class="sr-only" for="hero-search">What are you looking for?</label>
-          <div class="sh-field">
+          <div class="sh-field" data-suggest-anchor>
             <svg class="sh-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 4.5 4.5" stroke-linecap="round" />
             </svg>
@@ -122,6 +123,10 @@ import { withBase } from '../config';
     <div class="sh-poster" data-sh="poster" aria-hidden="true"></div>
   </div>
 </section>
+
+<!-- Suggestions for the hero search: rendered outside the section because
+     the stage clips its own content and the dropdown must hang below it. -->
+<SearchSuggest />
 
 <style>
   /* ---- Catalogue search in the opening frame ----------------------- */

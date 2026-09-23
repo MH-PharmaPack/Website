@@ -961,6 +961,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
 
 <script>
   import { readReturn, writeReturn } from '../scripts/catalogue-return';
+  import { searchTokens, matchesTokens } from '../scripts/search-normalize';
 
   // One state, two sets of controls (sidebar tree and rows). Every control
   // carries what it selects in data attributes, so the same handlers and the
@@ -1029,7 +1030,15 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
     type Scope = { line: string; group?: string; type?: string };
     const inScope = (el: HTMLElement, s: Scope) =>
       el.dataset.line === s.line && (!s.group || el.dataset.group === s.group) && (!s.type || el.dataset.type === s.type);
-    const matchesQuery = (el: HTMLElement, q: string) => !q || (el.dataset.search ?? '').includes(q);
+    // Word-by-word matching shared with the search suggestions, so the count a
+    // suggestion promises is the count this page shows.
+    let lastQ: string | null = null;
+    let lastTokens: string[] = [];
+    const tokensOf = (q: string) => (q === lastQ ? lastTokens : ((lastQ = q), (lastTokens = searchTokens(q))));
+    const matchesQuery = (el: HTMLElement, q: string) => {
+      const t = tokensOf(q);
+      return t.length === 0 || matchesTokens(el.dataset.search ?? '', t);
+    };
     const countIn = (s: Scope, q: string) => items.filter((el) => inScope(el, s) && matchesQuery(el, q)).length;
 
     // Horizontal-only: brings a chosen button into view inside a sideways

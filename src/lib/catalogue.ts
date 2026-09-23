@@ -20,6 +20,7 @@ import {
   type CatalogueType,
 } from '../data/catalogue';
 import { SALES_EMAIL, WHATSAPP, withBase } from '../config';
+import { normalizeSearch } from '../scripts/search-normalize';
 
 // Images live in src/assets/catalogue/ and are looked up by the filename each
 // entry carries. A missing file fails the build here, loudly, rather than
@@ -234,22 +235,24 @@ export function itemNote(item: CatalogueItem): string | undefined {
     : undefined;
 }
 
-/** Everything the client-side search matches against, precomputed per card. */
+/** Everything the client-side search matches against, precomputed per card
+ *  and normalised the same way typed queries are (src/scripts/search-normalize.ts). */
 export function searchText(item: CatalogueItem): string {
   const p = placeOf(item);
-  return [
-    item.name,
-    p.line.name,
-    p.group.name,
-    p.type?.name,
-    item.material,
-    item.weight,
-    item.keywords,
-    ...itemFacts(item).map((f) => f.value),
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase();
+  return normalizeSearch(
+    [
+      item.name,
+      p.line.name,
+      p.group.name,
+      p.type?.name,
+      item.material,
+      item.weight,
+      item.keywords,
+      ...itemFacts(item).map((f) => f.value),
+    ]
+      .filter(Boolean)
+      .join(' '),
+  );
 }
 
 // ---- Enquiry links -------------------------------------------------------
