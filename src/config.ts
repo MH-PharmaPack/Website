@@ -57,10 +57,13 @@ export const OFFICE_ADDRESS_PARTS = {
 // that confirmation. Any backend that accepts the same JSON can replace it
 // here in one line.
 //
-// [NEEDS: deploy tools/rfq-backend and paste its /exec URL.] While empty,
-// the form still works: Send opens the buyer's email app with the enquiry
-// written out, addressed to the sales desk.
-export const FORM_ENDPOINT = '';
+// Deployed 2026-09-23 from the sales@ account ("MH quote form"). To change
+// the script without changing this URL, edit the existing deployment
+// (Deploy > Manage deployments > edit > New version); a NEW deployment gets
+// a new URL. If this is ever emptied, the form still works: Send opens the
+// buyer's email app with the enquiry written out, addressed to sales.
+export const FORM_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbybEf-aa_wBLQ3CBBFbzv4Qa-_ll4FOa17osVDSzSlo47RqCAXItV-C_WNZZDYYer6yaw/exec';
 
 // Cloudflare Turnstile site key (the public half; the secret lives only in
 // the backend's script properties). Empty = no spam check on the page. The

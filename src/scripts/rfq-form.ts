@@ -580,6 +580,11 @@ export function initRfqForm(form: HTMLFormElement): void {
         body: JSON.stringify({ v: 1, fields: ps.filter(([k]) => k), token, website: hp.value }),
         signal: ctl.signal,
       });
+      // Google answers every POST with a redirect to its own response page,
+      // issued only after the script has run. That page can briefly fail to
+      // load (seen right after a deployment). The emails have gone by then,
+      // so count it as sent rather than inviting a duplicate second send.
+      if (!res.ok && res.url.startsWith('https://script.googleusercontent.com/')) return { confirmation: false };
       const data = (await res.json()) as { ok?: boolean; error?: string; confirmation?: boolean };
       if (!data.ok) throw new SendError(data.error || 'failed');
       return { confirmation: data.confirmation === true };
