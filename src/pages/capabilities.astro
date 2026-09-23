@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
-import CatalogueCard from '../components/CatalogueCard.astro';
+import EnquiryTray from '../components/EnquiryTray.astro';
+import { Image } from 'astro:assets';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 import { sourcingService } from '../lib/seo';
-import { CATALOGUE, CATALOGUE_CATEGORIES } from '../data/catalogue';
-import { MATERIAL_FACETS } from '../lib/catalogue';
+import { TAXONOMY } from '../data/catalogue';
+import { ITEMS, placeOf, imageFor, scopeHref } from '../lib/catalogue';
 
 // WHAT WE SOURCE (CONTENT-SPEC section 6). The frame on this page is
 // non-negotiable: everything below is what MH sources through its network,
@@ -16,9 +17,10 @@ import { MATERIAL_FACETS } from '../lib/catalogue';
 // the tiles below, same rule as the home page: if a category leaves the page,
 // it leaves the list.
 //
-// Page order (client direction, 2026-09-23): the five lines are a compact
-// rail, not a tall accordion, so the item catalogue sits within one scroll
-// of the top on a phone instead of a screen and a half down.
+// The item-by-item catalogue has its own page, /catalogue/ (client decision
+// 2026-09-23). This page is the overview: the five lines, then a strip of
+// photo tiles, one per packaging group, each opening the catalogue at that
+// group.
 
 const lines = [
   {
@@ -82,18 +84,36 @@ const regions = [
   { name: 'South Africa', copy: 'WHO GMP and PIC/S approved facilities.' },
 ];
 
-// The catalogue's categories and item names join the page's OfferCatalog:
-// every name is printed on a visible card below, so the markup keeps to the
-// visible-words rule.
-const catalogueLines = CATALOGUE_CATEGORIES.map((cat) => ({
-  name: cat,
-  items: CATALOGUE.filter((i) => i.category === cat).map((i) => i.name),
-}));
-
-// Static counts for the first paint; the script recomputes them live.
-const countFor = (cat: string) => CATALOGUE.filter((i) => i.category === cat).length;
-const materialCount = (m: string) =>
-  CATALOGUE.filter((i) => (i.material ?? '').toLowerCase().includes(m.toLowerCase())).length;
+// ---- The packaging tiles --------------------------------------------------
+// One tile per packaging group, in taxonomy order, each with a few of its
+// own catalogue photographs. The first group gets the large tile. `photo`
+// marks a scene photograph (the pallets), which is shown framed rather than
+// cut out on white.
+const tileArt: Record<string, { images: string[]; photo?: boolean }> = {
+  bottles: {
+    images: [
+      '100-ml-boston-round-pet-bottle.jpg',
+      '60-ml-dome-pet-bottle.jpg',
+      '100-ml-dsb-round-bottle.jpg',
+      '10-ml-dropper-bottle.jpg',
+    ],
+  },
+  closures: { images: ['25-mm-crc-outer.jpg', 'flip-top-cap-lens-cleaner-bottle.jpg'] },
+  'vial-seals': { images: ['flip-off-seal.jpg'] },
+  flexible: { images: ['standard-pouch.jpg'] },
+  pallets: { images: ['pallet-nestable.jpg'], photo: true },
+};
+const packaging = TAXONOMY.find((l) => l.id === 'packaging');
+const packagingItems = ITEMS.filter((i) => placeOf(i).line.id === 'packaging');
+const tiles = (packaging?.groups ?? [])
+  .map((g) => ({
+    ...g,
+    href: scopeHref({ line: 'packaging', group: g.id }),
+    count: ITEMS.filter((i) => placeOf(i).group.id === g.id).length,
+    typeCount: g.types?.length ?? 0,
+    art: tileArt[g.id] ?? { images: [] },
+  }))
+  .filter((t) => t.count > 0);
 
 // Title: nav anchor first, then the four concrete lines, brand last, same
 // pattern as the leadership page. The lines are the phrases a buyer would
@@ -107,18 +127,34 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 <Base
   title="What We Source: Packaging, Formulation, Finished Goods, API | MH PharmaPack"
   name="What we source"
-  description="Packaging, formulation, finished dosage forms and API, sourced through WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Browse the searchable packaging catalogue: caps, closures, bottles and more."
+  description="Packaging, formulation, finished dosage forms and API, sourced through WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Browse the catalogue: bottles, caps, closures, vial seals, flexible packaging and pallets."
   pageType="CollectionPage"
   breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'What We Source' }]}
   schema={[
     sourcingService(
-      [...lines.map((l) => ({ name: l.name, items: l.categories })), ...catalogueLines],
+      [
+        ...lines.map((l) => ({ name: l.name, items: l.categories })),
+        ...tiles.map((t) => ({ name: t.name })),
+      ],
       pageUrl,
       Astro.site,
     ),
   ]}
   mainEntityId={`${pageUrl}#service`}
 >
+  <!-- The catalogue used to live on this page. Links into it (the ?group=
+       style filters, the old ?cat= ones, #catalogue) now go to /catalogue/
+       with the same filters. Inline and early so there is no flash of the
+       wrong page. -->
+  <script is:inline define:vars={{ catalogue: withBase('/catalogue') }}>
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var keys = ['line', 'group', 'type', 'q', 'mat', 'cat', 'sort'];
+      var linked = keys.some(function (k) { return p.has(k); });
+      if (linked || location.hash === '#catalogue') location.replace(catalogue + location.search);
+    })();
+  </script>
+
   <!-- 6.1 Intro. The paragraph is verbatim spec copy; the headline is authored
        to say only what that paragraph already says. [NEEDS: confirm headline] -->
   <section class="bg-paper">
@@ -134,7 +170,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
         exclusively from WHO GMP and EU GMP approved facilities.
       </p>
       <div class="mt-7 flex flex-wrap gap-3" data-reveal>
-        <a href="#catalogue" class="btn btn-primary">Browse the packaging catalogue</a>
+        <a href={withBase('/catalogue')} class="btn btn-primary">Browse the catalogue</a>
         <a href={withBase('/contact')} class="btn btn-secondary">Request a Quote</a>
       </div>
     </div>
@@ -143,8 +179,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   <!-- 6.2 The five lines. One tile per line with its categories set as a
        short run of text, so all five fit in one row on a desktop and in a
        swipeable rail on a phone (each tile shows the edge of the next, which
-       is the cue to swipe). About a third of the height of the old accordion,
-       with nothing hidden behind a toggle. -->
+       is the cue to swipe). -->
   <section class="border-t border-line bg-paper" id="lines">
     <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
       <p class="eyebrow" data-reveal>The sourcing matrix</p>
@@ -163,7 +198,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
               )}
               {line.note && <p class="mt-2 text-sm leading-relaxed text-steel-deep">{line.note}</p>}
               {line.name === 'Packaging' && (
-                <a href="#catalogue" class="lines-link">
+                <a href={withBase('/catalogue')} class="lines-link">
                   See the catalogue
                   <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
@@ -177,136 +212,59 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     </div>
   </section>
 
-  <!-- The sourcing catalogue: partner-plant packaging items, searchable and
-       filterable client side. Data in src/data/catalogue.ts; the partners are
-       deliberately unnamed (see the note there). Framing stays "what we
-       source", never "our products" (guardrails 5 and 6).
-
-       Controls: a search box, a category row (single choice, counts live), a
-       Material menu (multi-choice, counts live; a bottom sheet on phones), and
-       a strip of the filters in force with a Clear all. They are hidden until
-       the script arms them, so without JS the full catalogue is simply
-       visible with nothing interactive lying dead. Every card links to the
-       item's own page, which carries its facts and the enquiry buttons. -->
-  <section class="border-t border-line bg-paper-warm" id="catalogue">
+  <!-- The packaging range as photo tiles (the one piece of "concept B" kept,
+       client decision 2026-09-23). Each tile opens the catalogue at its
+       group. Heading and line authored. [NEEDS: confirm copy] -->
+  <section class="border-t border-line bg-paper-warm" id="packaging-range">
     <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
       <p class="eyebrow" data-reveal>Sourcing catalogue</p>
-      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
-        The packaging range, item by item.
-      </h2>
-      <p class="mt-5 max-w-2xl text-base leading-relaxed text-steel-deep" data-reveal>
-        Every item below is sourced through our partner network and supplied to your
-        specification: what we source, not what we make. Open an item for its details, or enquire
-        about it directly. The catalogue grows as the network does.
-      </p>
-
-      <div class="mt-8 md:mt-10" data-cat-controls hidden>
-        <div class="flex gap-2 md:gap-3">
-          <label class="relative block min-w-0 flex-1 md:max-w-md">
-            <span class="sr-only">Search the catalogue</span>
-            <svg
-              class="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-steel-deep"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              aria-hidden="true"
-            >
-              <circle cx="10.5" cy="10.5" r="6.5" />
-              <path d="m15.5 15.5 4.5 4.5" stroke-linecap="round" />
-            </svg>
-            <input
-              id="cat-search"
-              type="search"
-              autocomplete="off"
-              placeholder="Search item, size, material"
-              class="h-11 w-full rounded-sm border border-line bg-white pr-4 pl-11 text-base text-ink transition-colors placeholder:text-muted focus:border-steel focus:outline-none"
-            />
-          </label>
-
-          <details class="facet" data-facet>
-            <summary class="facet-btn">
-              <span>Material</span>
-              <span class="facet-badge" data-facet-count hidden></span>
-              <svg class="facet-chev h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </summary>
-            <div class="facet-panel">
-              <div class="facet-head">
-                <span class="text-base font-bold text-ink">Material</span>
-                <button type="button" class="facet-x" data-facet-close aria-label="Close">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
-                  </svg>
-                </button>
-              </div>
-              <ul class="facet-list" role="group" aria-label="Filter by material">
-                {
-                  MATERIAL_FACETS.map((m) => (
-                    <li>
-                      <label class="facet-opt">
-                        <input type="checkbox" value={m} data-facet-opt />
-                        <span class="flex-1">{m}</span>
-                        <span class="facet-n" data-facet-n>{materialCount(m)}</span>
-                      </label>
-                    </li>
-                  ))
-                }
-              </ul>
-              <div class="facet-foot">
-                <button type="button" class="facet-clear" data-facet-clear>Clear</button>
-                <button type="button" class="btn btn-primary !min-h-11 flex-1 !px-4 text-sm" data-facet-apply>
-                  Show all items
-                </button>
-              </div>
-            </div>
-          </details>
+      <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
+            Browse the packaging range.
+          </h2>
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-steel-deep" data-reveal>
+            {packagingItems.length} items from approved partner plants, each with its specification
+            and an enquiry button.
+          </p>
         </div>
-
-        <div class="cat-seg-wrap mt-3">
-          <div class="cat-seg" role="group" aria-label="Category">
-            <button type="button" class="seg-btn" data-cat-filter="" aria-pressed="true">
-              All <span class="seg-n" data-seg-n>{CATALOGUE.length}</span>
-            </button>
-            {
-              CATALOGUE_CATEGORIES.map((c) => (
-                <button type="button" class="seg-btn" data-cat-filter={c} aria-pressed="false">
-                  {c} <span class="seg-n" data-seg-n>{countFor(c)}</span>
-                </button>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="mt-4 flex flex-wrap items-center gap-2">
-          <span class="mr-1 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite"></span>
-          <span class="contents" data-cat-active></span>
-          <button type="button" class="cat-clear" data-cat-clear hidden>Clear all</button>
-        </div>
+        <a href={withBase('/catalogue')} class="btn btn-secondary shrink-0 self-start md:self-auto" data-reveal>
+          Open the full catalogue
+        </a>
       </div>
 
-      <ul
-        class="mt-6 grid list-none grid-cols-2 gap-x-3 gap-y-6 p-0 sm:grid-cols-3 md:gap-x-4 lg:grid-cols-4 xl:grid-cols-5"
-        data-cat-grid
-      >
-        {CATALOGUE.map((item) => <CatalogueCard item={item} />)}
+      <ul class="tiles mt-8 md:mt-10">
+        {
+          tiles.map((t, i) => (
+            <li class:list={['tile-li', { 'tile-big': i === 0 }]} data-reveal-child>
+              <a href={t.href} class="tile">
+                <span class:list={['tile-art', { 'tile-art-photo': t.art.photo }]}>
+                  {t.art.images.map((file) => (
+                    <Image
+                      src={imageFor(file)}
+                      alt=""
+                      width={i === 0 ? 320 : 240}
+                      densities={[1, 2]}
+                      format="webp"
+                      quality={78}
+                      loading="lazy"
+                    />
+                  ))}
+                </span>
+                <span class="tile-label">
+                  <span class="tile-name">{t.name}</span>
+                  <span class="tile-n">
+                    {t.count} item{t.count === 1 ? '' : 's'}
+                    {t.typeCount > 1 ? ` · ${t.typeCount} types` : ''}
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
       </ul>
-
-      <div class="mt-10 text-center" data-cat-more-wrap hidden>
-        <button type="button" class="btn btn-secondary" data-cat-more>Show all items</button>
-      </div>
-
-      <p class="mt-6 max-w-xl text-base leading-relaxed text-steel-deep" data-cat-empty hidden>
-        Nothing in the catalogue matches{' '}
-        <span class="font-semibold text-ink" data-cat-empty-q></span>. We can very likely still
-        source it:{' '}
-        <a
-          href={withBase('/contact')}
-          class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper"
-        >
-          tell us what you need
-        </a>.
+      <p class="mt-6 text-sm text-steel-deep" data-reveal>
+        API and finished formulations are being added to the catalogue.
       </p>
     </div>
   </section>
@@ -380,6 +338,8 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     </div>
   </section>
 
+  <EnquiryTray />
+
   <style>
     /* ---- The five-line rail ------------------------------------------ */
     /* Phone: a horizontal snap rail bleeding to the screen edges, each tile
@@ -445,277 +405,123 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
       }
     }
 
-    /* ---- Catalogue controls ------------------------------------------ */
-    /* Category row: one choice at a time, pill group, scrolls sideways on a
-       phone (bleeding to the edges) and wraps on wider screens. */
-    .cat-seg-wrap {
-      margin: 0.75rem -1.25rem 0;
-      padding: 0 1.25rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .cat-seg-wrap::-webkit-scrollbar {
-      display: none;
-    }
-    .cat-seg {
-      display: inline-flex;
-      gap: 0.25rem;
-      padding: 0.25rem;
-      border: 1px solid var(--color-line);
-      border-radius: 999px;
-      background: #ffffff;
-    }
-    .seg-btn {
-      flex: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.5rem;
-      padding: 0 0.9rem;
-      border: 0;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--color-steel-deep);
-      font-size: 0.875rem;
-      font-weight: 600;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease;
-    }
-    .seg-btn:hover {
-      background: var(--color-paper-warm);
-      color: var(--color-ink);
-    }
-    .seg-btn[aria-pressed='true'] {
-      background: var(--color-steel-deep);
-      color: var(--color-paper);
-    }
-    .seg-btn.is-empty:not([aria-pressed='true']) {
-      color: var(--color-muted);
-    }
-    .seg-n {
-      font-size: 0.75rem;
-      font-weight: 600;
-      opacity: 0.8;
-    }
-    @media (min-width: 768px) {
-      .cat-seg-wrap {
-        margin: 0.75rem 0 0;
-        padding: 0;
-        overflow: visible;
-      }
-      .cat-seg {
-        flex-wrap: wrap;
-      }
-    }
-
-    /* Material menu: a <details>, so it opens and closes with no script and
-       the script only adds outside-click and Escape. Desktop: a dropdown
-       under its button. Phone: a bottom sheet with a dimmed page behind. */
-    .facet {
-      position: relative;
-      flex: none;
-    }
-    .facet-btn {
-      list-style: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      min-height: 2.75rem;
-      padding: 0 0.9rem;
-      border: 1px solid var(--color-line);
-      border-radius: 0.25rem;
-      background: #ffffff;
-      color: var(--color-steel-deep);
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-    .facet-btn::-webkit-details-marker {
-      display: none;
-    }
-    .facet-btn:hover,
-    .facet[open] > .facet-btn,
-    .facet.is-active > .facet-btn {
-      border-color: var(--color-steel-deep);
-      color: var(--color-ink);
-    }
-    .facet-chev {
-      transition: transform 0.2s ease;
-    }
-    .facet[open] .facet-chev {
-      transform: rotate(180deg);
-    }
-    .facet-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 1.25rem;
-      height: 1.25rem;
-      padding: 0 0.35rem;
-      border-radius: 999px;
-      background: var(--color-copper);
-      color: #ffffff;
-      font-size: 0.7rem;
-      line-height: 1;
-    }
-    .facet-panel {
-      position: absolute;
-      top: calc(100% + 0.4rem);
-      right: 0;
-      z-index: 60;
-      min-width: 16rem;
-      padding: 0.5rem;
-      border: 1px solid var(--color-line);
-      border-radius: 0.375rem;
-      background: #ffffff;
-      box-shadow: 0 18px 40px -20px rgba(38, 48, 61, 0.45);
-    }
-    .facet-head {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.25rem 0.5rem 0.5rem;
-    }
-    .facet-x {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.75rem;
-      height: 2.75rem;
-      margin-right: -0.5rem;
-      border: 0;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--color-steel-deep);
-      cursor: pointer;
-    }
-    .facet-list {
-      list-style: none;
+    /* ---- Packaging tiles --------------------------------------------- */
+    /* Phone: the first group full width, the rest two across. Desktop: a
+       bento, the first group tall on the left and four tiles beside it. */
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.625rem;
       margin: 0;
       padding: 0;
+      list-style: none;
     }
-    .facet-opt {
+    .tile-big {
+      grid-column: 1 / -1;
+    }
+    .tile {
       display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      min-height: 2.75rem;
-      padding: 0 0.75rem;
-      border-radius: 0.25rem;
-      font-size: 0.9375rem;
-      color: var(--color-ink);
-      cursor: pointer;
-    }
-    .facet-opt:hover {
-      background: var(--color-paper-warm);
-    }
-    .facet-opt input {
-      width: 1.1rem;
-      height: 1.1rem;
-      accent-color: var(--color-copper);
-    }
-    .facet-opt.is-empty {
-      color: var(--color-muted);
-    }
-    .facet-n {
-      font-size: 0.8rem;
-      color: var(--color-steel-deep);
-    }
-    .facet-foot {
-      display: none;
-      gap: 0.75rem;
-      align-items: center;
-      padding: 0.75rem 0.25rem 0;
-      margin-top: 0.5rem;
-      border-top: 1px solid var(--color-line);
-    }
-    .facet-clear {
-      min-height: 2.75rem;
-      padding: 0 0.75rem;
-      border: 0;
-      background: transparent;
-      color: var(--color-steel-deep);
-      font-size: 0.875rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    @media (max-width: 767px) {
-      .facet[open]::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        z-index: 65;
-        background: rgba(28, 38, 52, 0.5);
-      }
-      .facet-panel {
-        position: fixed;
-        top: auto;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 70;
-        min-width: 0;
-        max-height: 75vh;
-        overflow: auto;
-        padding: 0.75rem 1rem calc(env(safe-area-inset-bottom) + 1rem);
-        border: 0;
-        border-radius: 1rem 1rem 0 0;
-        box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.3);
-      }
-      .facet-head,
-      .facet-foot {
-        display: flex;
-      }
-    }
-
-    /* Filters in force, as removable chips beside the count. The chips are
-       created by the script, so they never receive Astro's scoping
-       attribute: their rules must be global or they silently miss. */
-    :global(.cat-pill),
-    .cat-clear {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      min-height: 2.5rem;
-      padding: 0 0.8rem;
-      border-radius: 999px;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-    }
-    :global(.cat-pill) {
-      border: 1px solid var(--color-steel-deep);
+      flex-direction: column;
+      height: 100%;
+      min-height: 10rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.5rem;
       background: #ffffff;
+      overflow: hidden;
       color: var(--color-ink);
+      text-decoration: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    :global(.cat-pill:hover) {
-      background: var(--color-steel-deep);
-      color: var(--color-paper);
+    .tile:hover,
+    .tile:focus-visible {
+      border-color: var(--color-steel);
+      box-shadow: 0 14px 30px -20px rgba(38, 48, 61, 0.5);
     }
-    :global(.cat-pill svg) {
-      width: 0.85rem;
-      height: 0.85rem;
+    .tile-big .tile {
+      background: linear-gradient(180deg, #ffffff 0%, #eef1f4 100%);
     }
-    .cat-clear {
-      border: 0;
-      background: transparent;
-      color: var(--color-copper-deep);
-      text-decoration: underline;
-      text-underline-offset: 4px;
+    .tile-art {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0.75rem 0.5rem 0;
+      min-height: 6.5rem;
     }
-    .cat-clear:hover {
-      color: var(--color-copper);
+    .tile-art :global(img) {
+      height: 6.5rem;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
     }
-
+    /* The photos are square with the bottle in the middle third, so they
+       overlap generously; multiply blending makes the white overlap vanish. */
+    .tile-big .tile-art :global(img) {
+      height: 9.5rem;
+      margin: 0 -2.4rem;
+    }
+    .tile-art-photo {
+      align-items: center;
+      padding: 0.75rem 0.75rem 0;
+    }
+    .tile-art-photo :global(img) {
+      height: 6rem;
+      border-radius: 0.25rem;
+      mix-blend-mode: normal;
+    }
+    .tile-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.75rem 0.9rem 0.9rem;
+    }
+    .tile-name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .tile-big .tile-name {
+      font-size: 1.25rem;
+    }
+    .tile-n {
+      flex: none;
+      font-size: 0.75rem;
+      color: var(--color-steel-deep);
+    }
+    @media (max-width: 400px) {
+      /* Two-up tiles at the 344px floor: name over count, not beside it. */
+      .tile-li:not(.tile-big) .tile-label {
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .tiles {
+        grid-template-columns: 1.6fr 1fr 1fr;
+        grid-template-rows: 12rem 12rem;
+        gap: 0.875rem;
+      }
+      .tile-big {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      .tile-art :global(img) {
+        height: 7.5rem;
+      }
+      .tile-big .tile-art :global(img) {
+        height: 16rem;
+        margin: 0 -4rem;
+      }
+      .tile-art-photo :global(img) {
+        height: 7.5rem;
+      }
+      .tile-big .tile-name {
+        font-size: 1.625rem;
+      }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .seg-btn,
-      .facet-btn,
-      .facet-chev,
-      :global(.cat-pill),
-      .cat-clear {
+      .tile {
         transition: none;
       }
     }
@@ -724,201 +530,5 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   <script>
     import initPageFlow from '../scripts/page-flow.js';
     initPageFlow();
-
-    // The catalogue: substring search, one category at a time, any number of
-    // materials, all client side over data-* attributes, no framework. Counts
-    // on every control are live: each option counts the items that would
-    // match if it were chosen, given everything else in force. The first
-    // LIMIT matches show; "Show all" reveals the rest, and any change folds
-    // back to the limit so the grid never silently holds a mile of scroll.
-    // Material matching is substring on purpose: an "LDPE + HDPE" item
-    // belongs under both. The filters in force are mirrored into the URL so
-    // a filtered view can be linked.
-    const grid = document.querySelector<HTMLElement>('[data-cat-grid]');
-    const controls = document.querySelector<HTMLElement>('[data-cat-controls]');
-    if (grid && controls) {
-      const items = [...grid.querySelectorAll<HTMLElement>('[data-cat-item]')];
-      const search = document.getElementById('cat-search') as HTMLInputElement | null;
-      const segBtns = [...controls.querySelectorAll<HTMLButtonElement>('[data-cat-filter]')];
-      const facet = controls.querySelector<HTMLDetailsElement>('details[data-facet]');
-      const opts = [...controls.querySelectorAll<HTMLInputElement>('input[data-facet-opt]')];
-      const badge = controls.querySelector<HTMLElement>('[data-facet-count]');
-      const applyBtn = controls.querySelector<HTMLButtonElement>('[data-facet-apply]');
-      const countEl = controls.querySelector<HTMLElement>('[data-cat-count]');
-      const activeEl = controls.querySelector<HTMLElement>('[data-cat-active]');
-      const clearBtn = controls.querySelector<HTMLButtonElement>('[data-cat-clear]');
-      const moreWrap = document.querySelector<HTMLElement>('[data-cat-more-wrap]');
-      const moreBtn = document.querySelector<HTMLButtonElement>('[data-cat-more]');
-      const emptyEl = document.querySelector<HTMLElement>('[data-cat-empty]');
-      const emptyQ = document.querySelector<HTMLElement>('[data-cat-empty-q]');
-      const LIMIT = 20;
-      let cat = '';
-      let expanded = false;
-
-      type Filters = { q: string; cat: string; mats: string[] };
-      const current = (): Filters => ({
-        q: (search?.value ?? '').trim().toLowerCase(),
-        cat,
-        mats: opts.filter((o) => o.checked).map((o) => o.value.toLowerCase()),
-      });
-      const matches = (el: HTMLElement, f: Filters, skip?: 'cat' | 'mat') =>
-        (!f.q || (el.dataset.search ?? '').includes(f.q)) &&
-        (skip === 'cat' || !f.cat || el.dataset.cat === f.cat) &&
-        (skip === 'mat' || f.mats.length === 0 || f.mats.some((m) => (el.dataset.mat ?? '').includes(m)));
-
-      const pill = (label: string, onRemove: () => void) => {
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'cat-pill';
-        b.setAttribute('aria-label', `Remove filter: ${label}`);
-        const t = document.createElement('span');
-        t.textContent = label;
-        b.appendChild(t);
-        b.insertAdjacentHTML(
-          'beforeend',
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>',
-        );
-        b.addEventListener('click', () => {
-          onRemove();
-          expanded = false;
-          apply();
-        });
-        return b;
-      };
-
-      const apply = () => {
-        const f = current();
-        let matched = 0;
-        let shown = 0;
-        for (const el of items) {
-          const ok = matches(el, f);
-          if (ok) matched++;
-          const visible = ok && (expanded || matched <= LIMIT);
-          el.hidden = !visible;
-          if (visible) shown++;
-        }
-
-        // Live counts: what each choice would yield given the others.
-        for (const b of segBtns) {
-          const v = b.dataset.catFilter ?? '';
-          const n = items.filter((el) => matches(el, f, 'cat') && (!v || el.dataset.cat === v)).length;
-          const nEl = b.querySelector('[data-seg-n]');
-          if (nEl) nEl.textContent = String(n);
-          b.classList.toggle('is-empty', n === 0);
-        }
-        for (const o of opts) {
-          const v = o.value.toLowerCase();
-          const n = items.filter((el) => matches(el, f, 'mat') && (el.dataset.mat ?? '').includes(v)).length;
-          const row = o.closest('label');
-          const nEl = row?.querySelector('[data-facet-n]');
-          if (nEl) nEl.textContent = String(n);
-          row?.classList.toggle('is-empty', n === 0 && !o.checked);
-        }
-        if (badge) {
-          badge.hidden = f.mats.length === 0;
-          badge.textContent = String(f.mats.length);
-        }
-        facet?.classList.toggle('is-active', f.mats.length > 0);
-        if (applyBtn) applyBtn.textContent = matched === 1 ? 'Show 1 item' : `Show ${matched} items`;
-
-        if (countEl) {
-          countEl.textContent =
-            matched === 0
-              ? 'No matching items'
-              : shown < matched
-                ? `Showing ${shown} of ${matched} items`
-                : `${matched} item${matched === 1 ? '' : 's'}`;
-        }
-        if (activeEl) {
-          activeEl.replaceChildren();
-          if (f.q && search) activeEl.appendChild(pill(`“${search.value.trim()}”`, () => (search.value = '')));
-          for (const o of opts.filter((o) => o.checked)) activeEl.appendChild(pill(o.value, () => (o.checked = false)));
-        }
-        if (clearBtn) clearBtn.hidden = !(f.q || f.cat || f.mats.length);
-        if (moreWrap && moreBtn) {
-          moreWrap.hidden = matched <= shown;
-          moreBtn.textContent = `Show all ${matched} items`;
-        }
-        if (emptyEl) emptyEl.hidden = matched !== 0;
-        if (emptyQ) emptyQ.textContent = f.q && search ? `“${search.value.trim()}”` : 'those filters';
-        grid.hidden = matched === 0;
-
-        // Mirror the state into the URL so a filtered view can be shared.
-        const p = new URLSearchParams();
-        if (f.q && search) p.set('q', search.value.trim());
-        if (f.cat) p.set('cat', f.cat);
-        if (f.mats.length) p.set('mat', opts.filter((o) => o.checked).map((o) => o.value).join(','));
-        const qs = p.toString();
-        history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
-      };
-
-      const setCat = (v: string) => {
-        cat = v;
-        for (const b of segBtns) b.setAttribute('aria-pressed', String((b.dataset.catFilter ?? '') === v));
-      };
-
-      // Restore a linked state before the first paint of the controls.
-      const init = new URLSearchParams(location.search);
-      if (search && init.get('q')) search.value = init.get('q') ?? '';
-      const initCat = init.get('cat') ?? '';
-      if (segBtns.some((b) => b.dataset.catFilter === initCat)) setCat(initCat);
-      const initMats = (init.get('mat') ?? '').split(',').map((m) => m.trim().toLowerCase()).filter(Boolean);
-      for (const o of opts) if (initMats.includes(o.value.toLowerCase())) o.checked = true;
-
-      // Arm only once we can control the grid: a JS failure leaves the whole
-      // catalogue visible with no dead controls on screen.
-      controls.hidden = false;
-
-      search?.addEventListener('input', () => {
-        expanded = false;
-        apply();
-      });
-      for (const b of segBtns) {
-        b.addEventListener('click', () => {
-          setCat(b.dataset.catFilter ?? '');
-          expanded = false;
-          apply();
-        });
-      }
-      for (const o of opts) {
-        o.addEventListener('change', () => {
-          expanded = false;
-          apply();
-        });
-      }
-      controls.querySelector('[data-facet-clear]')?.addEventListener('click', () => {
-        for (const o of opts) o.checked = false;
-        expanded = false;
-        apply();
-      });
-      const closeFacet = () => {
-        if (facet?.open) facet.open = false;
-      };
-      applyBtn?.addEventListener('click', closeFacet);
-      controls.querySelector('[data-facet-close]')?.addEventListener('click', closeFacet);
-      // Outside click closes the menu. On a phone the dimmed backdrop is the
-      // <details> element's own ::before, so a tap on it targets the element
-      // itself, which counts as outside too.
-      document.addEventListener('click', (e) => {
-        if (!facet?.open) return;
-        const t = e.target as Node;
-        if (t === facet || !facet.contains(t)) closeFacet();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeFacet();
-      });
-      clearBtn?.addEventListener('click', () => {
-        if (search) search.value = '';
-        setCat('');
-        for (const o of opts) o.checked = false;
-        expanded = false;
-        apply();
-      });
-      moreBtn?.addEventListener('click', () => {
-        expanded = true;
-        apply();
-      });
-      apply();
-    }
   </script>
 </Base>

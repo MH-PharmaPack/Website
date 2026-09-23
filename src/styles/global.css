@@ -179,6 +179,63 @@
     color: var(--color-steel-deep);
   }
 
+  /* "Add to enquiry" toggle, on catalogue cards and item pages. Outline
+     when the item is not in the list, filled copper once it is. 44px tall:
+     it sits under a card on a two-column phone grid. */
+  .enq-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--color-steel);
+    border-radius: 0.25rem;
+    background: #ffffff;
+    color: var(--color-steel-deep);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .enq-add:hover {
+    border-color: var(--color-steel-deep);
+    color: var(--color-ink);
+  }
+  .enq-add-icon {
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+  .enq-add-tick,
+  .enq-add-on {
+    display: none;
+  }
+  .enq-add[aria-pressed='true'] {
+    background: var(--color-copper);
+    border-color: var(--color-copper);
+    color: #ffffff;
+  }
+  .enq-add[aria-pressed='true']:hover {
+    background: var(--color-copper-deep);
+    border-color: var(--color-copper-deep);
+  }
+  .enq-add[aria-pressed='true'] .enq-add-plus,
+  .enq-add[aria-pressed='true'] .enq-add-off {
+    display: none;
+  }
+  .enq-add[aria-pressed='true'] .enq-add-tick,
+  .enq-add[aria-pressed='true'] .enq-add-on {
+    display: inline;
+  }
+  @media (min-width: 768px) {
+    .enq-add {
+      font-size: 0.875rem;
+    }
+  }
+
   .eyebrow {
     display: block;
     font-size: 0.75rem;

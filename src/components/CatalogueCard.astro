@@ -1,14 +1,28 @@
 ---
 import { Image } from 'astro:assets';
 import type { CatalogueItem } from '../data/catalogue';
-import { imageFor, itemPath, itemFacts, searchText } from '../lib/catalogue';
+import {
+  imageFor,
+  itemPath,
+  itemSlug,
+  itemFacts,
+  searchText,
+  placeOf,
+  materialTokens,
+  enquiryAttrs,
+  sortCapacity,
+} from '../lib/catalogue';
 
-// One catalogue card. The whole card is a link to the item's own page, with
-// two explicit actions under it (Details, Enquire) so the second one lands on
-// the page's enquiry block. On pointer devices, hovering the photo lifts a
-// spec peek over it; on touch there is no hover and the tap goes straight to
-// the page, which is where the same facts live in full. No modal: for
-// spec-driven items a quick-view overlay gets mistaken for the real page.
+// One catalogue card. The whole card is a link to the item's own page, and
+// under it one action: add the item to the enquiry list (or take it off
+// again). On pointer devices, hovering the photo lifts a spec peek over it;
+// on touch there is no hover and the tap goes straight to the page, which is
+// where the same facts live in full. No modal: for spec-driven items a
+// quick-view overlay gets mistaken for the real page.
+//
+// The add button ships hidden and is shown by the enquiry list's script
+// (src/components/EnquiryTray.astro), so without JS there is no dead button;
+// the item page's own email and WhatsApp links still work.
 
 interface Props {
   item: CatalogueItem;
@@ -19,13 +33,19 @@ const path = itemPath(item);
 const facts = itemFacts(item);
 // The peek is a glance, not the datasheet: the first few facts only.
 const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
+const place = placeOf(item);
+const enq = await enquiryAttrs(item, Astro.site);
 ---
 
 <li
   class="cat-item"
   data-cat-item
-  data-cat={item.category}
-  data-mat={(item.material ?? '').toLowerCase()}
+  data-slug={itemSlug(item)}
+  data-line={place.line.id}
+  data-group={place.group.id}
+  data-type={place.type?.id ?? ''}
+  data-mat={materialTokens(item).join(' ')}
+  data-cap={sortCapacity(item) ?? ''}
   data-search={searchText(item)}
 >
   <a href={path} class="cat-card">
@@ -72,10 +92,22 @@ const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
       )
     }
   </a>
-  <div class="cat-acts">
-    <a href={path}>Details</a>
-    <a href={`${path}#enquire`}>Enquire</a>
-  </div>
+  <button
+    type="button"
+    class="enq-add mt-2"
+    data-enq-add
+    {...enq}
+    aria-pressed="false"
+    aria-label={`Add ${item.name} to the enquiry list`}
+    hidden
+  >
+    <svg class="enq-add-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+      <path class="enq-add-plus" d="M12 5v14M5 12h14" stroke-linecap="round" />
+      <path class="enq-add-tick" d="m5 12.5 4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span class="enq-add-off">Add to enquiry</span>
+    <span class="enq-add-on">Added</span>
+  </button>
 </li>
 
 <style>
@@ -143,35 +175,18 @@ const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
     text-align: right;
   }
 
-  /* Two quiet text actions under each card. 44px tall, so a thumb can hit
-     them on a two-column phone grid. */
-  .cat-acts {
+  /* The card grows to fill its grid row, so every add button in a row sits
+     on the same line however long the item name runs. */
+  .cat-item {
     display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
-    margin-top: 0.125rem;
+    flex-direction: column;
   }
-  .cat-acts a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.75rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--color-copper-deep);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-color: transparent;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
-  }
-  .cat-acts a:hover,
-  .cat-acts a:focus-visible {
-    color: var(--color-copper);
-    text-decoration-color: currentColor;
+  .cat-card {
+    flex: 1 0 auto;
   }
   @media (prefers-reduced-motion: reduce) {
     .cat-card figure,
-    .cat-peek,
-    .cat-acts a {
+    .cat-peek {
       transition: none;
     }
   }

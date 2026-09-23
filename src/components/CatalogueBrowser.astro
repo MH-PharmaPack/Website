@@ -1,0 +1,1365 @@
+---
+import CatalogueCard from './CatalogueCard.astro';
+import { MAILTO_HREF, withBase } from '../config';
+import { TAXONOMY } from '../data/catalogue';
+import { ITEMS, MATERIALS, MATERIAL_LABELS, placeOf, materialTokens } from '../lib/catalogue';
+
+// The catalogue browser: filters and grid, used by /catalogue/.
+//
+// Filtering is a hierarchy, narrowest last:
+//   line   (Packaging / API / Finished Formulations)
+//   group  (Bottles, Caps & Closures, ...)
+//   type   (Dry Syrup, PET, ...), only for a group that has types
+// then refinements across whatever is selected: search, a Material filter
+// that lists only the materials present in the selection (hidden when there
+// are fewer than two to choose between), and a sort.
+//
+// Two presentations of the same state:
+//   1024px and up: a sticky sidebar tree (lines, groups, types, materials)
+//                  beside the grid;
+//   below 1024px:  rows above the grid (line tabs, group pills, type tabs)
+//                  and a Material menu that opens as a bottom sheet.
+// Both sets of controls are in the page; CSS shows one; the script keeps
+// them in step, so resizing never loses a selection.
+//
+// Changing line, group or type clears the material choice, because a
+// material picked for bottles means nothing for pallets; that is also why
+// the hierarchy's counts ignore material.
+//
+// Controls ship hidden and the script arms them, so without JS the whole
+// catalogue is simply visible with nothing interactive lying dead.
+
+const inLine = (lineId: string) => ITEMS.filter((i) => placeOf(i).line.id === lineId);
+const inGroup = (groupId: string) => ITEMS.filter((i) => placeOf(i).group.id === groupId);
+const inType = (typeId: string) => ITEMS.filter((i) => placeOf(i).type?.id === typeId);
+
+const lines = TAXONOMY.map((line) => ({
+  ...line,
+  allGroups: line.groups,
+  count: inLine(line.id).length,
+  groups: line.groups
+    .map((g) => ({
+      ...g,
+      count: inGroup(g.id).length,
+      types: (g.types ?? []).map((t) => ({ ...t, count: inType(t.id).length })).filter((t) => t.count > 0),
+    }))
+    .filter((g) => g.count > 0),
+}));
+const liveLines = lines.filter((l) => l.count > 0);
+const soonLines = lines.filter((l) => l.count === 0);
+const DEFAULT_LINE = liveLines[0]?.id ?? '';
+const typedGroups = liveLines.flatMap((l) => l.groups.filter((g) => g.types.length > 1).map((g) => ({ ...g, line: l.id })));
+
+// What the "coming soon" panel asks for, per line. [NEEDS: confirm copy]
+const soonAsk: Record<string, string> = {
+  api: 'tell us the molecule, the grade and the market',
+  finished: 'tell us the product, the dosage form and the market',
+};
+
+const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).includes(m)).length;
+---
+
+<div class="cat-layout" data-cat-root data-default-line={DEFAULT_LINE}>
+  <!-- ===== Sidebar (1024px and up) ===== -->
+  <aside class="cat-side" aria-label="Browse the catalogue" data-cat-controls hidden>
+    <p class="side-h">Browse</p>
+    {
+      lines.map((line) => (
+        <div class="tree-line-wrap">
+          <button type="button" class="tree-line" data-line-btn={line.id} aria-pressed={String(line.id === DEFAULT_LINE)}>
+            <span>{line.name}</span>
+            <span class="tree-n" data-line-n={line.count > 0 ? 'plain' : undefined}>
+              {line.count > 0 ? line.count : 'Coming soon'}
+            </span>
+          </button>
+          {line.count > 0 && (
+            <ul class="tree-groups" data-tree-groups={line.id} hidden={line.id !== DEFAULT_LINE}>
+              {line.groups.map((g) => (
+                <li>
+                  <button type="button" class="tree-group" data-group-btn={g.id} data-line={line.id} aria-pressed="false">
+                    <span>{g.name}</span>
+                    <span class="tree-n" data-n>{g.count}</span>
+                  </button>
+                  {g.types.length > 1 && (
+                    <ul class="tree-types" data-tree-types={g.id} hidden>
+                      {g.types.map((t) => (
+                        <li>
+                          <button
+                            type="button"
+                            class="tree-type"
+                            data-type-btn={t.id}
+                            data-group={g.id}
+                            data-line={line.id}
+                            aria-pressed="false"
+                          >
+                            <span>{t.short}</span>
+                            <span class="tree-n" data-n>{t.count}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))
+    }
+
+    <div class="side-mat" data-mat-box>
+      <p class="side-h">Material</p>
+      <ul class="m-0 list-none p-0" role="group" aria-label="Filter by material">
+        {
+          MATERIALS.map((m) => (
+            <li data-mat-li>
+              <label class="side-opt">
+                <input type="checkbox" value={m} data-mat-opt />
+                <span class="flex-1">{MATERIAL_LABELS[m]}</span>
+                <span class="side-opt-n" data-mat-n>{materialCount(m)}</span>
+              </label>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mat-note" data-mat-note>Two-material items, such as an LDPE bottle with an HDPE part, appear under both.</p>
+    </div>
+  </aside>
+
+  <!-- ===== Main column ===== -->
+  <div class="cat-main">
+    <!-- Rows (below 1024px) -->
+    <div class="cat-rows" data-cat-controls hidden>
+      <div class="line-tabs" role="group" aria-label="Sourcing line">
+        {
+          lines.map((line) => (
+            <button type="button" class="line-tab" data-line-btn={line.id} aria-pressed={String(line.id === DEFAULT_LINE)}>
+              <span class="line-tab-name">{line.name}</span>
+              <span class="line-tab-meta" data-line-n={line.count > 0 ? 'items' : undefined}>
+                {line.count > 0 ? `${line.count} items` : 'Coming soon'}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+
+      {
+        liveLines.map((line) => (
+          <div class="scroll-row mt-4" data-group-row={line.id} hidden={line.id !== DEFAULT_LINE}>
+            <div class="grp-row" role="group" aria-label={`${line.name} groups`}>
+              <button type="button" class="grp-btn" data-group-btn="" data-line={line.id} aria-pressed="true">
+                All {line.name.toLowerCase()} <span class="grp-n" data-n>{line.count}</span>
+              </button>
+              {line.groups.map((g) => (
+                <button type="button" class="grp-btn" data-group-btn={g.id} data-line={line.id} aria-pressed="false">
+                  {g.name} <span class="grp-n" data-n>{g.count}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+
+      {
+        typedGroups.map((g) => (
+          <div class="scroll-row type-wrap" data-type-row={g.id} hidden>
+            <div class="type-row" role="group" aria-label={`${g.name} types`}>
+              <button type="button" class="type-btn" data-type-btn="" data-group={g.id} data-line={g.line} aria-pressed="true">
+                All {g.name.toLowerCase()}
+              </button>
+              {g.types.map((t) => (
+                <button type="button" class="type-btn" data-type-btn={t.id} data-group={g.id} data-line={g.line} aria-pressed="false">
+                  {t.short} <span class="type-n" data-n>{t.count}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Toolbar: search, material (rows layout only), sort -->
+    <div class="cat-toolbar" data-cat-controls data-cat-toolbar hidden>
+      <label class="relative block min-w-0 flex-1">
+        <span class="sr-only">Search the catalogue</span>
+        <svg
+          class="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-steel-deep"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m15.5 15.5 4.5 4.5" stroke-linecap="round" />
+        </svg>
+        <input
+          id="cat-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search item, size, neck, material"
+          class="h-11 w-full rounded-sm border border-line bg-white pr-4 pl-11 text-base text-ink transition-colors placeholder:text-muted focus:border-steel focus:outline-none"
+        />
+      </label>
+
+      <details class="facet" data-facet>
+        <summary class="facet-btn">
+          <span>Material</span>
+          <span class="facet-badge" data-facet-count hidden></span>
+          <svg class="facet-chev h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="facet-panel">
+          <div class="facet-head">
+            <span class="text-base font-bold text-ink">Material</span>
+            <button type="button" class="facet-x" data-facet-close aria-label="Close">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+          <ul class="facet-list" role="group" aria-label="Filter by material">
+            {
+              MATERIALS.map((m) => (
+                <li data-mat-li>
+                  <label class="facet-opt">
+                    <input type="checkbox" value={m} data-mat-opt />
+                    <span class="flex-1">{MATERIAL_LABELS[m]}</span>
+                    <span class="facet-n" data-mat-n>{materialCount(m)}</span>
+                  </label>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mat-note" data-mat-note>Two-material items, such as an LDPE bottle with an HDPE part, appear under both.</p>
+          <div class="facet-foot">
+            <button type="button" class="facet-clear" data-mat-clear>Clear</button>
+            <button type="button" class="btn btn-primary !min-h-11 flex-1 !px-4 text-sm" data-facet-apply>
+              Show all items
+            </button>
+          </div>
+        </div>
+      </details>
+
+      <label class="sort">
+        <span class="sr-only">Sort</span>
+        <select data-sort>
+          <option value="">Catalogue order</option>
+          <option value="cap-asc">Smallest first</option>
+          <option value="cap-desc">Largest first</option>
+          <option value="name">Name, A to Z</option>
+        </select>
+        <svg class="sort-chev h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </label>
+    </div>
+
+    <div class="cat-status" data-cat-controls data-cat-status hidden>
+      <span class="mr-1 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite"></span>
+      <span class="contents" data-cat-active></span>
+      <button type="button" class="cat-clear" data-cat-clear hidden>Clear all</button>
+    </div>
+
+    <!-- Lines with no items yet: a holding panel in place of the grid -->
+    {
+      soonLines.map((line) => (
+        <div class="soon-panel" data-soon={line.id} hidden>
+          <p class="eyebrow">{line.name}</p>
+          <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">{line.name} listings are being added.</h2>
+          <p class="mt-3 max-w-2xl text-base leading-relaxed text-steel-deep">
+            {line.summary} Until the items are listed here, {soonAsk[line.id] ?? 'tell us what you need'}, and we will come back with approved sources.
+          </p>
+          <ul class="mt-5 flex list-none flex-wrap gap-2 p-0" aria-label={`${line.name} categories`}>
+            {line.allGroups.map((g) => (
+              <li class="soon-tag">{g.name}</li>
+            ))}
+          </ul>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href={withBase('/contact')} class="btn btn-primary">
+              Request a Quote
+            </a>
+            <a href={MAILTO_HREF} class="btn btn-secondary">
+              Email us
+            </a>
+          </div>
+        </div>
+      ))
+    }
+
+    <ul class="cat-grid" data-cat-grid>
+      {ITEMS.map((item) => <CatalogueCard item={item} />)}
+    </ul>
+
+    <div class="mt-10 text-center" data-cat-more-wrap hidden>
+      <button type="button" class="btn btn-secondary" data-cat-more>Show all items</button>
+    </div>
+
+    <p class="mt-6 max-w-xl text-base leading-relaxed text-steel-deep" data-cat-empty hidden>
+      Nothing in the catalogue matches <span class="font-semibold text-ink" data-cat-empty-q></span>. We can
+      very likely still source it:{' '}
+      <a href={withBase('/contact')} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">
+        tell us what you need
+      </a>.
+    </p>
+  </div>
+</div>
+
+<style>
+  /* ---- Layout ------------------------------------------------------- */
+  .cat-layout {
+    display: block;
+  }
+  .cat-side {
+    display: none;
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 0.75rem;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .cat-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 768px) {
+    .cat-grid {
+      gap: 1.75rem 1rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .cat-layout {
+      display: grid;
+      grid-template-columns: 15.5rem minmax(0, 1fr);
+      gap: 2.75rem;
+      align-items: start;
+    }
+    .cat-side:not([hidden]) {
+      display: block;
+      position: sticky;
+      top: 6rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: 0.25rem;
+      scrollbar-width: thin;
+    }
+    .cat-rows {
+      display: none;
+    }
+    .facet {
+      display: none;
+    }
+  }
+  @media (min-width: 1280px) {
+    .cat-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /* ---- Sidebar tree ------------------------------------------------- */
+  .side-h {
+    margin: 0 0 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--color-steel-deep);
+  }
+  .tree-line-wrap {
+    border-top: 1px solid var(--color-line);
+  }
+  .tree-line,
+  .tree-group,
+  .tree-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tree-line {
+    min-height: 2.75rem;
+    padding: 0.35rem 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .tree-line:not([aria-pressed='true']) {
+    color: var(--color-steel-deep);
+    font-weight: 600;
+  }
+  .tree-n {
+    flex: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-steel-deep);
+  }
+  .tree-groups,
+  .tree-types {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tree-groups {
+    padding-bottom: 0.5rem;
+  }
+  .tree-group {
+    min-height: 2.25rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--color-steel-deep);
+  }
+  .tree-group:hover,
+  .tree-type:hover {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .tree-group[aria-pressed='true'] {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .tree-types {
+    margin: 0.15rem 0 0.4rem 0.6rem;
+    padding-left: 0.6rem;
+    border-left: 1px solid var(--color-line);
+  }
+  .tree-type {
+    min-height: 2.125rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--color-steel-deep);
+  }
+  .tree-type[aria-pressed='true'] {
+    background: var(--color-steel-deep);
+    color: var(--color-paper);
+    font-weight: 600;
+  }
+  .tree-type[aria-pressed='true'] .tree-n {
+    color: var(--color-mist);
+  }
+  .tree-group.is-empty:not([aria-pressed='true']),
+  .tree-type.is-empty:not([aria-pressed='true']) {
+    color: var(--color-muted);
+  }
+  .side-mat {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .side-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.25rem;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+  .side-opt input,
+  .facet-opt input {
+    width: 1.05rem;
+    height: 1.05rem;
+    accent-color: var(--color-copper);
+  }
+  .side-opt-n {
+    font-size: 0.75rem;
+    color: var(--color-steel-deep);
+  }
+  .mat-note {
+    margin: 0.5rem 0 0;
+    font-size: 0.75rem;
+    line-height: 1.45;
+    color: var(--color-steel-deep);
+  }
+
+  /* ---- Rows (below 1024px) ------------------------------------------ */
+  /* Three levels, each visibly a step down from the one above: line tabs
+     with counts, then group pills, then type tabs on a hairline. */
+  .line-tabs {
+    display: flex;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: #ffffff;
+  }
+  .line-tab {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    min-height: 3.5rem;
+    padding: 0.45rem 0.4rem;
+    border: 0;
+    border-radius: 0.375rem;
+    background: transparent;
+    color: var(--color-ink);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .line-tab:hover {
+    background: var(--color-paper-warm);
+  }
+  .line-tab-name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .line-tab-meta {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-steel-deep);
+    white-space: nowrap;
+  }
+  .line-tab[aria-pressed='true'] {
+    background: var(--color-steel-deep);
+    color: var(--color-paper);
+  }
+  .line-tab[aria-pressed='true'] .line-tab-meta {
+    color: var(--color-mist);
+  }
+  @media (min-width: 768px) {
+    .line-tabs {
+      display: inline-flex;
+      min-width: 34rem;
+    }
+    .line-tab {
+      padding: 0.55rem 1.25rem;
+    }
+    .line-tab-name {
+      font-size: 1rem;
+    }
+  }
+  .scroll-row {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    padding: 0 1.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .scroll-row::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .scroll-row {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+  .grp-row {
+    display: flex;
+    gap: 0.5rem;
+    width: max-content;
+  }
+  .grp-btn {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .grp-btn:hover {
+    border-color: var(--color-steel);
+    color: var(--color-ink);
+  }
+  .grp-btn[aria-pressed='true'] {
+    background: var(--color-steel-deep);
+    border-color: var(--color-steel-deep);
+    color: var(--color-paper);
+  }
+  .grp-n,
+  .type-n {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+  @media (min-width: 768px) {
+    .grp-row {
+      flex-wrap: wrap;
+      width: auto;
+    }
+  }
+  .type-wrap {
+    margin-top: 0.5rem;
+  }
+  .type-row {
+    display: flex;
+    gap: 0.25rem;
+    width: max-content;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .type-btn {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    margin-bottom: -1px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .type-btn:hover {
+    color: var(--color-ink);
+  }
+  .type-btn[aria-pressed='true'] {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-copper);
+  }
+  @media (min-width: 768px) {
+    .type-row {
+      flex-wrap: wrap;
+      width: auto;
+    }
+  }
+  .grp-btn.is-empty:not([aria-pressed='true']),
+  .type-btn.is-empty:not([aria-pressed='true']) {
+    color: var(--color-muted);
+  }
+
+  /* ---- Toolbar ------------------------------------------------------ */
+  .cat-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  /* Phone: search on its own row, Material and Sort side by side under it.
+     Wider: all three in one row. */
+  .cat-toolbar > label:first-child {
+    flex: 1 1 100%;
+  }
+  @media (min-width: 640px) {
+    .cat-toolbar > label:first-child {
+      flex: 1 1 14rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .cat-toolbar {
+      margin-top: 0;
+      flex-wrap: nowrap;
+      gap: 0.75rem;
+    }
+  }
+  .sort {
+    position: relative;
+    flex: none;
+    display: block;
+  }
+  .sort select {
+    appearance: none;
+    height: 2.75rem;
+    padding: 0 2.25rem 0 0.9rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    background: #ffffff;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .sort select:hover,
+  .sort select:focus {
+    border-color: var(--color-steel);
+    color: var(--color-ink);
+  }
+  .sort-chev {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-steel-deep);
+  }
+
+  .cat-status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Material menu (rows layout): a <details>, so it opens and closes with no
+     script. Tablet: a dropdown. Phone: a bottom sheet over a dimmed page. */
+  .facet {
+    position: relative;
+    flex: none;
+  }
+  .facet-btn {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0 0.9rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    background: #ffffff;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .facet-btn::-webkit-details-marker {
+    display: none;
+  }
+  .facet-btn:hover,
+  .facet[open] > .facet-btn,
+  .facet.is-active > .facet-btn {
+    border-color: var(--color-steel-deep);
+    color: var(--color-ink);
+  }
+  .facet-chev {
+    transition: transform 0.2s ease;
+  }
+  .facet[open] .facet-chev {
+    transform: rotate(180deg);
+  }
+  .facet-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: var(--color-copper);
+    color: #ffffff;
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+  .facet-panel {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    z-index: 60;
+    min-width: 16rem;
+    padding: 0.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.375rem;
+    background: #ffffff;
+    box-shadow: 0 18px 40px -20px rgba(38, 48, 61, 0.45);
+  }
+  .facet-panel .mat-note {
+    margin: 0.25rem 0.75rem;
+    max-width: 15rem;
+  }
+  .facet-head {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem 0.5rem;
+  }
+  .facet-x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-steel-deep);
+    cursor: pointer;
+  }
+  .facet-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .facet-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+  .facet-opt:hover {
+    background: var(--color-paper-warm);
+  }
+  .facet-n {
+    font-size: 0.8rem;
+    color: var(--color-steel-deep);
+  }
+  .facet-foot {
+    display: none;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem 0.25rem 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--color-line);
+  }
+  .facet-clear {
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  @media (max-width: 767px) {
+    .facet[open]::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 65;
+      background: rgba(28, 38, 52, 0.5);
+    }
+    .facet-panel {
+      position: fixed;
+      top: auto;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 70;
+      min-width: 0;
+      max-height: 75vh;
+      overflow: auto;
+      padding: 0.75rem 1rem calc(env(safe-area-inset-bottom) + 1rem);
+      border: 0;
+      border-radius: 1rem 1rem 0 0;
+      box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.3);
+    }
+    .facet-panel .mat-note {
+      max-width: none;
+    }
+    .facet-head,
+    .facet-foot {
+      display: flex;
+    }
+  }
+
+  /* Filters in force, as removable chips beside the count. The chips are
+     created by the script, so they never receive Astro's scoping
+     attribute: their rules must be global or they silently miss. */
+  :global(.cat-pill),
+  .cat-clear {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  :global(.cat-pill) {
+    border: 1px solid var(--color-steel-deep);
+    background: #ffffff;
+    color: var(--color-ink);
+  }
+  :global(.cat-pill:hover) {
+    background: var(--color-steel-deep);
+    color: var(--color-paper);
+  }
+  :global(.cat-pill svg) {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+  .cat-clear {
+    border: 0;
+    background: transparent;
+    color: var(--color-copper-deep);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .cat-clear:hover {
+    color: var(--color-copper);
+  }
+
+  .soon-panel {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: #ffffff;
+  }
+  @media (min-width: 768px) {
+    .soon-panel {
+      padding: 2.25rem 2.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .soon-panel {
+      margin-top: 0;
+    }
+  }
+  .soon-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-paper);
+    color: var(--color-steel-deep);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tree-line,
+    .tree-group,
+    .tree-type,
+    .line-tab,
+    .grp-btn,
+    .type-btn,
+    .facet-btn,
+    .facet-chev,
+    :global(.cat-pill),
+    .cat-clear {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { readReturn, writeReturn } from '../scripts/catalogue-return';
+
+  // One state, two sets of controls (sidebar tree and rows). Every control
+  // carries what it selects in data attributes, so the same handlers and the
+  // same rendering serve both:
+  //   [data-line-btn=L]
+  //   [data-group-btn=G][data-line=L]         (G empty = "all of the line")
+  //   [data-type-btn=T][data-group=G][data-line=L]  (T empty = "all of the group")
+  //   [data-mat-opt=value]                    (checkboxes, in both places)
+  //
+  // Counts are live and each answers "what would I get if I chose this",
+  // given the search. The first LIMIT matches show; "Show all" reveals the
+  // rest, and any change folds back. The whole state is mirrored into the
+  // URL (line, group, type, q, mat, sort) so any view can be linked, and
+  // "Back to the catalogue" on an item page can return to it exactly.
+  const root = document.querySelector<HTMLElement>('[data-cat-root]');
+  const grid = document.querySelector<HTMLElement>('[data-cat-grid]');
+  if (root && grid) {
+    const DEFAULT_LINE = root.dataset.defaultLine ?? '';
+    const LIMIT = 20;
+    const $$ = <T extends Element = HTMLElement>(sel: string) => [...root.querySelectorAll<T>(sel)];
+
+    let items = $$<HTMLElement>('[data-cat-item]');
+    items.forEach((el, i) => (el.dataset.order = String(i)));
+
+    const lineBtns = $$<HTMLButtonElement>('[data-line-btn]');
+    const groupBtns = $$<HTMLButtonElement>('[data-group-btn]');
+    const typeBtns = $$<HTMLButtonElement>('[data-type-btn]');
+    const matOpts = $$<HTMLInputElement>('[data-mat-opt]');
+    const groupRows = $$('[data-group-row]');
+    const typeRows = $$('[data-type-row]');
+    const treeGroups = $$('[data-tree-groups]');
+    const treeTypes = $$('[data-tree-types]');
+    const soonPanels = $$('[data-soon]');
+    const controls = $$('[data-cat-controls]');
+    const toolbar = root.querySelector<HTMLElement>('[data-cat-toolbar]');
+    const status = root.querySelector<HTMLElement>('[data-cat-status]');
+    const matBox = root.querySelector<HTMLElement>('[data-mat-box]');
+    const facet = root.querySelector<HTMLDetailsElement>('details[data-facet]');
+    const badge = root.querySelector<HTMLElement>('[data-facet-count]');
+    const applyBtn = root.querySelector<HTMLButtonElement>('[data-facet-apply]');
+    const sortSel = root.querySelector<HTMLSelectElement>('[data-sort]');
+    const search = document.getElementById('cat-search') as HTMLInputElement | null;
+    const countEl = root.querySelector<HTMLElement>('[data-cat-count]');
+    const activeEl = root.querySelector<HTMLElement>('[data-cat-active]');
+    const clearBtn = root.querySelector<HTMLButtonElement>('[data-cat-clear]');
+    const moreWrap = root.querySelector<HTMLElement>('[data-cat-more-wrap]');
+    const moreBtn = root.querySelector<HTMLButtonElement>('[data-cat-more]');
+    const emptyEl = root.querySelector<HTMLElement>('[data-cat-empty]');
+    const emptyQ = root.querySelector<HTMLElement>('[data-cat-empty-q]');
+
+    const liveLines = new Set(groupRows.map((r) => r.dataset.groupRow ?? ''));
+    const groupLine = new Map(groupBtns.filter((b) => b.dataset.groupBtn).map((b) => [b.dataset.groupBtn!, b.dataset.line!]));
+    const typedGroups = new Set(typeBtns.map((b) => b.dataset.group ?? ''));
+    const knownTypes = new Set(typeBtns.map((b) => b.dataset.typeBtn).filter(Boolean));
+    const knownMats = new Set(matOpts.map((o) => o.value));
+
+    let line = DEFAULT_LINE;
+    let group = '';
+    let type = '';
+    let mats = new Set<string>();
+    let sort = '';
+    let expanded = false;
+
+    const query = () => (search?.value ?? '').trim().toLowerCase();
+    const hasMat = (el: HTMLElement, m: string) => ` ${el.dataset.mat ?? ''} `.includes(` ${m} `);
+    type Scope = { line: string; group?: string; type?: string };
+    const inScope = (el: HTMLElement, s: Scope) =>
+      el.dataset.line === s.line && (!s.group || el.dataset.group === s.group) && (!s.type || el.dataset.type === s.type);
+    const matchesQuery = (el: HTMLElement, q: string) => !q || (el.dataset.search ?? '').includes(q);
+    const countIn = (s: Scope, q: string) => items.filter((el) => inScope(el, s) && matchesQuery(el, q)).length;
+
+    // Horizontal-only: brings a chosen button into view inside a sideways
+    // scrolling row on a phone without moving the page.
+    const reveal = (b: HTMLElement) => {
+      const row = b.closest<HTMLElement>('.scroll-row');
+      if (!row || row.hidden || row.scrollWidth <= row.clientWidth) return;
+      const r = row.getBoundingClientRect();
+      const br = b.getBoundingClientRect();
+      if (br.left < r.left + 20 || br.right > r.right - 20) row.scrollLeft += br.left - r.left - 20;
+    };
+
+    const pill = (label: string, onRemove: () => void) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'cat-pill';
+      b.setAttribute('aria-label', `Remove filter: ${label}`);
+      const t = document.createElement('span');
+      t.textContent = label;
+      b.appendChild(t);
+      b.insertAdjacentHTML(
+        'beforeend',
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>',
+      );
+      b.addEventListener('click', () => {
+        onRemove();
+        expanded = false;
+        apply();
+      });
+      return b;
+    };
+
+    const applySort = () => {
+      const cap = (el: HTMLElement) => (el.dataset.cap ? parseFloat(el.dataset.cap) : NaN);
+      const order = (el: HTMLElement) => Number(el.dataset.order);
+      const name = (el: HTMLElement) => el.dataset.enqName ?? el.querySelector('[data-enq-add]')?.getAttribute('data-enq-name') ?? '';
+      const sorted = [...items].sort((a, b) => {
+        if (sort === 'cap-asc' || sort === 'cap-desc') {
+          const ca = cap(a);
+          const cb = cap(b);
+          if (isNaN(ca) !== isNaN(cb)) return isNaN(ca) ? 1 : -1;
+          if (!isNaN(ca) && ca !== cb) return sort === 'cap-asc' ? ca - cb : cb - ca;
+          return order(a) - order(b);
+        }
+        if (sort === 'name') return name(a).localeCompare(name(b), 'en', { numeric: true }) || order(a) - order(b);
+        return order(a) - order(b);
+      });
+      items = sorted;
+      grid.append(...sorted);
+    };
+
+    const apply = () => {
+      const q = query();
+      const live = liveLines.has(line);
+
+      // What is on screen.
+      for (const r of groupRows) r.hidden = r.dataset.groupRow !== line;
+      for (const r of typeRows) r.hidden = !live || r.dataset.typeRow !== group;
+      for (const t of treeGroups) t.hidden = t.dataset.treeGroups !== line;
+      for (const t of treeTypes) t.hidden = t.dataset.treeTypes !== group;
+      for (const p of soonPanels) p.hidden = p.dataset.soon !== line;
+      if (toolbar) toolbar.hidden = !live;
+      if (status) status.hidden = !live;
+
+      // Pressed states and counts, in both sets of controls.
+      for (const b of lineBtns) {
+        const id = b.dataset.lineBtn ?? '';
+        b.setAttribute('aria-pressed', String(id === line));
+        const nEl = b.querySelector<HTMLElement>('[data-line-n]');
+        if (nEl) {
+          const n = countIn({ line: id }, q);
+          nEl.textContent = nEl.dataset.lineN === 'items' ? `${n} item${n === 1 ? '' : 's'}` : String(n);
+        }
+      }
+      for (const b of groupBtns) {
+        const g = b.dataset.groupBtn ?? '';
+        const l = b.dataset.line ?? '';
+        const on = l === line && g === group;
+        b.setAttribute('aria-pressed', String(on));
+        const n = countIn({ line: l, group: g || undefined }, q);
+        const nEl = b.querySelector('[data-n]');
+        if (nEl) nEl.textContent = String(n);
+        b.classList.toggle('is-empty', n === 0);
+        if (on) reveal(b);
+      }
+      for (const b of typeBtns) {
+        const t = b.dataset.typeBtn ?? '';
+        const g = b.dataset.group ?? '';
+        const on = g === group && t === type;
+        b.setAttribute('aria-pressed', String(on));
+        if (t) {
+          const n = countIn({ line: b.dataset.line ?? '', group: g, type: t }, q);
+          const nEl = b.querySelector('[data-n]');
+          if (nEl) nEl.textContent = String(n);
+          b.classList.toggle('is-empty', n === 0);
+        }
+        if (on) reveal(b);
+      }
+
+      if (!live) {
+        grid.hidden = true;
+        if (moreWrap) moreWrap.hidden = true;
+        if (emptyEl) emptyEl.hidden = true;
+        if (matBox) matBox.hidden = true;
+        syncUrl();
+        return;
+      }
+
+      // Material: only what is present in the selection, and only when there
+      // are at least two to choose between (or one is already chosen).
+      const scope: Scope = { line, group: group || undefined, type: type || undefined };
+      const avail = new Map<string, number>();
+      for (const o of matOpts) {
+        if (!avail.has(o.value)) {
+          avail.set(o.value, items.filter((el) => inScope(el, scope) && matchesQuery(el, q) && hasMat(el, o.value)).length);
+        }
+        const n = avail.get(o.value) ?? 0;
+        o.checked = mats.has(o.value);
+        const li = o.closest<HTMLElement>('[data-mat-li]');
+        const nEl = li?.querySelector('[data-mat-n]');
+        if (nEl) nEl.textContent = String(n);
+        if (li) li.hidden = n === 0 && !o.checked;
+      }
+      const choosable = [...avail.values()].filter((n) => n > 0).length;
+      const showMat = choosable >= 2 || mats.size > 0;
+      if (matBox) matBox.hidden = !showMat;
+      if (facet) {
+        facet.hidden = !showMat;
+        if (!showMat) facet.open = false;
+        facet.classList.toggle('is-active', mats.size > 0);
+      }
+      if (badge) {
+        badge.hidden = mats.size === 0;
+        badge.textContent = String(mats.size);
+      }
+      const twoPart = items.some((el) => inScope(el, scope) && matchesQuery(el, q) && (el.dataset.mat ?? '').includes(' '));
+      for (const n of $$('[data-mat-note]')) n.hidden = !twoPart;
+
+      // The grid.
+      let matched = 0;
+      let shown = 0;
+      for (const el of items) {
+        const ok = inScope(el, scope) && matchesQuery(el, q) && (mats.size === 0 || [...mats].some((m) => hasMat(el, m)));
+        if (ok) matched++;
+        const visible = ok && (expanded || matched <= LIMIT);
+        el.hidden = !visible;
+        if (visible) shown++;
+      }
+      if (applyBtn) applyBtn.textContent = matched === 1 ? 'Show 1 item' : `Show ${matched} items`;
+      if (countEl) {
+        countEl.textContent =
+          matched === 0
+            ? 'No matching items'
+            : shown < matched
+              ? `Showing ${shown} of ${matched} items`
+              : `${matched} item${matched === 1 ? '' : 's'}`;
+      }
+      if (activeEl) {
+        activeEl.replaceChildren();
+        if (q && search) activeEl.appendChild(pill(`“${search.value.trim()}”`, () => (search.value = '')));
+        for (const m of mats) {
+          const label = matOpts.find((o) => o.value === m)?.closest('label')?.querySelector('span')?.textContent ?? m;
+          activeEl.appendChild(pill(label, () => mats.delete(m)));
+        }
+      }
+      if (clearBtn) clearBtn.hidden = !(q || group || mats.size);
+      if (moreWrap && moreBtn) {
+        moreWrap.hidden = matched <= shown;
+        moreBtn.textContent = `Show all ${matched} items`;
+      }
+      if (emptyEl) emptyEl.hidden = matched !== 0;
+      if (emptyQ) emptyQ.textContent = q && search ? `“${search.value.trim()}”` : 'that selection';
+      grid.hidden = matched === 0;
+      syncUrl();
+    };
+
+    const syncUrl = () => {
+      const p = new URLSearchParams();
+      if (line && line !== DEFAULT_LINE) p.set('line', line);
+      if (group) p.set('group', group);
+      if (type) p.set('type', type);
+      const q = search?.value.trim();
+      if (q && liveLines.has(line)) p.set('q', q);
+      if (mats.size) p.set('mat', [...mats].join(','));
+      if (sort) p.set('sort', sort);
+      const qs = p.toString();
+      history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+    };
+
+    const setLine = (v: string) => {
+      line = lineBtns.some((b) => b.dataset.lineBtn === v) ? v : DEFAULT_LINE;
+      group = '';
+      type = '';
+      mats = new Set();
+    };
+    const setGroup = (g: string) => {
+      const l = groupLine.get(g);
+      if (g && !l) return;
+      if (l) line = l;
+      group = g;
+      type = '';
+      mats = new Set();
+    };
+    const setType = (t: string) => {
+      type = t && knownTypes.has(t) ? t : '';
+      mats = new Set();
+    };
+
+    // Restore a linked state. Flat ?cat= links from the first version of the
+    // catalogue map onto the new structure so none of them break.
+    const init = new URLSearchParams(location.search);
+    const legacy: Record<string, [string, string]> = {
+      'Caps & Closures': ['closures', ''],
+      'Spray Bottles': ['bottles', 'spray-bottles'],
+      'Ophthalmic Bottles': ['bottles', 'dropper-bottles'],
+      'Pharmaceutical Bottles': ['bottles', ''],
+      'PET Bottles': ['bottles', 'pet-bottles'],
+      'Vial Seals': ['vial-seals', ''],
+      'Flexible Packaging': ['flexible', ''],
+      Pallets: ['pallets', ''],
+    };
+    const old = legacy[init.get('cat') ?? ''];
+    setLine(init.get('line') ?? DEFAULT_LINE);
+    setGroup(old ? old[0] : (init.get('group') ?? ''));
+    if (typedGroups.has(group)) {
+      const t = old ? old[1] : (init.get('type') ?? '');
+      if (typeBtns.some((b) => b.dataset.group === group && b.dataset.typeBtn === t)) setType(t);
+    }
+    if (search && init.get('q')) search.value = init.get('q') ?? '';
+    mats = new Set((init.get('mat') ?? '').toLowerCase().split(',').map((m) => m.trim()).filter((m) => knownMats.has(m)));
+    sort = ['cap-asc', 'cap-desc', 'name'].includes(init.get('sort') ?? '') ? (init.get('sort') ?? '') : '';
+    if (sortSel) sortSel.value = sort;
+    if (sort) applySort();
+
+    // Arm the controls: a JS failure leaves the whole catalogue visible with
+    // no dead controls on screen.
+    for (const c of controls) c.hidden = false;
+
+    const change = () => {
+      expanded = false;
+      apply();
+    };
+    for (const b of lineBtns) b.addEventListener('click', () => (setLine(b.dataset.lineBtn ?? DEFAULT_LINE), change()));
+    for (const b of groupBtns) b.addEventListener('click', () => (setGroup(b.dataset.groupBtn ?? ''), change()));
+    for (const b of typeBtns) {
+      b.addEventListener('click', () => {
+        setGroup(b.dataset.group ?? '');
+        setType(b.dataset.typeBtn ?? '');
+        change();
+      });
+    }
+    for (const o of matOpts) {
+      o.addEventListener('change', () => {
+        if (o.checked) mats.add(o.value);
+        else mats.delete(o.value);
+        change();
+      });
+    }
+    search?.addEventListener('input', change);
+    sortSel?.addEventListener('change', () => {
+      sort = sortSel.value;
+      applySort();
+      change();
+    });
+    root.querySelector('[data-mat-clear]')?.addEventListener('click', () => {
+      mats = new Set();
+      change();
+    });
+    const closeFacet = () => {
+      if (facet?.open) facet.open = false;
+    };
+    applyBtn?.addEventListener('click', closeFacet);
+    root.querySelector('[data-facet-close]')?.addEventListener('click', closeFacet);
+    // Outside click closes the menu. On a phone the dimmed backdrop is the
+    // <details> element's own ::before, so a tap on it targets the element
+    // itself, which counts as outside too.
+    document.addEventListener('click', (e) => {
+      if (!facet?.open) return;
+      const t = e.target as Node;
+      if (t === facet || !facet.contains(t)) closeFacet();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeFacet();
+    });
+    clearBtn?.addEventListener('click', () => {
+      if (search) search.value = '';
+      group = '';
+      type = '';
+      mats = new Set();
+      change();
+    });
+    moreBtn?.addEventListener('click', () => {
+      expanded = true;
+      apply();
+    });
+
+    // Opening an item records the view it was opened from, for the item
+    // page's "Back to the catalogue" (src/scripts/catalogue-return.ts).
+    grid.addEventListener('click', (e) => {
+      const a = (e.target as Element | null)?.closest('a');
+      const li = a?.closest<HTMLElement>('[data-cat-item]');
+      if (!a || !li) return;
+      writeReturn({
+        url: location.pathname + location.search,
+        expanded,
+        slug: li.dataset.slug ?? '',
+        y: window.scrollY,
+        returning: false,
+      });
+    });
+
+    // Arriving back (the item page's link, or the browser's Back button)
+    // restores "Show all" and puts the opened card back in view.
+    const saved = readReturn();
+    const navType = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined)?.type;
+    const returning =
+      !!saved && saved.url === location.pathname + location.search && (saved.returning || navType === 'back_forward');
+    if (returning && saved) expanded = saved.expanded;
+    apply();
+
+    if (returning && saved) {
+      const restore = () => {
+        const card = grid.querySelector<HTMLElement>(`[data-slug="${CSS.escape(saved.slug)}"]`);
+        const top = card && !card.hidden ? card.getBoundingClientRect().top + window.scrollY - 110 : saved.y;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+      };
+      restore();
+      requestAnimationFrame(restore);
+      window.addEventListener('load', () => requestAnimationFrame(restore), { once: true });
+      writeReturn({ ...saved, returning: false });
+    }
+  }
+</script>

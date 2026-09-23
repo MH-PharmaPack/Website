@@ -14,8 +14,13 @@ const desktopNav = NAV.filter((item) => item.href !== withBase('/') && item.href
 
 // Current-page marker. Trailing slashes are normalised because Astro emits
 // directory-style URLs (/leadership/) while config.ts writes them without.
+// A section stays marked on its child pages too (a catalogue item page marks
+// Catalogue, a partner profile marks Leadership); Home only ever marks itself.
 const here = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const isCurrent = (href: string) => (href.replace(/\/+$/, '') || '/') === here;
+const isCurrent = (href: string) => {
+  const target = href.replace(/\/+$/, '') || '/';
+  return target === here || (target !== '/' && here.startsWith(`${target}/`));
+};
 ---
 
 <header id="site-header" class="sticky top-0 z-50">

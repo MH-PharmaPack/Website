@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import CatalogueBrowser from '../../components/CatalogueBrowser.astro';
+import EnquiryTray from '../../components/EnquiryTray.astro';
+import { withBase } from '../../config';
+import { sourcingService } from '../../lib/seo';
+import { TAXONOMY } from '../../data/catalogue';
+import { ITEMS, placeOf } from '../../lib/catalogue';
+
+// THE SOURCING CATALOGUE (client decision 2026-09-23: its own page, "concept
+// A"). Every item MH can source through its partner plants, filterable by
+// line, group, type and material, each with its own page and an "Add to
+// enquiry" button feeding one enquiry list.
+//
+// Framing is the same as What We Source: what we source, never what we make
+// (CONTENT-SPEC guardrails 5 and 6), and never "our products".
+
+// The intro speaks of packaging because that is the only line with items so
+// far; this count stays true as API and finished formulations are added.
+const total = ITEMS.filter((i) => placeOf(i).line.id === 'packaging').length;
+const packagingGroups = TAXONOMY.find((l) => l.id === 'packaging')?.groups ?? [];
+
+// OfferCatalog: every group name is printed on a filter button and every item
+// name on a card, so the markup keeps to the visible-words rule.
+const schemaGroups = TAXONOMY.flatMap((line) => line.groups)
+  .map((g) => ({ name: g.name, items: ITEMS.filter((i) => placeOf(i).group.id === g.id).map((i) => i.name) }))
+  .filter((g) => g.items.length > 0);
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const groupList = packagingGroups
+  .map((g) => g.name.toLowerCase())
+  .join(', ')
+  .replace(/, ([^,]*)$/, ' and $1');
+---
+
+<Base
+  title="Sourcing Catalogue: Pharmaceutical Bottles, Caps, Vial Seals, Pallets | MH PharmaPack"
+  name="Sourcing catalogue"
+  description={`Browse ${total} packaging items sourced through WHO GMP and EU GMP approved partner plants: ${groupList}. Add items to an enquiry list and request a quote.`}
+  pageType="CollectionPage"
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'What We Source', path: '/capabilities' },
+    { name: 'Catalogue' },
+  ]}
+  schema={[sourcingService(schemaGroups, pageUrl, Astro.site)]}
+  mainEntityId={`${pageUrl}#service`}
+>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-8 pb-6 md:px-8 md:pt-12 md:pb-8">
+      <nav aria-label="Breadcrumb" class="text-sm text-steel-deep">
+        <a href={withBase('/capabilities')} class="hover:text-ink">What we source</a>
+        <span class="mx-2 text-muted" aria-hidden="true">/</span>
+        <span class="font-semibold text-ink" aria-current="page">Catalogue</span>
+      </nav>
+      <!-- Headline and intro authored. [NEEDS: confirm copy] -->
+      <h1 class="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">Sourcing catalogue</h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-steel-deep">
+        {total} packaging items from approved partner plants, each supplied to your specification:
+        what we source, not what we make. Add what you need to your enquiry list and send it as one
+        enquiry. API and finished formulations are being added.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-2 pb-14 md:px-8 md:pb-20">
+      <CatalogueBrowser />
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-paper-warm">
+    <div class="mx-auto flex max-w-content flex-col gap-5 px-5 py-12 md:flex-row md:items-center md:justify-between md:px-8 md:py-14">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-ink">Not seeing what you need?</h2>
+        <p class="mt-2 max-w-xl text-base leading-relaxed text-steel-deep">
+          The catalogue grows as the network does. Tell us the item, the specification and the
+          market, and we will very likely be able to source it.
+        </p>
+      </div>
+      <a href={withBase('/contact')} class="btn btn-primary shrink-0">Request a Quote</a>
+    </div>
+  </section>
+
+  <EnquiryTray />
+</Base>

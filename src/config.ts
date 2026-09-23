@@ -90,6 +90,7 @@ export const NAV = [
   { label: 'Home', href: withBase('/') },
   { label: 'What We Do', href: withBase('/services') },
   { label: 'What We Source', href: withBase('/capabilities') },
+  { label: 'Catalogue', href: withBase('/catalogue') },
   { label: 'Leadership', href: withBase('/leadership') },
   { label: 'Contact', href: withBase('/contact') },
 ];
