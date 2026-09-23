@@ -1,0 +1,143 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import CatalogueCard from '../../components/CatalogueCard.astro';
+import EnquiryActions from '../../components/EnquiryActions.astro';
+import { CATALOGUE, type CatalogueItem } from '../../data/catalogue';
+import { imageFor, itemSlug, itemFacts, itemNote } from '../../lib/catalogue';
+import { withBase } from '../../config';
+
+// One page per catalogue item. It exists so an item can be linked from a cold
+// email or a WhatsApp thread and so the enquiry buttons have somewhere to
+// live without JS; the catalogue's quick view shows the same facts in place.
+// Framing is the same as the catalogue: what we source, never our product,
+// and no Product schema for the reason given in src/lib/seo.ts.
+
+export function getStaticPaths() {
+  return CATALOGUE.map((item) => ({ params: { slug: itemSlug(item) }, props: { item } }));
+}
+
+interface Props {
+  item: CatalogueItem;
+}
+
+const { item } = Astro.props;
+const facts = itemFacts(item);
+const note = itemNote(item);
+const related = CATALOGUE.filter((i) => i.category === item.category && i !== item).slice(0, 5);
+const catalogueHref = `${withBase('/capabilities')}#catalogue`;
+const categoryHref = `${withBase('/capabilities')}?cat=${encodeURIComponent(item.category)}#catalogue`;
+
+// Description: the facts a buyer would search for, then the frame.
+const description = `${item.name}, ${facts
+  .map((f) => `${f.label.toLowerCase()} ${f.value}`)
+  .join(', ')}. Sourced through MH PharmaPack's partner network and supplied to your specification.`.slice(
+  0,
+  300,
+);
+---
+
+<Base
+  title={`${item.name} | What We Source | MH PharmaPack`}
+  name={item.name}
+  description={description}
+  pageType="ItemPage"
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'What We Source', path: '/capabilities' },
+    { name: item.name },
+  ]}
+>
+  <section class="bg-paper">
+    <div class="mx-auto max-w-content px-5 pt-6 pb-12 md:px-8 md:pt-10 md:pb-16">
+      <a
+        href={catalogueHref}
+        class="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-steel-deep transition-colors hover:text-ink"
+      >
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="m14.5 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Back to the catalogue
+      </a>
+
+      <div class="mt-4 grid gap-8 md:mt-6 md:grid-cols-[minmax(0,24rem)_1fr] md:gap-12 lg:grid-cols-[minmax(0,28rem)_1fr] lg:gap-16">
+        <figure class="m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-6 md:p-10">
+          {
+            item.illustrative ? (
+              <img
+                src={imageFor(item.image).src}
+                alt={`${item.name}, representative illustration`}
+                class="h-full w-full scale-[1.32] object-contain"
+                decoding="async"
+              />
+            ) : (
+              <Image
+                src={imageFor(item.image)}
+                alt={item.name}
+                width={600}
+                densities={[1, 2]}
+                format="webp"
+                quality={82}
+                class="h-full w-full object-contain"
+                loading="eager"
+              />
+            )
+          }
+        </figure>
+
+        <div>
+          <a href={categoryHref} class="eyebrow hover:text-copper">{item.category}</a>
+          <h1 class="mt-3 text-3xl font-bold tracking-tight text-ink md:text-4xl">{item.name}</h1>
+          <p class="mt-4 max-w-xl text-base leading-relaxed text-steel-deep">
+            Sourced through our partner network and supplied to your specification: what we source,
+            not what we make.
+          </p>
+
+          <dl class="mt-8 divide-y divide-line border-y border-line">
+            {
+              facts.map((f) => (
+                <div class="grid grid-cols-[8.5rem_1fr] gap-4 py-3 text-sm md:grid-cols-[10rem_1fr]">
+                  <dt class="font-semibold text-steel-deep">{f.label}</dt>
+                  <dd class="m-0 text-ink">{f.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          {note && <p class="mt-3 text-xs leading-relaxed text-steel-deep">{note}</p>}
+
+          <div id="enquire" class="mt-10 scroll-mt-24 border-t border-line pt-8">
+            <h2 class="text-xl font-bold tracking-tight text-ink">Enquire about this item</h2>
+            <p class="mt-2 max-w-xl text-sm leading-relaxed text-steel-deep">
+              Tell us the quantity, the destination market and the timeline, and we will come back
+              with the right plant and a quote.
+            </p>
+            <div class="mt-5">
+              <EnquiryActions item={item} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="border-t border-line bg-paper-warm">
+        <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
+          <p class="eyebrow">More in {item.category}</p>
+          <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink md:text-3xl">Related items.</h2>
+          <ul class="mt-8 grid list-none grid-cols-2 gap-x-3 gap-y-6 p-0 sm:grid-cols-3 md:gap-x-4 lg:grid-cols-5">
+            {related.map((r) => (
+              <CatalogueCard item={r} />
+            ))}
+          </ul>
+          <div class="mt-8">
+            <a href={categoryHref} class="btn btn-secondary">
+              All {item.category}
+            </a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</Base>

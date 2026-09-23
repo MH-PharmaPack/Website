@@ -1,20 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import CatalogueCard from '../components/CatalogueCard.astro';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 import { sourcingService } from '../lib/seo';
 import { CATALOGUE, CATALOGUE_CATEGORIES } from '../data/catalogue';
+import { MATERIAL_FACETS } from '../lib/catalogue';
 
 // WHAT WE SOURCE (CONTENT-SPEC section 6). The frame on this page is
 // non-negotiable: everything below is what MH sources through its network,
 // never what it makes (guardrails 5 and 6). The section header is
 // "What we can source", never "Our products".
 //
-// Category lists are the final ones from CONTENT-SPEC 5.2. `items` feeds this
-// page's OfferCatalog JSON-LD and holds only phrases printed visibly in the
-// matrix below, same rule as the home page: if a category leaves the page, it
-// leaves the list.
+// Category lists are the final ones from CONTENT-SPEC 5.2. `categories` feeds
+// this page's OfferCatalog JSON-LD and holds only phrases printed visibly in
+// the tiles below, same rule as the home page: if a category leaves the page,
+// it leaves the list.
+//
+// Page order (client direction, 2026-09-23): the five lines are a compact
+// rail, not a tall accordion, so the item catalogue sits within one scroll
+// of the top on a phone instead of a screen and a half down.
 
 const lines = [
   {
@@ -78,28 +82,6 @@ const regions = [
   { name: 'South Africa', copy: 'WHO GMP and PIC/S approved facilities.' },
 ];
 
-// The catalogue's images live in src/assets/catalogue/ and are looked up by
-// the filename each data entry carries. A missing file fails the build here,
-// loudly, rather than shipping a card with a broken image.
-const catalogueImages = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/catalogue/*.{jpg,png,svg}',
-  { eager: true },
-);
-const imageFor = (file: string): ImageMetadata => {
-  const mod = catalogueImages[`../assets/catalogue/${file}`];
-  if (!mod) throw new Error(`catalogue image missing: ${file}`);
-  return mod.default;
-};
-
-// Everything the client-side search matches against, precomputed per card.
-// keywords are industry synonyms (e.g. "child resistant" for CRC) that are
-// searchable but never displayed.
-const searchText = (item: (typeof CATALOGUE)[number]) =>
-  [item.name, item.category, item.material, item.weight, item.keywords]
-    .filter(Boolean)
-    .join(' ')
-    .toLowerCase();
-
 // The catalogue's categories and item names join the page's OfferCatalog:
 // every name is printed on a visible card below, so the markup keeps to the
 // visible-words rule.
@@ -107,6 +89,11 @@ const catalogueLines = CATALOGUE_CATEGORIES.map((cat) => ({
   name: cat,
   items: CATALOGUE.filter((i) => i.category === cat).map((i) => i.name),
 }));
+
+// Static counts for the first paint; the script recomputes them live.
+const countFor = (cat: string) => CATALOGUE.filter((i) => i.category === cat).length;
+const materialCount = (m: string) =>
+  CATALOGUE.filter((i) => (i.material ?? '').toLowerCase().includes(m.toLowerCase())).length;
 
 // Title: nav anchor first, then the four concrete lines, brand last, same
 // pattern as the leadership page. The lines are the phrases a buyer would
@@ -135,7 +122,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   <!-- 6.1 Intro. The paragraph is verbatim spec copy; the headline is authored
        to say only what that paragraph already says. [NEEDS: confirm headline] -->
   <section class="bg-paper">
-    <div class="mx-auto max-w-content px-5 pt-14 pb-12 md:px-8 md:pt-20 md:pb-16">
+    <div class="mx-auto max-w-content px-5 pt-12 pb-10 md:px-8 md:pt-16 md:pb-14">
       <p class="eyebrow" data-reveal>What we source</p>
       <h1 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
         What we source, and where it comes from.
@@ -146,189 +133,164 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
         not in-house manufacturing. Every partner plant is quality-approved, and we source
         exclusively from WHO GMP and EU GMP approved facilities.
       </p>
-    </div>
-  </section>
-
-  <!-- 6.2 The sourcing matrix. Mobile: an accordion, one line per expandable
-       section (CLAUDE.md hard requirement, never a mega-grid). Desktop: every
-       line open, name and summary in the left column, categories in the right,
-       laid out for scanning. One DOM serves both: the toggle stays functional
-       at every width, only the default state differs, so aria-expanded is
-       always telling the truth. Without JS everything is simply open. -->
-  <section class="border-t border-line bg-paper">
-    <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-20">
-      <p class="eyebrow" data-reveal>The sourcing matrix</p>
-      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
-        What we can source.
-      </h2>
-      <div class="mt-10 border-t border-line md:mt-12" data-matrix>
-        {
-          lines.map((line, i) => (
-            <div class="border-b border-line md:grid md:grid-cols-[minmax(0,21rem)_1fr] md:items-start md:gap-x-12 lg:gap-x-16" data-matrix-row data-reveal-child>
-              <h3 class="m-0">
-                <button
-                  type="button"
-                  class="matrix-toggle block w-full py-5 text-left md:py-7"
-                  aria-expanded="true"
-                  aria-controls={`line-panel-${i}`}
-                >
-                  <span class="flex items-center gap-3">
-                    <svg class="h-6 w-6 shrink-0 text-copper-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
-                    <span class="flex-1 text-lg font-bold tracking-tight text-ink md:text-xl">{line.name}</span>
-                    <svg class="matrix-chevron h-5 w-5 shrink-0 text-steel-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                      <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                  </span>
-                  <span class="mt-1.5 block pl-9 text-sm leading-relaxed text-steel-deep">
-                    {line.summary}
-                  </span>
-                </button>
-              </h3>
-              <div class="matrix-panel" id={`line-panel-${i}`}>
-                <div class="matrix-panel-clip">
-                  <div class="pb-6 pl-9 md:py-7 md:pl-0">
-                    {line.categories.length > 0 && (
-                      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
-                        {line.categories.map((cat) => (
-                          <li class="inline-flex items-center rounded-sm border border-line bg-paper-warm px-3 py-1.5 text-sm text-steel-deep">
-                            {cat}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {line.note && (
-                      <p class={`${line.categories.length ? 'mt-3' : 'mt-0'} max-w-xl text-sm leading-relaxed text-steel-deep`}>
-                        {line.note}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        }
+      <div class="mt-7 flex flex-wrap gap-3" data-reveal>
+        <a href="#catalogue" class="btn btn-primary">Browse the packaging catalogue</a>
+        <a href={withBase('/contact')} class="btn btn-secondary">Request a Quote</a>
       </div>
     </div>
   </section>
 
+  <!-- 6.2 The five lines. One tile per line with its categories set as a
+       short run of text, so all five fit in one row on a desktop and in a
+       swipeable rail on a phone (each tile shows the edge of the next, which
+       is the cue to swipe). About a third of the height of the old accordion,
+       with nothing hidden behind a toggle. -->
+  <section class="border-t border-line bg-paper" id="lines">
+    <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
+      <p class="eyebrow" data-reveal>The sourcing matrix</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
+        What we can source.
+      </h2>
+      <ul class="lines-rail mt-8 md:mt-10" aria-label="The five sourcing lines">
+        {
+          lines.map((line) => (
+            <li class="lines-tile" data-reveal-child>
+              <svg class="h-7 w-7 text-copper-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
+              <h3 class="mt-4 text-lg font-bold tracking-tight text-ink">{line.name}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-steel-deep">{line.summary}</p>
+              {line.categories.length > 0 && (
+                <p class="mt-3 text-sm leading-relaxed text-ink">{line.categories.join(' · ')}</p>
+              )}
+              {line.note && <p class="mt-2 text-sm leading-relaxed text-steel-deep">{line.note}</p>}
+              {line.name === 'Packaging' && (
+                <a href="#catalogue" class="lines-link">
+                  See the catalogue
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
   <!-- The sourcing catalogue: partner-plant packaging items, searchable and
-       filterable client side. Data in src/data/catalogue.ts; the partner is
+       filterable client side. Data in src/data/catalogue.ts; the partners are
        deliberately unnamed (see the note there). Framing stays "what we
-       source", never "our products" (guardrails 5 and 6). Controls are hidden
-       until the script arms them, so without JS the full catalogue is simply
-       visible with nothing interactive lying dead. -->
-  <section class="border-t border-line bg-paper" id="catalogue">
-    <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-20">
+       source", never "our products" (guardrails 5 and 6).
+
+       Controls: a search box, a category row (single choice, counts live), a
+       Material menu (multi-choice, counts live; a bottom sheet on phones), and
+       a strip of the filters in force with a Clear all. They are hidden until
+       the script arms them, so without JS the full catalogue is simply
+       visible with nothing interactive lying dead. Every card links to the
+       item's own page, which carries its facts and the enquiry buttons. -->
+  <section class="border-t border-line bg-paper-warm" id="catalogue">
+    <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
       <p class="eyebrow" data-reveal>Sourcing catalogue</p>
       <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
         The packaging range, item by item.
       </h2>
       <p class="mt-5 max-w-2xl text-base leading-relaxed text-steel-deep" data-reveal>
         Every item below is sourced through our partner network and supplied to your
-        specification: what we source, not what we make. The catalogue grows as the network
-        does.
+        specification: what we source, not what we make. Open an item for its details, or enquire
+        about it directly. The catalogue grows as the network does.
       </p>
 
-      <div class="mt-9" data-cat-controls hidden>
-        <label class="relative block max-w-md">
-          <span class="sr-only">Search the catalogue</span>
-          <svg
-            class="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-steel-deep"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-          >
-            <circle cx="10.5" cy="10.5" r="6.5" />
-            <path d="m15.5 15.5 4.5 4.5" stroke-linecap="round" />
-          </svg>
-          <input
-            id="cat-search"
-            type="search"
-            autocomplete="off"
-            placeholder="Search: item, size, material"
-            class="w-full rounded-sm border border-line bg-white py-3 pr-4 pl-11 text-base text-ink transition-colors placeholder:text-muted focus:border-steel focus:outline-none"
-          />
-        </label>
-        <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter by category">
-          <button type="button" class="cat-chip" data-cat-filter="all" aria-pressed="true">
-            All categories
-          </button>
-          {
-            CATALOGUE_CATEGORIES.map((c) => (
-              <button type="button" class="cat-chip" data-cat-filter={c} aria-pressed="false">
-                {c}
-              </button>
-            ))
-          }
+      <div class="mt-8 md:mt-10" data-cat-controls hidden>
+        <div class="flex gap-2 md:gap-3">
+          <label class="relative block min-w-0 flex-1 md:max-w-md">
+            <span class="sr-only">Search the catalogue</span>
+            <svg
+              class="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-steel-deep"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <circle cx="10.5" cy="10.5" r="6.5" />
+              <path d="m15.5 15.5 4.5 4.5" stroke-linecap="round" />
+            </svg>
+            <input
+              id="cat-search"
+              type="search"
+              autocomplete="off"
+              placeholder="Search item, size, material"
+              class="h-11 w-full rounded-sm border border-line bg-white pr-4 pl-11 text-base text-ink transition-colors placeholder:text-muted focus:border-steel focus:outline-none"
+            />
+          </label>
+
+          <details class="facet" data-facet>
+            <summary class="facet-btn">
+              <span>Material</span>
+              <span class="facet-badge" data-facet-count hidden></span>
+              <svg class="facet-chev h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </summary>
+            <div class="facet-panel">
+              <div class="facet-head">
+                <span class="text-base font-bold text-ink">Material</span>
+                <button type="button" class="facet-x" data-facet-close aria-label="Close">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6 6 18" stroke-linecap="round" />
+                  </svg>
+                </button>
+              </div>
+              <ul class="facet-list" role="group" aria-label="Filter by material">
+                {
+                  MATERIAL_FACETS.map((m) => (
+                    <li>
+                      <label class="facet-opt">
+                        <input type="checkbox" value={m} data-facet-opt />
+                        <span class="flex-1">{m}</span>
+                        <span class="facet-n" data-facet-n>{materialCount(m)}</span>
+                      </label>
+                    </li>
+                  ))
+                }
+              </ul>
+              <div class="facet-foot">
+                <button type="button" class="facet-clear" data-facet-clear>Clear</button>
+                <button type="button" class="btn btn-primary !min-h-11 flex-1 !px-4 text-sm" data-facet-apply>
+                  Show all items
+                </button>
+              </div>
+            </div>
+          </details>
         </div>
-        <div class="mt-2.5 flex flex-wrap gap-2" role="group" aria-label="Filter by material">
-          <button type="button" class="cat-chip" data-mat-filter="all" aria-pressed="true">
-            All materials
-          </button>
-          {
-            ['PP', 'HDPE', 'LDPE'].map((m) => (
-              <button
-                type="button"
-                class="cat-chip"
-                data-mat-filter={m.toLowerCase()}
-                aria-pressed="false"
-              >
-                {m}
-              </button>
-            ))
-          }
+
+        <div class="cat-seg-wrap mt-3">
+          <div class="cat-seg" role="group" aria-label="Category">
+            <button type="button" class="seg-btn" data-cat-filter="" aria-pressed="true">
+              All <span class="seg-n" data-seg-n>{CATALOGUE.length}</span>
+            </button>
+            {
+              CATALOGUE_CATEGORIES.map((c) => (
+                <button type="button" class="seg-btn" data-cat-filter={c} aria-pressed="false">
+                  {c} <span class="seg-n" data-seg-n>{countFor(c)}</span>
+                </button>
+              ))
+            }
+          </div>
         </div>
-        <p class="mt-5 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite">
-        </p>
+
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          <span class="mr-1 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite"></span>
+          <span class="contents" data-cat-active></span>
+          <button type="button" class="cat-clear" data-cat-clear hidden>Clear all</button>
+        </div>
       </div>
 
       <ul
         class="mt-6 grid list-none grid-cols-2 gap-x-3 gap-y-6 p-0 sm:grid-cols-3 md:gap-x-4 lg:grid-cols-4 xl:grid-cols-5"
         data-cat-grid
       >
-        {
-          CATALOGUE.map((item) => (
-            <li
-              data-cat-item
-              data-cat={item.category}
-              data-mat={(item.material ?? '').toLowerCase()}
-              data-search={searchText(item)}
-            >
-              <figure class="m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-3 md:p-4">
-                {item.illustrative ? (
-                  <img
-                    src={imageFor(item.image).src}
-                    alt={`${item.name}, representative illustration`}
-                    class="h-full w-full scale-[1.32] object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : (
-                  <Image
-                    src={imageFor(item.image)}
-                    alt={item.name}
-                    width={360}
-                    densities={[1, 2]}
-                    format="webp"
-                    quality={80}
-                    class="h-full w-full object-contain"
-                    loading="lazy"
-                  />
-                )}
-              </figure>
-              <p class="mt-2.5 text-[13px] leading-snug font-semibold text-ink md:text-sm">
-                {item.name}
-              </p>
-              {(item.material || item.weight) && (
-                <p class="mt-1 text-xs text-steel-deep">
-                  {[item.material, item.weight].filter(Boolean).join(' · ')}
-                </p>
-              )}
-            </li>
-          ))
-        }
+        {CATALOGUE.map((item) => <CatalogueCard item={item} />)}
       </ul>
 
       <div class="mt-10 text-center" data-cat-more-wrap hidden>
@@ -351,16 +313,16 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 
   <!-- 6.3 Sourcing regions: three clean cards, each noting the approval
        standard. Heading authored; it adds no claim. [NEEDS: confirm headline] -->
-  <section class="border-t border-line bg-paper-warm">
-    <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-20">
+  <section class="border-t border-line bg-paper">
+    <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
       <p class="eyebrow" data-reveal>Sourcing regions</p>
       <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>
         Where we source.
       </h2>
-      <div class="mt-10 grid gap-4 sm:grid-cols-3 md:mt-12 md:gap-6">
+      <div class="mt-8 grid gap-4 sm:grid-cols-3 md:mt-10 md:gap-6">
         {
           regions.map((region) => (
-            <div class="rounded-sm border border-line bg-paper p-6 md:p-7" data-reveal-child>
+            <div class="rounded-sm border border-line bg-white p-6 md:p-7" data-reveal-child>
               <h3 class="text-lg font-bold tracking-tight text-ink">{region.name}</h3>
               <p class="mt-2 text-sm leading-relaxed text-steel-deep">{region.copy}</p>
             </div>
@@ -419,45 +381,148 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
   </section>
 
   <style>
-    /* Accordion mechanics. The collapsed state exists only under .js-acc, which
-       the script below adds, so without JS every panel is simply open. The
-       0fr/1fr grid transition animates to content height with no measuring;
-       the clip wrapper provides the min-height:0 the trick requires. */
-    .matrix-panel {
+    /* ---- The five-line rail ------------------------------------------ */
+    /* Phone: a horizontal snap rail bleeding to the screen edges, each tile
+       78% wide so the next one peeks in. Tablet: three across, two rows.
+       Desktop: all five in one row. */
+    .lines-rail {
       display: grid;
-      grid-template-rows: 1fr;
-      transition:
-        grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0s linear 0s;
+      grid-auto-flow: column;
+      grid-auto-columns: min(78%, 19rem);
+      gap: 0.75rem;
+      margin: 2rem -1.25rem 0;
+      padding: 0 1.25rem 0.25rem;
+      list-style: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 1.25rem;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
     }
-    .matrix-panel-clip {
-      min-height: 0;
-      overflow: hidden;
+    .lines-rail::-webkit-scrollbar {
+      display: none;
     }
-    .js-acc [data-matrix-row]:not(.is-open) .matrix-panel {
-      grid-template-rows: 0fr;
-      /* Collapsed content leaves the a11y tree and the hit-test area, not just
-         the viewport. The delay holds visibility until the fold finishes. */
-      visibility: hidden;
-      transition:
-        grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0s linear 0.45s;
+    .lines-tile {
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--color-line);
+      border-radius: 0.25rem;
+      background: #ffffff;
+      padding: 1.25rem;
     }
-    .matrix-chevron {
-      transition: transform 0.3s ease;
-    }
-    [data-matrix-row].is-open .matrix-chevron {
-      transform: rotate(180deg);
-    }
-
-    /* Catalogue filter chips. 44px minimum height is the mobile tap-target
-       floor (CLAUDE.md), not a style choice. Active state mirrors the site's
-       steel-deep on paper inversion. */
-    .cat-chip {
+    .lines-link {
       display: inline-flex;
       align-items: center;
+      gap: 0.3rem;
+      margin-top: auto;
+      padding-top: 1rem;
       min-height: 2.75rem;
-      padding: 0 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-copper-deep);
+      text-decoration: none;
+    }
+    .lines-link:hover {
+      color: var(--color-copper);
+    }
+    @media (min-width: 768px) {
+      .lines-rail {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin: 2.5rem 0 0;
+        padding: 0;
+        overflow: visible;
+      }
+    }
+    @media (min-width: 1024px) {
+      .lines-rail {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .lines-tile {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+
+    /* ---- Catalogue controls ------------------------------------------ */
+    /* Category row: one choice at a time, pill group, scrolls sideways on a
+       phone (bleeding to the edges) and wraps on wider screens. */
+    .cat-seg-wrap {
+      margin: 0.75rem -1.25rem 0;
+      padding: 0 1.25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-seg-wrap::-webkit-scrollbar {
+      display: none;
+    }
+    .cat-seg {
+      display: inline-flex;
+      gap: 0.25rem;
+      padding: 0.25rem;
+      border: 1px solid var(--color-line);
+      border-radius: 999px;
+      background: #ffffff;
+    }
+    .seg-btn {
+      flex: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.5rem;
+      padding: 0 0.9rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--color-steel-deep);
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .seg-btn:hover {
+      background: var(--color-paper-warm);
+      color: var(--color-ink);
+    }
+    .seg-btn[aria-pressed='true'] {
+      background: var(--color-steel-deep);
+      color: var(--color-paper);
+    }
+    .seg-btn.is-empty:not([aria-pressed='true']) {
+      color: var(--color-muted);
+    }
+    .seg-n {
+      font-size: 0.75rem;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    @media (min-width: 768px) {
+      .cat-seg-wrap {
+        margin: 0.75rem 0 0;
+        padding: 0;
+        overflow: visible;
+      }
+      .cat-seg {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Material menu: a <details>, so it opens and closes with no script and
+       the script only adds outside-click and Escape. Desktop: a dropdown
+       under its button. Phone: a bottom sheet with a dimmed page behind. */
+    .facet {
+      position: relative;
+      flex: none;
+    }
+    .facet-btn {
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 2.75rem;
+      padding: 0 0.9rem;
       border: 1px solid var(--color-line);
       border-radius: 0.25rem;
       background: #ffffff;
@@ -465,23 +530,192 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
       font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
-      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+      user-select: none;
+      transition: border-color 0.15s ease, color 0.15s ease;
     }
-    .cat-chip:hover {
-      border-color: var(--color-steel);
+    .facet-btn::-webkit-details-marker {
+      display: none;
+    }
+    .facet-btn:hover,
+    .facet[open] > .facet-btn,
+    .facet.is-active > .facet-btn {
+      border-color: var(--color-steel-deep);
       color: var(--color-ink);
     }
-    .cat-chip[aria-pressed='true'] {
+    .facet-chev {
+      transition: transform 0.2s ease;
+    }
+    .facet[open] .facet-chev {
+      transform: rotate(180deg);
+    }
+    .facet-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.25rem;
+      height: 1.25rem;
+      padding: 0 0.35rem;
+      border-radius: 999px;
+      background: var(--color-copper);
+      color: #ffffff;
+      font-size: 0.7rem;
+      line-height: 1;
+    }
+    .facet-panel {
+      position: absolute;
+      top: calc(100% + 0.4rem);
+      right: 0;
+      z-index: 60;
+      min-width: 16rem;
+      padding: 0.5rem;
+      border: 1px solid var(--color-line);
+      border-radius: 0.375rem;
+      background: #ffffff;
+      box-shadow: 0 18px 40px -20px rgba(38, 48, 61, 0.45);
+    }
+    .facet-head {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.25rem 0.5rem 0.5rem;
+    }
+    .facet-x {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      margin-right: -0.5rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--color-steel-deep);
+      cursor: pointer;
+    }
+    .facet-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .facet-opt {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-height: 2.75rem;
+      padding: 0 0.75rem;
+      border-radius: 0.25rem;
+      font-size: 0.9375rem;
+      color: var(--color-ink);
+      cursor: pointer;
+    }
+    .facet-opt:hover {
+      background: var(--color-paper-warm);
+    }
+    .facet-opt input {
+      width: 1.1rem;
+      height: 1.1rem;
+      accent-color: var(--color-copper);
+    }
+    .facet-opt.is-empty {
+      color: var(--color-muted);
+    }
+    .facet-n {
+      font-size: 0.8rem;
+      color: var(--color-steel-deep);
+    }
+    .facet-foot {
+      display: none;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.75rem 0.25rem 0;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--color-line);
+    }
+    .facet-clear {
+      min-height: 2.75rem;
+      padding: 0 0.75rem;
+      border: 0;
+      background: transparent;
+      color: var(--color-steel-deep);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    @media (max-width: 767px) {
+      .facet[open]::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 65;
+        background: rgba(28, 38, 52, 0.5);
+      }
+      .facet-panel {
+        position: fixed;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 70;
+        min-width: 0;
+        max-height: 75vh;
+        overflow: auto;
+        padding: 0.75rem 1rem calc(env(safe-area-inset-bottom) + 1rem);
+        border: 0;
+        border-radius: 1rem 1rem 0 0;
+        box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.3);
+      }
+      .facet-head,
+      .facet-foot {
+        display: flex;
+      }
+    }
+
+    /* Filters in force, as removable chips beside the count. The chips are
+       created by the script, so they never receive Astro's scoping
+       attribute: their rules must be global or they silently miss. */
+    :global(.cat-pill),
+    .cat-clear {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-height: 2.5rem;
+      padding: 0 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    :global(.cat-pill) {
+      border: 1px solid var(--color-steel-deep);
+      background: #ffffff;
+      color: var(--color-ink);
+    }
+    :global(.cat-pill:hover) {
       background: var(--color-steel-deep);
-      border-color: var(--color-steel-deep);
       color: var(--color-paper);
+    }
+    :global(.cat-pill svg) {
+      width: 0.85rem;
+      height: 0.85rem;
+    }
+    .cat-clear {
+      border: 0;
+      background: transparent;
+      color: var(--color-copper-deep);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .cat-clear:hover {
+      color: var(--color-copper);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .matrix-panel,
-      .js-acc [data-matrix-row]:not(.is-open) .matrix-panel,
-      .matrix-chevron,
-      .cat-chip {
+      .seg-btn,
+      .facet-btn,
+      .facet-chev,
+      :global(.cat-pill),
+      .cat-clear {
         transition: none;
       }
     }
@@ -491,110 +725,195 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
     import initPageFlow from '../scripts/page-flow.js';
     initPageFlow();
 
-    // The matrix accordion. Toggles work at every width; only the defaults
-    // differ. Mobile opens the first line so the pattern is self-explaining,
-    // desktop opens everything because the spec wants the range scannable.
-    const matrix = document.querySelector('[data-matrix]');
-    const rows = [...document.querySelectorAll<HTMLElement>('[data-matrix-row]')];
-    const mq = window.matchMedia('(min-width: 768px)');
-
-    const setRow = (row: HTMLElement, open: boolean) => {
-      row.classList.toggle('is-open', open);
-      row.querySelector('.matrix-toggle')?.setAttribute('aria-expanded', String(open));
-    };
-
-    if (matrix && rows.length) {
-      // Arm only once we know we can control it: a JS failure leaves the
-      // matrix fully open rather than locked shut.
-      matrix.classList.add('js-acc');
-
-      const applyDefaults = (desktop: boolean) => {
-        rows.forEach((row, i) => setRow(row, desktop || i === 0));
-      };
-      applyDefaults(mq.matches);
-      mq.addEventListener('change', (e) => applyDefaults(e.matches));
-
-      for (const row of rows) {
-        row.querySelector('.matrix-toggle')?.addEventListener('click', () => {
-          setRow(row, !row.classList.contains('is-open'));
-        });
-      }
-    }
-
-    // The catalogue: substring search plus category and material filters, all
-    // client side over data-* attributes, no framework. The first LIMIT
-    // matches show; "Show all" reveals the rest of the current match set, and
-    // any filter or search change folds back to the limit so the grid never
-    // silently holds a mile of scroll. Material matching is substring on
-    // purpose: an "LDPE + HDPE" item belongs under both chips.
+    // The catalogue: substring search, one category at a time, any number of
+    // materials, all client side over data-* attributes, no framework. Counts
+    // on every control are live: each option counts the items that would
+    // match if it were chosen, given everything else in force. The first
+    // LIMIT matches show; "Show all" reveals the rest, and any change folds
+    // back to the limit so the grid never silently holds a mile of scroll.
+    // Material matching is substring on purpose: an "LDPE + HDPE" item
+    // belongs under both. The filters in force are mirrored into the URL so
+    // a filtered view can be linked.
     const grid = document.querySelector<HTMLElement>('[data-cat-grid]');
     const controls = document.querySelector<HTMLElement>('[data-cat-controls]');
     if (grid && controls) {
       const items = [...grid.querySelectorAll<HTMLElement>('[data-cat-item]')];
-      const searchInput = document.getElementById('cat-search') as HTMLInputElement | null;
-      const catBtns = [...controls.querySelectorAll<HTMLButtonElement>('[data-cat-filter]')];
-      const matBtns = [...controls.querySelectorAll<HTMLButtonElement>('[data-mat-filter]')];
+      const search = document.getElementById('cat-search') as HTMLInputElement | null;
+      const segBtns = [...controls.querySelectorAll<HTMLButtonElement>('[data-cat-filter]')];
+      const facet = controls.querySelector<HTMLDetailsElement>('details[data-facet]');
+      const opts = [...controls.querySelectorAll<HTMLInputElement>('input[data-facet-opt]')];
+      const badge = controls.querySelector<HTMLElement>('[data-facet-count]');
+      const applyBtn = controls.querySelector<HTMLButtonElement>('[data-facet-apply]');
       const countEl = controls.querySelector<HTMLElement>('[data-cat-count]');
+      const activeEl = controls.querySelector<HTMLElement>('[data-cat-active]');
+      const clearBtn = controls.querySelector<HTMLButtonElement>('[data-cat-clear]');
       const moreWrap = document.querySelector<HTMLElement>('[data-cat-more-wrap]');
       const moreBtn = document.querySelector<HTMLButtonElement>('[data-cat-more]');
       const emptyEl = document.querySelector<HTMLElement>('[data-cat-empty]');
       const emptyQ = document.querySelector<HTMLElement>('[data-cat-empty-q]');
       const LIMIT = 20;
-      let cat = 'all';
-      let mat = 'all';
+      let cat = '';
       let expanded = false;
 
+      type Filters = { q: string; cat: string; mats: string[] };
+      const current = (): Filters => ({
+        q: (search?.value ?? '').trim().toLowerCase(),
+        cat,
+        mats: opts.filter((o) => o.checked).map((o) => o.value.toLowerCase()),
+      });
+      const matches = (el: HTMLElement, f: Filters, skip?: 'cat' | 'mat') =>
+        (!f.q || (el.dataset.search ?? '').includes(f.q)) &&
+        (skip === 'cat' || !f.cat || el.dataset.cat === f.cat) &&
+        (skip === 'mat' || f.mats.length === 0 || f.mats.some((m) => (el.dataset.mat ?? '').includes(m)));
+
+      const pill = (label: string, onRemove: () => void) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cat-pill';
+        b.setAttribute('aria-label', `Remove filter: ${label}`);
+        const t = document.createElement('span');
+        t.textContent = label;
+        b.appendChild(t);
+        b.insertAdjacentHTML(
+          'beforeend',
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>',
+        );
+        b.addEventListener('click', () => {
+          onRemove();
+          expanded = false;
+          apply();
+        });
+        return b;
+      };
+
       const apply = () => {
-        const q = (searchInput?.value ?? '').trim().toLowerCase();
+        const f = current();
         let matched = 0;
         let shown = 0;
         for (const el of items) {
-          const ok =
-            (cat === 'all' || el.dataset.cat === cat) &&
-            (mat === 'all' || (el.dataset.mat ?? '').includes(mat)) &&
-            (!q || (el.dataset.search ?? '').includes(q));
+          const ok = matches(el, f);
           if (ok) matched++;
           const visible = ok && (expanded || matched <= LIMIT);
           el.hidden = !visible;
           if (visible) shown++;
         }
+
+        // Live counts: what each choice would yield given the others.
+        for (const b of segBtns) {
+          const v = b.dataset.catFilter ?? '';
+          const n = items.filter((el) => matches(el, f, 'cat') && (!v || el.dataset.cat === v)).length;
+          const nEl = b.querySelector('[data-seg-n]');
+          if (nEl) nEl.textContent = String(n);
+          b.classList.toggle('is-empty', n === 0);
+        }
+        for (const o of opts) {
+          const v = o.value.toLowerCase();
+          const n = items.filter((el) => matches(el, f, 'mat') && (el.dataset.mat ?? '').includes(v)).length;
+          const row = o.closest('label');
+          const nEl = row?.querySelector('[data-facet-n]');
+          if (nEl) nEl.textContent = String(n);
+          row?.classList.toggle('is-empty', n === 0 && !o.checked);
+        }
+        if (badge) {
+          badge.hidden = f.mats.length === 0;
+          badge.textContent = String(f.mats.length);
+        }
+        facet?.classList.toggle('is-active', f.mats.length > 0);
+        if (applyBtn) applyBtn.textContent = matched === 1 ? 'Show 1 item' : `Show ${matched} items`;
+
         if (countEl) {
           countEl.textContent =
             matched === 0
               ? 'No matching items'
               : shown < matched
                 ? `Showing ${shown} of ${matched} items`
-                : `Showing all ${matched} item${matched === 1 ? '' : 's'}`;
+                : `${matched} item${matched === 1 ? '' : 's'}`;
         }
+        if (activeEl) {
+          activeEl.replaceChildren();
+          if (f.q && search) activeEl.appendChild(pill(`“${search.value.trim()}”`, () => (search.value = '')));
+          for (const o of opts.filter((o) => o.checked)) activeEl.appendChild(pill(o.value, () => (o.checked = false)));
+        }
+        if (clearBtn) clearBtn.hidden = !(f.q || f.cat || f.mats.length);
         if (moreWrap && moreBtn) {
           moreWrap.hidden = matched <= shown;
           moreBtn.textContent = `Show all ${matched} items`;
         }
         if (emptyEl) emptyEl.hidden = matched !== 0;
-        if (emptyQ) emptyQ.textContent = `"${q}"`;
+        if (emptyQ) emptyQ.textContent = f.q && search ? `“${search.value.trim()}”` : 'those filters';
         grid.hidden = matched === 0;
+
+        // Mirror the state into the URL so a filtered view can be shared.
+        const p = new URLSearchParams();
+        if (f.q && search) p.set('q', search.value.trim());
+        if (f.cat) p.set('cat', f.cat);
+        if (f.mats.length) p.set('mat', opts.filter((o) => o.checked).map((o) => o.value).join(','));
+        const qs = p.toString();
+        history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
       };
+
+      const setCat = (v: string) => {
+        cat = v;
+        for (const b of segBtns) b.setAttribute('aria-pressed', String((b.dataset.catFilter ?? '') === v));
+      };
+
+      // Restore a linked state before the first paint of the controls.
+      const init = new URLSearchParams(location.search);
+      if (search && init.get('q')) search.value = init.get('q') ?? '';
+      const initCat = init.get('cat') ?? '';
+      if (segBtns.some((b) => b.dataset.catFilter === initCat)) setCat(initCat);
+      const initMats = (init.get('mat') ?? '').split(',').map((m) => m.trim().toLowerCase()).filter(Boolean);
+      for (const o of opts) if (initMats.includes(o.value.toLowerCase())) o.checked = true;
 
       // Arm only once we can control the grid: a JS failure leaves the whole
       // catalogue visible with no dead controls on screen.
       controls.hidden = false;
 
-      searchInput?.addEventListener('input', () => {
+      search?.addEventListener('input', () => {
         expanded = false;
         apply();
       });
-      const wireGroup = (btns: HTMLButtonElement[], set: (b: HTMLButtonElement) => void) => {
-        for (const b of btns) {
-          b.addEventListener('click', () => {
-            for (const x of btns) x.setAttribute('aria-pressed', String(x === b));
-            set(b);
-            expanded = false;
-            apply();
-          });
-        }
+      for (const b of segBtns) {
+        b.addEventListener('click', () => {
+          setCat(b.dataset.catFilter ?? '');
+          expanded = false;
+          apply();
+        });
+      }
+      for (const o of opts) {
+        o.addEventListener('change', () => {
+          expanded = false;
+          apply();
+        });
+      }
+      controls.querySelector('[data-facet-clear]')?.addEventListener('click', () => {
+        for (const o of opts) o.checked = false;
+        expanded = false;
+        apply();
+      });
+      const closeFacet = () => {
+        if (facet?.open) facet.open = false;
       };
-      wireGroup(catBtns, (b) => (cat = b.dataset.catFilter ?? 'all'));
-      wireGroup(matBtns, (b) => (mat = b.dataset.matFilter ?? 'all'));
+      applyBtn?.addEventListener('click', closeFacet);
+      controls.querySelector('[data-facet-close]')?.addEventListener('click', closeFacet);
+      // Outside click closes the menu. On a phone the dimmed backdrop is the
+      // <details> element's own ::before, so a tap on it targets the element
+      // itself, which counts as outside too.
+      document.addEventListener('click', (e) => {
+        if (!facet?.open) return;
+        const t = e.target as Node;
+        if (t === facet || !facet.contains(t)) closeFacet();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeFacet();
+      });
+      clearBtn?.addEventListener('click', () => {
+        if (search) search.value = '';
+        setCat('');
+        for (const o of opts) o.checked = false;
+        expanded = false;
+        apply();
+      });
       moreBtn?.addEventListener('click', () => {
         expanded = true;
         apply();

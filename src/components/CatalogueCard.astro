@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import type { CatalogueItem } from '../data/catalogue';
+import { imageFor, itemPath, itemFacts, searchText } from '../lib/catalogue';
+
+// One catalogue card. The whole card is a link to the item's own page, with
+// two explicit actions under it (Details, Enquire) so the second one lands on
+// the page's enquiry block. On pointer devices, hovering the photo lifts a
+// spec peek over it; on touch there is no hover and the tap goes straight to
+// the page, which is where the same facts live in full. No modal: for
+// spec-driven items a quick-view overlay gets mistaken for the real page.
+
+interface Props {
+  item: CatalogueItem;
+}
+
+const { item } = Astro.props;
+const path = itemPath(item);
+const facts = itemFacts(item);
+// The peek is a glance, not the datasheet: the first few facts only.
+const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
+---
+
+<li
+  class="cat-item"
+  data-cat-item
+  data-cat={item.category}
+  data-mat={(item.material ?? '').toLowerCase()}
+  data-search={searchText(item)}
+>
+  <a href={path} class="cat-card">
+    <figure class="relative m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-3 md:p-4">
+      {
+        item.illustrative ? (
+          <img
+            src={imageFor(item.image).src}
+            alt={`${item.name}, representative illustration`}
+            class="h-full w-full scale-[1.32] object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Image
+            src={imageFor(item.image)}
+            alt={item.name}
+            width={360}
+            densities={[1, 2]}
+            format="webp"
+            quality={80}
+            class="h-full w-full object-contain"
+            loading="lazy"
+          />
+        )
+      }
+      {
+        peek.length > 0 && (
+          <dl class="cat-peek" aria-hidden="true">
+            {peek.map((f) => (
+              <div class="cat-peek-row">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </figure>
+    <p class="mt-2.5 text-[13px] leading-snug font-semibold text-ink md:text-sm">{item.name}</p>
+    {
+      (item.material || item.weight) && (
+        <p class="mt-1 text-xs text-steel-deep">{[item.material, item.weight].filter(Boolean).join(' · ')}</p>
+      )
+    }
+  </a>
+  <div class="cat-acts">
+    <a href={path}>Details</a>
+    <a href={`${path}#enquire`}>Enquire</a>
+  </div>
+</li>
+
+<style>
+  .cat-card {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+  .cat-card figure {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cat-card:hover figure,
+  .cat-card:focus-visible figure {
+    border-color: var(--color-steel);
+    box-shadow: 0 10px 24px -16px rgba(38, 48, 61, 0.45);
+  }
+  .cat-card:focus-visible {
+    outline: none;
+  }
+
+  /* The spec peek: a white sheet rising over the photo with the item's key
+     facts. Pointer devices only; on touch it never renders, the tap opens
+     the item page instead. */
+  .cat-peek {
+    display: none;
+    position: absolute;
+    inset: auto 0 0 0;
+    margin: 0;
+    padding: 0.7rem 0.8rem 0.75rem;
+    background: rgba(255, 255, 255, 0.96);
+    border-top: 1px solid var(--color-line);
+    font-size: 0.75rem;
+    line-height: 1.35;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: opacity 0.18s ease, transform 0.22s ease;
+  }
+  @media (hover: hover) and (min-width: 640px) {
+    .cat-peek {
+      display: block;
+    }
+    .cat-card:hover .cat-peek,
+    .cat-card:focus-visible .cat-peek {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .cat-peek-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.15rem 0;
+  }
+  .cat-peek-row + .cat-peek-row {
+    border-top: 1px solid var(--color-paper-warm);
+  }
+  .cat-peek dt {
+    color: var(--color-steel-deep);
+    white-space: nowrap;
+  }
+  .cat-peek dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* Two quiet text actions under each card. 44px tall, so a thumb can hit
+     them on a two-column phone grid. */
+  .cat-acts {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.125rem;
+  }
+  .cat-acts a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-copper-deep);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: transparent;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+  }
+  .cat-acts a:hover,
+  .cat-acts a:focus-visible {
+    color: var(--color-copper);
+    text-decoration-color: currentColor;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cat-card figure,
+    .cat-peek,
+    .cat-acts a {
+      transition: none;
+    }
+  }
+</style>

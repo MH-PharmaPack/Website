@@ -1,7 +1,9 @@
 // The sourcing catalogue: packaging items MH can source through partner plants.
-// Data supplied by the manufacturing partner with permission; the partner is
-// deliberately not named anywhere on the site or in this repo, and their
-// internal product codes are not carried over. Entries marked `illustrative`
+// Data supplied by the manufacturing partners with permission; no partner is
+// named anywhere on the site or in this repo, and their internal product
+// codes are not carried over. The PET bottle range and its two caps come from
+// a second partner's catalogue (colour to requirement, 25 mm neck unless the
+// name says otherwise); everything else from the first. Entries marked `illustrative`
 // have no partner photograph yet and use a line drawing (same filename stem
 // convention, .svg) that is representative of the item type, not a photo.
 //
@@ -22,6 +24,8 @@ export interface CatalogueItem {
   weight?: string;
   /** Search-only synonyms, never rendered */
   keywords?: string;
+  /** Further facts from the partner's own datasheet, shown on the item's detail view */
+  specs?: { label: string; value: string }[];
 }
 
 export const CATALOGUE_CATEGORIES = [
@@ -29,6 +33,7 @@ export const CATALOGUE_CATEGORIES = [
   'Spray Bottles',
   'Ophthalmic Bottles',
   'Pharmaceutical Bottles',
+  'PET Bottles',
 ] as const;
 
 export type CatalogueCategory = (typeof CATALOGUE_CATEGORIES)[number];
@@ -261,6 +266,35 @@ export const CATALOGUE: CatalogueItem[] = [
     illustrative: true,
     material: 'PP',
     weight: '8.20 gm'
+  },
+  {
+    name: '25 mm Flip Top Cap',
+    category: 'Caps & Closures',
+    image: 'arch-flip-top-cap.svg',
+    illustrative: true,
+    weight: '3.75 gm',
+    keywords: '25 mm neck flip cap dispensing screwing mould',
+    specs: [
+      { label: 'Outer diameter', value: '27.40 mm' },
+      { label: 'Inner diameter', value: '24.86 mm' },
+      { label: 'Mould', value: 'Screwing mould' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '10 ml Measuring Cup (25 mm Neck)',
+    category: 'Caps & Closures',
+    image: 'arch-measuring-cup.svg',
+    illustrative: true,
+    weight: '1.15 gm',
+    keywords: '25 mm neck dosing cup hot runner mould',
+    specs: [
+      { label: 'Outer diameter', value: '27.75 mm' },
+      { label: 'Inner diameter', value: '26.75 mm' },
+      { label: 'Height', value: '20 mm' },
+      { label: 'Mould', value: 'Hot runner mould' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
   },
   {
     name: '15 ml Spray Bottle',
@@ -668,5 +702,206 @@ export const CATALOGUE: CatalogueItem[] = [
     image: '100-ml-tablet-bottle-set.jpg',
     material: 'HDPE',
     weight: '11.00 gm'
+  },
+  // PET bottles: neck, body diameter, height and overflow capacity are the
+  // partner's datasheet figures; colour is made to order on every one.
+  {
+    name: '15 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '15-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '7.70 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '28 mm' },
+      { label: 'Height', value: '60 mm' },
+      { label: 'Overflow capacity', value: '20 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '30 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '30-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '7.70 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '30.5 mm' },
+      { label: 'Height', value: '76 mm' },
+      { label: 'Overflow capacity', value: '35 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '60 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '60-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '10.00 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '36 mm' },
+      { label: 'Height', value: '92 mm' },
+      { label: 'Overflow capacity', value: '70 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '60 ml Dome PET Bottle',
+    category: 'PET Bottles',
+    image: '60-ml-dome-pet-bottle.jpg',
+    material: 'PET',
+    weight: '10.00 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '36 mm' },
+      { label: 'Height', value: '92 mm' },
+      { label: 'Overflow capacity', value: '70 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '100 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '100-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '12.76 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '43.7 mm' },
+      { label: 'Height', value: '107 mm' },
+      { label: 'Overflow capacity', value: '120 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '100 ml Brute PET Bottle',
+    category: 'PET Bottles',
+    image: '100-ml-brute-pet-bottle.jpg',
+    material: 'PET',
+    weight: '12.76 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '46.1 mm' },
+      { label: 'Height', value: '127.5 mm' },
+      { label: 'Overflow capacity', value: '115 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '100 ml Boston Round PET Bottle',
+    category: 'PET Bottles',
+    image: '100-ml-boston-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '12.76 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '43.7 mm' },
+      { label: 'Height', value: '109 mm' },
+      { label: 'Overflow capacity', value: '115 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '150 ml Flat PET Bottle (Gripe Water)',
+    category: 'PET Bottles',
+    image: 'arch-flat-bottle.svg',
+    illustrative: true,
+    material: 'PET',
+    weight: '16.50 gm',
+    keywords: '25 mm neck flask',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '57 mm' },
+      { label: 'Height', value: '146 mm' },
+      { label: 'Overflow capacity', value: '150 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    // The partner's catalogue shows one photograph for the 170 ml and the
+    // 200 ml round; both entries carry it.
+    name: '170 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '200-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '16.50 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '52 mm' },
+      { label: 'Height', value: '123 mm' },
+      { label: 'Overflow capacity', value: '187 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '200 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: '200-ml-round-pet-bottle.jpg',
+    material: 'PET',
+    weight: '18.30 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '55 mm' },
+      { label: 'Height', value: '133 mm' },
+      { label: 'Overflow capacity', value: '220 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '200 ml Brute PET Bottle',
+    category: 'PET Bottles',
+    image: '200-ml-brute-pet-bottle.jpg',
+    material: 'PET',
+    weight: '18.30 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '58 mm' },
+      { label: 'Height', value: '153 mm' },
+      { label: 'Overflow capacity', value: '225 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '200 ml Micro Brute PET Bottle',
+    category: 'PET Bottles',
+    image: '200-ml-micro-brute-pet-bottle.jpg',
+    material: 'PET',
+    weight: '19.00 gm',
+    keywords: '25 mm neck syrup',
+    specs: [
+      { label: 'Neck size', value: '25 mm' },
+      { label: 'Body diameter', value: '55 mm' },
+      { label: 'Height', value: '185 mm' },
+      { label: 'Overflow capacity', value: '220 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
+  },
+  {
+    name: '500 ml Round PET Bottle',
+    category: 'PET Bottles',
+    image: 'arch-round-bottle.svg',
+    illustrative: true,
+    material: 'PET',
+    weight: '38.00 gm',
+    keywords: '25 mm neck 28 mm neck',
+    specs: [
+      { label: 'Neck size', value: '25 mm or 28 mm' },
+      { label: 'Body diameter', value: '70 mm' },
+      { label: 'Height', value: '177 mm' },
+      { label: 'Overflow capacity', value: '530 ml' },
+      { label: 'Colour', value: 'To requirement' }
+    ]
   }
 ];
