@@ -3,6 +3,7 @@ import CatalogueCard from './CatalogueCard.astro';
 import { MAILTO_HREF, withBase } from '../config';
 import { TAXONOMY } from '../data/catalogue';
 import { ITEMS, MATERIALS, MATERIAL_LABELS, placeOf, materialTokens } from '../lib/catalogue';
+import { LINE_PAGE } from '../data/lines';
 
 // The catalogue browser: filters and grid, used by /catalogue/.
 //
@@ -26,8 +27,15 @@ import { ITEMS, MATERIALS, MATERIAL_LABELS, placeOf, materialTokens } from '../l
 // material picked for bottles means nothing for pallets; that is also why
 // the hierarchy's counts ignore material.
 //
-// Controls ship hidden and the script arms them, so without JS the whole
-// catalogue is simply visible with nothing interactive lying dead.
+// Controls are in the page from the first paint, laid out exactly as the
+// script leaves them for the default view, and the count line is rendered
+// with the default count. They used to ship hidden and appear when the script
+// ran, which moved the whole grid on every load (layout shift 0.215 on a
+// phone). Without JS a <noscript> style hides them, so the catalogue is
+// still simply visible with nothing interactive lying dead.
+
+// Items shown before "Show all"; the script reads it from data-limit.
+const LIMIT = 20;
 
 const inLine = (lineId: string) => ITEMS.filter((i) => placeOf(i).line.id === lineId);
 const inGroup = (groupId: string) => ITEMS.filter((i) => placeOf(i).group.id === groupId);
@@ -48,6 +56,9 @@ const lines = TAXONOMY.map((line) => ({
 const liveLines = lines.filter((l) => l.count > 0);
 const soonLines = lines.filter((l) => l.count === 0);
 const DEFAULT_LINE = liveLines[0]?.id ?? '';
+const defaultCount = liveLines[0]?.count ?? 0;
+// Same wording the script writes (see apply()), for the default view.
+const initialCount = defaultCount > LIMIT ? `Showing ${LIMIT} of ${defaultCount} items` : `${defaultCount} item${defaultCount === 1 ? '' : 's'}`;
 const typedGroups = liveLines.flatMap((l) => l.groups.filter((g) => g.types.length > 1).map((g) => ({ ...g, line: l.id })));
 
 // What the "coming soon" panel asks for, per line. [NEEDS: confirm copy]
@@ -59,9 +70,11 @@ const soonAsk: Record<string, string> = {
 const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).includes(m)).length;
 ---
 
-<div class="cat-layout" data-cat-root data-default-line={DEFAULT_LINE}>
+<noscript><style>[data-cat-controls], [data-enq-add] { display: none !important; }</style></noscript>
+
+<div class="cat-layout" data-cat-root data-default-line={DEFAULT_LINE} data-limit={LIMIT}>
   <!-- ===== Sidebar (1024px and up) ===== -->
-  <aside class="cat-side" aria-label="Browse the catalogue" data-cat-controls hidden>
+  <aside class="cat-side" aria-label="Browse the catalogue" data-cat-controls>
     <p class="side-h">Browse</p>
     {
       lines.map((line) => (
@@ -129,7 +142,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
   <!-- ===== Main column ===== -->
   <div class="cat-main">
     <!-- Rows (below 1024px) -->
-    <div class="cat-rows" data-cat-controls hidden>
+    <div class="cat-rows" data-cat-controls>
       <div class="line-tabs" role="group" aria-label="Sourcing line">
         {
           lines.map((line) => (
@@ -179,7 +192,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
     </div>
 
     <!-- Toolbar: search, material (rows layout only), sort -->
-    <div class="cat-toolbar" data-cat-controls data-cat-toolbar hidden>
+    <div class="cat-toolbar" data-cat-controls data-cat-toolbar>
       <label class="relative block min-w-0 flex-1">
         <span class="sr-only">Search the catalogue</span>
         <svg
@@ -256,8 +269,8 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
       </label>
     </div>
 
-    <div class="cat-status" data-cat-controls data-cat-status hidden>
-      <span class="mr-1 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite"></span>
+    <div class="cat-status" data-cat-controls data-cat-status>
+      <span class="mr-1 text-sm font-semibold text-steel-deep" data-cat-count aria-live="polite">{initialCount}</span>
       <span class="contents" data-cat-active></span>
       <button type="button" class="cat-clear" data-cat-clear hidden>Clear all</button>
     </div>
@@ -280,6 +293,11 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
             <a href={`${withBase('/contact')}?line=${line.id}`} class="btn btn-primary">
               Request a Quote
             </a>
+            {LINE_PAGE[line.id as keyof typeof LINE_PAGE] && (
+              <a href={withBase(LINE_PAGE[line.id as keyof typeof LINE_PAGE].path)} class="btn btn-secondary">
+                {LINE_PAGE[line.id as keyof typeof LINE_PAGE].linkText}
+              </a>
+            )}
             <a href={MAILTO_HREF} class="btn btn-secondary">
               Email us
             </a>
@@ -980,7 +998,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
   const grid = document.querySelector<HTMLElement>('[data-cat-grid]');
   if (root && grid) {
     const DEFAULT_LINE = root.dataset.defaultLine ?? '';
-    const LIMIT = 20;
+    const LIMIT = Number(root.dataset.limit) || 20;
     const $$ = <T extends Element = HTMLElement>(sel: string) => [...root.querySelectorAll<T>(sel)];
 
     let items = $$<HTMLElement>('[data-cat-item]');

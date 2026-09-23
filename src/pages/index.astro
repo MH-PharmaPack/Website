@@ -4,7 +4,7 @@ import Intro from '../components/Intro.astro';
 import ScrollHero from '../components/ScrollHero.astro';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 import { sourcingService } from '../lib/seo';
-import { SOURCING_LINES } from '../data/lines';
+import { SOURCING_LINES, LINE_PAGE } from '../data/lines';
 
 // Copy on this page is placed from CONTENT-SPEC.md section 4, updated for the
 // client's change of 2026-09-23: three sourcing lines (API, Finished
@@ -51,7 +51,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 <Base
   title="Pharmaceutical Sourcing & Supply from India | MH PharmaPack"
   name="Pharmaceutical sourcing and supply"
-  description="Sourcing API, finished formulations and pharmaceutical packaging from WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Ahmedabad based."
+  description="API, finished formulations and pharmaceutical packaging from WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Ahmedabad based."
   schema={[sourcingService(lines.map((l) => ({ name: l.name })), pageUrl, Astro.site)]}
 >
   <!-- Logo intro overlay: home route only, once per session, reduced-motion safe -->
@@ -87,14 +87,12 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
               <svg class="h-7 w-7 text-copper-soft" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" set:html={line.icon} />
               <h3 class="mt-4 text-lg font-bold text-paper">{line.name}</h3>
               <p class="mt-2 text-sm leading-relaxed text-line md:text-base">{line.blurb}</p>
-              {line.id === 'packaging' && (
-                <a href={withBase('/catalogue')} class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-copper-soft hover:text-paper">
-                  Browse the packaging catalogue
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              )}
+              <a href={withBase(LINE_PAGE[line.id].path)} class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-copper-soft hover:text-paper">
+                {line.id === 'packaging' ? 'Browse the packaging catalogue' : LINE_PAGE[line.id].linkText}
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
             </div>
           ))
         }

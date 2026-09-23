@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import LinePage from '../../components/LinePage.astro';
+import { sourcingService } from '../../lib/seo';
+import { lineById } from '../../data/lines';
+
+// API line page. See src/components/LinePage.astro for where every section's
+// copy comes from. The "what to send" list is the quote form's own API
+// prompts (src/data/rfq.ts: grade, particle size, DMF or CEP, quantity in kg).
+// [NEEDS: confirm headline, intro and list]
+const line = lineById('api');
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<Base
+  title="API Sourcing: WHO GMP and EU GMP Plants | MH PharmaPack"
+  name="API sourcing"
+  description="API sourcing across corticosteroids, anticancer, antidepressants and most major categories, from WHO GMP and EU GMP approved plants. Request a quote."
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'What We Source', path: '/capabilities' },
+    { name: 'API' },
+  ]}
+  schema={[sourcingService([{ name: line.name, items: line.categories }], pageUrl, Astro.site)]}
+  mainEntityId={`${pageUrl}#service`}
+>
+  <LinePage
+    line={line}
+    eyebrow="API sourcing"
+    headline="API sourcing from WHO GMP and EU GMP approved plants."
+    intro="Active pharmaceutical ingredients across corticosteroid, anticancer, antidepressant, and most major therapeutic categories, sourced through our network of approved manufacturing partners in India, Latin America, and South Africa. We do not manufacture; we source, match, and manage."
+    ask={[
+      'The molecule, including the salt or ester where it matters',
+      'The grade: IP, BP, USP or Ph. Eur.',
+      'Quantity, in kg',
+      'Specification details, such as particle size',
+      'Whether your market needs a DMF or CEP',
+      'Destination market and timeline',
+    ]}
+    categoriesNote="API listings are being added to the catalogue."
+    ctaTitle="Looking for a specific API?"
+    ctaLede="Tell us the molecule, the grade and the market."
+  />
+</Base>

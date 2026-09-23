@@ -209,6 +209,11 @@
     border-color: var(--color-steel-deep);
     color: var(--color-ink);
   }
+  /* Holds its space but stays invisible and unclickable until the enquiry
+     list's script arms it, so cards never change height after first paint. */
+  .enq-add[data-enq-pending] {
+    visibility: hidden;
+  }
   .enq-add-icon {
     width: 1rem;
     height: 1rem;

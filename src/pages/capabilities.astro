@@ -6,7 +6,7 @@ import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from 
 import { sourcingService } from '../lib/seo';
 import { TAXONOMY } from '../data/catalogue';
 import { ITEMS, placeOf, imageFor, scopeHref } from '../lib/catalogue';
-import { SOURCING_LINES } from '../data/lines';
+import { SOURCING_LINES, LINE_PAGE } from '../data/lines';
 
 // WHAT WE SOURCE (CONTENT-SPEC section 6). The frame on this page is
 // non-negotiable: everything below is what MH sources through its network,
@@ -76,9 +76,9 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <Base
-  title="What We Source: API, Finished Formulations, Packaging | MH PharmaPack"
+  title="What We Source: API, Formulations, Packaging | MH PharmaPack"
   name="What we source"
-  description="API, finished formulations and pharmaceutical packaging, sourced through WHO GMP and EU GMP approved plants in India, Latin America and South Africa. Browse the catalogue: bottles, caps, closures, vial seals, flexible packaging and pallets."
+  description="API, finished formulations and pharmaceutical packaging, sourced through WHO GMP and EU GMP approved plants in India, Latin America and South Africa."
   pageType="CollectionPage"
   breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'What We Source' }]}
   schema={[
@@ -149,14 +149,12 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
                 <p class="mt-3 text-sm leading-relaxed text-ink">{line.categories.join(' · ')}</p>
               )}
               {line.note && <p class="mt-2 text-sm leading-relaxed text-steel-deep">{line.note}</p>}
-              {line.id === 'packaging' && (
-                <a href={withBase('/catalogue')} class="lines-link">
-                  See the catalogue
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              )}
+              <a href={withBase(LINE_PAGE[line.id].path)} class="lines-link">
+                {LINE_PAGE[line.id].linkText}
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
             </li>
           ))
         }

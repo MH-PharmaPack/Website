@@ -205,6 +205,32 @@ export default function initScrollHero(root) {
     root.classList.add('sh-fallback');
     return;
   }
+
+  /* Software rendering: no GPU at all (remote desktops, virtual machines,
+     blocklisted drivers, and the lab machines PageSpeed Insights tests
+     on). WebGL still "works" there, but every frame is rasterised on the
+     CPU: PageSpeed measured 32.7 s of CPU from this script in one mobile
+     load (2026-09-24), i.e. a page frozen for as long as it is open, and
+     even degrade level 4 cannot fix that. Such a machine gets the same
+     static hero as a browser without WebGL, decided here, before the
+     warm-up frames and the calibration render a single pixel. Nothing
+     changes on any real GPU. ?shfb forces this path for review. */
+  const softwareGL = (() => {
+    try {
+      const gl = renderer.getContext();
+      const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      const name = String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER) || '');
+      return /swiftshader|llvmpipe|softpipe|software|basic render driver/i.test(name);
+    } catch (e) {
+      return false;
+    }
+  })();
+  if (softwareGL || new URLSearchParams(location.search).has('shfb')) {
+    console.info('ScrollHero: software rendering, static hero.');
+    renderer.dispose();
+    root.classList.add('sh-fallback');
+    return;
+  }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelCap));
   renderer.setClearColor(0x000000, 0);
   renderer.autoClear = false;

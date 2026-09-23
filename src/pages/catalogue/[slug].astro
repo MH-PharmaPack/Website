@@ -41,17 +41,37 @@ const trail = [
     : []),
 ];
 
-// Description: the facts a buyer would search for, then the frame.
-const description = `${item.name}, ${facts
-  .map((f) => `${f.label.toLowerCase()} ${f.value}`)
-  .join(', ')}. Sourced through MH PharmaPack's partner network and supplied to your specification.`.slice(
-  0,
-  300,
-);
+// Description: the facts a buyer would search for, then the frame, kept
+// within ~155 characters so a search result shows it whole. The longest
+// frame that fits is used; if the facts alone run long, they are cut at a
+// comma, never mid-word.
+const MAX_DESC = 155;
+const factText = facts.map((f) => `${f.label.toLowerCase()} ${f.value}`).join(', ');
+let lead = factText ? `${item.name}: ${factText}.` : `${item.name}.`;
+if (lead.length > MAX_DESC) {
+  const cut = lead.slice(0, MAX_DESC - 1);
+  lead = `${cut.slice(0, Math.max(cut.lastIndexOf(','), item.name.length + 1))}.`;
+}
+const description =
+  [
+    " Sourced through MH PharmaPack's partner network, to your specification.",
+    ' Sourced to your specification.',
+    '',
+  ]
+    .map((frame) => lead + frame)
+    .find((d) => d.length <= MAX_DESC) ?? lead;
+
+// "Name | Pharma Packaging | MH PharmaPack" when that fits in 60 characters,
+// else "Name | MH PharmaPack": search results cut titles at about 60.
+const baseTitle = `${item.name} | MH PharmaPack`;
+const title =
+  placeOf(item).line.id === 'packaging' && baseTitle.length + 19 <= 60
+    ? `${item.name} | Pharma Packaging | MH PharmaPack`
+    : baseTitle;
 ---
 
 <Base
-  title={`${item.name} | What We Source | MH PharmaPack`}
+  title={title}
   name={item.name}
   description={description}
   pageType="ItemPage"

@@ -576,6 +576,7 @@ import ChipField from './ChipField.astro';
     if (names) names.textContent = s.items.map((i) => i.name).join(' · ');
     for (const b of addButtons()) {
       b.hidden = false;
+      b.removeAttribute('data-enq-pending');
       b.setAttribute('aria-pressed', String(has(s, b.dataset.enqSlug ?? '')));
     }
     renderList();

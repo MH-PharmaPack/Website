@@ -20,9 +20,12 @@ import {
 // where the same facts live in full. No modal: for spec-driven items a
 // quick-view overlay gets mistaken for the real page.
 //
-// The add button ships hidden and is shown by the enquiry list's script
-// (src/components/EnquiryTray.astro), so without JS there is no dead button;
-// the item page's own email and WhatsApp links still work.
+// The add button keeps its space from the first paint but stays invisible
+// (data-enq-pending) until the enquiry list's script arms it
+// (src/components/EnquiryTray.astro). It used to ship `hidden`, and every
+// card grew when it appeared, moving the rows below it. Without JS the
+// catalogue's <noscript> style removes it, so there is no dead button; the
+// item page's own email and WhatsApp links still work.
 
 interface Props {
   item: CatalogueItem;
@@ -99,7 +102,7 @@ const enq = await enquiryAttrs(item, Astro.site);
     {...enq}
     aria-pressed="false"
     aria-label={`Add ${item.name} to the enquiry list`}
-    hidden
+    data-enq-pending
   >
     <svg class="enq-add-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
       <path class="enq-add-plus" d="M12 5v14M5 12h14" stroke-linecap="round" />

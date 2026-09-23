@@ -1,0 +1,331 @@
+---
+// One sourcing line's own page: /capabilities/api-sourcing/ and
+// /capabilities/finished-formulations/ (added 2026-09-24; the August SEO
+// plan's "a page per line", so searches like "API sourcing India" have a
+// page that is about exactly that). Packaging's equivalent is the catalogue.
+//
+// Every section is built from copy the site already stands behind:
+//   categories and summary   src/data/lines.ts (CONTENT-SPEC 5.2)
+//   framing                  CONTENT-SPEC 6.1 (sourced, never made)
+//   support                  CONTENT-SPEC 5.3, verbatim, with its qualifier
+//   regions, quality         CONTENT-SPEC 6.3 and 6.4, verbatim
+// Only the headline, the intro sentence and the "what to send" list are
+// written per page, and they say nothing the spec does not: they list what
+// a buyer specifies, using the quote form's own prompts (src/data/rfq.ts).
+// [NEEDS: confirm copy]
+
+import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, SALES_EMAIL, withBase } from '../config';
+import type { SourcingLine } from '../data/lines';
+
+interface Props {
+  line: SourcingLine;
+  eyebrow: string;
+  headline: string;
+  intro: string;
+  /** What to include in an enquiry for this line */
+  ask: string[];
+  /** One line under the categories, e.g. the catalogue status */
+  categoriesNote?: string;
+  /** Closing CTA lede, e.g. "Tell us the molecule, the grade and the market." */
+  ctaLede: string;
+  ctaTitle: string;
+}
+
+const { line, eyebrow, headline, intro, ask, categoriesNote, ctaLede, ctaTitle } = Astro.props;
+
+const quoteHref = `${withBase('/contact')}?line=${line.id}`;
+
+// The spec-sheet email, same template as the quote page, with the line
+// already filled in.
+const specBody = [
+  `Line of interest: ${line.name}`,
+  'Product / molecule / item: ',
+  'Quantity / volume: ',
+  'Destination market / country: ',
+  'Required timeline: ',
+  'Regulatory requirement: ',
+  '',
+  'Name: ',
+  'Company: ',
+  'Phone / WhatsApp: ',
+  '',
+  'Please attach your specification sheet to this email.',
+].join('\r\n');
+const specMailto = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent(`RFQ: ${line.name}: [Company]`)}&body=${encodeURIComponent(specBody)}`;
+
+// CONTENT-SPEC 5.3, verbatim.
+const support = [
+  { name: 'Supplier audit support', copy: 'Help evaluating and qualifying manufacturers.' },
+  { name: 'Business development', copy: 'Matching demand to the right supply, and supply to demand.' },
+  { name: 'QA / QC and dossier coordination', copy: 'Coordinating quality documentation and dossiers between the parties.' },
+  { name: 'Documentation and paperwork', copy: 'Support with the trade paperwork a deal requires.' },
+  { name: 'Payment terms', copy: 'Helping structure workable commercial terms between buyer and supplier.' },
+  { name: 'Collection and logistics follow-up', copy: 'Staying with the shipment, chasing, and troubleshooting until it lands.' },
+];
+
+// CONTENT-SPEC 6.3, verbatim.
+const regions = [
+  { name: 'India', copy: 'The core manufacturing base.' },
+  { name: 'Latin America', copy: 'EU-approved facilities.' },
+  { name: 'South Africa', copy: 'WHO GMP and PIC/S approved facilities.' },
+];
+---
+
+<!-- Intro -->
+<section class="bg-paper">
+  <div class="mx-auto max-w-content px-5 pt-8 pb-10 md:px-8 md:pt-12 md:pb-14">
+    <nav aria-label="Breadcrumb" class="text-sm text-steel-deep">
+      <a href={withBase('/capabilities')} class="hover:text-ink">What we source</a>
+      <span class="mx-2 text-muted" aria-hidden="true">/</span>
+      <span class="font-semibold text-ink" aria-current="page">{line.name}</span>
+    </nav>
+    <p class="eyebrow mt-6">{eyebrow}</p>
+    <h1 class="mt-4 max-w-3xl text-3xl font-bold tracking-tight text-ink md:text-4xl">{headline}</h1>
+    <p class="mt-5 max-w-2xl text-base leading-relaxed text-steel-deep md:text-lg">{intro}</p>
+    <div class="mt-7 flex flex-wrap gap-3">
+      <a href={quoteHref} class="btn btn-primary">Request a Quote</a>
+      <a href={specMailto} class="btn btn-secondary">Email your spec</a>
+    </div>
+  </div>
+</section>
+
+<!-- Categories and what to send -->
+<section class="border-t border-line bg-paper">
+  <div class="lp-two mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
+    <div>
+      <p class="eyebrow" data-reveal>What we source</p>
+      <h2 class="mt-4 text-2xl font-bold tracking-tight text-ink md:text-3xl" data-reveal>{line.name} categories</h2>
+      <p class="mt-3 text-base leading-relaxed text-steel-deep" data-reveal>{line.summary}</p>
+      <ul class="lp-cats" aria-label={`${line.name} categories`}>
+        {line.categories.map((c) => <li data-reveal-child>{c}</li>)}
+      </ul>
+      {line.note && <p class="mt-4 text-sm leading-relaxed text-steel-deep" data-reveal>{line.note}</p>}
+      {categoriesNote && <p class="mt-2 text-sm leading-relaxed text-steel-deep" data-reveal>{categoriesNote}</p>}
+    </div>
+
+    <div class="lp-ask" data-reveal>
+      <h2 class="text-xl font-bold tracking-tight text-ink">What to send us for a quote</h2>
+      <ul class="lp-ask-list">
+        {
+          ask.map((a) => (
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                <path d="M5 12.5 10 17l9-10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span>{a}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-4 text-sm leading-relaxed text-steel-deep">
+        Have a specification sheet? Email it straight to our sales desk and we will take it from there.
+      </p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href={quoteHref} class="btn btn-primary">Request a Quote</a>
+        <a href={specMailto} class="btn btn-secondary">Email your spec</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How we support the order (CONTENT-SPEC 5.3) -->
+<section class="band band-edge">
+  <div class="mx-auto max-w-content px-5 py-14 md:px-8 md:py-20">
+    <p class="eyebrow eyebrow-on-dark" data-reveal>End to end</p>
+    <h2 class="mt-4 max-w-2xl text-3xl font-bold tracking-tight text-paper md:text-4xl" data-reveal>
+      How we support every engagement.
+    </h2>
+    <ul class="lp-support">
+      {
+        support.map((s) => (
+          <li data-reveal-child>
+            <h3>{s.name}</h3>
+            <p>{s.copy}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="lp-qualifier" data-reveal>
+      We coordinate and support; we do not assume the manufacturer's regulatory or quality
+      responsibilities, and contracts of sale are directly between buyer and supplier.
+    </p>
+    <a href={withBase('/services')} class="lp-more" data-reveal>
+      How an order runs, stage by stage
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- Regions and quality (CONTENT-SPEC 6.3, 6.4) -->
+<section class="border-b border-line bg-paper">
+  <div class="mx-auto max-w-content px-5 py-12 md:px-8 md:py-16">
+    <p class="eyebrow" data-reveal>Where we source</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-3 md:gap-6">
+      {
+        regions.map((r) => (
+          <div class="rounded-sm border border-line bg-white p-6" data-reveal-child>
+            <h3 class="text-lg font-bold tracking-tight text-ink">{r.name}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-steel-deep">{r.copy}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="mt-8 max-w-3xl border-l-2 border-copper pl-5 text-base leading-relaxed text-ink" data-reveal>
+      We source exclusively from WHO GMP and EU GMP approved plants. Our partner facilities hold WHO
+      GMP, EU GMP, ISO, and UK MHRA approvals. MH PharmaPack coordinates quality documentation
+      between buyer and supplier; the approvals belong to the manufacturing partners.
+    </p>
+  </div>
+</section>
+
+<!-- CTA (CONTENT-SPEC 6.5, with the line's own ask) -->
+<section class="bg-paper">
+  <div class="mx-auto max-w-content px-5 py-20 text-center md:px-8 md:py-24">
+    <h2 class="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-4xl" data-reveal>{ctaTitle}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-steel-deep" data-reveal>{ctaLede}</p>
+    <div class="mt-9" data-reveal>
+      <a href={quoteHref} class="btn btn-primary">Request a Quote</a>
+    </div>
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold" data-reveal>
+      <a href={WHATSAPP_HREF} class="text-steel-deep transition-colors hover:text-ink" title={WHATSAPP ? 'Chat on WhatsApp' : 'WhatsApp number to be added'}>WhatsApp</a>
+      <a href={TEL_HREF} class="text-steel-deep transition-colors hover:text-ink" title={PHONE ? 'Call us' : 'Phone number to be added'}>Call</a>
+      <a href={MAILTO_HREF} class="text-steel-deep transition-colors hover:text-ink">Email</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Categories beside what-to-send from 1024px; stacked below. No margin
+     rules on elements that also carry Tailwind margin utilities. */
+  .lp-two {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1024px) {
+    .lp-two {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+  .lp-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lp-cats li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+  .lp-ask {
+    padding: 1.5rem 1.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.5rem;
+    background: #ffffff;
+  }
+  @media (min-width: 768px) {
+    .lp-ask {
+      padding: 2rem;
+    }
+  }
+  .lp-ask-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lp-ask-list li {
+    display: flex;
+    gap: 0.65rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+  .lp-ask-list svg {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.15rem;
+    color: var(--color-copper-deep);
+  }
+
+  .lp-support {
+    display: grid;
+    gap: 0.875rem;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .lp-support {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .lp-support {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+  .lp-support {
+    margin-top: 2.25rem;
+  }
+  .lp-support li {
+    padding: 1.25rem 1.25rem 1.35rem;
+    border: 1px solid var(--color-hairline);
+    border-radius: 0.375rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .lp-support h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-paper);
+  }
+  .lp-support p {
+    margin-top: 0.4rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-mist);
+  }
+  .lp-qualifier {
+    margin-top: 2.25rem;
+    max-width: 48rem;
+    padding-left: 1.1rem;
+    border-left: 2px solid var(--color-copper-soft);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-paper);
+  }
+  .lp-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: 2.75rem;
+    margin-top: 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-copper-soft);
+    text-decoration: none;
+  }
+  .lp-more:hover {
+    color: var(--color-paper);
+  }
+</style>
+
+<script>
+  import initPageFlow from '../scripts/page-flow.js';
+  initPageFlow();
+</script>

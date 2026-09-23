@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, WHATSAPP, PHONE, withBase } from '../config';
 import { sourcingService } from '../lib/seo';
-import { SOURCING_LINES } from '../data/lines';
+import { SOURCING_LINES, LINE_PAGE } from '../data/lines';
 
 // WHAT WE DO (CONTENT-SPEC section 5), restructured 2026-09-23 at the
 // client's direction: the three sourcing lines, then how an order is carried
@@ -102,9 +102,9 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <Base
-  title="What We Do: End-to-End Pharmaceutical Sourcing | MH PharmaPack"
+  title="Pharmaceutical Sourcing, Carried End to End | MH PharmaPack"
   name="What we do"
-  description="We source API, finished formulations and pharmaceutical packaging from WHO GMP and EU GMP approved plants, and support every order end to end: supplier audits, QA and dossier coordination, paperwork, payment terms and logistics."
+  description="Pharmaceutical sourcing carried end to end: supplier audits, QA and dossier coordination, paperwork, payment terms and logistics, from approved plants."
   breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'What We Do' }]}
   schema={[sourcingService(lines.map((l) => ({ name: l.name, items: l.categories })), pageUrl, Astro.site)]}
   mainEntityId={`${pageUrl}#service`}
@@ -149,21 +149,12 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
                 ))}
               </ul>
               {line.note && <p class="mt-3 text-sm text-steel-deep">{line.note}</p>}
-              {line.id === 'packaging' ? (
-                <a href={withBase('/catalogue')} class="line-link">
-                  Browse the catalogue
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              ) : (
-                <a href={`${withBase('/contact')}?line=${line.id}`} class="line-link">
-                  Request a Quote
-                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </a>
-              )}
+              <a href={withBase(LINE_PAGE[line.id].path)} class="line-link">
+                {LINE_PAGE[line.id].linkText}
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
             </li>
           ))
         }

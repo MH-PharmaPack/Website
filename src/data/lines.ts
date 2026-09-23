@@ -81,5 +81,14 @@ export const SOURCING_LINES: SourcingLine[] = [
 
 export const lineById = (id: SourcingLine['id']) => SOURCING_LINES.find((l) => l.id === id)!;
 
+/** Each line's own page (added 2026-09-24 so a search like "API sourcing
+ *  India" has somewhere to land). Packaging's page is the catalogue. Paths
+ *  go through withBase() where they are used. */
+export const LINE_PAGE: Record<SourcingLine['id'], { path: string; linkText: string }> = {
+  api: { path: '/capabilities/api-sourcing', linkText: 'About API sourcing' },
+  finished: { path: '/capabilities/finished-formulations', linkText: 'About finished formulations' },
+  packaging: { path: '/catalogue', linkText: 'See the catalogue' },
+};
+
 /** "API, finished formulations and packaging", for running copy. */
 export const LINES_IN_PROSE = 'API, finished formulations, and pharmaceutical packaging';
