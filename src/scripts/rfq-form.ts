@@ -585,7 +585,18 @@ export function initRfqForm(form: HTMLFormElement): void {
       // load (seen right after a deployment). The emails have gone by then,
       // so count it as sent rather than inviting a duplicate second send.
       if (!res.ok && res.url.startsWith('https://script.googleusercontent.com/')) return { confirmation: false };
-      const data = (await res.json()) as { ok?: boolean; error?: string; confirmation?: boolean };
+      const raw = await res.text();
+      let data: { ok?: boolean; error?: string; confirmation?: boolean };
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        // The other failure seen after a redeploy: Google bounces the
+        // response page back to the web app's GET handler, so the answer is
+        // its "POST only" line instead of the JSON. The POST had already run
+        // and the emails had gone (confirmed 2026-09-23), so this is a send.
+        if (raw.startsWith('MH PharmaPack quote form endpoint')) return { confirmation: false };
+        throw new SendError('network');
+      }
       if (!data.ok) throw new SendError(data.error || 'failed');
       return { confirmation: data.confirmation === true };
     } catch (e) {
