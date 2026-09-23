@@ -9,10 +9,9 @@ import { SALES_EMAIL, FORM_ENDPOINT, TURNSTILE_SITE_KEY, withBase } from '../con
 // backend that is not switched on.
 //
 // [NEEDS: review before launch, ideally by someone qualified (8.1).]
-// [NEEDS: client to confirm two practice statements: when buyer contact
-//  details are shared with a manufacturer, and how long enquiry emails are
-//  kept.] Both are written as the business model implies, not invented
-//  policies, and are marked below.
+// [NEEDS: client policy, deliberately left OUT of the page until decided
+//  (client, 2026-09-23): when a buyer's contact details are shared with a
+//  manufacturer, and how long enquiries are kept.] Add them here once set.
 
 const UPDATED = '23 September 2026';
 const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy request')}`;
@@ -61,9 +60,6 @@ const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy
           To respond to your enquiry, find suitable approved manufacturers for your requirement, and
           coordinate the engagement that follows. To prepare a quote, we share the requirement itself
           (product, specification, quantity, market and timeline) with the manufacturers we approach.
-          {/* [NEEDS: client to confirm] */}
-          If you decide to go ahead, we introduce you to the manufacturer, which includes sharing your
-          name, company and contact details with them.
         </p>
         <p>We do not sell your information, and we do not use it for advertising.</p>
 
@@ -94,11 +90,6 @@ const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy
             </p>
           )
         }
-        <p>
-          {/* [NEEDS: client to confirm retention] */}
-          We keep enquiries for as long as they are needed to respond to you, to coordinate any order
-          that follows, and for our business records.
-        </p>
 
         <h2>Stored on your own device</h2>
         <p>
