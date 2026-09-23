@@ -16,11 +16,13 @@ send the buyer a confirmation email. Autoresponders are a paid feature there.
 3. The script checks it: the hidden spam-trap field, the Turnstile token,
    rate limits (3 per address per 10 minutes, 40 per hour overall), the
    allowed field names, required fields and lengths.
-4. It sends **the enquiry to sales@**, as `key: value` lines, subject
-   `RFQ: <Company>`, **Reply-To set to the buyer**, so pressing Reply answers
-   them directly.
-5. It sends **the buyer a confirmation**, from sales@, with a summary of what
-   they sent. Their reply to it lands in the sales@ inbox.
+4. It sends **the enquiry to sales@**. Subject: `RFQ: <Company> | <what> |
+   <market>`. The HTML layout puts who, what, how much and where at the top,
+   with Reply / WhatsApp / Call buttons; the plain-text part is the stable
+   `key: value` lines for anything that parses enquiries. **Reply-To is the
+   buyer** and the sender name is theirs, so pressing Reply answers them.
+5. It sends **the buyer a branded confirmation**, from sales@, with a
+   summary of what they sent. Their reply to it lands in the sales@ inbox.
 6. The page shows the success state.
 
 If anything fails, the page keeps everything typed and offers the same
@@ -56,9 +58,24 @@ every submission would be refused.
 
 ## Changing the script later
 
-Edit, then **Deploy > Manage deployments > (edit) > Version: New version**.
-Editing a deployment keeps the same URL. Making a new deployment creates a
-new URL, which the site would then need.
+1. Open <https://raw.githubusercontent.com/MH-PharmaPack/Website/main/tools/rfq-backend/Code.gs>,
+   press Ctrl+A, then Ctrl+C.
+2. In the Apps Script editor, select all the old code, paste, and save.
+3. **Deploy > Manage deployments**, click the pencil (edit) icon, set
+   **Version: New version**, and click **Deploy**.
+
+Editing the deployment keeps the same URL. Making a new deployment creates
+a new URL, which the site would then need in `FORM_ENDPOINT`.
+
+## Previewing the emails
+
+In the editor, choose `sendSamples` in the function menu next to Run, then
+click **Run**. It sends two sample enquiries (one product, and catalogue
+items), each with its confirmation, to sales@ only.
+
+The logo in the buyer's confirmation is `public/email/mh-logo.png` on the
+website (built by `tools/email/make-logo.mjs`), so it only shows once the
+site is deployed.
 
 ## Limits
 
