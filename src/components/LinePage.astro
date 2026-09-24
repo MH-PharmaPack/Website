@@ -26,12 +26,14 @@ interface Props {
   ask: string[];
   /** One line under the categories, e.g. the catalogue status */
   categoriesNote?: string;
+  /** The catalogue opened at this line, once it has listings */
+  catalogue?: { href: string; label: string };
   /** Closing CTA lede, e.g. "Tell us the molecule, the grade and the market." */
   ctaLede: string;
   ctaTitle: string;
 }
 
-const { line, eyebrow, headline, intro, ask, categoriesNote, ctaLede, ctaTitle } = Astro.props;
+const { line, eyebrow, headline, intro, ask, categoriesNote, catalogue, ctaLede, ctaTitle } = Astro.props;
 
 const quoteHref = `${withBase('/contact')}?line=${line.id}`;
 
@@ -101,6 +103,13 @@ const regions = [
       </ul>
       {line.note && <p class="mt-4 text-sm leading-relaxed text-steel-deep" data-reveal>{line.note}</p>}
       {categoriesNote && <p class="mt-2 text-sm leading-relaxed text-steel-deep" data-reveal>{categoriesNote}</p>}
+      {
+        catalogue && (
+          <a href={catalogue.href} class="btn btn-secondary mt-6" data-reveal>
+            {catalogue.label}
+          </a>
+        )
+      }
     </div>
 
     <div class="lp-ask" data-reveal>

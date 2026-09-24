@@ -1,0 +1,23 @@
+---
+// A molecular formula with its counts set as subscripts: C22H29FO5 reads as
+// C₂₂H₂₉FO₅. Screen readers get the plain string, which they read correctly;
+// the subscripted copy is hidden from them so it is not spelled out digit by
+// digit.
+
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+const parts = value.split(/(\d+)/).filter(Boolean);
+---
+
+<span class="formula"><span class="sr-only">{value}</span><span aria-hidden="true">{parts.map((p) => (/^\d+$/.test(p) ? <sub>{p}</sub> : p))}</span></span>
+
+<style>
+  .formula sub {
+    font-size: 0.72em;
+    vertical-align: -0.28em;
+    line-height: 0;
+  }
+</style>

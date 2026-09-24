@@ -1,0 +1,46 @@
+{
+  "_comment": "The API listings, from the client's product list (2026-09-24). name = what the site shows (INN/BP spelling, as the client wrote it, typos corrected). gsrs = the substance's name in the FDA/NCATS Global Substance Registration System, where structure, formula, weight and CAS come from (public domain). keywords = other official names only (USAN, INN, pharmacopoeial spelling), never brand or company names. group/type = src/data/catalogue.ts TAXONOMY ids.",
+  "items": [
+    { "name": "Mecobalamin (Methylcobalamin)", "gsrs": "METHYLCOBALAMIN", "group": "vitamins", "keywords": "methylcobalamin vitamin b12 cobalamin" },
+
+    { "name": "Hydroxyprogesterone Caproate", "gsrs": "HYDROXYPROGESTERONE CAPROATE", "group": "hormones", "type": "progestogens", "keywords": "17-alpha hydroxyprogesterone hexanoate progestin" },
+    { "name": "Medroxyprogesterone Acetate", "gsrs": "MEDROXYPROGESTERONE ACETATE", "group": "hormones", "type": "progestogens", "keywords": "mpa progestin" },
+    { "name": "Mifepristone", "gsrs": "MIFEPRISTONE", "group": "hormones", "type": "progestogens", "keywords": "ru-486 antiprogestogen" },
+    { "name": "Norethisterone Acetate", "gsrs": "NORETHINDRONE ACETATE", "group": "hormones", "type": "progestogens", "keywords": "norethindrone acetate progestin" },
+    { "name": "Norethisterone", "gsrs": "NORETHINDRONE", "group": "hormones", "type": "progestogens", "keywords": "norethindrone norethisterone base progestin" },
+
+    { "name": "Testosterone", "gsrs": "TESTOSTERONE", "group": "hormones", "type": "androgens", "keywords": "testosterone base androgen" },
+    { "name": "Testosterone Cypionate", "gsrs": "TESTOSTERONE CYPIONATE", "group": "hormones", "type": "androgens", "keywords": "testosterone cyclopentylpropionate androgen ester" },
+    { "name": "Testosterone Decanoate", "gsrs": "TESTOSTERONE DECANOATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Enanthate", "gsrs": "TESTOSTERONE ENANTHATE", "group": "hormones", "type": "androgens", "keywords": "testosterone heptanoate androgen ester" },
+    { "name": "Testosterone Phenylpropionate", "gsrs": "TESTOSTERONE PHENYLPROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Propionate", "gsrs": "TESTOSTERONE PROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Undecanoate", "gsrs": "TESTOSTERONE UNDECANOATE", "group": "hormones", "type": "androgens", "keywords": "tu tsu androgen ester" },
+    { "name": "Oxandrolone", "gsrs": "OXANDROLONE", "group": "hormones", "type": "androgens", "keywords": "anabolic steroid" },
+
+    { "name": "Beclomethasone Dipropionate", "gsrs": "BECLOMETHASONE DIPROPIONATE", "group": "corticosteroids", "keywords": "beclometasone dipropionate glucocorticoid" },
+    { "name": "Betamethasone Dipropionate", "gsrs": "BETAMETHASONE DIPROPIONATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Betamethasone Sodium Phosphate", "gsrs": "BETAMETHASONE SODIUM PHOSPHATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Betamethasone Valerate", "gsrs": "BETAMETHASONE VALERATE", "group": "corticosteroids", "keywords": "betamethasone 17-valerate glucocorticoid" },
+    { "name": "Clobetasol Propionate", "gsrs": "CLOBETASOL PROPIONATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Clobetasone Butyrate", "gsrs": "CLOBETASONE BUTYRATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Dexamethasone", "gsrs": "DEXAMETHASONE", "group": "corticosteroids", "keywords": "dexamethasone base glucocorticoid" },
+    { "name": "Dexamethasone Sodium Phosphate", "gsrs": "DEXAMETHASONE SODIUM PHOSPHATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Halobetasol Propionate", "gsrs": "HALOBETASOL PROPIONATE", "group": "corticosteroids", "keywords": "ulobetasol propionate glucocorticoid" },
+    { "name": "Hydrocortisone", "gsrs": "HYDROCORTISONE", "group": "corticosteroids", "keywords": "hydrocortisone base cortisol glucocorticoid" },
+    { "name": "Hydrocortisone Acetate", "gsrs": "HYDROCORTISONE ACETATE", "group": "corticosteroids", "keywords": "cortisol acetate glucocorticoid" },
+    { "name": "Methylprednisolone", "gsrs": "METHYLPREDNISOLONE", "group": "corticosteroids", "keywords": "methyl prednisolone glucocorticoid" },
+    { "name": "Methylprednisolone Acetate", "gsrs": "METHYLPREDNISOLONE ACETATE", "group": "corticosteroids", "keywords": "methyl prednisolone acetate glucocorticoid" },
+    { "name": "Mometasone Furoate", "gsrs": "MOMETASONE FUROATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Prednisolone", "gsrs": "PREDNISOLONE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Prednisolone Sodium Phosphate", "gsrs": "PREDNISOLONE SODIUM PHOSPHATE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+    { "name": "Triamcinolone Acetonide", "gsrs": "TRIAMCINOLONE ACETONIDE", "group": "corticosteroids", "keywords": "glucocorticoid" },
+
+    { "name": "Dutasteride", "gsrs": "DUTASTERIDE", "group": "urology", "keywords": "5-alpha reductase inhibitor bph" },
+    { "name": "Finasteride", "gsrs": "FINASTERIDE", "group": "urology", "keywords": "5-alpha reductase inhibitor bph" },
+
+    { "name": "Spironolactone", "gsrs": "SPIRONOLACTONE", "group": "cardiovascular", "keywords": "aldosterone antagonist potassium-sparing diuretic" },
+
+    { "name": "Polymyxin B Sulphate", "gsrs": "POLYMYXIN B SULFATE", "drawAs": "POLYMYXIN B1", "group": "anti-infectives", "keywords": "polymyxin b sulfate polypeptide antibiotic" }
+  ]
+}

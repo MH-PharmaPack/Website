@@ -68,6 +68,10 @@ const soonAsk: Record<string, string> = {
 };
 
 const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).includes(m)).length;
+
+// "All packaging" reads naturally; "All api" does not. An acronym keeps its
+// capitals and takes the plural.
+const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'All APIs' : `All ${line.name.toLowerCase()}`);
 ---
 
 <noscript><style>[data-cat-controls], [data-enq-add] { display: none !important; }</style></noscript>
@@ -161,7 +165,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
           <div class="scroll-row mt-4" data-group-row={line.id} hidden={line.id !== DEFAULT_LINE}>
             <div class="grp-row" role="group" aria-label={`${line.name} groups`}>
               <button type="button" class="grp-btn" data-group-btn="" data-line={line.id} aria-pressed="true">
-                All {line.name.toLowerCase()} <span class="grp-n" data-n>{line.count}</span>
+                {allLabel(line)} <span class="grp-n" data-n>{line.count}</span>
               </button>
               {line.groups.map((g) => (
                 <button type="button" class="grp-btn" data-group-btn={g.id} data-line={line.id} aria-pressed="false">
@@ -210,7 +214,7 @@ const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).inclu
           id="cat-search"
           type="search"
           autocomplete="off"
-          placeholder="Search item, size, neck, material"
+          placeholder="Search name, CAS or size"
           class="h-11 w-full rounded-sm border border-line bg-white pr-4 pl-11 text-base text-ink transition-colors placeholder:text-muted focus:border-steel focus:outline-none"
         />
       </label>

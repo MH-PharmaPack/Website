@@ -13,7 +13,7 @@
 
 import type { APIRoute } from 'astro';
 import { TAXONOMY } from '../data/catalogue';
-import { ITEMS, placeOf, itemPath, itemSlug, searchText, scopeHref, enquiryAttrs } from '../lib/catalogue';
+import { ITEMS, placeOf, itemPath, itemSlug, itemDetail, searchText, scopeHref, enquiryAttrs } from '../lib/catalogue';
 import { normalizeSearch } from '../scripts/search-normalize';
 
 export const GET: APIRoute = async ({ site }) => {
@@ -27,7 +27,7 @@ export const GET: APIRoute = async ({ site }) => {
         n: item.name,
         h: itemPath(item),
         c: [p.group.name, p.type?.short].filter(Boolean).join(' · '),
-        d: [item.material, item.weight].filter(Boolean).join(' · '),
+        d: itemDetail(item),
         t: enq['data-enq-thumb'],
         s: searchText(item),
       };

@@ -4,8 +4,9 @@ import { Image } from 'astro:assets';
 import CatalogueCard from '../../components/CatalogueCard.astro';
 import EnquiryActions from '../../components/EnquiryActions.astro';
 import EnquiryTray from '../../components/EnquiryTray.astro';
+import Formula from '../../components/Formula.astro';
 import { CATALOGUE, type CatalogueItem } from '../../data/catalogue';
-import { imageFor, itemSlug, itemFacts, itemNote, placeOf, categoryName, scopeHref, ITEMS } from '../../lib/catalogue';
+import { imageFor, itemSlug, itemFacts, itemNote, specValue, placeOf, categoryName, scopeHref, ITEMS } from '../../lib/catalogue';
 
 // One page per catalogue item. It exists so an item can be linked from a cold
 // email or a WhatsApp thread and so the enquiry buttons have somewhere to
@@ -46,8 +47,16 @@ const trail = [
 // frame that fits is used; if the facts alone run long, they are cut at a
 // comma, never mid-word.
 const MAX_DESC = 155;
-const factText = facts.map((f) => `${f.label.toLowerCase()} ${f.value}`).join(', ');
-let lead = factText ? `${item.name}: ${factText}.` : `${item.name}.`;
+const isApi = place.line.id === 'api';
+const cas = specValue(item, 'CAS number');
+const formula = specValue(item, 'Molecular formula');
+// An API is searched for by name, CAS number and formula, so those lead; the
+// datasheet-style list (weight, UNII) stays on the page.
+const factText = isApi
+  ? [cas && `CAS ${cas}`, formula && `molecular formula ${formula}`].filter(Boolean).join(', ')
+  : facts.map((f) => `${f.label.toLowerCase()} ${f.value}`).join(', ');
+const subject = isApi ? `${item.name} API` : item.name;
+let lead = factText ? `${subject}: ${factText}.` : `${subject}.`;
 if (lead.length > MAX_DESC) {
   const cut = lead.slice(0, MAX_DESC - 1);
   lead = `${cut.slice(0, Math.max(cut.lastIndexOf(','), item.name.length + 1))}.`;
@@ -61,13 +70,16 @@ const description =
     .map((frame) => lead + frame)
     .find((d) => d.length <= MAX_DESC) ?? lead;
 
-// "Name | Pharma Packaging | MH PharmaPack" when that fits in 60 characters,
-// else "Name | MH PharmaPack": search results cut titles at about 60.
-const baseTitle = `${item.name} | MH PharmaPack`;
-const title =
-  placeOf(item).line.id === 'packaging' && baseTitle.length + 19 <= 60
-    ? `${item.name} | Pharma Packaging | MH PharmaPack`
-    : baseTitle;
+// The longest title that fits in 60 characters (search results cut there):
+// "Name | Pharma Packaging | MH PharmaPack" for packaging, "Name API
+// Sourcing | MH PharmaPack" for an API, else "Name | MH PharmaPack".
+const titles = isApi
+  ? [`${item.name} API Sourcing | MH PharmaPack`, `${item.name} API | MH PharmaPack`]
+  : place.line.id === 'packaging'
+    ? [`${item.name} | Pharma Packaging | MH PharmaPack`]
+    : [];
+const title = titles.find((t) => t.length <= 60) ?? `${item.name} | MH PharmaPack`;
+const tone = item.structure ? item.tone : undefined;
 ---
 
 <Base
@@ -97,9 +109,22 @@ const title =
 
       <div class="mt-4 grid gap-8 md:mt-6 md:grid-cols-[minmax(0,24rem)_1fr] md:gap-12 lg:grid-cols-[minmax(0,28rem)_1fr] lg:gap-16">
         <div>
-          <figure class="m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-6 md:p-10">
+          <figure
+            class:list={[
+              'm-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border',
+              tone ? 'item-tile' : 'border-line bg-white p-6 md:p-10',
+            ]}
+            style={tone ? `--tile-bg:${tone.bg};--tile-mid:${tone.mid}` : undefined}
+          >
             {
-              item.illustrative ? (
+              tone ? (
+                <img
+                  src={imageFor(item.image).src}
+                  alt={item.structureOf ? `Structural formula of ${item.structureOf}, the main component of ${item.name}` : `Structural formula of ${item.name}`}
+                  class="h-full w-full object-cover"
+                  decoding="async"
+                />
+              ) : item.illustrative ? (
                 <img
                   src={imageFor(item.image).src}
                   alt={`${item.name}, representative illustration`}
@@ -153,7 +178,7 @@ const title =
               facts.map((f) => (
                 <div class="grid grid-cols-[8.5rem_1fr] gap-4 py-3 text-sm md:grid-cols-[10rem_1fr]">
                   <dt class="font-semibold text-steel-deep">{f.label}</dt>
-                  <dd class="m-0 text-ink">{f.value}</dd>
+                  <dd class="m-0 text-ink">{f.label === 'Molecular formula' ? <Formula value={f.value} /> : f.value}</dd>
                 </div>
               ))
             }
@@ -197,6 +222,13 @@ const title =
   }
 
   <EnquiryTray />
+
+  <style>
+    .item-tile {
+      background: var(--tile-bg);
+      border-color: color-mix(in srgb, var(--tile-mid) 55%, var(--tile-bg));
+    }
+  </style>
 
   <script>
     // "Back to the catalogue" returns to the exact view the reader left

@@ -15,9 +15,11 @@ import { ITEMS, placeOf } from '../../lib/catalogue';
 // Framing is the same as What We Source: what we source, never what we make
 // (CONTENT-SPEC guardrails 5 and 6), and never "our products".
 
-// The intro speaks of packaging because that is the only line with items so
-// far; this count stays true as API and finished formulations are added.
-const total = ITEMS.filter((i) => placeOf(i).line.id === 'packaging').length;
+// Counts per line, so the intro and the description stay true as lines fill.
+// Finished formulations joins them when its first items are listed.
+const countOf = (line: string) => ITEMS.filter((i) => placeOf(i).line.id === line).length;
+const total = countOf('packaging');
+const apiTotal = countOf('api');
 const packagingGroups = TAXONOMY.find((l) => l.id === 'packaging')?.groups ?? [];
 
 // OfferCatalog: every group name is printed on a filter button and every item
@@ -31,12 +33,19 @@ const groupList = packagingGroups
   .map((g) => g.name.toLowerCase())
   .join(', ')
   .replace(/, ([^,]*)$/, ' and $1');
+// Kept under 155 characters; the packaging groups are listed only while
+// there is room for them.
+const descFull = `${apiTotal} APIs and ${total} pharmaceutical packaging items: ${groupList}. Add items to an enquiry list and request a quote.`;
+const description =
+  descFull.length <= 155
+    ? descFull
+    : `${apiTotal} APIs, from corticosteroids to hormones, and ${total} pharmaceutical packaging items. Add items to an enquiry list and request a quote.`;
 ---
 
 <Base
-  title="Sourcing Catalogue: Pharmaceutical Packaging | MH PharmaPack"
+  title="Sourcing Catalogue: APIs and Packaging | MH PharmaPack"
   name="Sourcing catalogue"
-  description={`${total} pharmaceutical packaging items: ${groupList}. Add items to an enquiry list and request a quote.`}
+  description={description}
   pageType="CollectionPage"
   breadcrumbs={[
     { name: 'Home', path: '/' },
@@ -56,9 +65,9 @@ const groupList = packagingGroups
       <!-- Headline and intro authored. [NEEDS: confirm copy] -->
       <h1 class="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">Sourcing catalogue</h1>
       <p class="mt-4 max-w-2xl text-base leading-relaxed text-steel-deep">
-        {total} packaging items from approved partner plants, each supplied to your specification:
-        what we source, not what we make. Add what you need to your enquiry list and send it as one
-        enquiry. API and finished formulations are being added.
+        {total} packaging items and {apiTotal} APIs from approved partner plants, each supplied to
+        your specification: what we source, not what we make. Add what you need to your enquiry list
+        and send it as one enquiry. Finished formulations are being added.
       </p>
     </div>
   </section>

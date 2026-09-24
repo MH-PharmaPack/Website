@@ -230,9 +230,28 @@ export function sortCapacity(item: CatalogueItem): number | undefined {
 
 /** Small print under the facts, when there is any. */
 export function itemNote(item: CatalogueItem): string | undefined {
+  if (item.structure) {
+    const what = item.structureOf
+      ? `The drawing shows ${item.structureOf}, the main component.`
+      : 'The drawing is the molecule’s structural formula.';
+    return `${what} The chemical data above is from the FDA’s public substance registry (UNII).`;
+  }
   return item.illustrative
     ? 'The drawing is representative of the item type; a photograph of the partner plant’s piece is available on request.'
     : undefined;
+}
+
+/** One value from an item's specs, by label. */
+export const specValue = (item: CatalogueItem, label: string): string | undefined =>
+  item.specs?.find((s) => s.label === label)?.value;
+
+/** The short detail line under a name on cards, in the search suggestions
+ *  and the enquiry list: material and unit weight for packaging, the CAS
+ *  number for an API. */
+export function itemDetail(item: CatalogueItem, sep = ' · '): string {
+  const cas = specValue(item, 'CAS number');
+  if (cas) return `CAS ${cas}`;
+  return [item.material, item.weight].filter(Boolean).join(sep);
 }
 
 /** Everything the client-side search matches against, precomputed per card
@@ -272,6 +291,7 @@ export function enquiryMailto(item: CatalogueItem, itemUrl?: string): string {
     `Category: ${[p.group.name, p.type?.name].filter(Boolean).join(' / ')}`,
     item.material ? `Material: ${item.material}` : null,
     item.weight ? `Unit weight: ${item.weight}` : null,
+    specValue(item, 'CAS number') ? `CAS number: ${specValue(item, 'CAS number')}` : null,
     itemUrl ? `Item page: ${itemUrl}` : null,
     '',
     'Quantity / volume: ',
@@ -288,7 +308,7 @@ export function enquiryMailto(item: CatalogueItem, itemUrl?: string): string {
 
 export function enquiryWhatsApp(item: CatalogueItem): string {
   if (!WHATSAPP) return '#';
-  const detail = [item.material, item.weight].filter(Boolean).join(', ');
+  const detail = itemDetail(item, ', ');
   const text =
     `Hello MH PharmaPack, I would like to enquire about: ${item.name}` +
     (detail ? ` (${detail})` : '') +
@@ -303,11 +323,12 @@ export function enquiryRfq(item: CatalogueItem): string {
 
 /** Everything an "Add to enquiry" button hands to the enquiry list
  *  (src/scripts/enquiry-list.ts), as data attributes. The thumbnail is a
- *  96px webp made at build time; line drawings use their SVG as is. */
+ *  96px webp made at build time; drawings (line art, API structures) use
+ *  their SVG as is. */
 export async function enquiryAttrs(item: CatalogueItem, site: URL | undefined): Promise<Record<string, string>> {
   const p = placeOf(item);
   const img = imageFor(item.image);
-  const thumb = item.illustrative
+  const thumb = item.illustrative || item.structure
     ? img.src
     : (await getImage({ src: img, width: 96, format: 'webp', quality: 70 })).src;
   return {
@@ -315,7 +336,7 @@ export async function enquiryAttrs(item: CatalogueItem, site: URL | undefined): 
     'data-enq-name': item.name,
     'data-enq-category': [p.group.name, p.type?.name].filter(Boolean).join(' / '),
     'data-enq-line': p.line.name,
-    'data-enq-detail': [item.material, item.weight].filter(Boolean).join(', '),
+    'data-enq-detail': itemDetail(item, ', '),
     'data-enq-url': site ? new URL(itemPath(item), site).href : itemPath(item),
     'data-enq-thumb': thumb,
   };

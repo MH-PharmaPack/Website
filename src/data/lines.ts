@@ -35,7 +35,9 @@ export const SOURCING_LINES: SourcingLine[] = [
     summary: 'Active pharmaceutical ingredients across therapeutic categories.',
     blurb:
       'Active pharmaceutical ingredients across corticosteroid, anticancer, antidepressant, and most major therapeutic categories.',
-    categories: ['Corticosteroids', 'Anticancer', 'Antidepressants'],
+    // CONTENT-SPEC 5.2's three, plus the two the client's product list added
+    // on 2026-09-24 (the catalogue's API groups hold the listings).
+    categories: ['Corticosteroids', 'Hormones', 'Vitamins', 'Anticancer', 'Antidepressants'],
     note: 'And most major API categories.',
     icon: '<path d="M12 4 19 8v8l-7 4-7-4V8l7-4Z" stroke-linejoin="round"/><circle cx="12" cy="12" r="1.6"/>',
   },

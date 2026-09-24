@@ -1,0 +1,9 @@
+{
+  "name": "mh-api-art",
+  "private": true,
+  "description": "Draws the API catalogue's structure tiles (RDKit, WebAssembly build). Tool only; the site build does not use it.",
+  "type": "module",
+  "dependencies": {
+    "@rdkit/rdkit": "^2026.3.6"
+  }
+}

@@ -1,0 +1,1097 @@
+[
+  {
+    "name": "Mecobalamin (Methylcobalamin)",
+    "group": "vitamins",
+    "image": "api-mecobalamin-methylcobalamin.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfc5",
+      "glow": "#f8e2e5",
+      "ink": "#4e121a",
+      "mid": "#bc5c69"
+    },
+    "keywords": "methylcobalamin vitamin b12 cobalamin",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "13422-55-4"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C63H91CoN13O14P"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "1344.38 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "BR1SN1JS2W"
+      }
+    ]
+  },
+  {
+    "name": "Hydroxyprogesterone Caproate",
+    "group": "hormones",
+    "type": "progestogens",
+    "image": "api-hydroxyprogesterone-caproate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfe7",
+      "glow": "#f8e2f5",
+      "ink": "#4e1246",
+      "mid": "#bc5cb0"
+    },
+    "keywords": "17-alpha hydroxyprogesterone hexanoate progestin",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "630-56-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C27H40O4"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "428.61 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "276F2O42F5"
+      }
+    ]
+  },
+  {
+    "name": "Medroxyprogesterone Acetate",
+    "group": "hormones",
+    "type": "progestogens",
+    "image": "api-medroxyprogesterone-acetate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfdf",
+      "glow": "#f8e2f2",
+      "ink": "#4e123c",
+      "mid": "#bc5ca0"
+    },
+    "keywords": "mpa progestin",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "71-58-9"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C24H34O4"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "386.53 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "C2QI4IOI2G"
+      }
+    ]
+  },
+  {
+    "name": "Mifepristone",
+    "group": "hormones",
+    "type": "progestogens",
+    "image": "api-mifepristone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfd8",
+      "glow": "#f8e2ee",
+      "ink": "#4e1232",
+      "mid": "#bc5c8f"
+    },
+    "keywords": "ru-486 antiprogestogen",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "84371-65-3"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C29H35NO2"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "429.59 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "320T6RNW1F"
+      }
+    ]
+  },
+  {
+    "name": "Norethisterone Acetate",
+    "group": "hormones",
+    "type": "progestogens",
+    "image": "api-norethisterone-acetate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfd0",
+      "glow": "#f8e2ea",
+      "ink": "#4e1228",
+      "mid": "#bc5c7f"
+    },
+    "keywords": "norethindrone acetate progestin",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "51-98-9"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H28O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "340.46 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "9S44LIC7OJ"
+      }
+    ]
+  },
+  {
+    "name": "Norethisterone",
+    "group": "hormones",
+    "type": "progestogens",
+    "image": "api-norethisterone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edbfc8",
+      "glow": "#f8e2e7",
+      "ink": "#4e121e",
+      "mid": "#bc5c6f"
+    },
+    "keywords": "norethindrone norethisterone base progestin",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "68-22-4"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C20H26O2"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "298.42 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "T18F433X4S"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edcabf",
+      "glow": "#f8e7e2",
+      "ink": "#4e2012",
+      "mid": "#bc735c"
+    },
+    "keywords": "testosterone base androgen",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "58-22-0"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C19H28O2"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "288.43 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "3XMK78S47O"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Cypionate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-cypionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edcebf",
+      "glow": "#f8e9e2",
+      "ink": "#4e2512",
+      "mid": "#bc7a5c"
+    },
+    "keywords": "testosterone cyclopentylpropionate androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "58-20-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C27H40O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "412.61 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "M0XW1UBI14"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Decanoate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-decanoate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edd1bf",
+      "glow": "#f8ebe2",
+      "ink": "#4e2a12",
+      "mid": "#bc825c"
+    },
+    "keywords": "androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "5721-91-5"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C29H46O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "442.67 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "IJW60LAO6S"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Enanthate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-enanthate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edd5bf",
+      "glow": "#f8ede2",
+      "ink": "#4e2f12",
+      "mid": "#bc8a5c"
+    },
+    "keywords": "testosterone heptanoate androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "315-37-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C26H40O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "400.60 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "7Z6522T8N9"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Phenylpropionate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-phenylpropionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edd9bf",
+      "glow": "#f8eee2",
+      "ink": "#4e3412",
+      "mid": "#bc925c"
+    },
+    "keywords": "androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "1255-49-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C28H36O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "420.58 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "8GN84GWX51"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Propionate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-propionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#edddbf",
+      "glow": "#f8f0e2",
+      "ink": "#4e3912",
+      "mid": "#bc9a5c"
+    },
+    "keywords": "androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "57-85-2"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H32O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "344.49 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "WI93Z9138A"
+      }
+    ]
+  },
+  {
+    "name": "Testosterone Undecanoate",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-testosterone-undecanoate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#ede0bf",
+      "glow": "#f8f2e2",
+      "ink": "#4e3e12",
+      "mid": "#bca15c"
+    },
+    "keywords": "tu tsu androgen ester",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "5949-44-0"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C30H48O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "456.70 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "H16A5VCT9C"
+      }
+    ]
+  },
+  {
+    "name": "Oxandrolone",
+    "group": "hormones",
+    "type": "androgens",
+    "image": "api-oxandrolone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#ede4bf",
+      "glow": "#f8f4e2",
+      "ink": "#4e4212",
+      "mid": "#bca95c"
+    },
+    "keywords": "anabolic steroid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "53-39-4"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C19H30O3"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "306.44 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "7H6TM3CT4L"
+      }
+    ]
+  },
+  {
+    "name": "Beclomethasone Dipropionate",
+    "group": "corticosteroids",
+    "image": "api-beclomethasone-dipropionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#c1edbf",
+      "glow": "#e3f8e2",
+      "ink": "#144e12",
+      "mid": "#5fbc5c"
+    },
+    "keywords": "beclometasone dipropionate glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "5534-09-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C28H37ClO7"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "521.04 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "5B307S63B2"
+      }
+    ]
+  },
+  {
+    "name": "Betamethasone Dipropionate",
+    "group": "corticosteroids",
+    "image": "api-betamethasone-dipropionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedc2",
+      "glow": "#e2f8e3",
+      "ink": "#124e16",
+      "mid": "#5cbc61"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "5593-20-4"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C28H37FO7"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "504.59 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "826Y60901U"
+      }
+    ]
+  },
+  {
+    "name": "Betamethasone Sodium Phosphate",
+    "group": "corticosteroids",
+    "image": "api-betamethasone-sodium-phosphate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedc6",
+      "glow": "#e2f8e5",
+      "ink": "#124e1b",
+      "mid": "#5cbc6a"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "151-73-5"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H28FNa2O8P"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "516.41 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "7BK02SCL3W"
+      }
+    ]
+  },
+  {
+    "name": "Betamethasone Valerate",
+    "group": "corticosteroids",
+    "image": "api-betamethasone-valerate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedca",
+      "glow": "#e2f8e7",
+      "ink": "#124e20",
+      "mid": "#5cbc72"
+    },
+    "keywords": "betamethasone 17-valerate glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "2152-44-5"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C27H37FO6"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "476.58 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "9IFA5XM7R2"
+      }
+    ]
+  },
+  {
+    "name": "Clobetasol Propionate",
+    "group": "corticosteroids",
+    "image": "api-clobetasol-propionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedce",
+      "glow": "#e2f8e9",
+      "ink": "#124e25",
+      "mid": "#5cbc7b"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "25122-46-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C25H32ClFO5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "466.97 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "779619577M"
+      }
+    ]
+  },
+  {
+    "name": "Clobetasone Butyrate",
+    "group": "corticosteroids",
+    "image": "api-clobetasone-butyrate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedd2",
+      "glow": "#e2f8eb",
+      "ink": "#124e2b",
+      "mid": "#5cbc83"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "25122-57-0"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C26H32ClFO5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "478.98 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "8U0H6XI6EO"
+      }
+    ]
+  },
+  {
+    "name": "Dexamethasone",
+    "group": "corticosteroids",
+    "image": "api-dexamethasone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedd6",
+      "glow": "#e2f8ed",
+      "ink": "#124e30",
+      "mid": "#5cbc8b"
+    },
+    "keywords": "dexamethasone base glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "50-02-2"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H29FO5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "392.46 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "7S5I7G3JQL"
+      }
+    ]
+  },
+  {
+    "name": "Dexamethasone Sodium Phosphate",
+    "group": "corticosteroids",
+    "image": "api-dexamethasone-sodium-phosphate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedda",
+      "glow": "#e2f8ef",
+      "ink": "#124e35",
+      "mid": "#5cbc94"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "2392-39-4"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H28FNa2O8P"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "516.41 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "AI9376Y64P"
+      }
+    ]
+  },
+  {
+    "name": "Halobetasol Propionate",
+    "group": "corticosteroids",
+    "image": "api-halobetasol-propionate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedde",
+      "glow": "#e2f8f1",
+      "ink": "#124e3a",
+      "mid": "#5cbc9c"
+    },
+    "keywords": "ulobetasol propionate glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "66852-54-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C25H31ClF2O5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "484.96 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "91A0K1TY3Z"
+      }
+    ]
+  },
+  {
+    "name": "Hydrocortisone",
+    "group": "corticosteroids",
+    "image": "api-hydrocortisone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfede2",
+      "glow": "#e2f8f3",
+      "ink": "#124e40",
+      "mid": "#5cbca5"
+    },
+    "keywords": "hydrocortisone base cortisol glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "50-23-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C21H30O5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "362.46 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "WI4X0X7BPJ"
+      }
+    ]
+  },
+  {
+    "name": "Hydrocortisone Acetate",
+    "group": "corticosteroids",
+    "image": "api-hydrocortisone-acetate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfede6",
+      "glow": "#e2f8f5",
+      "ink": "#124e45",
+      "mid": "#5cbcad"
+    },
+    "keywords": "cortisol acetate glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "50-03-3"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C23H32O6"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "404.50 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "3X7931PO74"
+      }
+    ]
+  },
+  {
+    "name": "Methylprednisolone",
+    "group": "corticosteroids",
+    "image": "api-methylprednisolone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfedea",
+      "glow": "#e2f8f7",
+      "ink": "#124e4a",
+      "mid": "#5cbcb6"
+    },
+    "keywords": "methyl prednisolone glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "83-43-2"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C22H30O5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "374.47 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "X4W7ZR7023"
+      }
+    ]
+  },
+  {
+    "name": "Methylprednisolone Acetate",
+    "group": "corticosteroids",
+    "image": "api-methylprednisolone-acetate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfeced",
+      "glow": "#e2f8f8",
+      "ink": "#124d4e",
+      "mid": "#5cbbbc"
+    },
+    "keywords": "methyl prednisolone acetate glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "53-36-1"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C24H32O6"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "416.51 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "43502P7F0P"
+      }
+    ]
+  },
+  {
+    "name": "Mometasone Furoate",
+    "group": "corticosteroids",
+    "image": "api-mometasone-furoate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfe8ed",
+      "glow": "#e2f6f8",
+      "ink": "#12484e",
+      "mid": "#5cb2bc"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "83919-23-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C27H30Cl2O6"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "521.43 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "04201GDN4R"
+      }
+    ]
+  },
+  {
+    "name": "Prednisolone",
+    "group": "corticosteroids",
+    "image": "api-prednisolone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfe4ed",
+      "glow": "#e2f4f8",
+      "ink": "#12434e",
+      "mid": "#5caabc"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "50-24-8"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C21H28O5"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "360.44 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "9PHQ9Y1OLM"
+      }
+    ]
+  },
+  {
+    "name": "Prednisolone Sodium Phosphate",
+    "group": "corticosteroids",
+    "image": "api-prednisolone-sodium-phosphate.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfe0ed",
+      "glow": "#e2f2f8",
+      "ink": "#123e4e",
+      "mid": "#5ca2bc"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "125-02-0"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C21H27Na2O8P"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "484.39 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "IV021NXA9J"
+      }
+    ]
+  },
+  {
+    "name": "Triamcinolone Acetonide",
+    "group": "corticosteroids",
+    "image": "api-triamcinolone-acetonide.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfdced",
+      "glow": "#e2f0f8",
+      "ink": "#12384e",
+      "mid": "#5c99bc"
+    },
+    "keywords": "glucocorticoid",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "76-25-5"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C24H31FO6"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "434.50 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "F446C597KA"
+      }
+    ]
+  },
+  {
+    "name": "Dutasteride",
+    "group": "urology",
+    "image": "api-dutasteride.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#cdbfed",
+      "glow": "#e9e2f8",
+      "ink": "#24124e",
+      "mid": "#795cbc"
+    },
+    "keywords": "5-alpha reductase inhibitor bph",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "164656-23-9"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C27H30F6N2O2"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "528.53 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "O0J6XJN02I"
+      }
+    ]
+  },
+  {
+    "name": "Finasteride",
+    "group": "urology",
+    "image": "api-finasteride.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#dfbfed",
+      "glow": "#f2e2f8",
+      "ink": "#3c124e",
+      "mid": "#a05cbc"
+    },
+    "keywords": "5-alpha reductase inhibitor bph",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "98319-26-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C23H36N2O2"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "372.55 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "57GNO57U7G"
+      }
+    ]
+  },
+  {
+    "name": "Spironolactone",
+    "group": "cardiovascular",
+    "image": "api-spironolactone.svg",
+    "structure": true,
+    "tone": {
+      "bg": "#bfd0ed",
+      "glow": "#e2eaf8",
+      "ink": "#12284e",
+      "mid": "#5c7fbc"
+    },
+    "keywords": "aldosterone antagonist potassium-sparing diuretic",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "52-01-7"
+      },
+      {
+        "label": "Molecular formula",
+        "value": "C24H32O4S"
+      },
+      {
+        "label": "Molecular weight",
+        "value": "416.58 g/mol"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "27O7W4T232"
+      }
+    ]
+  },
+  {
+    "name": "Polymyxin B Sulphate",
+    "group": "anti-infectives",
+    "image": "api-polymyxin-b-sulphate.svg",
+    "structure": true,
+    "structureOf": "polymyxin B1",
+    "tone": {
+      "bg": "#e5edbf",
+      "glow": "#f5f8e2",
+      "ink": "#444e12",
+      "mid": "#acbc5c"
+    },
+    "keywords": "polymyxin b sulfate polypeptide antibiotic",
+    "specs": [
+      {
+        "label": "CAS number",
+        "value": "1405-20-5"
+      },
+      {
+        "label": "Composition",
+        "value": "Mixture of polymyxins B1, B1-I, B2, B3, as sulphates"
+      },
+      {
+        "label": "FDA UNII",
+        "value": "19371312D4"
+      }
+    ]
+  }
+]

@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LinePage from '../../components/LinePage.astro';
 import { sourcingService } from '../../lib/seo';
 import { lineById } from '../../data/lines';
+import { ITEMS, placeOf, scopeHref } from '../../lib/catalogue';
 
 // API line page. See src/components/LinePage.astro for where every section's
 // copy comes from. The "what to send" list is the quote form's own API
@@ -10,6 +11,7 @@ import { lineById } from '../../data/lines';
 // [NEEDS: confirm headline, intro and list]
 const line = lineById('api');
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const apiCount = ITEMS.filter((i) => placeOf(i).line.id === 'api').length;
 ---
 
 <Base
@@ -37,7 +39,8 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
       'Whether your market needs a DMF or CEP',
       'Destination market and timeline',
     ]}
-    categoriesNote="API listings are being added to the catalogue."
+    categoriesNote={`${apiCount} APIs are listed in the catalogue so far, each with its structure, formula and CAS number, and more are being added.`}
+    catalogue={{ href: scopeHref({ line: 'api' }), label: `Browse the ${apiCount} APIs` }}
     ctaTitle="Looking for a specific API?"
     ctaLede="Tell us the molecule, the grade and the market."
   />

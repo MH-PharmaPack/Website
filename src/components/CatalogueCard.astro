@@ -1,11 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import type { CatalogueItem } from '../data/catalogue';
+import Formula from './Formula.astro';
 import {
   imageFor,
   itemPath,
   itemSlug,
   itemFacts,
+  itemDetail,
+  specValue,
   searchText,
   placeOf,
   materialTokens,
@@ -38,6 +41,13 @@ const facts = itemFacts(item);
 const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
 const place = placeOf(item);
 const enq = await enquiryAttrs(item, Astro.site);
+const detail = itemDetail(item);
+// API tiles: the structure drawing fills the square on its own colour, with
+// the class (the filter's own short name) top left and the formula bottom
+// left, both in the tile's ink, which render.mjs holds to 7:1 on its tint.
+const tone = item.structure ? item.tone : undefined;
+const formula = item.structure ? specValue(item, 'Molecular formula') : undefined;
+const classLabel = place.type?.short ?? place.group.name;
 ---
 
 <li
@@ -52,9 +62,31 @@ const enq = await enquiryAttrs(item, Astro.site);
   data-search={searchText(item)}
 >
   <a href={path} class="cat-card">
-    <figure class="relative m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border border-line bg-white p-3 md:p-4">
+    <figure
+      class:list={[
+        'relative m-0 flex aspect-square items-center justify-center overflow-hidden rounded-sm border',
+        tone ? 'cat-tile' : 'border-line bg-white p-3 md:p-4',
+      ]}
+      style={tone ? `--tile-bg:${tone.bg};--tile-ink:${tone.ink};--tile-mid:${tone.mid}` : undefined}
+    >
       {
-        item.illustrative ? (
+        tone ? (
+          <>
+            <img
+              src={imageFor(item.image).src}
+              alt={`${item.name}, structural formula`}
+              class="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="tile-class">{classLabel}</span>
+            {formula && (
+              <span class="tile-formula">
+                <Formula value={formula} />
+              </span>
+            )}
+          </>
+        ) : item.illustrative ? (
           <img
             src={imageFor(item.image).src}
             alt={`${item.name}, representative illustration`}
@@ -89,11 +121,7 @@ const enq = await enquiryAttrs(item, Astro.site);
       }
     </figure>
     <p class="mt-2.5 text-[13px] leading-snug font-semibold text-ink md:text-sm">{item.name}</p>
-    {
-      (item.material || item.weight) && (
-        <p class="mt-1 text-xs text-steel-deep">{[item.material, item.weight].filter(Boolean).join(' · ')}</p>
-      )
-    }
+    {detail && <p class="mt-1 text-xs text-steel-deep">{detail}</p>}
   </a>
   <button
     type="button"
@@ -129,6 +157,51 @@ const enq = await enquiryAttrs(item, Astro.site);
   }
   .cat-card:focus-visible {
     outline: none;
+  }
+
+  /* An API's structure tile. The border is a darker step of its own colour
+     rather than the grey hairline, so a row of tiles reads as colour, not as
+     boxes; the class and formula sit on the tile in its ink. */
+  .cat-tile {
+    background: var(--tile-bg);
+    border-color: color-mix(in srgb, var(--tile-mid) 55%, var(--tile-bg));
+  }
+  .tile-class,
+  .tile-formula {
+    position: absolute;
+    left: 0.6rem;
+    color: var(--tile-ink);
+    line-height: 1.2;
+    pointer-events: none;
+  }
+  .tile-class {
+    top: 0.55rem;
+    right: 0.6rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tile-formula {
+    bottom: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  @media (min-width: 768px) {
+    .tile-class,
+    .tile-formula {
+      left: 0.75rem;
+    }
+    .tile-class {
+      top: 0.7rem;
+    }
+    .tile-formula {
+      bottom: 0.65rem;
+      font-size: 0.8125rem;
+    }
   }
 
   /* The spec peek: a white sheet rising over the photo with the item's key

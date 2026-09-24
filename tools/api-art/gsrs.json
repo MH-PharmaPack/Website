@@ -1,0 +1,513 @@
+{
+  "METHYLCOBALAMIN": {
+    "name": "METHYLCOBALAMIN",
+    "uuid": "5072e8fc-7986-458d-95ba-837a655a0a4e",
+    "unii": "BR1SN1JS2W",
+    "class": "chemical",
+    "smiles": "Cc1cc2c(cc1C)n(cn2)[C@@H]3[C@@H]([C@@H]([C@@H](CO)O3)OP(=O)([O-])O[C@@H](C)CNC(=O)CC[C@]\\4(C)[C@@H](CC(=O)N)[C@]5([H])[C@@]6(C)[C@@](C)(CC(=O)N)[C@H](CCC(=O)N)C(=N6)/C(=C7/[C@@](C)(CC(=O)N)[C@H](CCC(=O)N)C(=N7)/C=C\\8/C(C)(C)[C@H](CCC(=O)N)C(=N8)C(=C4\\[N-]5)/C)/C)O.[CH3-].[Co+3]",
+    "formula": "C62H88N13O14P.CH3.Co",
+    "mw": 1344.3847,
+    "casPrimary": [
+      "13422-55-4"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "HYDROXYPROGESTERONE CAPROATE": {
+    "name": "HYDROXYPROGESTERONE CAPROATE",
+    "uuid": "7e00e1cb-ad5b-4347-9adf-5591f935ead7",
+    "unii": "276F2O42F5",
+    "class": "chemical",
+    "smiles": "CCCCCC(=O)O[C@@]1(CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])CC[C@@]21C)C(=O)C",
+    "formula": "C27H40O4",
+    "mw": 428.6051,
+    "casPrimary": [
+      "630-56-8"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "MEDROXYPROGESTERONE ACETATE": {
+    "name": "Medroxyprogesterone acetate",
+    "uuid": "339ba9df-cd88-49bb-9e7d-af168003ad56",
+    "unii": "C2QI4IOI2G",
+    "class": "chemical",
+    "smiles": "C[C@H]1C[C@]2([H])[C@]([H])(CC[C@@]3(C)[C@@]2([H])CC[C@@]3(C(=O)C)OC(=O)C)[C@@]4(C)CCC(=O)C=C14",
+    "formula": "C24H34O4",
+    "mw": 386.5253,
+    "casPrimary": [
+      "71-58-9"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "MIFEPRISTONE": {
+    "name": "MIFEPRISTONE",
+    "uuid": "934ea2da-d2cd-4301-928d-251b25e9f3c1",
+    "unii": "320T6RNW1F",
+    "class": "chemical",
+    "smiles": "CC#C[C@@]1(CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CCC4=C3[C@H](C[C@@]21C)c5ccc(cc5)N(C)C)O",
+    "formula": "C29H35NO2",
+    "mw": 429.5948,
+    "casPrimary": [
+      "84371-65-3"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "NORETHINDRONE ACETATE": {
+    "name": "Norethindrone acetate",
+    "uuid": "baab57e8-d0fd-4ca4-9933-986a78b932e7",
+    "unii": "9S44LIC7OJ",
+    "class": "chemical",
+    "smiles": "C#C[C@@]1(CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4([H])[C@@]3([H])CC[C@@]21C)OC(=O)C",
+    "formula": "C22H28O3",
+    "mw": 340.4567,
+    "casPrimary": [
+      "51-98-9"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "NORETHINDRONE": {
+    "name": "Norethindrone",
+    "uuid": "03872652-fe65-4845-88fa-fa35a5189a59",
+    "unii": "T18F433X4S",
+    "class": "chemical",
+    "smiles": "C#C[C@@]1(CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4([H])[C@@]3([H])CC[C@@]21C)O",
+    "formula": "C20H26O2",
+    "mw": 298.42,
+    "casPrimary": [
+      "68-22-4"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE CYPIONATE": {
+    "name": "TESTOSTERONE CYPIONATE",
+    "uuid": "34cf0282-ed74-4c43-9d31-c1d6cbd95756",
+    "unii": "M0XW1UBI14",
+    "class": "chemical",
+    "smiles": "C[C@@]12CCC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@@H]([C@@]4(C)CC[C@@]31[H])OC(=O)CCC5CCCC5",
+    "formula": "C27H40O3",
+    "mw": 412.6057,
+    "casPrimary": [
+      "58-20-8"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE DECANOATE": {
+    "name": "TESTOSTERONE DECANOATE",
+    "uuid": "8dfe42de-211b-4cb7-a333-e826b1f43767",
+    "unii": "IJW60LAO6S",
+    "class": "chemical",
+    "smiles": "CCCCCCCCCC(=O)O[C@H]1CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])CC[C@@]21C",
+    "formula": "C29H46O3",
+    "mw": 442.6748,
+    "casPrimary": [
+      "5721-91-5"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE ENANTHATE": {
+    "name": "Testosterone enanthate",
+    "uuid": "cb5f2d5f-07aa-490f-bd49-c7de7ce3cf09",
+    "unii": "7Z6522T8N9",
+    "class": "chemical",
+    "smiles": "CCCCCCC(=O)O[C@H]1CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])CC[C@@]21C",
+    "formula": "C26H40O3",
+    "mw": 400.595,
+    "casPrimary": [
+      "315-37-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE PHENYLPROPIONATE": {
+    "name": "TESTOSTERONE PHENYLPROPIONATE",
+    "uuid": "1229ed5c-5936-43e3-bd76-d46a33234587",
+    "unii": "8GN84GWX51",
+    "class": "chemical",
+    "smiles": "C[C@@]12CCC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@@H]([C@@]4(C)CC[C@@]31[H])OC(=O)CCc5ccccc5",
+    "formula": "C28H36O3",
+    "mw": 420.5847,
+    "casPrimary": [
+      "1255-49-8"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE PROPIONATE": {
+    "name": "Testosterone propionate",
+    "uuid": "bf45f2a1-35b1-40d0-a2b2-cc0ff8e35b01",
+    "unii": "WI93Z9138A",
+    "class": "chemical",
+    "smiles": "CCC(=O)O[C@H]1CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])CC[C@@]21C",
+    "formula": "C22H32O3",
+    "mw": 344.4885,
+    "casPrimary": [
+      "57-85-2"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TESTOSTERONE UNDECANOATE": {
+    "name": "TESTOSTERONE UNDECANOATE",
+    "uuid": "5a1fd35f-e160-4962-a4b5-f86d47afb7e0",
+    "unii": "H16A5VCT9C",
+    "class": "chemical",
+    "smiles": "CCCCCCCCCCC(=O)O[C@H]1CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])CC[C@@]21C",
+    "formula": "C30H48O3",
+    "mw": 456.7014,
+    "casPrimary": [
+      "5949-44-0"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "OXANDROLONE": {
+    "name": "OXANDROLONE",
+    "uuid": "d55440de-77e1-425f-9385-b154f8209e89",
+    "unii": "7H6TM3CT4L",
+    "class": "chemical",
+    "smiles": "C[C@@]12COC(=O)C[C@]2([H])CC[C@]3([H])[C@]1([H])CC[C@@]4(C)[C@@]3([H])CC[C@]4(C)O",
+    "formula": "C19H30O3",
+    "mw": 306.4404,
+    "casPrimary": [
+      "53-39-4"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "BECLOMETHASONE DIPROPIONATE": {
+    "name": "BECLOMETHASONE DIPROPIONATE",
+    "uuid": "7dfdb616-6568-4190-9cf7-aaa04efb7a52",
+    "unii": "5B307S63B2",
+    "class": "chemical",
+    "smiles": "CCC(=O)OCC(=O)[C@]1([C@@H](C)C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@@]21C)O)Cl)OC(=O)CC",
+    "formula": "C28H37ClO7",
+    "mw": 521.0432,
+    "casPrimary": [
+      "5534-09-8"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "BETAMETHASONE DIPROPIONATE": {
+    "name": "Betamethasone Dipropionate",
+    "uuid": "31274826-1563-445e-91af-9fa471ba530b",
+    "unii": "826Y60901U",
+    "class": "chemical",
+    "smiles": "CCC(=O)OCC(=O)[C@]1([C@@H](C)C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@@]21C)O)F)OC(=O)CC",
+    "formula": "C28H37FO7",
+    "mw": 504.5887,
+    "casPrimary": [
+      "5593-20-4"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "BETAMETHASONE SODIUM PHOSPHATE": {
+    "name": "Betamethasone sodium phosphate",
+    "uuid": "dc14e774-ca9c-4fe3-8f63-174b0606d353",
+    "unii": "7BK02SCL3W",
+    "class": "chemical",
+    "smiles": "C[C@H]1C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@]2(C)[C@]1(C(=O)COP(=O)([O-])[O-])O)O)F.[Na+].[Na+]",
+    "formula": "C22H28FO8P.2Na",
+    "mw": 516.4055,
+    "casPrimary": [
+      "151-73-5"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "BETAMETHASONE VALERATE": {
+    "name": "Betamethasone Valerate",
+    "uuid": "2f6f6ec2-5d5c-453e-b56c-8b596b78ffff",
+    "unii": "9IFA5XM7R2",
+    "class": "chemical",
+    "smiles": "CCCCC(=O)O[C@@]1([C@@H](C)C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@@]21C)O)F)C(=O)CO",
+    "formula": "C27H37FO6",
+    "mw": 476.5785,
+    "casPrimary": [
+      "2152-44-5"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "CLOBETASOL PROPIONATE": {
+    "name": "Clobetasol propionate",
+    "uuid": "3d221684-171c-48d7-a682-0c90e6c4b3d1",
+    "unii": "779619577M",
+    "class": "chemical",
+    "smiles": "CCC(=O)O[C@@]1([C@@H](C)C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@@]21C)O)F)C(=O)CCl",
+    "formula": "C25H32ClFO5",
+    "mw": 466.9709,
+    "casPrimary": [
+      "25122-46-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "CLOBETASONE BUTYRATE": {
+    "name": "Clobetasone Butyrate",
+    "uuid": "765c48e2-790b-4d3e-8685-c5b8bf1d9b4c",
+    "unii": "8U0H6XI6EO",
+    "class": "chemical",
+    "smiles": "CCCC(=O)O[C@@]1([C@@H](C)C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3(C(=O)C[C@@]21C)F)C(=O)CCl",
+    "formula": "C26H32ClFO5",
+    "mw": 478.9816,
+    "casPrimary": [
+      "25122-57-0"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "DEXAMETHASONE SODIUM PHOSPHATE": {
+    "name": "Dexamethasone Sodium Phosphate",
+    "uuid": "c2012754-46f0-48e7-9106-bb103947a6be",
+    "unii": "AI9376Y64P",
+    "class": "chemical",
+    "smiles": "C[C@@H]1C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@]2(C)[C@]1(C(=O)COP(=O)([O-])[O-])O)O)F.[Na+].[Na+]",
+    "formula": "C22H28FO8P.2Na",
+    "mw": 516.4055,
+    "casPrimary": [
+      "2392-39-4"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "HALOBETASOL PROPIONATE": {
+    "name": "HALOBETASOL PROPIONATE",
+    "uuid": "7f13e550-1afc-47ea-a7d1-8ce1f9b807af",
+    "unii": "91A0K1TY3Z",
+    "class": "chemical",
+    "smiles": "CCC(=O)O[C@@]1([C@@H](C)C[C@@]2([H])[C@]3([H])C[C@@H](C4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@@]21C)O)F)F)C(=O)CCl",
+    "formula": "C25H31ClF2O5",
+    "mw": 484.9613,
+    "casPrimary": [
+      "66852-54-8"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "HYDROCORTISONE": {
+    "name": "Hydrocortisone",
+    "uuid": "78b8ddbe-ab86-49b9-a13d-dd103b0ab301",
+    "unii": "WI4X0X7BPJ",
+    "class": "chemical",
+    "smiles": "C[C@@]12CCC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@](C(=O)CO)([C@@]4(C)C[C@@H]([C@@]31[H])O)O",
+    "formula": "C21H30O5",
+    "mw": 362.4607,
+    "casPrimary": [
+      "50-23-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "HYDROCORTISONE ACETATE": {
+    "name": "Hydrocortisone Acetate",
+    "uuid": "c327de78-59da-4fc0-b780-eb9ded06297d",
+    "unii": "3X7931PO74",
+    "class": "chemical",
+    "smiles": "CC(=O)OCC(=O)[C@]1(CC[C@@]2([H])[C@]3([H])CCC4=CC(=O)CC[C@]4(C)[C@@]3([H])[C@H](C[C@@]21C)O)O",
+    "formula": "C23H32O6",
+    "mw": 404.4975,
+    "casPrimary": [
+      "50-03-3"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "METHYLPREDNISOLONE": {
+    "name": "Methylprednisolone",
+    "uuid": "18bd1457-53af-4de4-864d-3cc720bcb1da",
+    "unii": "X4W7ZR7023",
+    "class": "chemical",
+    "smiles": "C[C@H]1C[C@@]2([H])[C@]3([H])CC[C@](C(=O)CO)([C@@]3(C)C[C@@H]([C@]2([H])[C@@]4(C)C=CC(=O)C=C14)O)O",
+    "formula": "C22H30O5",
+    "mw": 374.4714,
+    "casPrimary": [
+      "83-43-2"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "METHYLPREDNISOLONE ACETATE": {
+    "name": "Methylprednisolone acetate",
+    "uuid": "f751518a-59f1-4940-8d30-dd360c5da7b7",
+    "unii": "43502P7F0P",
+    "class": "chemical",
+    "smiles": "C[C@H]1C[C@@]2([H])[C@]3([H])CC[C@](C(=O)COC(=O)C)([C@@]3(C)C[C@@H]([C@]2([H])[C@@]4(C)C=CC(=O)C=C14)O)O",
+    "formula": "C24H32O6",
+    "mw": 416.5082,
+    "casPrimary": [
+      "53-36-1"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "MOMETASONE FUROATE": {
+    "name": "Mometasone Furoate",
+    "uuid": "aa31299d-4621-40c8-847f-ff8265241942",
+    "unii": "04201GDN4R",
+    "class": "chemical",
+    "smiles": "C[C@@H]1C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@]2(C)[C@]1(C(=O)CCl)OC(=O)c5ccco5)O)Cl",
+    "formula": "C27H30Cl2O6",
+    "mw": 521.4304,
+    "casPrimary": [
+      "83919-23-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "PREDNISOLONE SODIUM PHOSPHATE": {
+    "name": "Prednisolone sodium phosphate",
+    "uuid": "091648bf-7381-4064-a3d9-e68464113905",
+    "unii": "IV021NXA9J",
+    "class": "chemical",
+    "smiles": "C[C@@]12C=CC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@](C(=O)COP(=O)([O-])[O-])([C@@]4(C)C[C@@H]([C@@]31[H])O)O.[Na+].[Na+]",
+    "formula": "C21H27O8P.2Na",
+    "mw": 484.3884,
+    "casPrimary": [
+      "125-02-0"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "TRIAMCINOLONE ACETONIDE": {
+    "name": "Triamcinolone acetonide",
+    "uuid": "8215acd8-ca7a-45b6-a734-778f50a49091",
+    "unii": "F446C597KA",
+    "class": "chemical",
+    "smiles": "CC1(C)O[C@]2([H])C[C@@]3([H])[C@]4([H])CCC5=CC(=O)C=C[C@]5(C)[C@]4([C@H](C[C@]3(C)[C@]2(C(=O)CO)O1)O)F",
+    "formula": "C24H31FO6",
+    "mw": 434.4987,
+    "casPrimary": [
+      "76-25-5"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "DUTASTERIDE": {
+    "name": "Dutasteride",
+    "uuid": "b77ebf98-065a-4d85-b19e-b1a3879cc429",
+    "unii": "O0J6XJN02I",
+    "class": "chemical",
+    "smiles": "C[C@@]12CC[C@@]3([H])[C@@]([H])(CC[C@]4([H])[C@]3(C)C=CC(=O)N4)[C@]2([H])CC[C@@H]1C(=O)Nc5cc(ccc5C(F)(F)F)C(F)(F)F",
+    "formula": "C27H30F6N2O2",
+    "mw": 528.5307,
+    "casPrimary": [
+      "164656-23-9"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "FINASTERIDE": {
+    "name": "FINASTERIDE",
+    "uuid": "3cbd1127-4048-4259-a810-86d730caadc0",
+    "unii": "57GNO57U7G",
+    "class": "chemical",
+    "smiles": "CC(C)(C)NC(=O)[C@H]1CC[C@@]2([H])[C@]3([H])CC[C@]4([H])[C@](C)(C=CC(=O)N4)[C@@]3([H])CC[C@@]21C",
+    "formula": "C23H36N2O2",
+    "mw": 372.545,
+    "casPrimary": [
+      "98319-26-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "SPIRONOLACTONE": {
+    "name": "Spironolactone",
+    "uuid": "61407b8f-da7a-4899-bbb6-94b1b6752859",
+    "unii": "27O7W4T232",
+    "class": "chemical",
+    "smiles": "CC(=O)S[C@@H]1CC2=CC(=O)CC[C@]2(C)[C@@]3([H])CC[C@@]4(C)[C@@]([H])(CC[C@]54CCC(=O)O5)[C@@]31[H]",
+    "formula": "C24H32O4S",
+    "mw": 416.5755,
+    "casPrimary": [
+      "52-01-7"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "POLYMYXIN B SULFATE": {
+    "name": "Polymyxin B sulfate",
+    "uuid": "16824947-efe0-4b62-a059-1700cad4886f",
+    "unii": "19371312D4",
+    "class": "mixture",
+    "smiles": null,
+    "formula": null,
+    "mw": null,
+    "casPrimary": [
+      "1405-20-5"
+    ],
+    "casOther": [],
+    "mixture": [
+      "POLYMYXIN B1 SULFATE",
+      "POLYMYXIN B1-I SULFATE",
+      "POLYMYXIN B3 SULFATE",
+      "POLYMYXIN B2 SULFATE"
+    ]
+  },
+  "TESTOSTERONE": {
+    "name": "TESTOSTERONE",
+    "uuid": "de5088e3-60d2-48db-8c91-311bd3435f32",
+    "unii": "3XMK78S47O",
+    "class": "chemical",
+    "smiles": "C[C@@]12CCC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@@H]([C@@]4(C)CC[C@@]31[H])O",
+    "formula": "C19H28O2",
+    "mw": 288.4251,
+    "casPrimary": [
+      "58-22-0"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "DEXAMETHASONE": {
+    "name": "Dexamethasone",
+    "uuid": "681b3b7c-2a18-442f-a215-5105a536d929",
+    "unii": "7S5I7G3JQL",
+    "class": "chemical",
+    "smiles": "C[C@@H]1C[C@@]2([H])[C@]3([H])CCC4=CC(=O)C=C[C@]4(C)[C@]3([C@H](C[C@]2(C)[C@]1(C(=O)CO)O)O)F",
+    "formula": "C22H29FO5",
+    "mw": 392.4619,
+    "casPrimary": [
+      "50-02-2"
+    ],
+    "casOther": [],
+    "mixture": null
+  },
+  "PREDNISOLONE": {
+    "name": "Prednisolone",
+    "uuid": "9646220b-4066-4271-9435-e166e3075d55",
+    "unii": "9PHQ9Y1OLM",
+    "class": "chemical",
+    "smiles": "C[C@@]12C=CC(=O)C=C2CC[C@@]3([H])[C@]4([H])CC[C@](C(=O)CO)([C@@]4(C)C[C@@H]([C@@]31[H])O)O",
+    "formula": "C21H28O5",
+    "mw": 360.4448,
+    "casPrimary": [
+      "50-24-8"
+    ],
+    "casOther": [
+      "8056-11-9 (SUPERSEDED)"
+    ],
+    "mixture": null
+  },
+  "POLYMYXIN B1": {
+    "name": "POLYMYXIN B1",
+    "uuid": "ed3b2211-4cd7-406c-b84f-e0251ccd50ab",
+    "unii": "B35S89JSRU",
+    "class": "chemical",
+    "smiles": "CC[C@H](C)CCCCC(=O)N[C@@H](CCN)C(=O)N[C@@]([H])([C@@H](C)O)C(=O)N[C@@H](CCN)C(=O)N[C@H]1CCNC(=O)[C@]([H])([C@@H](C)O)NC(=O)[C@H](CCN)NC(=O)[C@H](CCN)NC(=O)[C@H](CC(C)C)NC(=O)[C@@H](Cc2ccccc2)NC(=O)[C@H](CCN)NC1=O",
+    "formula": "C56H98N16O13",
+    "mw": 1203.4789,
+    "casPrimary": [
+      "4135-11-9"
+    ],
+    "casOther": [],
+    "mixture": null
+  }
+}
