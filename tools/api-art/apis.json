@@ -1,22 +1,22 @@
 {
-  "_comment": "The API listings, from the client's product list (2026-09-24). name = what the site shows (INN/BP spelling, as the client wrote it, typos corrected). gsrs = the substance's name in the FDA/NCATS Global Substance Registration System, where structure, formula, weight and CAS come from (public domain). keywords = other official names only (USAN, INN, pharmacopoeial spelling), never brand or company names. group/type = src/data/catalogue.ts TAXONOMY ids.",
+  "_comment": "The API listings, from the client's product list (2026-09-24). name = what the site shows (INN/BP spelling, as the client wrote it, typos corrected). gsrs = the substance's name in the FDA/NCATS Global Substance Registration System, where structure, formula, weight and CAS come from (public domain). keywords = other official names only (USAN, INN, pharmacopoeial spelling), never brand or company names. group/type = src/data/catalogue.ts TAXONOMY ids. restricted = controlled or restricted in many markets (testosterone and its esters, oxandrolone, mifepristone); the item page then carries the licensed-buyers line, client-approved 2026-09-24.",
   "items": [
     { "name": "Mecobalamin (Methylcobalamin)", "gsrs": "METHYLCOBALAMIN", "group": "vitamins", "keywords": "methylcobalamin vitamin b12 cobalamin" },
 
     { "name": "Hydroxyprogesterone Caproate", "gsrs": "HYDROXYPROGESTERONE CAPROATE", "group": "hormones", "type": "progestogens", "keywords": "17-alpha hydroxyprogesterone hexanoate progestin" },
     { "name": "Medroxyprogesterone Acetate", "gsrs": "MEDROXYPROGESTERONE ACETATE", "group": "hormones", "type": "progestogens", "keywords": "mpa progestin" },
-    { "name": "Mifepristone", "gsrs": "MIFEPRISTONE", "group": "hormones", "type": "progestogens", "keywords": "ru-486 antiprogestogen" },
+    { "name": "Mifepristone", "restricted": true, "gsrs": "MIFEPRISTONE", "group": "hormones", "type": "progestogens", "keywords": "ru-486 antiprogestogen" },
     { "name": "Norethisterone Acetate", "gsrs": "NORETHINDRONE ACETATE", "group": "hormones", "type": "progestogens", "keywords": "norethindrone acetate progestin" },
     { "name": "Norethisterone", "gsrs": "NORETHINDRONE", "group": "hormones", "type": "progestogens", "keywords": "norethindrone norethisterone base progestin" },
 
-    { "name": "Testosterone", "gsrs": "TESTOSTERONE", "group": "hormones", "type": "androgens", "keywords": "testosterone base androgen" },
-    { "name": "Testosterone Cypionate", "gsrs": "TESTOSTERONE CYPIONATE", "group": "hormones", "type": "androgens", "keywords": "testosterone cyclopentylpropionate androgen ester" },
-    { "name": "Testosterone Decanoate", "gsrs": "TESTOSTERONE DECANOATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
-    { "name": "Testosterone Enanthate", "gsrs": "TESTOSTERONE ENANTHATE", "group": "hormones", "type": "androgens", "keywords": "testosterone heptanoate androgen ester" },
-    { "name": "Testosterone Phenylpropionate", "gsrs": "TESTOSTERONE PHENYLPROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
-    { "name": "Testosterone Propionate", "gsrs": "TESTOSTERONE PROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
-    { "name": "Testosterone Undecanoate", "gsrs": "TESTOSTERONE UNDECANOATE", "group": "hormones", "type": "androgens", "keywords": "tu tsu androgen ester" },
-    { "name": "Oxandrolone", "gsrs": "OXANDROLONE", "group": "hormones", "type": "androgens", "keywords": "anabolic steroid" },
+    { "name": "Testosterone", "restricted": true, "gsrs": "TESTOSTERONE", "group": "hormones", "type": "androgens", "keywords": "testosterone base androgen" },
+    { "name": "Testosterone Cypionate", "restricted": true, "gsrs": "TESTOSTERONE CYPIONATE", "group": "hormones", "type": "androgens", "keywords": "testosterone cyclopentylpropionate androgen ester" },
+    { "name": "Testosterone Decanoate", "restricted": true, "gsrs": "TESTOSTERONE DECANOATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Enanthate", "restricted": true, "gsrs": "TESTOSTERONE ENANTHATE", "group": "hormones", "type": "androgens", "keywords": "testosterone heptanoate androgen ester" },
+    { "name": "Testosterone Phenylpropionate", "restricted": true, "gsrs": "TESTOSTERONE PHENYLPROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Propionate", "restricted": true, "gsrs": "TESTOSTERONE PROPIONATE", "group": "hormones", "type": "androgens", "keywords": "androgen ester" },
+    { "name": "Testosterone Undecanoate", "restricted": true, "gsrs": "TESTOSTERONE UNDECANOATE", "group": "hormones", "type": "androgens", "keywords": "tu tsu androgen ester" },
+    { "name": "Oxandrolone", "restricted": true, "gsrs": "OXANDROLONE", "group": "hormones", "type": "androgens", "keywords": "anabolic steroid" },
 
     { "name": "Beclomethasone Dipropionate", "gsrs": "BECLOMETHASONE DIPROPIONATE", "group": "corticosteroids", "keywords": "beclometasone dipropionate glucocorticoid" },
     { "name": "Betamethasone Dipropionate", "gsrs": "BETAMETHASONE DIPROPIONATE", "group": "corticosteroids", "keywords": "glucocorticoid" },

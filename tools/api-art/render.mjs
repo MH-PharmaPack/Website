@@ -202,6 +202,7 @@ for (const it of items) {
     ...(it.type ? { type: it.type } : {}),
     image: file,
     structure: true,
+    ...(it.restricted ? { restricted: true } : {}),
     // "POLYMYXIN B1" -> "polymyxin B1", for the item page's note.
     ...(it.drawAs ? { structureOf: drawRec.name.toLowerCase().replace(/\bb(\d)\b/g, 'B$1') } : {}),
     tone: { bg: hex(tone.bg), glow: hex(tone.glow), ink: hex(tone.ink), mid: hex(tone.mid) },

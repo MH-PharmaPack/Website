@@ -100,6 +100,7 @@
     "type": "progestogens",
     "image": "api-mifepristone.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edbfd8",
       "glow": "#f8e2ee",
@@ -196,6 +197,7 @@
     "type": "androgens",
     "image": "api-testosterone.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edcabf",
       "glow": "#f8e7e2",
@@ -228,6 +230,7 @@
     "type": "androgens",
     "image": "api-testosterone-cypionate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edcebf",
       "glow": "#f8e9e2",
@@ -260,6 +263,7 @@
     "type": "androgens",
     "image": "api-testosterone-decanoate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edd1bf",
       "glow": "#f8ebe2",
@@ -292,6 +296,7 @@
     "type": "androgens",
     "image": "api-testosterone-enanthate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edd5bf",
       "glow": "#f8ede2",
@@ -324,6 +329,7 @@
     "type": "androgens",
     "image": "api-testosterone-phenylpropionate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edd9bf",
       "glow": "#f8eee2",
@@ -356,6 +362,7 @@
     "type": "androgens",
     "image": "api-testosterone-propionate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#edddbf",
       "glow": "#f8f0e2",
@@ -388,6 +395,7 @@
     "type": "androgens",
     "image": "api-testosterone-undecanoate.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#ede0bf",
       "glow": "#f8f2e2",
@@ -420,6 +428,7 @@
     "type": "androgens",
     "image": "api-oxandrolone.svg",
     "structure": true,
+    "restricted": true,
     "tone": {
       "bg": "#ede4bf",
       "glow": "#f8f4e2",

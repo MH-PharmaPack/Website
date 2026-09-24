@@ -172,6 +172,16 @@ const tone = item.structure ? item.tone : undefined;
             Sourced through our partner network and supplied to your specification: what we source,
             not what we make.
           </p>
+          {
+            /* Client-approved wording, 2026-09-24. A statement of who it goes
+               to, not a guarantee of anything (CONTENT-SPEC guardrail 4). */
+            item.restricted && (
+              <p class="restricted-note mt-4 max-w-xl text-sm leading-relaxed text-ink">
+                Supplied only to licensed pharmaceutical manufacturers and importers, against the
+                licences and permits the destination market requires.
+              </p>
+            )
+          }
 
           <dl class="mt-8 divide-y divide-line border-y border-line">
             {
@@ -227,6 +237,11 @@ const tone = item.structure ? item.tone : undefined;
     .item-tile {
       background: var(--tile-bg);
       border-color: color-mix(in srgb, var(--tile-mid) 55%, var(--tile-bg));
+    }
+    .restricted-note {
+      padding: 0.7rem 0.9rem;
+      border-left: 3px solid var(--color-copper-deep);
+      background: var(--color-paper-warm);
     }
   </style>
 

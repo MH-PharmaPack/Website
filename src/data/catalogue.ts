@@ -181,6 +181,9 @@ export interface CatalogueItem {
   /** The tile's colours: edge tint, glow, ink (structure and overlaid
    *  text, at least 7:1 on bg) and a mid tone */
   tone?: { bg: string; glow: string; ink: string; mid: string };
+  /** Controlled or restricted in many markets (anabolic steroids,
+   *  mifepristone): the item page states it goes to licensed buyers only */
+  restricted?: boolean;
 }
 
 const API_ITEMS = apiItems as CatalogueItem[];
