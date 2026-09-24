@@ -3,10 +3,8 @@ import Base from '../../layouts/Base.astro';
 // Build-time resized logo (see Header.astro): shown at 48 CSS px here.
 import { Image } from 'astro:assets';
 import logo from '../../assets/logo/mh-pharmapack-logo.webp';
-import { PARTNERS, partnerWhatsApp, type Partner } from '../../data/leadership';
+import { PARTNERS, partnerMailto, partnerWhatsApp, type Partner } from '../../data/leadership';
 import {
-  MAILTO_HREF,
-  SALES_EMAIL,
   OFFICE_ADDRESS,
   OFFICE_ADDRESS_PARTS,
   MAPS_HREF,
@@ -51,6 +49,7 @@ interface Props {
 
 const { partner } = Astro.props;
 const vcardHref = withBase(`/leadership/${partner.slug}.vcf`);
+const mailtoHref = partnerMailto(partner);
 
 // The Person node this page is about, tied to the organisation by @id so the
 // two are one graph rather than two unrelated claims. No rich result comes of
@@ -65,7 +64,7 @@ const personNode = {
   worksFor: { '@id': ORG_ID },
   description: partner.bio || `${partner.title} at MH PharmaPack. ${partner.lead}`,
   telephone: partner.phone,
-  email: SALES_EMAIL,
+  email: partner.email,
   workLocation: {
     '@type': 'Place',
     address: {
@@ -207,7 +206,7 @@ const backClass =
                 </svg>
                 WhatsApp
               </a>
-              <a href={MAILTO_HREF} class={actionClass}>
+              <a href={mailtoHref} class={actionClass}>
                 <svg class="h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                   <rect x="3.4" y="5.4" width="17.2" height="13.2" rx="1.6"></rect>
                   <path d="m3.9 6.4 8.1 6 8.1-6" stroke-linejoin="round"></path>
@@ -232,7 +231,7 @@ const backClass =
             <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">
               <dt class="text-muted md:w-24 md:shrink-0">Email</dt>
               <dd>
-                <a href={MAILTO_HREF} class="font-medium text-steel-deep hover:text-ink">{SALES_EMAIL}</a>
+                <a href={mailtoHref} class="font-medium text-steel-deep hover:text-ink">{partner.email}</a>
               </dd>
             </div>
             <div class="flex justify-between gap-4 py-1.5 md:justify-start md:gap-8">

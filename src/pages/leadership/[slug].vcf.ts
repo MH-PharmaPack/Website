@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { PARTNERS } from '../../data/leadership';
-import { SALES_EMAIL, SITE_URL, SITE_TITLE, OFFICE_ADDRESS_PARTS } from '../../config';
+import { SITE_URL, SITE_TITLE, OFFICE_ADDRESS_PARTS } from '../../config';
 
 // Emits /leadership/<slug>.vcf at build time, one per partner.
 //
@@ -48,7 +48,7 @@ export const GET: APIRoute = ({ params }) => {
     `ORG:${esc(SITE_TITLE)}`,
     `TITLE:${esc(partner.title)}`,
     `TEL;TYPE=CELL,VOICE:${partner.phone}`,
-    `EMAIL;TYPE=INTERNET,WORK:${SALES_EMAIL}`,
+    `EMAIL;TYPE=INTERNET,WORK:${partner.email}`,
     `ADR;TYPE=WORK:${adr}`,
     `URL:${SITE_URL}/leadership/${partner.slug}`,
     ...(partner.linkedin ? [`X-SOCIALPROFILE;TYPE=linkedin:${partner.linkedin}`] : []),
