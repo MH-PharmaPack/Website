@@ -69,6 +69,27 @@ const soonAsk: Record<string, string> = {
 
 const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).includes(m)).length;
 
+// Sorts differ by line: packaging sorts by capacity, which an API does not
+// have, so the API line sorts by molecular weight instead. The select is
+// rendered with the default line's options; the script swaps them when the
+// line changes (rebuilding the options, because iOS Safari ignores `hidden`
+// on <option>). Sorts not listed for a line fall back to catalogue order.
+const SORTS: Record<string, [string, string][]> = {
+  default: [
+    ['', 'Catalogue order'],
+    ['cap-asc', 'Smallest first'],
+    ['cap-desc', 'Largest first'],
+    ['name', 'Name, A to Z'],
+  ],
+  api: [
+    ['', 'Catalogue order'],
+    ['name', 'Name, A to Z'],
+    ['mw-asc', 'Molecular weight, low to high'],
+    ['mw-desc', 'Molecular weight, high to low'],
+  ],
+};
+const defaultSorts = SORTS[DEFAULT_LINE] ?? SORTS.default;
+
 // "All packaging" reads naturally; "All api" does not. An acronym keeps its
 // capitals and takes the plural.
 const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'All APIs' : `All ${line.name.toLowerCase()}`);
@@ -261,11 +282,8 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
 
       <label class="sort">
         <span class="sr-only">Sort</span>
-        <select data-sort>
-          <option value="">Catalogue order</option>
-          <option value="cap-asc">Smallest first</option>
-          <option value="cap-desc">Largest first</option>
-          <option value="name">Name, A to Z</option>
+        <select data-sort data-sorts={JSON.stringify(SORTS)}>
+          {defaultSorts.map(([v, label]) => <option value={v}>{label}</option>)}
         </select>
         <svg class="sort-chev h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="m6 9.5 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
@@ -1096,15 +1114,19 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
     };
 
     const applySort = () => {
-      const cap = (el: HTMLElement) => (el.dataset.cap ? parseFloat(el.dataset.cap) : NaN);
+      // Capacity (packaging) and molecular weight (API) sort the same way:
+      // items without the number go last, in catalogue order.
+      const num = (el: HTMLElement, key: 'cap' | 'mw') => (el.dataset[key] ? parseFloat(el.dataset[key] ?? '') : NaN);
       const order = (el: HTMLElement) => Number(el.dataset.order);
       const name = (el: HTMLElement) => el.dataset.enqName ?? el.querySelector('[data-enq-add]')?.getAttribute('data-enq-name') ?? '';
+      const numeric = sort.match(/^(cap|mw)-(asc|desc)$/);
       const sorted = [...items].sort((a, b) => {
-        if (sort === 'cap-asc' || sort === 'cap-desc') {
-          const ca = cap(a);
-          const cb = cap(b);
+        if (numeric) {
+          const key = numeric[1] as 'cap' | 'mw';
+          const ca = num(a, key);
+          const cb = num(b, key);
           if (isNaN(ca) !== isNaN(cb)) return isNaN(ca) ? 1 : -1;
-          if (!isNaN(ca) && ca !== cb) return sort === 'cap-asc' ? ca - cb : cb - ca;
+          if (!isNaN(ca) && ca !== cb) return numeric[2] === 'asc' ? ca - cb : cb - ca;
           return order(a) - order(b);
         }
         if (sort === 'name') return name(a).localeCompare(name(b), 'en', { numeric: true }) || order(a) - order(b);
@@ -1114,7 +1136,25 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
       grid.append(...sorted);
     };
 
+    // Give the sort menu the current line's options. A sort the line does
+    // not offer (a capacity sort carried over to the API line) drops back to
+    // catalogue order rather than silently doing nothing.
+    const sortSets: Record<string, [string, string][]> = JSON.parse(sortSel?.dataset.sorts ?? '{}');
+    let sortLine = '';
+    const syncSorts = () => {
+      if (!sortSel || sortLine === line) return;
+      sortLine = line;
+      const opts = sortSets[line] ?? sortSets.default ?? [];
+      sortSel.replaceChildren(...opts.map(([v, label]) => new Option(label, v)));
+      if (!opts.some(([v]) => v === sort)) {
+        sort = '';
+        applySort();
+      }
+      sortSel.value = sort;
+    };
+
     const apply = () => {
+      syncSorts();
       const q = query();
       const live = liveLines.has(line);
 
@@ -1298,7 +1338,11 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
     }
     if (search && init.get('q')) search.value = init.get('q') ?? '';
     mats = new Set((init.get('mat') ?? '').toLowerCase().split(',').map((m) => m.trim()).filter((m) => knownMats.has(m)));
-    sort = ['cap-asc', 'cap-desc', 'name'].includes(init.get('sort') ?? '') ? (init.get('sort') ?? '') : '';
+    // A linked sort is kept only if the linked line offers it.
+    const linkedSort = init.get('sort') ?? '';
+    const lineSorts = sortSets[line] ?? sortSets.default ?? [];
+    sort = linkedSort && lineSorts.some(([v]) => v === linkedSort) ? linkedSort : '';
+    syncSorts();
     if (sortSel) sortSel.value = sort;
     if (sort) applySort();
 

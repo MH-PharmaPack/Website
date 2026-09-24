@@ -37,8 +37,18 @@ interface Props {
 const { item } = Astro.props;
 const path = itemPath(item);
 const facts = itemFacts(item);
-// The peek is a glance, not the datasheet: the first few facts only.
-const peek = facts.filter((f) => f.label !== 'Colour').slice(0, 5);
+// The peek is a glance, not the datasheet: the first few facts only. For an
+// API that is CAS, formula and weight under short labels (the UNII and a
+// mixture's composition stay on the item page); "Molecular formula" beside
+// "C63H91CoN13O14P" does not fit a card.
+const PEEK_LABELS: Record<string, string> = {
+  'CAS number': 'CAS',
+  'Molecular formula': 'Formula',
+  'Molecular weight': 'Mol. weight',
+};
+const peek = item.structure
+  ? facts.filter((f) => PEEK_LABELS[f.label]).map((f) => ({ label: PEEK_LABELS[f.label], value: f.value }))
+  : facts.filter((f) => f.label !== 'Colour').slice(0, 5);
 const place = placeOf(item);
 const enq = await enquiryAttrs(item, Astro.site);
 const detail = itemDetail(item);
@@ -47,6 +57,8 @@ const detail = itemDetail(item);
 // left, both in the tile's ink, which render.mjs holds to 7:1 on its tint.
 const tone = item.structure ? item.tone : undefined;
 const formula = item.structure ? specValue(item, 'Molecular formula') : undefined;
+// Molecular weight as a number, for the API sorts ("392.46 g/mol" -> 392.46).
+const mw = parseFloat(specValue(item, 'Molecular weight') ?? '');
 const classLabel = place.type?.short ?? place.group.name;
 ---
 
@@ -59,6 +71,7 @@ const classLabel = place.type?.short ?? place.group.name;
   data-type={place.type?.id ?? ''}
   data-mat={materialTokens(item).join(' ')}
   data-cap={sortCapacity(item) ?? ''}
+  data-mw={Number.isFinite(mw) ? mw : ''}
   data-search={searchText(item)}
 >
   <a href={path} class="cat-card">
@@ -113,7 +126,7 @@ const classLabel = place.type?.short ?? place.group.name;
             {peek.map((f) => (
               <div class="cat-peek-row">
                 <dt>{f.label}</dt>
-                <dd>{f.value}</dd>
+                <dd>{f.label === 'Formula' ? <Formula value={f.value} /> : f.value}</dd>
               </div>
             ))}
           </dl>
@@ -241,14 +254,19 @@ const classLabel = place.type?.short ?? place.group.name;
     border-top: 1px solid var(--color-paper-warm);
   }
   .cat-peek dt {
+    flex-shrink: 0;
     color: var(--color-steel-deep);
     white-space: nowrap;
   }
+  /* A value too long for the row wraps inside the card instead of running
+     past its edge; min-width lets the flex item shrink below its content. */
   .cat-peek dd {
+    min-width: 0;
     margin: 0;
     color: var(--color-ink);
     font-weight: 600;
     text-align: right;
+    overflow-wrap: anywhere;
   }
 
   /* The card grows to fill its grid row, so every add button in a row sits
