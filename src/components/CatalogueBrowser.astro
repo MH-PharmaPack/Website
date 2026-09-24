@@ -1002,6 +1002,7 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
 <script>
   import { readReturn, writeReturn } from '../scripts/catalogue-return';
   import { searchTokens, matchesTokens } from '../scripts/search-normalize';
+  import { track } from '../scripts/analytics';
 
   // One state, two sets of controls (sidebar tree and rows). Every control
   // carries what it selects in data attributes, so the same handlers and the
@@ -1153,6 +1154,27 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
       sortSel.value = sort;
     };
 
+    // Searches go to analytics once typing settles, with how many items they
+    // found. The ones that found nothing are the list of what buyers want
+    // and the catalogue does not have yet.
+    let searchTimer = 0;
+    let lastSearch = '';
+    const queueSearch = (text: string, results: number) => {
+      clearTimeout(searchTimer);
+      if (text.length < 2 || text === lastSearch) return;
+      searchTimer = window.setTimeout(() => {
+        lastSearch = text;
+        track('catalogue_searched', {
+          query: text.toLowerCase().slice(0, 80),
+          results,
+          no_results: results === 0,
+          line,
+          group: group || undefined,
+        });
+      }, 1200);
+    };
+    const trackFilter = () => track('catalogue_filtered', { line, group: group || undefined, type: type || undefined, materials: mats.size ? [...mats] : undefined });
+
     const apply = () => {
       syncSorts();
       const q = query();
@@ -1251,6 +1273,7 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
         el.hidden = !visible;
         if (visible) shown++;
       }
+      queueSearch(q ? (search?.value.trim() ?? '') : '', matched);
       if (applyBtn) applyBtn.textContent = matched === 1 ? 'Show 1 item' : `Show ${matched} items`;
       if (countEl) {
         countEl.textContent =
@@ -1284,8 +1307,15 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
       syncUrl();
     };
 
+    // Only the catalogue's own keys are rewritten; anything else in the
+    // address stays, above all campaign tags (utm_source and the rest from a
+    // cold email or an ad), which analytics read after the page has settled.
+    // Dropping them here used to erase the attribution of every visit that
+    // landed on the catalogue.
+    const OWN_KEYS = ['line', 'group', 'type', 'q', 'mat', 'sort', 'cat'];
     const syncUrl = () => {
-      const p = new URLSearchParams();
+      const p = new URLSearchParams(location.search);
+      for (const k of OWN_KEYS) p.delete(k);
       if (line && line !== DEFAULT_LINE) p.set('line', line);
       if (group) p.set('group', group);
       if (type) p.set('type', type);
@@ -1354,13 +1384,14 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
       expanded = false;
       apply();
     };
-    for (const b of lineBtns) b.addEventListener('click', () => (setLine(b.dataset.lineBtn ?? DEFAULT_LINE), change()));
-    for (const b of groupBtns) b.addEventListener('click', () => (setGroup(b.dataset.groupBtn ?? ''), change()));
+    for (const b of lineBtns) b.addEventListener('click', () => (setLine(b.dataset.lineBtn ?? DEFAULT_LINE), change(), trackFilter()));
+    for (const b of groupBtns) b.addEventListener('click', () => (setGroup(b.dataset.groupBtn ?? ''), change(), trackFilter()));
     for (const b of typeBtns) {
       b.addEventListener('click', () => {
         setGroup(b.dataset.group ?? '');
         setType(b.dataset.typeBtn ?? '');
         change();
+        trackFilter();
       });
     }
     for (const o of matOpts) {
@@ -1368,6 +1399,7 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
         if (o.checked) mats.add(o.value);
         else mats.delete(o.value);
         change();
+        trackFilter();
       });
     }
     search?.addEventListener('input', change);
@@ -1375,6 +1407,7 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
       sort = sortSel.value;
       applySort();
       change();
+      track('catalogue_sorted', { sort: sort || 'catalogue', line });
     });
     root.querySelector('[data-mat-clear]')?.addEventListener('click', () => {
       mats = new Set();
@@ -1406,6 +1439,7 @@ const allLabel = (line: { id: string; name: string }) => (line.id === 'api' ? 'A
     moreBtn?.addEventListener('click', () => {
       expanded = true;
       apply();
+      track('catalogue_show_all', { line, group: group || undefined });
     });
 
     // Opening an item records the view it was opened from, for the item

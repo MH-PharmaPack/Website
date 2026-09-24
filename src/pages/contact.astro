@@ -286,7 +286,7 @@ const svg = {
 
               <div class="rfq-captcha" data-rfq-captcha></div>
 
-              <div class="rfq-alert" role="alert" data-rfq-error hidden>
+              <div class="rfq-alert ph-no-capture" role="alert" data-rfq-error hidden>
                 <p class="rfq-alert-h" data-rfq-error-msg>We could not send your enquiry just now.</p>
                 <p>Everything you typed is still here. Try again, or send the same enquiry by email.</p>
                 <div class="rfq-alert-acts">
@@ -306,7 +306,7 @@ const svg = {
                 </p>
               </div>
 
-              <div class="rfq-alert rfq-alert-info" role="status" data-rfq-handoff hidden>
+              <div class="rfq-alert rfq-alert-info ph-no-capture" role="status" data-rfq-handoff hidden>
                 <p class="rfq-alert-h">Your email app should now be open.</p>
                 <p>
                   The enquiry is written out in a new email to {SALES_EMAIL}. Press send there and it reaches
@@ -325,7 +325,10 @@ const svg = {
           </div>
 
           <!-- Sent -->
-          <div class="rfq-card rfq-done" data-rfq-done hidden>
+          <!-- ph-no-capture here and on the two alerts above: they repeat the
+               buyer's details (the summary, and links carrying the whole
+               enquiry), so session recordings leave them out entirely. -->
+          <div class="rfq-card rfq-done ph-no-capture" data-rfq-done hidden>
             <span class="rfq-done-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d={svg.tick} stroke-linecap="round" stroke-linejoin="round" /></svg>
             </span>

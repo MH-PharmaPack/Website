@@ -1,0 +1,122 @@
+---
+// The cookie question (client decision 2026-09-24: recordings, with consent).
+// One small card, asked once, never in the way:
+//   - it appears only after PostHog has loaded (late, when the browser is
+//     idle), and on the home page only after the intro has docked;
+//   - it is fixed-position, so nothing on the page moves (no layout shift);
+//   - on phones it sits above the WhatsApp / Call / Quote pill, on desktop in
+//     the bottom-left corner, lifted clear of the enquiry bar when that shows;
+//   - ignoring it is fine: the visitor is counted without cookies either way
+//     (src/scripts/analytics.ts), so "No thanks" is a real choice, not a
+//     penalty. The footer's "Cookie settings" reopens it.
+// Rendered only when a PostHog key is set.
+import { POSTHOG_KEY, withBase } from '../config';
+---
+
+{
+  POSTHOG_KEY && (
+    <div class="consent" data-consent hidden role="region" aria-label="Cookie choice">
+      <p class="consent-text">
+        May we use cookies to see how this site is used, including recordings of visits? Anything
+        typed into forms stays hidden.{' '}
+        <a href={withBase('/privacy#analytics')}>Privacy policy</a>
+      </p>
+      <div class="consent-actions">
+        <button type="button" class="btn btn-primary consent-btn" data-consent-yes>Allow</button>
+        <button type="button" class="btn btn-secondary consent-btn" data-consent-no>No thanks</button>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  import { consentStatus, setConsent } from '../scripts/analytics';
+
+  const box = document.querySelector<HTMLElement>('[data-consent]');
+  if (box) {
+    const show = () => {
+      box.hidden = false;
+    };
+    const hide = () => {
+      box.hidden = true;
+    };
+    // Not over the home page's intro: wait for it to dock, then a beat more
+    // so the card does not land during the logo's flight.
+    const afterIntro = (fn: () => void) => {
+      const pending = document.documentElement.classList.contains('intro-pending') && !(window as { __mhIntroDone?: boolean }).__mhIntroDone;
+      if (!pending) return fn();
+      addEventListener('mh:intro-done', () => setTimeout(fn, 2200), { once: true });
+    };
+    addEventListener('mh:analytics-ready', () => {
+      if (consentStatus() === 'pending') afterIntro(show);
+    });
+    addEventListener('mh:consent-open', show);
+    box.querySelector('[data-consent-yes]')?.addEventListener('click', () => {
+      setConsent(true);
+      hide();
+    });
+    box.querySelector('[data-consent-no]')?.addEventListener('click', () => {
+      setConsent(false);
+      hide();
+    });
+  }
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 60;
+    left: 0.75rem;
+    right: 0.75rem;
+    /* Above the phone's quick-action pill (44px buttons, 0.7rem gap). */
+    bottom: calc(env(safe-area-inset-bottom) + 5.4rem);
+    padding: 1rem 1.1rem;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: 0.25rem;
+    box-shadow: 0 18px 40px -18px rgba(38, 48, 61, 0.45);
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent-text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-steel-deep);
+  }
+  .consent-text a {
+    color: var(--color-copper-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+  }
+  .consent-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.85rem;
+  }
+  .consent-btn {
+    flex: 1;
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    font-size: 0.875rem;
+  }
+  /* The enquiry bar takes the bottom of the screen when it shows (and hides
+     the pill); the card keeps the same clearance above it. */
+  @media (min-width: 768px) {
+    .consent {
+      left: 1.5rem;
+      right: auto;
+      bottom: 1.5rem;
+      max-width: 24rem;
+    }
+    :global(html.has-enquiry) .consent {
+      bottom: 6rem;
+    }
+    .consent-btn {
+      flex: 0 0 auto;
+    }
+  }
+</style>

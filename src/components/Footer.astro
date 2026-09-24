@@ -16,6 +16,7 @@ import {
   MAPS_HREF,
   MAP_EMBED_SRC,
   LINKEDIN_URL,
+  POSTHOG_KEY,
   withBase,
 } from '../config';
 
@@ -59,6 +60,21 @@ const year = new Date().getFullYear();
               Privacy Policy
             </a>
           </li>
+          {
+            /* Reopens the cookie question (src/components/ConsentBanner.astro).
+               Only there when analytics are switched on. */
+            POSTHOG_KEY && (
+              <li>
+                <button
+                  type="button"
+                  class="text-sm font-medium text-steel-deep transition-colors hover:text-ink"
+                  onclick="dispatchEvent(new Event('mh:consent-open'))"
+                >
+                  Cookie settings
+                </button>
+              </li>
+            )
+          }
         </ul>
       </nav>
 

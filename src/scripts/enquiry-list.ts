@@ -6,8 +6,12 @@
 // Storage is a convenience, not a dependency: private modes and blocked
 // storage throw, and then the list still works for the current page from
 // memory, it just does not survive a reload.
+//
+// Analytics (src/scripts/analytics.ts) hear which items are added and
+// removed, and how the list is sent; never quantities or anything typed.
 
 import { SALES_EMAIL, WHATSAPP, withBase } from '../config';
+import { track } from './analytics';
 
 export interface EnquiryItem {
   slug: string;
@@ -99,13 +103,21 @@ export function toggle(item: Omit<EnquiryItem, 'qty' | 'unit'>): boolean {
   const added = !has(s, item.slug);
   s.items = added ? [...s.items, { ...item, qty: '', unit: '' }] : s.items.filter((i) => i.slug !== item.slug);
   save(s);
+  track(added ? 'enquiry_item_added' : 'enquiry_item_removed', {
+    item: item.slug,
+    item_line: item.line,
+    item_category: item.category,
+    list_size: s.items.length,
+  });
   return added;
 }
 
 export function remove(slug: string): void {
   const s = load();
+  const gone = s.items.find((i) => i.slug === slug);
   s.items = s.items.filter((i) => i.slug !== slug);
   save(s);
+  if (gone) track('enquiry_item_removed', { item: slug, item_line: gone.line, list_size: s.items.length });
 }
 
 export function setQty(slug: string, qty: string, unit?: string): void {
@@ -129,7 +141,9 @@ export function setField(field: 'market' | 'timeline', value: string): void {
 }
 
 export function clear(): void {
+  const had = load().items.length;
   save(blank());
+  if (had) track('enquiry_list_cleared', { list_size: had });
 }
 
 // ---- The message ---------------------------------------------------------

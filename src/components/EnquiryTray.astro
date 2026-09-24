@@ -454,6 +454,7 @@ import ChipField from './ChipField.astro';
   } from '../scripts/enquiry-list';
   import { numericOnly, formatQuantity } from '../scripts/numeric';
   import { initChipField } from '../scripts/chip-field';
+  import { track } from '../scripts/analytics';
   import { COUNTRY_GROUPS } from '../data/countries';
   import { UNITS } from '../data/rfq';
 
@@ -614,8 +615,26 @@ import ChipField from './ChipField.astro';
     }
   });
 
-  document.querySelector('[data-enq-open]')?.addEventListener('click', () => dialog?.showModal());
+  document.querySelector('[data-enq-open]')?.addEventListener('click', () => {
+    dialog?.showModal();
+    track('enquiry_list_opened', { list_size: load().items.length });
+  });
   document.querySelector('[data-enq-close]')?.addEventListener('click', () => dialog?.close());
+
+  // How the list is sent: the moment a shortlist becomes an enquiry.
+  const sent = (via: string) => () => {
+    const s = load();
+    track('enquiry_list_sent', {
+      via,
+      list_size: s.items.length,
+      items: s.items.map((i) => i.slug),
+      has_market: Boolean(s.market),
+      has_timeline: Boolean(s.timeline),
+    });
+  };
+  mail?.addEventListener('click', sent('email'));
+  wa?.addEventListener('click', sent('whatsapp'));
+  rfq?.addEventListener('click', sent('quote_form'));
   // A click on the backdrop lands on the <dialog> element itself.
   dialog?.addEventListener('click', (e) => {
     if (e.target === dialog) dialog.close();
@@ -628,6 +647,7 @@ import ChipField from './ChipField.astro';
   copyBtn?.addEventListener('click', async () => {
     try {
       await navigator.clipboard.writeText(plainText(load()));
+      sent('copied')();
       copyBtn.textContent = 'Copied';
     } catch {
       copyBtn.textContent = 'Copy failed: use Email instead';

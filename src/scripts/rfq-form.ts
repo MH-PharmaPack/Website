@@ -28,6 +28,7 @@ import { initChipField } from './chip-field';
 import { REGULATORY, CUSTOM_ICON } from '../data/regulatory';
 import { COUNTRY_GROUPS } from '../data/countries';
 import { UNITS, DEFAULT_UNIT, LINE_HINTS } from '../data/rfq';
+import { track } from './analytics';
 import { withBase } from '../config';
 
 type LineId = keyof typeof DEFAULT_UNIT;
@@ -110,6 +111,23 @@ export function initRfqForm(form: HTMLFormElement): void {
   const lineIdOfName = (name: string) => lineBoxes.find((b) => b.dataset.name === name)?.value as LineId | undefined;
   const chosenLines = () => lineBoxes.filter((b) => b.checked);
   const chosenTimeline = () => timelineRadios.find((r) => r.checked)?.value ?? '';
+
+  // Analytics (src/scripts/analytics.ts): what an enquiry asks for and where
+  // it is going, never who is asking. No name, company, email, phone number,
+  // and none of the free-text fields; only whether they were filled.
+  const enquiryFacts = () => ({
+    lines: chosenLines().map((b) => b.dataset.name),
+    item_count: items.length,
+    items: items.map((it) => it.slug),
+    markets: market.get(),
+    regulatory: reg.get(),
+    timeline: chosenTimeline() || undefined,
+    has_product: Boolean(text.product.value.trim()),
+    has_spec: Boolean(text.spec.value.trim()),
+    has_phone: Boolean(text.phone.value.trim()),
+    arrived_with_list: fromList,
+  });
+  form.addEventListener('focusin', () => track('quote_form_started', { arrived_with_list: fromList, item_count: items.length }), { once: true });
 
   // ---- Line-aware hints and units ---------------------------------------------
   function applyLineHints() {
@@ -376,7 +394,11 @@ export function initRfqForm(form: HTMLFormElement): void {
       }
     }
     if (many || one || search || line) {
-      history.replaceState(history.state, '', location.pathname + location.hash);
+      // Drop only the form's own keys: campaign tags (utm_source and the
+      // rest) stay for analytics, which read them once the page has settled.
+      for (const k of ['items', 'item', 'q', 'line']) params.delete(k);
+      const rest = params.toString();
+      history.replaceState(history.state, '', `${location.pathname}${rest ? `?${rest}` : ''}${location.hash}`);
       saveDraft();
     }
     renderItems();
@@ -654,6 +676,7 @@ export function initRfqForm(form: HTMLFormElement): void {
       const again = q<HTMLAnchorElement>('[data-rfq-handoff-mail]', handoffBox);
       if (again) again.href = href;
       handoffBox.hidden = false;
+      track('quote_submitted', { ...enquiryFacts(), via: 'email_app' });
       window.location.href = href;
       return;
     }
@@ -662,9 +685,11 @@ export function initRfqForm(form: HTMLFormElement): void {
     try {
       const token = sitekey ? await captchaToken() : '';
       const res = await post(ps, token);
+      track('quote_submitted', { ...enquiryFacts(), via: 'form', confirmation_sent: res.confirmation });
       clearDraft();
       showDone(ps, res.confirmation);
     } catch (err) {
+      track('quote_send_failed', { reason: err instanceof SendError ? err.message : 'network' });
       showError(err instanceof SendError ? err.message : 'network', ps);
       if (widgetId !== undefined) void loadTurnstile().then((ts) => ts.reset(widgetId));
     } finally {
