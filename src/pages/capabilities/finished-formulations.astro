@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import LinePage from '../../components/LinePage.astro';
 import { sourcingService } from '../../lib/seo';
 import { lineById } from '../../data/lines';
+import { ITEMS, placeOf, scopeHref } from '../../lib/catalogue';
 
 // Finished Formulations line page. See src/components/LinePage.astro for
 // where every section's copy comes from. The intro is the line's blurb from
@@ -13,6 +14,7 @@ import { lineById } from '../../data/lines';
 // [NEEDS: confirm headline and list]
 const line = lineById('finished');
 const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const ffCount = ITEMS.filter((i) => placeOf(i).line.id === 'finished').length;
 ---
 
 <Base
@@ -39,7 +41,8 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
       'The destination market and what registration needs, such as a CTD or ACTD dossier or a CoPP',
       'Your timeline',
     ]}
-    categoriesNote="Finished formulation listings are being added to the catalogue."
+    categoriesNote={`${ffCount} finished formulations are listed in the catalogue so far, each with its dosage form and strengths, and more are being added.`}
+    catalogue={{ href: scopeHref({ line: 'finished' }), label: `Browse the ${ffCount} formulations` }}
     ctaTitle="Looking for a specific formulation?"
     ctaLede="Tell us the product, the dosage form and the market."
   />

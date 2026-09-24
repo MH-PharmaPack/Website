@@ -1,4 +1,5 @@
-// The sourcing catalogue: packaging and APIs MH can source through partner plants.
+// The sourcing catalogue: packaging, APIs and finished formulations MH can
+// source through partner plants.
 // Data supplied by the manufacturing partners with permission; no partner is
 // named anywhere on the site or in this repo, and their internal product
 // codes are not carried over. The PET bottle range and its two caps come from
@@ -23,9 +24,8 @@
 //
 // To add products later: append entries here and drop the image into
 // src/assets/catalogue/ under the same filename. `keywords` are extra
-// search-only terms (industry synonyms), never displayed. Finished
-// Formulations has its groups defined and no items yet; the catalogue shows
-// it as "coming soon" until the first item names one of its groups.
+// search-only terms (industry synonyms), never displayed. A line with no
+// items shows as "coming soon" until the first item names one of its groups.
 //
 // APIs are not written by hand here. They come from the client's product list
 // via tools/api-art: apis.json lists them, fetch.mjs takes each one's
@@ -34,9 +34,19 @@
 // (api-<slug>.svg, `structure: true`) in its own colour (`tone`) and writes
 // src/data/api-items.json, appended to CATALOGUE below. To add an API, add it
 // to apis.json and run the two scripts.
+//
+// Finished formulations come the same way, from tools/ff-art: products.json
+// (generic names, strengths and dosage forms, curated from partner lists with
+// no partner, brand or code carried over), fetch.mjs (each ingredient's
+// structure and WHO ATC class from the same registry) and render.mjs, which
+// draws the tiles, files each product into a group and therapy type, and
+// writes src/data/ff-items.json plus the groups and types in
+// src/data/ff-taxonomy.json that the Finished Formulations line uses below.
 
 import { lineById } from './lines';
 import apiItems from './api-items.json';
+import ffItems from './ff-items.json';
+import ffTaxonomy from './ff-taxonomy.json';
 
 export interface CatalogueType {
   id: string;
@@ -140,15 +150,12 @@ export const TAXONOMY: CatalogueLine[] = [
   {
     ...line('finished'),
     // Formulation and Finished Goods merged (2026-09-23): dosage forms, plus
-    // the antibiotic lines that run in segregated plants.
-    groups: [
-      { id: 'injectables', name: 'Injectables' },
-      { id: 'tablets-capsules', name: 'Tablets & Capsules' },
-      { id: 'liquids', name: 'Liquids' },
-      { id: 'dry-powders', name: 'Dry Powders' },
-      { id: 'cephalosporins', name: 'Cephalosporins' },
-      { id: 'beta-lactams', name: 'Beta-lactams' },
-    ],
+    // the antibiotic lines that run in segregated plants. Since the first
+    // listings (2026-09-24) the groups come from tools/ff-art/render.mjs:
+    // the six above in that order, plus Topicals; Injectables and Tablets &
+    // Capsules are typed by therapy area, the two antibiotic groups by
+    // injections and oral.
+    groups: ffTaxonomy as CatalogueGroup[],
   },
 ];
 
@@ -173,20 +180,31 @@ export interface CatalogueItem {
   /** Photo attribution, printed under the image on the item page (openly
    *  licensed photographs only; partner images carry none) */
   credit?: string;
-  /** True when the image is the molecule's structural formula (APIs) */
+  /** True when the image is a structural formula: the molecule's own (APIs)
+   *  or the main ingredient's (finished formulations) */
   structure?: boolean;
   /** When the drawing is of a component rather than the item itself
-   *  (a mixture such as polymyxin B sulphate), what it shows */
+   *  (a mixture such as polymyxin B sulphate, or the main ingredient of a
+   *  finished formulation), what it shows */
   structureOf?: string;
-  /** The tile's colours: edge tint, glow, ink (structure and overlaid
-   *  text, at least 7:1 on bg) and a mid tone */
+  /** Generated tiles (APIs, finished formulations): edge tint, glow, ink
+   *  (drawing and overlaid text, at least 7:1 on bg) and a mid tone */
   tone?: { bg: string; glow: string; ink: string; mid: string };
   /** Controlled or restricted in many markets (anabolic steroids,
-   *  mifepristone): the item page states it goes to licensed buyers only */
+   *  mifepristone, scheduled injectables): the item page states it goes to
+   *  licensed buyers only */
   restricted?: boolean;
+  /** Finished formulations: the dosage form ("Powder for injection"), shown
+   *  on the tile; the tile's drawing is the dosage form itself when the
+   *  main ingredient has no structure to draw */
+  dosageForm?: string;
+  /** Finished formulations: the therapy area in short ("Infections"), the
+   *  tile's label; the filter uses the full name */
+  therapy?: string;
 }
 
 const API_ITEMS = apiItems as CatalogueItem[];
+const FF_ITEMS = ffItems as CatalogueItem[];
 
 // Listed in the order they were added; src/lib/catalogue.ts sorts them into
 // taxonomy order for display.
@@ -1333,4 +1351,6 @@ export const CATALOGUE: CatalogueItem[] = [
   },
   // The API range, generated by tools/api-art (see API_ITEMS above).
   ...API_ITEMS,
+  // Finished formulations, generated by tools/ff-art.
+  ...FF_ITEMS,
 ];

@@ -1,0 +1,8642 @@
+[
+ {
+  "name": "Ceftriaxone for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-for-injection.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfe4ed",
+   "glow": "#e2f4f8",
+   "ink": "#12424e",
+   "mid": "#4aa0b5"
+  },
+  "keywords": "ceftriaxone sodium ceftriaxone Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "125 mg, 250 mg, 500 mg, 1 g, 2 g"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with lidocaine injection 1% and sterile water for injection"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftriaxone and Sulbactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-and-sulbactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfcfed",
+   "glow": "#e2eaf8",
+   "ink": "#12274e",
+   "mid": "#4a6fb5"
+  },
+  "keywords": "ceftriaxone sulbactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "375 mg, 750 mg, 1 g, 1.5 g"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with lidocaine injection 1%"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftriaxone and Tazobactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfdced",
+   "glow": "#e2f0f8",
+   "ink": "#12384e",
+   "mid": "#4a8db5"
+  },
+  "keywords": "ceftriaxone tazobactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "281.25 mg, 562.5 mg, 1.125 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefotaxime for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefotaxime-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefotaxime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc7ed",
+   "glow": "#e2e6f8",
+   "ink": "#121d4e",
+   "mid": "#4a5db5"
+  },
+  "keywords": "cefotaxime sodium cefotaxime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD01, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefotaxime and Sulbactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefotaxime-and-sulbactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefotaxime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd4ed",
+   "glow": "#e2ecf8",
+   "ink": "#122e4e",
+   "mid": "#4a7bb5"
+  },
+  "keywords": "cefotaxime sulbactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1.5 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD01, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftazidime for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftazidime-for-injection.svg",
+  "structure": true,
+  "structureOf": "ceftazidime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfe1ed",
+   "glow": "#e2f2f8",
+   "ink": "#123f4e",
+   "mid": "#4a99b5"
+  },
+  "keywords": "ceftazidime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD02, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftazidime and Tazobactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftazidime-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "ceftazidime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfcced",
+   "glow": "#e2e8f8",
+   "ink": "#12234e",
+   "mid": "#4a68b5"
+  },
+  "keywords": "ceftazidime tazobactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "281.25 mg, 562.5 mg, 1.125 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD02, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefepime for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefepime-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefepime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd9ed",
+   "glow": "#e2eef8",
+   "ink": "#12344e",
+   "mid": "#4a86b5"
+  },
+  "keywords": "cefepime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg, 1 g"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sterile water for injection"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DE01, Fourth-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefepime and Tazobactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefepime-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefepime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc4ed",
+   "glow": "#e2e4f8",
+   "ink": "#12194e",
+   "mid": "#4a55b5"
+  },
+  "keywords": "cefepime tazobactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "281.25 mg, 562.5 mg, 1.125 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DE01, Fourth-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefuroxime for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefuroxime-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefuroxime",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd1ed",
+   "glow": "#e2ebf8",
+   "ink": "#122a4e",
+   "mid": "#4a73b5"
+  },
+  "keywords": "cefuroxime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "750 mg, 1.5 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DC02, Second-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefoperazone for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefoperazone-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefoperazone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfdeed",
+   "glow": "#e2f1f8",
+   "ink": "#123b4e",
+   "mid": "#4a91b5"
+  },
+  "keywords": "cefoperazone Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD12, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefoperazone and Sulbactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefoperazone-and-sulbactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefoperazone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc9ed",
+   "glow": "#e2e7f8",
+   "ink": "#121f4e",
+   "mid": "#4a61b5"
+  },
+  "keywords": "cefoperazone sulbactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "1 g, 1.5 g, 2 g, 3 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD12, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefoperazone and Tazobactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefoperazone-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefoperazone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd6ed",
+   "glow": "#e2edf8",
+   "ink": "#12304e",
+   "mid": "#4a7fb5"
+  },
+  "keywords": "cefoperazone tazobactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1.125 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD12, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefazolin for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefazolin-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefazolin",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfe3ed",
+   "glow": "#e2f3f8",
+   "ink": "#12414e",
+   "mid": "#4a9db5"
+  },
+  "keywords": "cefazolin Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DB04, First-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefpirome for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefpirome-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefpirome",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfceed",
+   "glow": "#e2e9f8",
+   "ink": "#12264e",
+   "mid": "#4a6cb5"
+  },
+  "keywords": "cefpirome Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DE02, Fourth-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefpirome and Sulbactam for Injection",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-cefpirome-and-sulbactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "cefpirome",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfdbed",
+   "glow": "#e2eff8",
+   "ink": "#12374e",
+   "mid": "#4a8ab5"
+  },
+  "keywords": "cefpirome sulbactam Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "1.5 g, 3 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DE02, Fourth-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefixime Dispersible Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefixime-dispersible-tablets.svg",
+  "structure": true,
+  "structureOf": "cefixime",
+  "dosageForm": "Dispersible tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc6ed",
+   "glow": "#e2e5f8",
+   "ink": "#121b4e",
+   "mid": "#4a5ab5"
+  },
+  "keywords": "cefixime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Dispersible tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD08, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefixime and Lactic Acid Bacillus Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefixime-and-lactic-acid-bacillus-tablets.svg",
+  "structure": true,
+  "structureOf": "cefixime",
+  "dosageForm": "Tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd3ed",
+   "glow": "#e2ecf8",
+   "ink": "#122c4e",
+   "mid": "#4a78b5"
+  },
+  "keywords": "probiotic cefixime lactic acid bacillus Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD08, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefixime and Ofloxacin Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefixime-and-ofloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "cefixime",
+  "dosageForm": "Tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfe0ed",
+   "glow": "#e2f2f8",
+   "ink": "#123d4e",
+   "mid": "#4a96b5"
+  },
+  "keywords": "cefixime ofloxacin Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg + 200 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD08, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefpodoxime Dispersible Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefpodoxime-dispersible-tablets.svg",
+  "structure": true,
+  "structureOf": "cefpodoxime",
+  "dosageForm": "Dispersible tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfcbed",
+   "glow": "#e2e8f8",
+   "ink": "#12224e",
+   "mid": "#4a65b5"
+  },
+  "keywords": "cefpodoxime proxetil cefpodoxime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Dispersible tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD13, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefpodoxime and Potassium Clavulanate Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefpodoxime-and-potassium-clavulanate-tablets.svg",
+  "structure": true,
+  "structureOf": "cefpodoxime",
+  "dosageForm": "Tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd8ed",
+   "glow": "#e2eef8",
+   "ink": "#12334e",
+   "mid": "#4a83b5"
+  },
+  "keywords": "clavulanic acid cefpodoxime clavulanic acid Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg + 125 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD13, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefpodoxime and Ofloxacin Tablets",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefpodoxime-and-ofloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "cefpodoxime",
+  "dosageForm": "Tablets",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc3ed",
+   "glow": "#e2e4f8",
+   "ink": "#12174e",
+   "mid": "#4a53b5"
+  },
+  "keywords": "cefpodoxime ofloxacin Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg + 200 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD13, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Cefixime Oral Suspension",
+  "group": "cephalosporins",
+  "type": "ceph-oral",
+  "image": "ff-cefixime-oral-suspension.svg",
+  "structure": true,
+  "structureOf": "cefixime",
+  "dosageForm": "Oral suspension",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd0ed",
+   "glow": "#e2eaf8",
+   "ink": "#12284e",
+   "mid": "#4a71b5"
+  },
+  "keywords": "dry syrup cefixime Cephalosporins",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD08, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Meropenem for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-meropenem-for-injection.svg",
+  "structure": true,
+  "structureOf": "meropenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#bfc1ed",
+   "glow": "#e2e3f8",
+   "ink": "#12144e",
+   "mid": "#4a4eb5"
+  },
+  "keywords": "meropenem Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg, 1 g, 2 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DH02, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Meropenem and Sulbactam for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-meropenem-and-sulbactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "meropenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#cebfed",
+   "glow": "#e9e2f8",
+   "ink": "#25124e",
+   "mid": "#6c4ab5"
+  },
+  "keywords": "meropenem sulbactam Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1.5 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DH02, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Meropenem and Tazobactam for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-meropenem-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "meropenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#c4bfed",
+   "glow": "#e4e2f8",
+   "ink": "#18124e",
+   "mid": "#554ab5"
+  },
+  "keywords": "meropenem tazobactam Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1.125 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DH02, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Imipenem and Cilastatin for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-imipenem-and-cilastatin-for-injection.svg",
+  "structure": true,
+  "structureOf": "imipenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#d4bfed",
+   "glow": "#ece2f8",
+   "ink": "#2d124e",
+   "mid": "#7a4ab5"
+  },
+  "keywords": "imipenem cilastatin Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g, 2 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DH51, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Doripenem for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-doripenem-for-injection.svg",
+  "structure": true,
+  "structureOf": "doripenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#cabfed",
+   "glow": "#e7e2f8",
+   "ink": "#20124e",
+   "mid": "#634ab5"
+  },
+  "keywords": "doripenem Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DH04, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Ertapenem for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-ertapenem-for-injection.svg",
+  "structure": true,
+  "structureOf": "ertapenem",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#c0bfed",
+   "glow": "#e2e2f8",
+   "ink": "#13124e",
+   "mid": "#4c4ab5"
+  },
+  "keywords": "ertapenem sodium ertapenem Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DH03, Carbapenems"
+   }
+  ]
+ },
+ {
+  "name": "Piperacillin and Tazobactam for Injection",
+  "group": "beta-lactams",
+  "type": "bl-injections",
+  "image": "ff-piperacillin-and-tazobactam-for-injection.svg",
+  "structure": true,
+  "structureOf": "piperacillin",
+  "dosageForm": "Powder for injection",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#d0bfed",
+   "glow": "#eae2f8",
+   "ink": "#29124e",
+   "mid": "#714ab5"
+  },
+  "keywords": "piperacillin tazobactam Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01CA12, Penicillins with extended spectrum"
+   }
+  ]
+ },
+ {
+  "name": "Amoxicillin and Potassium Clavulanate Tablets",
+  "group": "beta-lactams",
+  "type": "bl-oral",
+  "image": "ff-amoxicillin-and-potassium-clavulanate-tablets.svg",
+  "structure": true,
+  "structureOf": "amoxicillin",
+  "dosageForm": "Tablets",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#c6bfed",
+   "glow": "#e5e2f8",
+   "ink": "#1c124e",
+   "mid": "#5a4ab5"
+  },
+  "keywords": "amoxycillin co-amoxiclav clavulanic acid amoxicillin clavulanic acid Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg + 125 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01CA04, Penicillins with extended spectrum"
+   }
+  ]
+ },
+ {
+  "name": "Amoxicillin and Potassium Clavulanate Oral Suspension",
+  "group": "beta-lactams",
+  "type": "bl-oral",
+  "image": "ff-amoxicillin-and-potassium-clavulanate-oral-suspension.svg",
+  "structure": true,
+  "structureOf": "amoxicillin",
+  "dosageForm": "Oral suspension",
+  "therapy": "Beta-lactam",
+  "tone": {
+   "bg": "#d6bfed",
+   "glow": "#ede2f8",
+   "ink": "#31124e",
+   "mid": "#804ab5"
+  },
+  "keywords": "amoxycillin co-amoxiclav dry syrup amoxicillin clavulanic acid Beta-lactams",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg + 28.5 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01CA04, Penicillins with extended spectrum"
+   }
+  ]
+ },
+ {
+  "name": "Spectinomycin for Injectable Suspension",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-spectinomycin-for-injectable-suspension.svg",
+  "structure": true,
+  "structureOf": "spectinomycin",
+  "dosageForm": "Powder for injectable suspension",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedcd",
+   "glow": "#e2f8e9",
+   "ink": "#124e24",
+   "mid": "#4ab56a"
+  },
+  "keywords": "spectinomycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injectable suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "2 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01XX04, Other antibacterials"
+   }
+  ]
+ },
+ {
+  "name": "Vancomycin for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-vancomycin-for-injection.svg",
+  "structure": true,
+  "structureOf": "vancomycin",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfeded",
+   "glow": "#e2f8f8",
+   "ink": "#124e4e",
+   "mid": "#4ab5b5"
+  },
+  "keywords": "vancomycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01XA01, Glycopeptide antibacterials"
+   }
+  ]
+ },
+ {
+  "name": "Teicoplanin for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-teicoplanin-for-injection.svg",
+  "structure": true,
+  "structureOf": "teicoplanin",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd9",
+   "glow": "#e2f8ef",
+   "ink": "#124e35",
+   "mid": "#4ab587"
+  },
+  "keywords": "teicoplanin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "400 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01XA02, Glycopeptide antibacterials"
+   }
+  ]
+ },
+ {
+  "name": "Tigecycline for Infusion",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-tigecycline-for-infusion.svg",
+  "structure": true,
+  "structureOf": "tigecycline",
+  "dosageForm": "Powder for infusion",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe1ed",
+   "glow": "#e2f2f8",
+   "ink": "#123e4e",
+   "mid": "#4a98b5"
+  },
+  "keywords": "tigecycline Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for infusion"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01AA12, Tetracyclines"
+   }
+  ]
+ },
+ {
+  "name": "Amikacin Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-amikacin-injection.svg",
+  "structure": true,
+  "structureOf": "amikacin",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede6",
+   "glow": "#e2f8f5",
+   "ink": "#124e45",
+   "mid": "#4ab5a3"
+  },
+  "keywords": "amikacin sulphate sulfate amikacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg/2 ml, 250 mg/2 ml, 500 mg/2 ml, 250 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01GB06, Other aminoglycosides"
+   }
+  ]
+ },
+ {
+  "name": "Netilmicin Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-netilmicin-injection.svg",
+  "structure": true,
+  "structureOf": "netilmicin",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd2",
+   "glow": "#e2f8eb",
+   "ink": "#124e2b",
+   "mid": "#4ab575"
+  },
+  "keywords": "netilmicin sulphate sulfate netilmicin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01GB07, Other aminoglycosides"
+   }
+  ]
+ },
+ {
+  "name": "Gentamicin Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-gentamicin-injection.svg",
+  "structure": true,
+  "structureOf": "gentamicin",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe8ed",
+   "glow": "#e2f6f8",
+   "ink": "#12484e",
+   "mid": "#4aaab5"
+  },
+  "keywords": "gentamicin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01GB03, Other aminoglycosides"
+   }
+  ]
+ },
+ {
+  "name": "Lincomycin Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-lincomycin-injection.svg",
+  "structure": true,
+  "structureOf": "lincomycin",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedde",
+   "glow": "#e2f8f1",
+   "ink": "#124e3b",
+   "mid": "#4ab592"
+  },
+  "keywords": "lincomycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "600 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FF02, Lincosamides"
+   }
+  ]
+ },
+ {
+  "name": "Clindamycin Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-clindamycin-injection.svg",
+  "structure": true,
+  "structureOf": "clindamycin",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfdced",
+   "glow": "#e2f0f8",
+   "ink": "#12384e",
+   "mid": "#4a8db5"
+  },
+  "keywords": "clindamycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "600 mg/4 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FF01, Lincosamides"
+   }
+  ]
+ },
+ {
+  "name": "Clarithromycin for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-clarithromycin-for-injection.svg",
+  "structure": true,
+  "structureOf": "clarithromycin",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedea",
+   "glow": "#e2f8f7",
+   "ink": "#124e4b",
+   "mid": "#4ab5ae"
+  },
+  "keywords": "clarithromycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FA09, Macrolides"
+   }
+  ]
+ },
+ {
+  "name": "Acyclovir for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-acyclovir-for-injection.svg",
+  "structure": true,
+  "structureOf": "acyclovir",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd6",
+   "glow": "#e2f8ed",
+   "ink": "#124e31",
+   "mid": "#4ab580"
+  },
+  "keywords": "aciclovir acyclovir Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sterile water for injection"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J05AB01, Nucleosides and nucleotides excl. reverse transcriptase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Ganciclovir for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-ganciclovir-for-injection.svg",
+  "structure": true,
+  "structureOf": "ganciclovir",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe4ed",
+   "glow": "#e2f4f8",
+   "ink": "#12424e",
+   "mid": "#4a9fb5"
+  },
+  "keywords": "ganciclovir Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J05AB06, Nucleosides and nucleotides excl. reverse transcriptase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Voriconazole for Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-voriconazole-for-injection.svg",
+  "structure": true,
+  "structureOf": "voriconazole",
+  "dosageForm": "Powder for injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede3",
+   "glow": "#e2f8f3",
+   "ink": "#124e41",
+   "mid": "#4ab59d"
+  },
+  "keywords": "voriconazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J02AC03, Triazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Artemether Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-artemether-injection.svg",
+  "structure": true,
+  "structureOf": "artemether",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedcf",
+   "glow": "#e2f8ea",
+   "ink": "#124e27",
+   "mid": "#4ab56e"
+  },
+  "keywords": "artemether Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "80 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P01BE02, Artemisinin and derivatives, plain"
+   }
+  ]
+ },
+ {
+  "name": "Meglumine Antimoniate Injection",
+  "group": "injectables",
+  "type": "inj-anti-infectives",
+  "image": "ff-meglumine-antimoniate-injection.svg",
+  "structure": true,
+  "structureOf": "meglumine antimoniate",
+  "dosageForm": "Injection",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfebed",
+   "glow": "#e2f7f8",
+   "ink": "#124c4e",
+   "mid": "#4ab1b5"
+  },
+  "keywords": "leishmaniasis meglumine antimoniate Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1.5 g/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P01CB01, Antimony compounds"
+   }
+  ]
+ },
+ {
+  "name": "Esomeprazole for Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-esomeprazole-for-injection.svg",
+  "structure": true,
+  "structureOf": "esomeprazole",
+  "dosageForm": "Powder for injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#ecedbf",
+   "glow": "#f7f8e2",
+   "ink": "#4c4e12",
+   "mid": "#b1b54a"
+  },
+  "keywords": "esomeprazole sodium lyophilized esomeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sodium chloride injection 0.9%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC05, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole for Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-pantoprazole-for-injection.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Powder for injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d9edbf",
+   "glow": "#eef8e2",
+   "ink": "#344e12",
+   "mid": "#85b54a"
+  },
+  "keywords": "pantoprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sodium chloride injection 0.9%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Omeprazole for Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-omeprazole-for-injection.svg",
+  "structure": true,
+  "structureOf": "omeprazole",
+  "dosageForm": "Powder for injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e4edbf",
+   "glow": "#f4f8e2",
+   "ink": "#434e12",
+   "mid": "#a1b54a"
+  },
+  "keywords": "omeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC01, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Rabeprazole for Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-rabeprazole-for-injection.svg",
+  "structure": true,
+  "structureOf": "rabeprazole",
+  "dosageForm": "Powder for injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d2edbf",
+   "glow": "#ebf8e2",
+   "ink": "#2a4e12",
+   "mid": "#74b54a"
+  },
+  "keywords": "rabeprazole sodium rabeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sterile water for injection"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC04, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Famotidine for Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-famotidine-for-injection.svg",
+  "structure": true,
+  "structureOf": "famotidine",
+  "dosageForm": "Powder for injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#ddedbf",
+   "glow": "#f1f8e2",
+   "ink": "#3a4e12",
+   "mid": "#90b54a"
+  },
+  "keywords": "famotidine Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with sodium chloride injection 0.9%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BA03, H<SUB>2</SUB>-receptor antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Ondansetron Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-ondansetron-injection.svg",
+  "structure": true,
+  "structureOf": "ondansetron",
+  "dosageForm": "Injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e9edbf",
+   "glow": "#f6f8e2",
+   "ink": "#494e12",
+   "mid": "#abb54a"
+  },
+  "keywords": "ondansetron Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "2 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A04AA01, Serotonin (5HT3) antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Ramosetron Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-ramosetron-injection.svg",
+  "structure": true,
+  "structureOf": "ramosetron",
+  "dosageForm": "Injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d6edbf",
+   "glow": "#edf8e2",
+   "ink": "#304e12",
+   "mid": "#7fb54a"
+  },
+  "keywords": "ramosetron Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.3 mg/2 ml"
+   }
+  ]
+ },
+ {
+  "name": "Metoclopramide Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-metoclopramide-injection.svg",
+  "structure": true,
+  "structureOf": "metoclopramide",
+  "dosageForm": "Injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e2edbf",
+   "glow": "#f3f8e2",
+   "ink": "#3f4e12",
+   "mid": "#9ab54a"
+  },
+  "keywords": "metoclopramide Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A03FA01, Propulsives"
+   }
+  ]
+ },
+ {
+  "name": "Hyoscine Butylbromide Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-hyoscine-butylbromide-injection.svg",
+  "structure": true,
+  "structureOf": "butylscopolamine",
+  "dosageForm": "Injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#cfedbf",
+   "glow": "#eaf8e2",
+   "ink": "#274e12",
+   "mid": "#6eb54a"
+  },
+  "keywords": "hyoscine butylbromide scopolamine butylbromide butylscopolamine Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A03BB01, Belladonna alkaloids, semisynthetic, quaternary ammonium compounds"
+   }
+  ]
+ },
+ {
+  "name": "Dimenhydrinate Injection",
+  "group": "injectables",
+  "type": "inj-gastro",
+  "image": "ff-dimenhydrinate-injection.svg",
+  "structure": true,
+  "structureOf": "dimenhydrinate",
+  "dosageForm": "Injection",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#daedbf",
+   "glow": "#eff8e2",
+   "ink": "#364e12",
+   "mid": "#89b54a"
+  },
+  "keywords": "dimenhydrinate Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/ml"
+   }
+  ]
+ },
+ {
+  "name": "Cerebroprotein Hydrolysate for Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-cerebroprotein-hydrolysate-for-injection.svg",
+  "dosageForm": "Powder for injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#d5bfed",
+   "glow": "#ece2f8",
+   "ink": "#2e124e",
+   "mid": "#7c4ab5"
+  },
+  "keywords": "cerebroprotein hydrolysate CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "60 mg"
+   }
+  ]
+ },
+ {
+  "name": "Olanzapine for Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-olanzapine-for-injection.svg",
+  "structure": true,
+  "structureOf": "olanzapine",
+  "dosageForm": "Powder for injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e9bfed",
+   "glow": "#f6e2f8",
+   "ink": "#4a124e",
+   "mid": "#ac4ab5"
+  },
+  "keywords": "olanzapine CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AH03, Diazepines, oxazepines, thiazepines and oxepines"
+   }
+  ]
+ },
+ {
+  "name": "Haloperidol Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-haloperidol-injection.svg",
+  "structure": true,
+  "structureOf": "haloperidol",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#ddbfed",
+   "glow": "#f0e2f8",
+   "ink": "#39124e",
+   "mid": "#8e4ab5"
+  },
+  "keywords": "haloperidol CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AD01, Butyrophenone derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Haloperidol Decanoate Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-haloperidol-decanoate-injection.svg",
+  "structure": true,
+  "structureOf": "haloperidol decanoate",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#edbfe9",
+   "glow": "#f8e2f6",
+   "ink": "#4e1249",
+   "mid": "#b54aab"
+  },
+  "keywords": "haloperidol decanoate CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/2 ml"
+   }
+  ]
+ },
+ {
+  "name": "Chlorpromazine Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-chlorpromazine-injection.svg",
+  "structure": true,
+  "structureOf": "chlorpromazine",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e4bfed",
+   "glow": "#f4e2f8",
+   "ink": "#43124e",
+   "mid": "#a14ab5"
+  },
+  "keywords": "chlorpromazine CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "25 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AA01, Phenothiazines with aliphatic side-chain"
+   }
+  ]
+ },
+ {
+  "name": "Flupentixol Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-flupentixol-injection.svg",
+  "structure": true,
+  "structureOf": "flupentixol",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#d8bfed",
+   "glow": "#eee2f8",
+   "ink": "#32124e",
+   "mid": "#834ab5"
+  },
+  "keywords": "flupenthixol flupentixol CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "20 mg/ml, 40 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AF01, Thioxanthene derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Zuclopenthixol Decanoate Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-zuclopenthixol-decanoate-injection.svg",
+  "structure": true,
+  "structureOf": "zuclopenthixol decanoate",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#ecbfed",
+   "glow": "#f8e2f8",
+   "ink": "#4e124e",
+   "mid": "#b44ab5"
+  },
+  "keywords": "zuclopenthixol decanoate CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg/ml"
+   }
+  ]
+ },
+ {
+  "name": "Phenytoin Sodium Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-phenytoin-sodium-injection.svg",
+  "structure": true,
+  "structureOf": "phenytoin",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e0bfed",
+   "glow": "#f2e2f8",
+   "ink": "#3d124e",
+   "mid": "#964ab5"
+  },
+  "keywords": "phenytoin CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "50 mg/ml, 250 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AB02, Hydantoin derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Sodium Valproate Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-sodium-valproate-injection.svg",
+  "structure": true,
+  "structureOf": "valproic acid",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#edbfe6",
+   "glow": "#f8e2f5",
+   "ink": "#4e1245",
+   "mid": "#b54aa4"
+  },
+  "keywords": "valproate sodium valproic acid CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg, 500 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AG01, Fatty acid derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Phenobarbital Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-phenobarbital-injection.svg",
+  "structure": true,
+  "structureOf": "phenobarbital",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#e8bfed",
+   "glow": "#f6e2f8",
+   "ink": "#47124e",
+   "mid": "#a84ab5"
+  },
+  "keywords": "phenobarbitone phenobarbital CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AA02, Barbiturates and derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Diazepam Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-diazepam-injection.svg",
+  "structure": true,
+  "structureOf": "diazepam",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#dbbfed",
+   "glow": "#efe2f8",
+   "ink": "#36124e",
+   "mid": "#8a4ab5"
+  },
+  "keywords": "diazepam CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05BA01, Benzodiazepine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Midazolam Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-midazolam-injection.svg",
+  "structure": true,
+  "structureOf": "midazolam",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#edbfeb",
+   "glow": "#f8e2f7",
+   "ink": "#4e124b",
+   "mid": "#b54aaf"
+  },
+  "keywords": "midazolam CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05CD08, Benzodiazepine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Piracetam Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-piracetam-injection.svg",
+  "structure": true,
+  "structureOf": "piracetam",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e3bfed",
+   "glow": "#f3e2f8",
+   "ink": "#41124e",
+   "mid": "#9d4ab5"
+  },
+  "keywords": "piracetam CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N06BX03, Other psychostimulants and nootropics"
+   }
+  ]
+ },
+ {
+  "name": "Citicoline Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-citicoline-injection.svg",
+  "structure": true,
+  "structureOf": "citicoline",
+  "dosageForm": "Injection",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#d6bfed",
+   "glow": "#ede2f8",
+   "ink": "#30124e",
+   "mid": "#7f4ab5"
+  },
+  "keywords": "citicoline CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "250 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N06BX06, Other psychostimulants and nootropics"
+   }
+  ]
+ },
+ {
+  "name": "Botulinum Toxin for Injection",
+  "group": "injectables",
+  "type": "inj-cns",
+  "image": "ff-botulinum-toxin-for-injection.svg",
+  "dosageForm": "Powder for injection",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#ebbfed",
+   "glow": "#f7e2f8",
+   "ink": "#4b124e",
+   "mid": "#af4ab5"
+  },
+  "keywords": "clostridium botulinum toxin botulinum toxin type a CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 units"
+   }
+  ]
+ },
+ {
+  "name": "Vecuronium Bromide for Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-vecuronium-bromide-for-injection.svg",
+  "structure": true,
+  "structureOf": "vecuronium",
+  "dosageForm": "Powder for injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc7",
+   "glow": "#f8e2e6",
+   "ink": "#4e121c",
+   "mid": "#b54a5c"
+  },
+  "keywords": "vecuronium Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M03AC03, Other quaternary ammonium compounds"
+   }
+  ]
+ },
+ {
+  "name": "Atracurium Besylate Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-atracurium-besylate-injection.svg",
+  "structure": true,
+  "structureOf": "atracurium",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc2bf",
+   "glow": "#f8e3e2",
+   "ink": "#4e1612",
+   "mid": "#b5504a"
+  },
+  "keywords": "atracurium besilate atracurium Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M03AC04, Other quaternary ammonium compounds"
+   }
+  ]
+ },
+ {
+  "name": "Suxamethonium Chloride Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-suxamethonium-chloride-injection.svg",
+  "structure": true,
+  "structureOf": "suxamethonium",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc3",
+   "glow": "#f8e2e4",
+   "ink": "#4e1217",
+   "mid": "#b54a53"
+  },
+  "keywords": "succinylcholine suxamethonium Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M03AB01, Choline derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Propofol Injectable Emulsion",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-propofol-injectable-emulsion.svg",
+  "structure": true,
+  "structureOf": "propofol",
+  "dosageForm": "Injectable emulsion",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc6bf",
+   "glow": "#f8e5e2",
+   "ink": "#4e1b12",
+   "mid": "#b55a4a"
+  },
+  "keywords": "propofol Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injectable emulsion"
+   },
+   {
+    "label": "Strength",
+    "value": "1% w/v (10 mg/ml)"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N01AX10, Other general anesthetics"
+   }
+  ]
+ },
+ {
+  "name": "Etomidate Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-etomidate-injection.svg",
+  "structure": true,
+  "structureOf": "etomidate",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc0bf",
+   "glow": "#f8e2e2",
+   "ink": "#4e1312",
+   "mid": "#b54b4a"
+  },
+  "keywords": "etomidate Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg/10 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N01AX07, Other general anesthetics"
+   }
+  ]
+ },
+ {
+  "name": "Lidocaine Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-lidocaine-injection.svg",
+  "structure": true,
+  "structureOf": "lidocaine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc5",
+   "glow": "#f8e2e5",
+   "ink": "#4e121a",
+   "mid": "#b54a58"
+  },
+  "keywords": "lignocaine xylocaine lidocaine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "1%, 2%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N01BB02, Amides"
+   }
+  ]
+ },
+ {
+  "name": "Lidocaine and Adrenaline Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-lidocaine-and-adrenaline-injection.svg",
+  "structure": true,
+  "structureOf": "lidocaine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc4bf",
+   "glow": "#f8e4e2",
+   "ink": "#4e1812",
+   "mid": "#b5544a"
+  },
+  "keywords": "lignocaine epinephrine dental cartridge lidocaine epinephrine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "2% w/v, lidocaine hydrochloride 24.64 mg + adrenaline 0.0125 mg per ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N01BB02, Amides"
+   }
+  ]
+ },
+ {
+  "name": "Bupivacaine Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-bupivacaine-injection.svg",
+  "structure": true,
+  "structureOf": "bupivacaine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc2",
+   "glow": "#f8e2e3",
+   "ink": "#4e1215",
+   "mid": "#b54a4f"
+  },
+  "keywords": "bupivacaine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.5% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N01BB01, Amides"
+   }
+  ]
+ },
+ {
+  "name": "Bupivacaine in Dextrose Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-bupivacaine-in-dextrose-injection.svg",
+  "structure": true,
+  "structureOf": "bupivacaine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc8bf",
+   "glow": "#f8e6e2",
+   "ink": "#4e1d12",
+   "mid": "#b55d4a"
+  },
+  "keywords": "heavy spinal bupivacaine dextrose Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg + 80 mg per ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N01BB01, Amides"
+   }
+  ]
+ },
+ {
+  "name": "Ropivacaine Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-ropivacaine-injection.svg",
+  "structure": true,
+  "structureOf": "ropivacaine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc1bf",
+   "glow": "#f8e3e2",
+   "ink": "#4e1512",
+   "mid": "#b54e4a"
+  },
+  "keywords": "ropivacaine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.5%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N01BB09, Amides"
+   }
+  ]
+ },
+ {
+  "name": "Atropine Sulphate Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-atropine-sulphate-injection.svg",
+  "structure": true,
+  "structureOf": "atropine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc4",
+   "glow": "#f8e2e4",
+   "ink": "#4e1218",
+   "mid": "#b54a55"
+  },
+  "keywords": "atropine sulfate atropine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.6 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A03BA01, Belladonna alkaloids, tertiary amines"
+   }
+  ]
+ },
+ {
+  "name": "Naloxone Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-naloxone-injection.svg",
+  "structure": true,
+  "structureOf": "naloxone",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc5bf",
+   "glow": "#f8e5e2",
+   "ink": "#4e1a12",
+   "mid": "#b5574a"
+  },
+  "keywords": "naloxone Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.4 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "V03AB15, Antidotes"
+   }
+  ]
+ },
+ {
+  "name": "Buprenorphine Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-buprenorphine-injection.svg",
+  "structure": true,
+  "structureOf": "buprenorphine",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "restricted": true,
+  "tone": {
+   "bg": "#edc7bf",
+   "glow": "#f8e6e2",
+   "ink": "#4e1c12",
+   "mid": "#b55c4a"
+  },
+  "keywords": "buprenorphine Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.3 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02AE01, Oripavine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Tramadol Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-tramadol-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "tramadol",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "restricted": true,
+  "tone": {
+   "bg": "#edd5bf",
+   "glow": "#f8ede2",
+   "ink": "#4e2f12",
+   "mid": "#b57d4a"
+  },
+  "keywords": "tramadol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02AX02, Other opioids"
+   }
+  ]
+ },
+ {
+  "name": "Dopamine Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-dopamine-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "dopamine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc0",
+   "glow": "#f8e2e2",
+   "ink": "#4e1213",
+   "mid": "#b54a4b"
+  },
+  "keywords": "dopamine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C01CA04, Adrenergic and dopaminergic agents"
+   }
+  ]
+ },
+ {
+  "name": "Dobutamine Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-dobutamine-injection.svg",
+  "structure": true,
+  "structureOf": "dobutamine",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc6",
+   "glow": "#f8e2e5",
+   "ink": "#4e121c",
+   "mid": "#b54a5a"
+  },
+  "keywords": "dobutamine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "250 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C01CA07, Adrenergic and dopaminergic agents"
+   }
+  ]
+ },
+ {
+  "name": "Isoprenaline Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-isoprenaline-injection.svg",
+  "structure": true,
+  "structureOf": "isoproterenol",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc3bf",
+   "glow": "#f8e4e2",
+   "ink": "#4e1712",
+   "mid": "#b5524a"
+  },
+  "keywords": "isoproterenol isoproterenol Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.5%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C01CA02, Adrenergic and dopaminergic agents"
+   }
+  ]
+ },
+ {
+  "name": "Levosimendan for Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-levosimendan-for-injection.svg",
+  "structure": true,
+  "structureOf": "levosimendan",
+  "dosageForm": "Powder for injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc2",
+   "glow": "#f8e2e4",
+   "ink": "#4e1216",
+   "mid": "#b54a51"
+  },
+  "keywords": "levosimendan Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "12.5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C01CX08, Other cardiac stimulants"
+   }
+  ]
+ },
+ {
+  "name": "Lornoxicam for Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-lornoxicam-for-injection.svg",
+  "structure": true,
+  "structureOf": "lornoxicam",
+  "dosageForm": "Powder for injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edccbf",
+   "glow": "#f8e8e2",
+   "ink": "#4e2412",
+   "mid": "#b5684a"
+  },
+  "keywords": "lornoxicam Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "8 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AC05, Oxicams"
+   }
+  ]
+ },
+ {
+  "name": "Metamizole Sodium Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-metamizole-sodium-injection.svg",
+  "structure": true,
+  "structureOf": "metamizole",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#eddabf",
+   "glow": "#f8efe2",
+   "ink": "#4e3612",
+   "mid": "#b58a4a"
+  },
+  "keywords": "dipyrone analgin metamizole Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02BB72, Pyrazolones"
+   }
+  ]
+ },
+ {
+  "name": "Meloxicam Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-meloxicam-injection.svg",
+  "structure": true,
+  "structureOf": "meloxicam",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd2bf",
+   "glow": "#f8ebe2",
+   "ink": "#4e2b12",
+   "mid": "#b5754a"
+  },
+  "keywords": "meloxicam Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "15 mg/1.5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AC06, Oxicams"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-diclofenac-sodium-injection.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edc9bf",
+   "glow": "#f8e7e2",
+   "ink": "#4e1f12",
+   "mid": "#b5614a"
+  },
+  "keywords": "diclofenac Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "75 mg/3 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Nefopam Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-nefopam-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "nefopam",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd7bf",
+   "glow": "#f8eee2",
+   "ink": "#4e3212",
+   "mid": "#b5824a"
+  },
+  "keywords": "nefopam Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02BG06, Other analgesics and antipyretics"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium and Betamethasone Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-diclofenac-sodium-and-betamethasone-injection.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcebf",
+   "glow": "#f8e9e2",
+   "ink": "#4e2612",
+   "mid": "#b56d4a"
+  },
+  "keywords": "diclofenac betamethasone Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "75 mg + 2 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "Combipack with thiamine, pyridoxine and cyanocobalamin injection"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Chondroitin Sulfate Injection",
+  "group": "injectables",
+  "type": "inj-pain",
+  "image": "ff-chondroitin-sulfate-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edddbf",
+   "glow": "#f8f0e2",
+   "ink": "#4e3912",
+   "mid": "#b58e4a"
+  },
+  "keywords": "sodium chondroitin sulfate osteoarthritis chondroitin sulfate Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg"
+   }
+  ]
+ },
+ {
+  "name": "Dexamethasone Sodium Phosphate Injection",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-dexamethasone-sodium-phosphate-injection.svg",
+  "structure": true,
+  "structureOf": "dexamethasone",
+  "dosageForm": "Injection",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#cdbfed",
+   "glow": "#e9e2f8",
+   "ink": "#24124e",
+   "mid": "#6a4ab5"
+  },
+  "keywords": "dexamethasone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "4 mg/ml, 8 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB02, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Prednisolone Sodium Phosphate Injection",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-prednisolone-sodium-phosphate-injection.svg",
+  "structure": true,
+  "structureOf": "prednisolone",
+  "dosageForm": "Injection",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#ddbfed",
+   "glow": "#f0e2f8",
+   "ink": "#39124e",
+   "mid": "#904ab5"
+  },
+  "keywords": "prednisolone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "30 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB06, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Hydrocortisone Sodium Succinate for Injection",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-hydrocortisone-sodium-succinate-for-injection.svg",
+  "structure": true,
+  "structureOf": "hydrocortisone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#d3bfed",
+   "glow": "#ece2f8",
+   "ink": "#2c124e",
+   "mid": "#784ab5"
+  },
+  "keywords": "hydrocortisone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg"
+   },
+   {
+    "label": "Also supplied as",
+    "value": "With 2 ml water for injection"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB09, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Betamethasone Sodium Phosphate and Betamethasone Dipropionate Injectable Suspension",
+  "group": "injectables",
+  "type": "inj-respiratory",
+  "image": "ff-betamethasone-sodium-phosphate-and-betamethasone-dipropionate-injectable-suspension.svg",
+  "structure": true,
+  "structureOf": "betamethasone",
+  "dosageForm": "Injectable suspension",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#c1edbf",
+   "glow": "#e3f8e2",
+   "ink": "#144e12",
+   "mid": "#4eb54a"
+  },
+  "keywords": "betamethasone betamethasone dipropionate Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injectable suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "2 mg + 2 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R03BA04, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Methylprednisolone Acetate Injectable Suspension",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-methylprednisolone-acetate-injectable-suspension.svg",
+  "structure": true,
+  "structureOf": "methylprednisolone",
+  "dosageForm": "Injectable suspension",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#e3bfed",
+   "glow": "#f3e2f8",
+   "ink": "#42124e",
+   "mid": "#9e4ab5"
+  },
+  "keywords": "methylprednisolone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injectable suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB04, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Oxytocin Injection",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-oxytocin-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Hormones",
+  "restricted": true,
+  "tone": {
+   "bg": "#d9bfed",
+   "glow": "#efe2f8",
+   "ink": "#35124e",
+   "mid": "#874ab5"
+  },
+  "keywords": "oxytocin Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Composition",
+    "value": "With chlorobutanol 0.5% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H01BB02, Oxytocin and analogues"
+   }
+  ]
+ },
+ {
+  "name": "Ergometrine Injection",
+  "group": "injectables",
+  "type": "inj-hormones",
+  "image": "ff-ergometrine-injection.svg",
+  "structure": true,
+  "structureOf": "ergometrine",
+  "dosageForm": "Injection",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#cfbfed",
+   "glow": "#eae2f8",
+   "ink": "#28124e",
+   "mid": "#704ab5"
+  },
+  "keywords": "ergonovine ergometrine Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "0.5 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "G02AB03, Ergot alkaloids"
+   }
+  ]
+ },
+ {
+  "name": "Furosemide Injection",
+  "group": "injectables",
+  "type": "inj-cardio",
+  "image": "ff-furosemide-injection.svg",
+  "structure": true,
+  "structureOf": "furosemide",
+  "dosageForm": "Injection",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd6ed",
+   "glow": "#e2edf8",
+   "ink": "#12304e",
+   "mid": "#4a80b5"
+  },
+  "keywords": "frusemide furosemide Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C03CA01, Sulfonamides, plain"
+   }
+  ]
+ },
+ {
+  "name": "Torsemide Injection",
+  "group": "injectables",
+  "type": "inj-cardio",
+  "image": "ff-torsemide-injection.svg",
+  "structure": true,
+  "structureOf": "torsemide",
+  "dosageForm": "Injection",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc7ed",
+   "glow": "#e2e6f8",
+   "ink": "#121d4e",
+   "mid": "#4a5cb5"
+  },
+  "keywords": "torasemide torsemide Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C03CA04, Sulfonamides, plain"
+   }
+  ]
+ },
+ {
+  "name": "Hydralazine Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-cardio",
+  "image": "ff-hydralazine-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "hydralazine",
+  "dosageForm": "Injection",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd0ed",
+   "glow": "#e2eaf8",
+   "ink": "#12294e",
+   "mid": "#4a72b5"
+  },
+  "keywords": "hydralazine Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C02DB02, Hydrazinophthalazine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Labetalol Injection",
+  "group": "injectables",
+  "type": "inj-cardio",
+  "image": "ff-labetalol-injection.svg",
+  "structure": true,
+  "structureOf": "labetalol",
+  "dosageForm": "Injection",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc1ed",
+   "glow": "#e2e3f8",
+   "ink": "#12154e",
+   "mid": "#4a4fb5"
+  },
+  "keywords": "labetalol Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C07AG01, Alpha and beta blocking agents"
+   }
+  ]
+ },
+ {
+  "name": "Clonidine Injection",
+  "group": "injectables",
+  "type": "inj-cardio",
+  "image": "ff-clonidine-injection.svg",
+  "structure": true,
+  "structureOf": "clonidine",
+  "dosageForm": "Injection",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfcbed",
+   "glow": "#e2e8f8",
+   "ink": "#12214e",
+   "mid": "#4a65b5"
+  },
+  "keywords": "clonidine Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "150 mcg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C02AC01, Imidazoline receptor agonists"
+   }
+  ]
+ },
+ {
+  "name": "Heparin Sodium Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-heparin-sodium-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd8",
+   "glow": "#f8e2ee",
+   "ink": "#4e1232",
+   "mid": "#b54a83"
+  },
+  "keywords": "heparin Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "5,000 IU/5 ml, 25,000 IU/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B01AB01, Heparin group"
+   }
+  ]
+ },
+ {
+  "name": "Protamine Sulphate Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-protamine-sulphate-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc7bf",
+   "glow": "#f8e6e2",
+   "ink": "#4e1c12",
+   "mid": "#b55b4a"
+  },
+  "keywords": "protamine sulfate protamine Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "V03AB14, Antidotes"
+   }
+  ]
+ },
+ {
+  "name": "Urokinase for Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-urokinase-for-injection.svg",
+  "dosageForm": "Powder for injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfcc",
+   "glow": "#f8e2e8",
+   "ink": "#4e1224",
+   "mid": "#b54a69"
+  },
+  "keywords": "urokinase Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "60,000 IU"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B01AD04, Enzymes"
+   }
+  ]
+ },
+ {
+  "name": "Phytomenadione Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-phytomenadione-injection.svg",
+  "structure": true,
+  "structureOf": "phytonadione",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd3",
+   "glow": "#f8e2ec",
+   "ink": "#4e122d",
+   "mid": "#b54a79"
+  },
+  "keywords": "vitamin k1 phytonadione phytonadione Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B02BA01, Vitamin K"
+   }
+  ]
+ },
+ {
+  "name": "Menadione Sodium Bisulphite Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-menadione-sodium-bisulphite-injection.svg",
+  "structure": true,
+  "structureOf": "menadione sodium bisulfite",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfc8",
+   "glow": "#f8e2e6",
+   "ink": "#4e121e",
+   "mid": "#b54a5e"
+  },
+  "keywords": "menaphthone vitamin k3 menadione sodium bisulfite Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   }
+  ]
+ },
+ {
+  "name": "Iron Dextran Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-iron-dextran-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfcf",
+   "glow": "#f8e2ea",
+   "ink": "#4e1227",
+   "mid": "#b54a6f"
+  },
+  "keywords": "iron dextran Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg/2 ml"
+   }
+  ]
+ },
+ {
+  "name": "Iron Sucrose Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-iron-sucrose-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd6",
+   "glow": "#f8e2ed",
+   "ink": "#4e1230",
+   "mid": "#b54a7f"
+  },
+  "keywords": "iron sucrose Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B03AC02, Iron trivalent, parenteral preparations"
+   }
+  ]
+ },
+ {
+  "name": "Ferric Carboxymaltose Injection",
+  "group": "injectables",
+  "type": "inj-blood",
+  "image": "ff-ferric-carboxymaltose-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfcb",
+   "glow": "#f8e2e8",
+   "ink": "#4e1221",
+   "mid": "#b54a65"
+  },
+  "keywords": "ferric carboxymaltose Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "50 mg/ml, 500 mg/10 ml"
+   }
+  ]
+ },
+ {
+  "name": "Sodium Bicarbonate Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-sodium-bicarbonate-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc0bf",
+   "glow": "#f8e3e2",
+   "ink": "#4e1412",
+   "mid": "#b54c4a"
+  },
+  "keywords": "sodium bicarbonate Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "7.5% w/v, 8.4% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B05XA02, Electrolyte solutions"
+   }
+  ]
+ },
+ {
+  "name": "Potassium Chloride Injection Concentrate",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-potassium-chloride-injection-concentrate.svg",
+  "dosageForm": "Concentrate for injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edbfc5",
+   "glow": "#f8e2e5",
+   "ink": "#4e121a",
+   "mid": "#b54a57"
+  },
+  "keywords": "potassium chloride Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Concentrate for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "15% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B05XA01, Electrolyte solutions"
+   }
+  ]
+ },
+ {
+  "name": "Calcium Gluconate Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-calcium-gluconate-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#edd9bf",
+   "glow": "#f8efe2",
+   "ink": "#4e3412",
+   "mid": "#b5874a"
+  },
+  "keywords": "calcium gluconate Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A12AA03, Calcium"
+   }
+  ]
+ },
+ {
+  "name": "Calcium Glucono-galacto-gluconate Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-calcium-glucono-galacto-gluconate-injection.svg",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede3bf",
+   "glow": "#f8f3e2",
+   "ink": "#4e4112",
+   "mid": "#b59d4a"
+  },
+  "keywords": "hypocalcaemia calcium glucoheptonate Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "137.5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A12AA10, Calcium"
+   }
+  ]
+ },
+ {
+  "name": "Glucose Injection",
+  "group": "injectables",
+  "type": "inj-critical",
+  "image": "ff-glucose-injection.svg",
+  "structure": true,
+  "structureOf": "dextrose",
+  "dosageForm": "Injection",
+  "therapy": "Critical care",
+  "tone": {
+   "bg": "#edc4bf",
+   "glow": "#f8e4e2",
+   "ink": "#4e1912",
+   "mid": "#b5554a"
+  },
+  "keywords": "dextrose dextrose Anaesthesia & Critical Care",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "25% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "V06DC01, Carbohydrates"
+   }
+  ]
+ },
+ {
+  "name": "Cholecalciferol Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-cholecalciferol-injection.svg",
+  "structure": true,
+  "structureOf": "cholecalciferol",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#edddbf",
+   "glow": "#f8f0e2",
+   "ink": "#4e3912",
+   "mid": "#b58f4a"
+  },
+  "keywords": "vitamin d3 cholecalciferol Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "200,000 IU/ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A11CC05, Vitamin D and analogues"
+   }
+  ]
+ },
+ {
+  "name": "Thiamine Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-thiamine-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "thiamine",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede6bf",
+   "glow": "#f8f5e2",
+   "ink": "#4e4612",
+   "mid": "#b5a54a"
+  },
+  "keywords": "vitamin b1 thiamine Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A11DA01, Vitamin B1, plain"
+   }
+  ]
+ },
+ {
+  "name": "Pyridoxine Hydrochloride Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-pyridoxine-hydrochloride-injection.svg",
+  "structure": true,
+  "structureOf": "pyridoxine",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede0bf",
+   "glow": "#f8f2e2",
+   "ink": "#4e3e12",
+   "mid": "#b5974a"
+  },
+  "keywords": "vitamin b6 pyridoxine Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg/2 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A11HA02, Other plain vitamin preparations"
+   }
+  ]
+ },
+ {
+  "name": "Thiamine and Pyridoxine Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-thiamine-and-pyridoxine-injection.svg",
+  "structure": true,
+  "structureOf": "thiamine",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#eddbbf",
+   "glow": "#f8efe2",
+   "ink": "#4e3612",
+   "mid": "#b58a4a"
+  },
+  "keywords": "vitamin b1 b6 thiamine pyridoxine Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A11DA01, Vitamin B1, plain"
+   }
+  ]
+ },
+ {
+  "name": "Thiamine, Pyridoxine and Cyanocobalamin Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-thiamine-pyridoxine-and-cyanocobalamin-injection.svg",
+  "structure": true,
+  "structureOf": "thiamine",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede4bf",
+   "glow": "#f8f4e2",
+   "ink": "#4e4312",
+   "mid": "#b5a04a"
+  },
+  "keywords": "vitamin b1 b6 b12 neurobion thiamine pyridoxine cyanocobalamin Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg + 100 mg + 1 mg (with lidocaine 20 mg), 100 mg + 100 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A11DA01, Vitamin B1, plain"
+   }
+  ]
+ },
+ {
+  "name": "Vitamins B and C Injection",
+  "group": "injectables",
+  "type": "inj-vitamins",
+  "image": "ff-vitamins-b-and-c-injection.svg",
+  "structure": true,
+  "structureOf": "thiamine",
+  "dosageForm": "Injection",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#eddebf",
+   "glow": "#f8f1e2",
+   "ink": "#4e3b12",
+   "mid": "#b5924a"
+  },
+  "keywords": "vitamin b c high potency thiamine riboflavin pyridoxine ascorbic acid nicotinamide dextrose Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Composition",
+    "value": "Two ampoules: No. 1 thiamine hydrochloride 250 mg, riboflavin 4 mg, pyridoxine hydrochloride 50 mg; No. 2 ascorbic acid 500 mg, nicotinamide 160 mg, glucose 1000 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A11DA01, Vitamin B1, plain"
+   }
+  ]
+ },
+ {
+  "name": "Aminophylline Injection",
+  "group": "injectables",
+  "type": "inj-respiratory",
+  "image": "ff-aminophylline-injection.svg",
+  "structure": true,
+  "structureOf": "aminophylline",
+  "dosageForm": "Injection",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd0",
+   "glow": "#e2f8ea",
+   "ink": "#124e28",
+   "mid": "#4ab570"
+  },
+  "keywords": "aminophylline Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "250 mg/10 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R03DA05, Xanthines"
+   }
+  ]
+ },
+ {
+  "name": "Ceftriaxone for Injection (Veterinary)",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-for-injection-veterinary.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfdded",
+   "glow": "#e2f0f8",
+   "ink": "#12394e",
+   "mid": "#4a8fb5"
+  },
+  "keywords": "ceftriaxone Cephalosporins veterinary",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "3 g, 4 g"
+   },
+   {
+    "label": "Use",
+    "value": "Veterinary"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftriaxone and Sulbactam for Injection (Veterinary)",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-and-sulbactam-for-injection-veterinary.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfc8ed",
+   "glow": "#e2e6f8",
+   "ink": "#121e4e",
+   "mid": "#4a5eb5"
+  },
+  "keywords": "ceftriaxone sulbactam Cephalosporins veterinary",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "3 g, 4.5 g"
+   },
+   {
+    "label": "Use",
+    "value": "Veterinary"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftriaxone and Tazobactam for Injection (Veterinary)",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftriaxone-and-tazobactam-for-injection-veterinary.svg",
+  "structure": true,
+  "structureOf": "ceftriaxone",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfd5ed",
+   "glow": "#e2ecf8",
+   "ink": "#122f4e",
+   "mid": "#4a7cb5"
+  },
+  "keywords": "ceftriaxone tazobactam Cephalosporins veterinary",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strengths",
+    "value": "3.375 g, 4.5 g"
+   },
+   {
+    "label": "Use",
+    "value": "Veterinary"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01DD04, Third-generation cephalosporins"
+   }
+  ]
+ },
+ {
+  "name": "Ceftiofur for Injection (Veterinary)",
+  "group": "cephalosporins",
+  "type": "ceph-injections",
+  "image": "ff-ceftiofur-for-injection-veterinary.svg",
+  "structure": true,
+  "structureOf": "ceftiofur",
+  "dosageForm": "Powder for injection",
+  "therapy": "Cephalosporin",
+  "tone": {
+   "bg": "#bfe2ed",
+   "glow": "#e2f3f8",
+   "ink": "#123f4e",
+   "mid": "#4a9ab5"
+  },
+  "keywords": "ceftiofur Cephalosporins veterinary",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Powder for injection"
+   },
+   {
+    "label": "Strength",
+    "value": "1 g"
+   },
+   {
+    "label": "Use",
+    "value": "Veterinary"
+   }
+  ]
+ },
+ {
+  "name": "Maropitant Citrate Injection (Veterinary)",
+  "group": "injectables",
+  "type": "inj-veterinary",
+  "image": "ff-maropitant-citrate-injection-veterinary.svg",
+  "structure": true,
+  "structureOf": "maropitant",
+  "dosageForm": "Injection",
+  "therapy": "Veterinary",
+  "tone": {
+   "bg": "#d6edbf",
+   "glow": "#edf8e2",
+   "ink": "#304e12",
+   "mid": "#80b54a"
+  },
+  "keywords": "maropitant Veterinary veterinary",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Injection"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg/ml"
+   },
+   {
+    "label": "Use",
+    "value": "Veterinary"
+   }
+  ]
+ },
+ {
+  "name": "Aceclofenac and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-aceclofenac-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "aceclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd4bf",
+   "glow": "#f8ece2",
+   "ink": "#4e2d12",
+   "mid": "#b57a4a"
+  },
+  "keywords": "acetaminophen aceclofenac paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg + 325 mg, 100 mg + 500 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB16, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Aceclofenac, Paracetamol and Serratiopeptidase Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-aceclofenac-paracetamol-and-serratiopeptidase-tablets.svg",
+  "structure": true,
+  "structureOf": "aceclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcbbf",
+   "glow": "#f8e8e2",
+   "ink": "#4e2212",
+   "mid": "#b5654a"
+  },
+  "keywords": "serratiopeptidase aceclofenac paracetamol serrapeptase Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg + 325 mg + 15 mg, 100 mg + 500 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB16, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Aceclofenac, Paracetamol, Trypsin and Chymotrypsin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-aceclofenac-paracetamol-trypsin-and-chymotrypsin-tablets.svg",
+  "structure": true,
+  "structureOf": "aceclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd9bf",
+   "glow": "#f8efe2",
+   "ink": "#4e3412",
+   "mid": "#b5874a"
+  },
+  "keywords": "aceclofenac paracetamol trypsin chymotrypsin Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB16, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Acyclovir Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-acyclovir-tablets.svg",
+  "structure": true,
+  "structureOf": "acyclovir",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfeddb",
+   "glow": "#e2f8f0",
+   "ink": "#124e37",
+   "mid": "#4ab58b"
+  },
+  "keywords": "aciclovir acyclovir Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J05AB01, Nucleosides and nucleotides excl. reverse transcriptase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Amitriptyline Hydrochloride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-amitriptyline-hydrochloride-tablets.svg",
+  "structure": true,
+  "structureOf": "amitriptyline",
+  "dosageForm": "Tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#debfed",
+   "glow": "#f1e2f8",
+   "ink": "#3a124e",
+   "mid": "#914ab5"
+  },
+  "keywords": "amitriptyline CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "25 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N06AA09, Non-selective monoamine reuptake inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Amlodipine Besylate Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-amlodipine-besylate-tablets.svg",
+  "structure": true,
+  "structureOf": "amlodipine",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd4ed",
+   "glow": "#e2ecf8",
+   "ink": "#122e4e",
+   "mid": "#4a7ab5"
+  },
+  "keywords": "amlodipine besilate amlodipine Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "5 mg, 10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C08CA01, Dihydropyridine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Amlodipine and Bisoprolol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-amlodipine-and-bisoprolol-tablets.svg",
+  "structure": true,
+  "structureOf": "amlodipine",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc5ed",
+   "glow": "#e2e5f8",
+   "ink": "#121a4e",
+   "mid": "#4a57b5"
+  },
+  "keywords": "amlodipine bisoprolol Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg + 5 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "C08CA01, Dihydropyridine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Artemether and Lumefantrine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-artemether-and-lumefantrine-tablets.svg",
+  "structure": true,
+  "structureOf": "artemether",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfdfed",
+   "glow": "#e2f1f8",
+   "ink": "#123c4e",
+   "mid": "#4a94b5"
+  },
+  "keywords": "antimalarial act artemether lumefantrine Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "20 mg + 120 mg, 40 mg + 240 mg, 80 mg + 480 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "P01BE02, Artemisinin and derivatives, plain"
+   }
+  ]
+ },
+ {
+  "name": "Ascorbic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-vitamins",
+  "image": "ff-ascorbic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "ascorbic acid",
+  "dosageForm": "Tablets",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede8bf",
+   "glow": "#f8f6e2",
+   "ink": "#4e4712",
+   "mid": "#b5a84a"
+  },
+  "keywords": "vitamin c ascorbic acid Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A11GA01, Ascorbic acid (vitamin C), plain"
+   }
+  ]
+ },
+ {
+  "name": "Aspirin Gastro-resistant Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-aspirin-gastro-resistant-tablets.svg",
+  "structure": true,
+  "structureOf": "aspirin",
+  "dosageForm": "Gastro-resistant tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd2",
+   "glow": "#f8e2eb",
+   "ink": "#4e122b",
+   "mid": "#b54a75"
+  },
+  "keywords": "acetylsalicylic acid aspirin Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gastro-resistant tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "80 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B01AC06, Platelet aggregation inhibitors excl. heparin"
+   }
+  ]
+ },
+ {
+  "name": "Atorvastatin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-atorvastatin-tablets.svg",
+  "structure": true,
+  "structureOf": "atorvastatin",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfceed",
+   "glow": "#e2e9f8",
+   "ink": "#12264e",
+   "mid": "#4a6db5"
+  },
+  "keywords": "atorvastatin calcium atorvastatin Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "10 mg, 20 mg, 40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C10AA05, HMG CoA reductase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Atorvastatin and Amlodipine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-atorvastatin-and-amlodipine-tablets.svg",
+  "structure": true,
+  "structureOf": "atorvastatin",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#c0bfed",
+   "glow": "#e2e2f8",
+   "ink": "#13124e",
+   "mid": "#4a4ab5"
+  },
+  "keywords": "atorvastatin amlodipine Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "C10AA05, HMG CoA reductase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Azithromycin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-azithromycin-tablets.svg",
+  "structure": true,
+  "structureOf": "azithromycin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede7",
+   "glow": "#e2f8f5",
+   "ink": "#124e47",
+   "mid": "#4ab5a8"
+  },
+  "keywords": "azithromycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FA10, Macrolides"
+   }
+  ]
+ },
+ {
+  "name": "Benzhexol Hydrochloride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-benzhexol-hydrochloride-tablets.svg",
+  "structure": true,
+  "structureOf": "trihexyphenidyl",
+  "dosageForm": "Tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#edbfe8",
+   "glow": "#f8e2f6",
+   "ink": "#4e1247",
+   "mid": "#b54aa8"
+  },
+  "keywords": "trihexyphenidyl trihexyphenidyl CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N04AA01, Tertiary amines"
+   }
+  ]
+ },
+ {
+  "name": "Betahistine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-betahistine-tablets.svg",
+  "structure": true,
+  "structureOf": "betahistine",
+  "dosageForm": "Tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e6bfed",
+   "glow": "#f5e2f8",
+   "ink": "#45124e",
+   "mid": "#a44ab5"
+  },
+  "keywords": "betahistine CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "8 mg, 16 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N07CA01, Antivertigo preparations"
+   }
+  ]
+ },
+ {
+  "name": "Calcium Carbonate and Vitamin D3 Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-vitamins",
+  "image": "ff-calcium-carbonate-and-vitamin-d3-tablets.svg",
+  "dosageForm": "Tablets",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#ede2bf",
+   "glow": "#f8f3e2",
+   "ink": "#4e4012",
+   "mid": "#b59b4a"
+  },
+  "keywords": "calcium carbonate cholecalciferol Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "1250 mg (500 mg elemental calcium) + 250 IU"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A12AA04, Calcium"
+   }
+  ]
+ },
+ {
+  "name": "Carvedilol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-carvedilol-tablets.svg",
+  "structure": true,
+  "structureOf": "carvedilol",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc8ed",
+   "glow": "#e2e7f8",
+   "ink": "#121e4e",
+   "mid": "#4a5fb5"
+  },
+  "keywords": "carvedilol Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C07AG02, Alpha and beta blocking agents"
+   }
+  ]
+ },
+ {
+  "name": "Cetirizine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-cetirizine-tablets.svg",
+  "structure": true,
+  "structureOf": "cetirizine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedc5",
+   "glow": "#e2f8e5",
+   "ink": "#124e19",
+   "mid": "#4ab556"
+  },
+  "keywords": "cetirizine dihydrochloride cetirizine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R06AE07, Piperazine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Chlorpheniramine Maleate Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-chlorpheniramine-maleate-tablets.svg",
+  "structure": true,
+  "structureOf": "chlorpheniramine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd7",
+   "glow": "#e2f8ed",
+   "ink": "#124e31",
+   "mid": "#4ab580"
+  },
+  "keywords": "chlorphenamine chlorpheniramine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R06AB04, Substituted alkylamines"
+   }
+  ]
+ },
+ {
+  "name": "Ciprofloxacin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-ciprofloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "ciprofloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd4",
+   "glow": "#e2f8ec",
+   "ink": "#124e2d",
+   "mid": "#4ab579"
+  },
+  "keywords": "ciprofloxacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01MA02, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Clarithromycin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-clarithromycin-tablets.svg",
+  "structure": true,
+  "structureOf": "clarithromycin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe7ed",
+   "glow": "#e2f5f8",
+   "ink": "#12464e",
+   "mid": "#4aa6b5"
+  },
+  "keywords": "clarithromycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FA09, Macrolides"
+   }
+  ]
+ },
+ {
+  "name": "Clopidogrel Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-clopidogrel-tablets.svg",
+  "structure": true,
+  "structureOf": "clopidogrel",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfc6",
+   "glow": "#f8e2e6",
+   "ink": "#4e121c",
+   "mid": "#b54a5b"
+  },
+  "keywords": "clopidogrel Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "75 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B01AC04, Platelet aggregation inhibitors excl. heparin"
+   }
+  ]
+ },
+ {
+  "name": "Dapagliflozin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-dapagliflozin-tablets.svg",
+  "structure": true,
+  "structureOf": "dapagliflozin",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#d0edbf",
+   "glow": "#eaf8e2",
+   "ink": "#284e12",
+   "mid": "#71b54a"
+  },
+  "keywords": "dapagliflozin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BK01, Sodium-glucose co-transporter 2 (SGLT2) inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Dexamethasone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-hormones",
+  "image": "ff-dexamethasone-tablets.svg",
+  "structure": true,
+  "structureOf": "dexamethasone",
+  "dosageForm": "Tablets",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#dfbfed",
+   "glow": "#f2e2f8",
+   "ink": "#3d124e",
+   "mid": "#954ab5"
+  },
+  "keywords": "dexamethasone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "0.5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB02, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Potassium Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-potassium-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd0bf",
+   "glow": "#f8eae2",
+   "ink": "#4e2912",
+   "mid": "#b5724a"
+  },
+  "keywords": "diclofenac Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Uncoated or film coated"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-sodium-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edc8bf",
+   "glow": "#f8e6e2",
+   "ink": "#4e1d12",
+   "mid": "#b55e4a"
+  },
+  "keywords": "diclofenac Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Uncoated or film coated"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium Gastro-resistant Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-sodium-gastro-resistant-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Gastro-resistant tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd6bf",
+   "glow": "#f8ede2",
+   "ink": "#4e3012",
+   "mid": "#b57f4a"
+  },
+  "keywords": "diclofenac Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gastro-resistant tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Potassium and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-potassium-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcdbf",
+   "glow": "#f8e9e2",
+   "ink": "#4e2512",
+   "mid": "#b56a4a"
+  },
+  "keywords": "diclofenac paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 325 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-sodium-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#eddbbf",
+   "glow": "#f8f0e2",
+   "ink": "#4e3712",
+   "mid": "#b58b4a"
+  },
+  "keywords": "diclofenac paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 500 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Potassium, Paracetamol and Chlorzoxazone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-potassium-paracetamol-and-chlorzoxazone-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd3bf",
+   "glow": "#f8ebe2",
+   "ink": "#4e2c12",
+   "mid": "#b5774a"
+  },
+  "keywords": "diclofenac paracetamol chlorzoxazone Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 325 mg + 250 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Potassium, Paracetamol and Serratiopeptidase Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-potassium-paracetamol-and-serratiopeptidase-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcabf",
+   "glow": "#f8e7e2",
+   "ink": "#4e2012",
+   "mid": "#b5624a"
+  },
+  "keywords": "serratiopeptidase diclofenac paracetamol serrapeptase Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 325 mg + 15 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Potassium and Serratiopeptidase Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-potassium-and-serratiopeptidase-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd8bf",
+   "glow": "#f8eee2",
+   "ink": "#4e3312",
+   "mid": "#b5844a"
+  },
+  "keywords": "serratiopeptidase diclofenac serrapeptase Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac Sodium and Misoprostol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-diclofenac-sodium-and-misoprostol-tablets.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcfbf",
+   "glow": "#f8eae2",
+   "ink": "#4e2712",
+   "mid": "#b56f4a"
+  },
+  "keywords": "diclofenac misoprostol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AB05, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Dicyclomine and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-dicyclomine-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "dicyclomine",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e6edbf",
+   "glow": "#f5f8e2",
+   "ink": "#454e12",
+   "mid": "#a5b54a"
+  },
+  "keywords": "dicycloverine dicyclomine paracetamol Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg + 325 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A03AA07, Synthetic anticholinergics, esters with tertiary amino group"
+   }
+  ]
+ },
+ {
+  "name": "Docusate Sodium and Senna Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-docusate-sodium-and-senna-tablets.svg",
+  "structure": true,
+  "structureOf": "docusate",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d3edbf",
+   "glow": "#ecf8e2",
+   "ink": "#2d4e12",
+   "mid": "#78b54a"
+  },
+  "keywords": "senna glucosides laxative docusate sennosides Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A06AG10, Enemas"
+   }
+  ]
+ },
+ {
+  "name": "Doxylamine, Pyridoxine and Folic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-doxylamine-pyridoxine-and-folic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "doxylamine",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#dfedbf",
+   "glow": "#f1f8e2",
+   "ink": "#3c4e12",
+   "mid": "#94b54a"
+  },
+  "keywords": "doxylamine pyridoxine folic acid Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "10 mg + 10 mg + 2.5 mg, 20 mg + 20 mg + 5 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R06AA09, Aminoalkyl ethers"
+   }
+  ]
+ },
+ {
+  "name": "Drotaverine Hydrochloride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-drotaverine-hydrochloride-tablets.svg",
+  "structure": true,
+  "structureOf": "drotaverine",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#eaedbf",
+   "glow": "#f7f8e2",
+   "ink": "#4b4e12",
+   "mid": "#afb54a"
+  },
+  "keywords": "drotaverine Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A03AD02, Papaverine and derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Erythromycin Stearate Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-erythromycin-stearate-tablets.svg",
+  "structure": true,
+  "structureOf": "erythromycin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede0",
+   "glow": "#e2f8f2",
+   "ink": "#124e3d",
+   "mid": "#4ab596"
+  },
+  "keywords": "erythromycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FA01, Macrolides"
+   }
+  ]
+ },
+ {
+  "name": "Esomeprazole Gastro-resistant Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-esomeprazole-gastro-resistant-tablets.svg",
+  "structure": true,
+  "structureOf": "esomeprazole",
+  "dosageForm": "Gastro-resistant tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d8edbf",
+   "glow": "#eef8e2",
+   "ink": "#324e12",
+   "mid": "#83b54a"
+  },
+  "keywords": "esomeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gastro-resistant tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC05, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Etoricoxib Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-etoricoxib-tablets.svg",
+  "structure": true,
+  "structureOf": "etoricoxib",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edddbf",
+   "glow": "#f8f1e2",
+   "ink": "#4e3a12",
+   "mid": "#b5904a"
+  },
+  "keywords": "etoricoxib Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "60 mg, 90 mg, 120 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AH05, Coxibs"
+   }
+  ]
+ },
+ {
+  "name": "Ferrous Bisglycinate, Zinc Bisglycinate, Folic Acid and Methylcobalamin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-ferrous-bisglycinate-zinc-bisglycinate-folic-acid-and-methylcobalamin-tablets.svg",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfcd",
+   "glow": "#f8e2e9",
+   "ink": "#4e1225",
+   "mid": "#b54a6b"
+  },
+  "keywords": "ferrous bisglycinate zinc bisglycinate folic acid mecobalamin Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   }
+  ]
+ },
+ {
+  "name": "Fexofenadine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-fexofenadine-tablets.svg",
+  "structure": true,
+  "structureOf": "fexofenadine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedcb",
+   "glow": "#e2f8e8",
+   "ink": "#124e22",
+   "mid": "#4ab566"
+  },
+  "keywords": "fexofenadine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "120 mg, 180 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R06AX26, Other antihistamines for systemic use"
+   }
+  ]
+ },
+ {
+  "name": "Fexofenadine and Montelukast Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-fexofenadine-and-montelukast-tablets.svg",
+  "structure": true,
+  "structureOf": "fexofenadine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedc0",
+   "glow": "#e2f8e3",
+   "ink": "#124e14",
+   "mid": "#4ab54c"
+  },
+  "keywords": "fexofenadine montelukast Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "120 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R06AX26, Other antihistamines for systemic use"
+   }
+  ]
+ },
+ {
+  "name": "Folic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-folic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "folic acid",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd4",
+   "glow": "#f8e2ec",
+   "ink": "#4e122e",
+   "mid": "#b54a7b"
+  },
+  "keywords": "folic acid Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B03BB01, Folic acid and derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Gliclazide Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-gliclazide-tablets.svg",
+  "structure": true,
+  "structureOf": "gliclazide",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#c0edbf",
+   "glow": "#e2f8e2",
+   "ink": "#134e12",
+   "mid": "#4cb54a"
+  },
+  "keywords": "gliclazide Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BB09, Sulfonamides, urea derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Glimepiride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-glimepiride-tablets.svg",
+  "structure": true,
+  "structureOf": "glimepiride",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#caedbf",
+   "glow": "#e7f8e2",
+   "ink": "#204e12",
+   "mid": "#63b54a"
+  },
+  "keywords": "glimepiride Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "1 mg, 2 mg, 3 mg, 4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BB12, Sulfonamides, urea derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Glimepiride and Metformin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-glimepiride-and-metformin-tablets.svg",
+  "structure": true,
+  "structureOf": "glimepiride",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#bfedc5",
+   "glow": "#e2f8e5",
+   "ink": "#124e19",
+   "mid": "#4ab557"
+  },
+  "keywords": "glimepiride metformin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "1 mg + 500 mg, 2 mg + 500 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Also with sustained-release metformin"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A10BB12, Sulfonamides, urea derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Griseofulvin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-griseofulvin-tablets.svg",
+  "structure": true,
+  "structureOf": "griseofulvin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfdaed",
+   "glow": "#e2eff8",
+   "ink": "#12364e",
+   "mid": "#4a89b5"
+  },
+  "keywords": "griseofulvin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "125 mg, 250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "D01AA08, Antibiotics"
+   }
+  ]
+ },
+ {
+  "name": "Hydrochlorothiazide Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-hydrochlorothiazide-tablets.svg",
+  "structure": true,
+  "structureOf": "hydrochlorothiazide",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd2ed",
+   "glow": "#e2ebf8",
+   "ink": "#122b4e",
+   "mid": "#4a75b5"
+  },
+  "keywords": "hydrochlorothiazide Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "25 mg, 50 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C03AA03, Thiazides, plain"
+   }
+  ]
+ },
+ {
+  "name": "Ibuprofen Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-ibuprofen-tablets.svg",
+  "structure": true,
+  "structureOf": "ibuprofen",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd5bf",
+   "glow": "#f8ece2",
+   "ink": "#4e2e12",
+   "mid": "#b57c4a"
+  },
+  "keywords": "ibuprofen Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "200 mg, 400 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Film coated or sugar coated"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AE01, Propionic acid derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Ketoconazole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-ketoconazole-tablets.svg",
+  "structure": true,
+  "structureOf": "ketoconazole",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedec",
+   "glow": "#e2f8f8",
+   "ink": "#124e4d",
+   "mid": "#4ab5b3"
+  },
+  "keywords": "ketoconazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J02AB02, Imidazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Ketorolac Tromethamine Dispersible Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-ketorolac-tromethamine-dispersible-tablets.svg",
+  "structure": true,
+  "structureOf": "ketorolac",
+  "dosageForm": "Dispersible tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edccbf",
+   "glow": "#f8e8e2",
+   "ink": "#4e2312",
+   "mid": "#b5674a"
+  },
+  "keywords": "ketorolac Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Dispersible tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AB15, Acetic acid derivatives and related substances"
+   }
+  ]
+ },
+ {
+  "name": "Labetalol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-labetalol-tablets.svg",
+  "structure": true,
+  "structureOf": "labetalol",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc3ed",
+   "glow": "#e2e4f8",
+   "ink": "#12174e",
+   "mid": "#4a52b5"
+  },
+  "keywords": "labetalol Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg, 200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C07AG01, Alpha and beta blocking agents"
+   }
+  ]
+ },
+ {
+  "name": "Letrozole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-oncology",
+  "image": "ff-letrozole-tablets.svg",
+  "structure": true,
+  "structureOf": "letrozole",
+  "dosageForm": "Tablets",
+  "therapy": "Oncology",
+  "tone": {
+   "bg": "#edbfe5",
+   "glow": "#f8e2f5",
+   "ink": "#4e1244",
+   "mid": "#b54aa3"
+  },
+  "keywords": "letrozole Oncology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "L02BG04, Enzyme inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Levocetirizine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-levocetirizine-tablets.svg",
+  "structure": true,
+  "structureOf": "levocetirizine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd2",
+   "glow": "#e2f8eb",
+   "ink": "#124e2b",
+   "mid": "#4ab576"
+  },
+  "keywords": "levocetirizine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R06AE09, Piperazine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Levocetirizine and Montelukast Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-levocetirizine-and-montelukast-tablets.svg",
+  "structure": true,
+  "structureOf": "levocetirizine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedc7",
+   "glow": "#e2f8e6",
+   "ink": "#124e1d",
+   "mid": "#4ab55d"
+  },
+  "keywords": "levocetirizine montelukast Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R06AE09, Piperazine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Levocetirizine and Pseudoephedrine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-levocetirizine-and-pseudoephedrine-tablets.svg",
+  "structure": true,
+  "structureOf": "levocetirizine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "restricted": true,
+  "tone": {
+   "bg": "#bfedd9",
+   "glow": "#e2f8ef",
+   "ink": "#124e34",
+   "mid": "#4ab586"
+  },
+  "keywords": "levocetirizine pseudoephedrine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "5 mg + 240 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R06AE09, Piperazine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Levofloxacin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-levofloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "levofloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd8",
+   "glow": "#e2f8ee",
+   "ink": "#124e33",
+   "mid": "#4ab584"
+  },
+  "keywords": "levofloxacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01MA12, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Loperamide Hydrochloride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-loperamide-hydrochloride-tablets.svg",
+  "structure": true,
+  "structureOf": "loperamide",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e3edbf",
+   "glow": "#f3f8e2",
+   "ink": "#424e12",
+   "mid": "#9eb54a"
+  },
+  "keywords": "loperamide Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "2 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A07DA03, Antipropulsives"
+   }
+  ]
+ },
+ {
+  "name": "Loratadine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-loratadine-tablets.svg",
+  "structure": true,
+  "structureOf": "loratadine",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedce",
+   "glow": "#e2f8e9",
+   "ink": "#124e26",
+   "mid": "#4ab56d"
+  },
+  "keywords": "loratadine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R06AX13, Other antihistamines for systemic use"
+   }
+  ]
+ },
+ {
+  "name": "Losartan Potassium Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-losartan-potassium-tablets.svg",
+  "structure": true,
+  "structureOf": "losartan",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfcced",
+   "glow": "#e2e8f8",
+   "ink": "#12234e",
+   "mid": "#4a68b5"
+  },
+  "keywords": "losartan Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "25 mg, 50 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C09CA01, Angiotensin II antagonists, plain"
+   }
+  ]
+ },
+ {
+  "name": "Mebendazole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-mebendazole-tablets.svg",
+  "structure": true,
+  "structureOf": "mebendazole",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe2ed",
+   "glow": "#e2f3f8",
+   "ink": "#12404e",
+   "mid": "#4a9bb5"
+  },
+  "keywords": "mebendazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P02CA01, Benzimidazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Mefenamic Acid and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-mefenamic-acid-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "mefenamic acid",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#eddabf",
+   "glow": "#f8efe2",
+   "ink": "#4e3512",
+   "mid": "#b5884a"
+  },
+  "keywords": "mefenamic acid paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg + 325 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AG01, Fenamates"
+   }
+  ]
+ },
+ {
+  "name": "Metformin Hydrochloride Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-metformin-hydrochloride-tablets.svg",
+  "structure": true,
+  "structureOf": "metformin",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#c4edbf",
+   "glow": "#e4f8e2",
+   "ink": "#184e12",
+   "mid": "#55b54a"
+  },
+  "keywords": "metformin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 850 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BA02, Biguanides"
+   }
+  ]
+ },
+ {
+  "name": "Metformin Hydrochloride Extended-release Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-metformin-hydrochloride-extended-release-tablets.svg",
+  "structure": true,
+  "structureOf": "metformin",
+  "dosageForm": "Extended-release tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#ceedbf",
+   "glow": "#e9f8e2",
+   "ink": "#254e12",
+   "mid": "#6cb54a"
+  },
+  "keywords": "modified release sr er metformin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Extended-release tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1000 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BA02, Biguanides"
+   }
+  ]
+ },
+ {
+  "name": "Metformin and Sitagliptin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-metformin-and-sitagliptin-tablets.svg",
+  "structure": true,
+  "structureOf": "sitagliptin",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#bfedc1",
+   "glow": "#e2f8e3",
+   "ink": "#124e14",
+   "mid": "#4ab54e"
+  },
+  "keywords": "sitagliptin metformin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "metformin 500 mg, metformin 1000 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A10BH01, Dipeptidyl peptidase 4 (DPP-4) inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Methylcobalamin, Pyridoxine and Folic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-methylcobalamin-pyridoxine-and-folic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "mecobalamin",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfc9",
+   "glow": "#f8e2e7",
+   "ink": "#4e121f",
+   "mid": "#b54a61"
+  },
+  "keywords": "methylcobalamin mecobalamin pyridoxine folic acid Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "1500 mcg + 20 mg + 5 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "B03BA05, Vitamin B12 (cyanocobalamin and analogues)"
+   }
+  ]
+ },
+ {
+  "name": "Methylprednisolone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-hormones",
+  "image": "ff-methylprednisolone-tablets.svg",
+  "structure": true,
+  "structureOf": "methylprednisolone",
+  "dosageForm": "Tablets",
+  "therapy": "Hormones",
+  "tone": {
+   "bg": "#d6bfed",
+   "glow": "#ede2f8",
+   "ink": "#30124e",
+   "mid": "#7e4ab5"
+  },
+  "keywords": "methylprednisolone Hormones & Steroids",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "H02AB04, Glucocorticoids"
+   }
+  ]
+ },
+ {
+  "name": "Metronidazole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-metronidazole-tablets.svg",
+  "structure": true,
+  "structureOf": "metronidazole",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede4",
+   "glow": "#e2f8f4",
+   "ink": "#124e43",
+   "mid": "#4ab5a1"
+  },
+  "keywords": "metronidazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "200 mg, 250 mg, 400 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P01AB01, Nitroimidazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Montelukast Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-montelukast-tablets.svg",
+  "structure": true,
+  "structureOf": "montelukast",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedc3",
+   "glow": "#e2f8e4",
+   "ink": "#124e17",
+   "mid": "#4ab553"
+  },
+  "keywords": "montelukast sodium montelukast Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "5 mg, 10 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "R03DC03, Leukotriene receptor antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Nifedipine Extended-release Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-nifedipine-extended-release-tablets.svg",
+  "structure": true,
+  "structureOf": "nifedipine",
+  "dosageForm": "Extended-release tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd5ed",
+   "glow": "#e2edf8",
+   "ink": "#122f4e",
+   "mid": "#4a7eb5"
+  },
+  "keywords": "nifedipine Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Extended-release tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C08CA05, Dihydropyridine derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Nimesulide and Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-nimesulide-and-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "nimesulide",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd1bf",
+   "glow": "#f8ebe2",
+   "ink": "#4e2a12",
+   "mid": "#b5744a"
+  },
+  "keywords": "nimesulide paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg + 325 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M01AX17, Other antiinflammatory and antirheumatic agents, non-steroids"
+   }
+  ]
+ },
+ {
+  "name": "Nitrofurantoin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-nitrofurantoin-tablets.svg",
+  "structure": true,
+  "structureOf": "nitrofurantoin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd1",
+   "glow": "#e2f8ea",
+   "ink": "#124e29",
+   "mid": "#4ab572"
+  },
+  "keywords": "nitrofurantoin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01XE01, Nitrofuran derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Norfloxacin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-norfloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "norfloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe9ed",
+   "glow": "#e2f6f8",
+   "ink": "#124a4e",
+   "mid": "#4aadb5"
+  },
+  "keywords": "norfloxacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "400 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01MA06, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Ofloxacin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-ofloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "ofloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfeddd",
+   "glow": "#e2f8f0",
+   "ink": "#124e39",
+   "mid": "#4ab58f"
+  },
+  "keywords": "ofloxacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01MA01, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Ofloxacin and Ornidazole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-ofloxacin-and-ornidazole-tablets.svg",
+  "structure": true,
+  "structureOf": "ofloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfdded",
+   "glow": "#e2f1f8",
+   "ink": "#123a4e",
+   "mid": "#4a90b5"
+  },
+  "keywords": "ofloxacin ornidazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "200 mg + 500 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "J01MA01, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Ondansetron Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-ondansetron-tablets.svg",
+  "structure": true,
+  "structureOf": "ondansetron",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d0edbf",
+   "glow": "#eaf8e2",
+   "ink": "#294e12",
+   "mid": "#72b54a"
+  },
+  "keywords": "ondansetron Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "4 mg, 8 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A04AA01, Serotonin (5HT3) antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Ondansetron Orally Disintegrating Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-ondansetron-orally-disintegrating-tablets.svg",
+  "structure": true,
+  "structureOf": "ondansetron",
+  "dosageForm": "Orally disintegrating tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#dcedbf",
+   "glow": "#f0f8e2",
+   "ink": "#384e12",
+   "mid": "#8db54a"
+  },
+  "keywords": "odt ondansetron Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Orally disintegrating tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A04AA01, Serotonin (5HT3) antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole Gastro-resistant Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-pantoprazole-gastro-resistant-tablets.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Gastro-resistant tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e8edbf",
+   "glow": "#f6f8e2",
+   "ink": "#474e12",
+   "mid": "#a9b54a"
+  },
+  "keywords": "pantoprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gastro-resistant tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole and Domperidone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-pantoprazole-and-domperidone-tablets.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d5edbf",
+   "glow": "#edf8e2",
+   "ink": "#2f4e12",
+   "mid": "#7cb54a"
+  },
+  "keywords": "pantoprazole domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Release",
+    "value": "Gastro-resistant pantoprazole, prolonged-release domperidone"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Paracetamol Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-paracetamol-tablets.svg",
+  "structure": true,
+  "structureOf": "paracetamol",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edc9bf",
+   "glow": "#f8e7e2",
+   "ink": "#4e1e12",
+   "mid": "#b55f4a"
+  },
+  "keywords": "acetaminophen paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 650 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02BE01, Anilides"
+   }
+  ]
+ },
+ {
+  "name": "Paracetamol, Phenylephrine and Chlorpheniramine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-paracetamol-phenylephrine-and-chlorpheniramine-tablets.svg",
+  "structure": true,
+  "structureOf": "paracetamol",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd5",
+   "glow": "#e2f8ed",
+   "ink": "#124e2f",
+   "mid": "#4ab57d"
+  },
+  "keywords": "cold paracetamol phenylephrine chlorpheniramine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg + 5 mg + 2 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N02BE01, Anilides"
+   }
+  ]
+ },
+ {
+  "name": "Paracetamol, Caffeine, Phenylephrine and Diphenhydramine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-respiratory",
+  "image": "ff-paracetamol-caffeine-phenylephrine-and-diphenhydramine-tablets.svg",
+  "structure": true,
+  "structureOf": "paracetamol",
+  "dosageForm": "Tablets",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedca",
+   "glow": "#e2f8e7",
+   "ink": "#124e20",
+   "mid": "#4ab563"
+  },
+  "keywords": "cold paracetamol caffeine phenylephrine diphenhydramine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg + 30 mg + 5 mg + 25 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N02BE01, Anilides"
+   }
+  ]
+ },
+ {
+  "name": "Pefloxacin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-pefloxacin-tablets.svg",
+  "structure": true,
+  "structureOf": "pefloxacin",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede9",
+   "glow": "#e2f8f6",
+   "ink": "#124e49",
+   "mid": "#4ab5ac"
+  },
+  "keywords": "pefloxacin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "400 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01MA03, Fluoroquinolones"
+   }
+  ]
+ },
+ {
+  "name": "Quetiapine Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-quetiapine-tablets.svg",
+  "structure": true,
+  "structureOf": "quetiapine",
+  "dosageForm": "Tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#d9bfed",
+   "glow": "#eee2f8",
+   "ink": "#34124e",
+   "mid": "#864ab5"
+  },
+  "keywords": "quetiapine CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "25 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AH04, Diazepines, oxazepines, thiazepines and oxepines"
+   }
+  ]
+ },
+ {
+  "name": "Rabeprazole Sodium Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-rabeprazole-sodium-tablets.svg",
+  "structure": true,
+  "structureOf": "rabeprazole",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e1edbf",
+   "glow": "#f2f8e2",
+   "ink": "#3e4e12",
+   "mid": "#98b54a"
+  },
+  "keywords": "rabeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC04, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Ranitidine and Domperidone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-ranitidine-and-domperidone-tablets.svg",
+  "structure": true,
+  "structureOf": "ranitidine",
+  "dosageForm": "Tablets",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#ceedbf",
+   "glow": "#e9f8e2",
+   "ink": "#254e12",
+   "mid": "#6cb54a"
+  },
+  "keywords": "ranitidine domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "150 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BA02, H<SUB>2</SUB>-receptor antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Risperidone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-risperidone-tablets.svg",
+  "structure": true,
+  "structureOf": "risperidone",
+  "dosageForm": "Tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#edbfed",
+   "glow": "#f8e2f8",
+   "ink": "#4e124e",
+   "mid": "#b54ab4"
+  },
+  "keywords": "risperidone CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "3 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N05AX08, Other antipsychotics"
+   }
+  ]
+ },
+ {
+  "name": "Rosuvastatin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-rosuvastatin-tablets.svg",
+  "structure": true,
+  "structureOf": "rosuvastatin",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc6ed",
+   "glow": "#e2e5f8",
+   "ink": "#121c4e",
+   "mid": "#4a5ab5"
+  },
+  "keywords": "rosuvastatin calcium rosuvastatin Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "5 mg, 10 mg, 20 mg, 40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C10AA07, HMG CoA reductase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Secnidazole Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-secnidazole-tablets.svg",
+  "structure": true,
+  "structureOf": "secnidazole",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedd5",
+   "glow": "#e2f8ed",
+   "ink": "#124e2f",
+   "mid": "#4ab57d"
+  },
+  "keywords": "secnidazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "500 mg, 1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P01AB07, Nitroimidazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Sildenafil Citrate Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-urology",
+  "image": "ff-sildenafil-citrate-tablets.svg",
+  "structure": true,
+  "structureOf": "sildenafil",
+  "dosageForm": "Tablets",
+  "therapy": "Urology",
+  "tone": {
+   "bg": "#bfeced",
+   "glow": "#e2f7f8",
+   "ink": "#124c4e",
+   "mid": "#4ab1b5"
+  },
+  "keywords": "sildenafil Urology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "25 mg, 50 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "G04BE03, Drugs used in erectile dysfunction"
+   }
+  ]
+ },
+ {
+  "name": "Sitagliptin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-diabetes",
+  "image": "ff-sitagliptin-tablets.svg",
+  "structure": true,
+  "structureOf": "sitagliptin",
+  "dosageForm": "Tablets",
+  "therapy": "Diabetes",
+  "tone": {
+   "bg": "#c8edbf",
+   "glow": "#e6f8e2",
+   "ink": "#1d4e12",
+   "mid": "#5db54a"
+  },
+  "keywords": "sitagliptin Diabetes",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "50 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A10BH01, Dipeptidyl peptidase 4 (DPP-4) inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Sodium Valproate and Valproic Acid Prolonged-release Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-sodium-valproate-and-valproic-acid-prolonged-release-tablets.svg",
+  "structure": true,
+  "structureOf": "valproic acid",
+  "dosageForm": "Prolonged-release tablets",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e1bfed",
+   "glow": "#f2e2f8",
+   "ink": "#3e124e",
+   "mid": "#984ab5"
+  },
+  "keywords": "sodium valproate sr valproic acid CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Prolonged-release tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "150 mg, 200 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AG01, Fatty acid derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Spironolactone Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-spironolactone-tablets.svg",
+  "structure": true,
+  "structureOf": "spironolactone",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfd0ed",
+   "glow": "#e2eaf8",
+   "ink": "#12284e",
+   "mid": "#4a70b5"
+  },
+  "keywords": "spironolactone Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "25 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C03DA01, Aldosterone antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Tadalafil Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-urology",
+  "image": "ff-tadalafil-tablets.svg",
+  "structure": true,
+  "structureOf": "tadalafil",
+  "dosageForm": "Tablets",
+  "therapy": "Urology",
+  "tone": {
+   "bg": "#bfe2ed",
+   "glow": "#e2f3f8",
+   "ink": "#12404e",
+   "mid": "#4a9bb5"
+  },
+  "keywords": "tadalafil Urology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "5 mg, 10 mg, 20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "G04BE08, Drugs used in erectile dysfunction"
+   }
+  ]
+ },
+ {
+  "name": "Tamsulosin Hydrochloride Prolonged-release Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-urology",
+  "image": "ff-tamsulosin-hydrochloride-prolonged-release-tablets.svg",
+  "structure": true,
+  "structureOf": "tamsulosin",
+  "dosageForm": "Prolonged-release tablets",
+  "therapy": "Urology",
+  "tone": {
+   "bg": "#bfe8ed",
+   "glow": "#e2f6f8",
+   "ink": "#12484e",
+   "mid": "#4aa9b5"
+  },
+  "keywords": "modified release tamsulosin Urology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Prolonged-release tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "0.4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "G04CA02, Alpha-adrenoreceptor antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Telmisartan Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-cardio",
+  "image": "ff-telmisartan-tablets.svg",
+  "structure": true,
+  "structureOf": "telmisartan",
+  "dosageForm": "Tablets",
+  "therapy": "Cardio",
+  "tone": {
+   "bg": "#bfc1ed",
+   "glow": "#e2e3f8",
+   "ink": "#12144e",
+   "mid": "#4a4db5"
+  },
+  "keywords": "telmisartan Cardiovascular",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "20 mg, 40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "C09CA07, Angiotensin II antagonists, plain"
+   }
+  ]
+ },
+ {
+  "name": "Tranexamic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-tranexamic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "tranexamic acid",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd0",
+   "glow": "#f8e2ea",
+   "ink": "#4e1228",
+   "mid": "#b54a71"
+  },
+  "keywords": "tranexamic acid Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B02AA02, Amino acids"
+   }
+  ]
+ },
+ {
+  "name": "Tranexamic Acid and Mefenamic Acid Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-tranexamic-acid-and-mefenamic-acid-tablets.svg",
+  "structure": true,
+  "structureOf": "tranexamic acid",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd7",
+   "glow": "#f8e2ee",
+   "ink": "#4e1232",
+   "mid": "#b54a82"
+  },
+  "keywords": "tranexamic acid mefenamic acid Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "B02AA02, Amino acids"
+   }
+  ]
+ },
+ {
+  "name": "Trypsin-Chymotrypsin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-trypsin-chymotrypsin-tablets.svg",
+  "dosageForm": "Tablets",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd7bf",
+   "glow": "#f8ede2",
+   "ink": "#4e3112",
+   "mid": "#b5814a"
+  },
+  "keywords": "trypsin chymotrypsin Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "B06AA07, Enzymes"
+   }
+  ]
+ },
+ {
+  "name": "Valacyclovir Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-valacyclovir-tablets.svg",
+  "structure": true,
+  "structureOf": "valacyclovir",
+  "dosageForm": "Tablets",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfe5ed",
+   "glow": "#e2f4f8",
+   "ink": "#12444e",
+   "mid": "#4aa2b5"
+  },
+  "keywords": "valaciclovir valacyclovir Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "1 g"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J05AB11, Nucleosides and nucleotides excl. reverse transcriptase inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Cyanocobalamin Tablets",
+  "group": "tablets-capsules",
+  "type": "osd-blood",
+  "image": "ff-cyanocobalamin-tablets.svg",
+  "structure": true,
+  "structureOf": "cyanocobalamin",
+  "dosageForm": "Tablets",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfcc",
+   "glow": "#f8e2e8",
+   "ink": "#4e1223",
+   "mid": "#b54a67"
+  },
+  "keywords": "vitamin b12 cyanocobalamin Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Tablets"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mcg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "B03BA01, Vitamin B12 (cyanocobalamin and analogues)"
+   }
+  ]
+ },
+ {
+  "name": "Gabapentin Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-gabapentin-capsules.svg",
+  "structure": true,
+  "structureOf": "gabapentin",
+  "dosageForm": "Capsules",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#edbfe5",
+   "glow": "#f8e2f4",
+   "ink": "#4e1243",
+   "mid": "#b54aa1"
+  },
+  "keywords": "gabapentin CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg, 300 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AX12, Other antiepileptics"
+   }
+  ]
+ },
+ {
+  "name": "Omeprazole Gastro-resistant Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-omeprazole-gastro-resistant-capsules.svg",
+  "structure": true,
+  "structureOf": "omeprazole",
+  "dosageForm": "Gastro-resistant capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d9edbf",
+   "glow": "#eff8e2",
+   "ink": "#354e12",
+   "mid": "#87b54a"
+  },
+  "keywords": "delayed release omeprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gastro-resistant capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC01, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Omeprazole and Domperidone Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-omeprazole-and-domperidone-capsules.svg",
+  "structure": true,
+  "structureOf": "omeprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e5edbf",
+   "glow": "#f4f8e2",
+   "ink": "#444e12",
+   "mid": "#a2b54a"
+  },
+  "keywords": "omeprazole domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg + 10 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC01, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Esomeprazole and Domperidone Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-esomeprazole-and-domperidone-capsules.svg",
+  "structure": true,
+  "structureOf": "esomeprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d2edbf",
+   "glow": "#ebf8e2",
+   "ink": "#2b4e12",
+   "mid": "#76b54a"
+  },
+  "keywords": "esomeprazole domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Release",
+    "value": "Enteric-coated esomeprazole, sustained-release domperidone"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC05, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Itraconazole Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-itraconazole-capsules.svg",
+  "structure": true,
+  "structureOf": "itraconazole",
+  "dosageForm": "Capsules",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfede2",
+   "glow": "#e2f8f3",
+   "ink": "#124e3f",
+   "mid": "#4ab59a"
+  },
+  "keywords": "itraconazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "100 mg, 200 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J02AC02, Triazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-pantoprazole-capsules.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#deedbf",
+   "glow": "#f1f8e2",
+   "ink": "#3a4e12",
+   "mid": "#91b54a"
+  },
+  "keywords": "pantoprazole Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole and Levosulpiride Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-pantoprazole-and-levosulpiride-capsules.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e9edbf",
+   "glow": "#f6f8e2",
+   "ink": "#4a4e12",
+   "mid": "#adb54a"
+  },
+  "keywords": "pantoprazole levosulpiride Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "40 mg + 75 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Pantoprazole and Domperidone Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-pantoprazole-and-domperidone-capsules.svg",
+  "structure": true,
+  "structureOf": "pantoprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d7edbf",
+   "glow": "#edf8e2",
+   "ink": "#314e12",
+   "mid": "#80b54a"
+  },
+  "keywords": "pantoprazole domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Release",
+    "value": "Gastro-resistant pantoprazole, prolonged-release domperidone"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC02, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Pregabalin Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-pregabalin-capsules.svg",
+  "structure": true,
+  "structureOf": "pregabalin",
+  "dosageForm": "Capsules",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#e9bfed",
+   "glow": "#f6e2f8",
+   "ink": "#49124e",
+   "mid": "#ab4ab5"
+  },
+  "keywords": "pregabalin CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "75 mg, 150 mg, 300 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AX16, Other antiepileptics"
+   }
+  ]
+ },
+ {
+  "name": "Pregabalin and Methylcobalamin Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-pregabalin-and-methylcobalamin-capsules.svg",
+  "structure": true,
+  "structureOf": "pregabalin",
+  "dosageForm": "Capsules",
+  "therapy": "CNS",
+  "restricted": true,
+  "tone": {
+   "bg": "#dcbfed",
+   "glow": "#f0e2f8",
+   "ink": "#38124e",
+   "mid": "#8d4ab5"
+  },
+  "keywords": "pregabalin mecobalamin CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "75 mg pregabalin"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N03AX16, Other antiepileptics"
+   }
+  ]
+ },
+ {
+  "name": "Rabeprazole and Domperidone Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-rabeprazole-and-domperidone-capsules.svg",
+  "structure": true,
+  "structureOf": "rabeprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e2edbf",
+   "glow": "#f3f8e2",
+   "ink": "#404e12",
+   "mid": "#9cb54a"
+  },
+  "keywords": "rabeprazole domperidone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg + 30 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Enteric-coated rabeprazole, sustained-release domperidone"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC04, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Rabeprazole and Levosulpiride Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-rabeprazole-and-levosulpiride-capsules.svg",
+  "structure": true,
+  "structureOf": "rabeprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#cfedbf",
+   "glow": "#eaf8e2",
+   "ink": "#284e12",
+   "mid": "#70b54a"
+  },
+  "keywords": "rabeprazole levosulpiride Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg + 75 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Enteric-coated rabeprazole, sustained-release levosulpiride"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC04, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Rabeprazole and Itopride Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-rabeprazole-and-itopride-capsules.svg",
+  "structure": true,
+  "structureOf": "rabeprazole",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#dbedbf",
+   "glow": "#eff8e2",
+   "ink": "#374e12",
+   "mid": "#8bb54a"
+  },
+  "keywords": "rabeprazole itopride Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg + 150 mg"
+   },
+   {
+    "label": "Release",
+    "value": "Enteric-coated rabeprazole, sustained-release itopride"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02BC04, Proton pump inhibitors"
+   }
+  ]
+ },
+ {
+  "name": "Sodium Valproate Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-sodium-valproate-capsules.svg",
+  "structure": true,
+  "structureOf": "valproic acid",
+  "dosageForm": "Capsules",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#edbfea",
+   "glow": "#f8e2f7",
+   "ink": "#4e124a",
+   "mid": "#b54aad"
+  },
+  "keywords": "valproate sodium valproic acid CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "150 mg, 200 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AG01, Fatty acid derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Valproic Acid Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-cns",
+  "image": "ff-valproic-acid-capsules.svg",
+  "structure": true,
+  "structureOf": "valproic acid",
+  "dosageForm": "Capsules",
+  "therapy": "CNS",
+  "tone": {
+   "bg": "#e4bfed",
+   "glow": "#f4e2f8",
+   "ink": "#42124e",
+   "mid": "#9f4ab5"
+  },
+  "keywords": "valproic acid CNS & Psychiatry",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N03AG01, Fatty acid derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Tamsulosin Hydrochloride Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-urology",
+  "image": "ff-tamsulosin-hydrochloride-capsules.svg",
+  "structure": true,
+  "structureOf": "tamsulosin",
+  "dosageForm": "Capsules",
+  "therapy": "Urology",
+  "tone": {
+   "bg": "#bfdfed",
+   "glow": "#e2f1f8",
+   "ink": "#123b4e",
+   "mid": "#4a93b5"
+  },
+  "keywords": "tamsulosin Urology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "0.4 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "G04CA02, Alpha-adrenoreceptor antagonists"
+   }
+  ]
+ },
+ {
+  "name": "Azithromycin Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-azithromycin-capsules.svg",
+  "structure": true,
+  "structureOf": "azithromycin",
+  "dosageForm": "Capsules",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedce",
+   "glow": "#e2f8e9",
+   "ink": "#124e25",
+   "mid": "#4ab56c"
+  },
+  "keywords": "azithromycin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "500 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J01FA10, Macrolides"
+   }
+  ]
+ },
+ {
+  "name": "Fluconazole Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-anti-infectives",
+  "image": "ff-fluconazole-capsules.svg",
+  "structure": true,
+  "structureOf": "fluconazole",
+  "dosageForm": "Capsules",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfeced",
+   "glow": "#e2f8f8",
+   "ink": "#124e4e",
+   "mid": "#4ab3b5"
+  },
+  "keywords": "fluconazole Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "150 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "J02AC01, Triazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Loperamide Hydrochloride Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-gastro",
+  "image": "ff-loperamide-hydrochloride-capsules.svg",
+  "structure": true,
+  "structureOf": "loperamide",
+  "dosageForm": "Capsules",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#e7edbf",
+   "glow": "#f5f8e2",
+   "ink": "#464e12",
+   "mid": "#a6b54a"
+  },
+  "keywords": "loperamide Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "2 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A07DA03, Antipropulsives"
+   }
+  ]
+ },
+ {
+  "name": "Piroxicam Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-piroxicam-capsules.svg",
+  "structure": true,
+  "structureOf": "piroxicam",
+  "dosageForm": "Capsules",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcebf",
+   "glow": "#f8e9e2",
+   "ink": "#4e2612",
+   "mid": "#b56c4a"
+  },
+  "keywords": "piroxicam Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "20 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "M01AC01, Oxicams"
+   }
+  ]
+ },
+ {
+  "name": "Tramadol Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-tramadol-capsules.svg",
+  "structure": true,
+  "structureOf": "tramadol",
+  "dosageForm": "Capsules",
+  "therapy": "Pain",
+  "restricted": true,
+  "tone": {
+   "bg": "#eddcbf",
+   "glow": "#f8f0e2",
+   "ink": "#4e3812",
+   "mid": "#b58d4a"
+  },
+  "keywords": "tramadol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strengths",
+    "value": "50 mg, 100 mg"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02AX02, Other opioids"
+   }
+  ]
+ },
+ {
+  "name": "Paracetamol, Ibuprofen and Caffeine Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-pain",
+  "image": "ff-paracetamol-ibuprofen-and-caffeine-capsules.svg",
+  "structure": true,
+  "structureOf": "paracetamol",
+  "dosageForm": "Capsules",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd3bf",
+   "glow": "#f8ece2",
+   "ink": "#4e2d12",
+   "mid": "#b5794a"
+  },
+  "keywords": "paracetamol ibuprofen caffeine Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Capsules"
+   },
+   {
+    "label": "Strength",
+    "value": "325 mg + 200 mg + 30 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "N02BE01, Anilides"
+   }
+  ]
+ },
+ {
+  "name": "Ginseng, Multivitamin and Multimineral Softgel Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-nutrition",
+  "image": "ff-ginseng-multivitamin-and-multimineral-softgel-capsules.svg",
+  "dosageForm": "Softgel capsules",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#ede2bf",
+   "glow": "#f8f3e2",
+   "ink": "#4e4012",
+   "mid": "#b59c4a"
+  },
+  "keywords": "ginseng multivitamin Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Softgel capsules"
+   }
+  ]
+ },
+ {
+  "name": "Omega-3 Fatty Acids with Antioxidants, Multivitamin and Multimineral Softgel Capsules",
+  "group": "tablets-capsules",
+  "type": "osd-nutrition",
+  "image": "ff-omega-3-fatty-acids-with-antioxidants-multivitamin-and-multimineral-softgel-capsules.svg",
+  "structure": true,
+  "structureOf": "omega-3-acid ethyl esters",
+  "dosageForm": "Softgel capsules",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#edebbf",
+   "glow": "#f8f7e2",
+   "ink": "#4e4c12",
+   "mid": "#b5b04a"
+  },
+  "keywords": "omega 3 epa dha omega-3-acid ethyl esters multivitamin Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Softgel capsules"
+   },
+   {
+    "label": "Composition",
+    "value": "With ginseng, ginkgo biloba, citrus bioflavonoids, green tea and grape seed extracts, mixed carotenoids, lycopene, garlic, lutein and amino acids"
+   }
+  ]
+ },
+ {
+  "name": "Aluminium Hydroxide, Magnesium Hydroxide and Simethicone Suspension",
+  "group": "liquids",
+  "image": "ff-aluminium-hydroxide-magnesium-hydroxide-and-simethicone-suspension.svg",
+  "dosageForm": "Oral suspension",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#d4edbf",
+   "glow": "#ecf8e2",
+   "ink": "#2d4e12",
+   "mid": "#7ab54a"
+  },
+  "keywords": "antacid aluminum hydroxide magnesium hydroxide simethicone Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "250 mg + 250 mg + 50 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A02AB01, Aluminium compounds"
+   }
+  ]
+ },
+ {
+  "name": "Dextromethorphan, Chlorpheniramine and Phenylephrine Syrup",
+  "group": "liquids",
+  "image": "ff-dextromethorphan-chlorpheniramine-and-phenylephrine-syrup.svg",
+  "structure": true,
+  "structureOf": "dextromethorphan",
+  "dosageForm": "Syrup",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#c0edbf",
+   "glow": "#e2f8e2",
+   "ink": "#134e12",
+   "mid": "#4bb54a"
+  },
+  "keywords": "cough dextromethorphan chlorpheniramine phenylephrine Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "10 mg + 2 mg + 5 mg"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R05DA09, Opium alkaloids and derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Terbutaline, Bromhexine and Guaifenesin Syrup",
+  "group": "liquids",
+  "image": "ff-terbutaline-bromhexine-and-guaifenesin-syrup.svg",
+  "structure": true,
+  "structureOf": "terbutaline",
+  "dosageForm": "Syrup",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd1",
+   "glow": "#e2f8ea",
+   "ink": "#124e29",
+   "mid": "#4ab573"
+  },
+  "keywords": "cough expectorant guaiphenesin terbutaline bromhexine guaifenesin Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Composition",
+    "value": "Terbutaline 2.5 mg and guaifenesin 100 mg; bromhexine strength on request"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R03CC03, Selective beta-2-adrenoreceptor agonists"
+   }
+  ]
+ },
+ {
+  "name": "Terbutaline, Bromhexine, Guaifenesin and Menthol Syrup",
+  "group": "liquids",
+  "image": "ff-terbutaline-bromhexine-guaifenesin-and-menthol-syrup.svg",
+  "structure": true,
+  "structureOf": "terbutaline",
+  "dosageForm": "Syrup",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedc6",
+   "glow": "#e2f8e5",
+   "ink": "#124e1b",
+   "mid": "#4ab559"
+  },
+  "keywords": "cough expectorant guaiphenesin terbutaline bromhexine guaifenesin menthol Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "1.25 mg + 2 mg + 50 mg + 0.5 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R03CC03, Selective beta-2-adrenoreceptor agonists"
+   }
+  ]
+ },
+ {
+  "name": "Levosalbutamol, Ambroxol and Guaifenesin Syrup",
+  "group": "liquids",
+  "image": "ff-levosalbutamol-ambroxol-and-guaifenesin-syrup.svg",
+  "structure": true,
+  "structureOf": "levalbuterol",
+  "dosageForm": "Syrup",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedd8",
+   "glow": "#e2f8ee",
+   "ink": "#124e32",
+   "mid": "#4ab583"
+  },
+  "keywords": "levosalbutamol cough guaiphenesin levalbuterol ambroxol guaifenesin Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "1 mg + 30 mg + 50 mg"
+   }
+  ]
+ },
+ {
+  "name": "Chlorpheniramine Maleate and Menthol Syrup",
+  "group": "liquids",
+  "image": "ff-chlorpheniramine-maleate-and-menthol-syrup.svg",
+  "structure": true,
+  "structureOf": "chlorpheniramine",
+  "dosageForm": "Syrup",
+  "therapy": "Respiratory",
+  "tone": {
+   "bg": "#bfedcc",
+   "glow": "#e2f8e8",
+   "ink": "#124e24",
+   "mid": "#4ab569"
+  },
+  "keywords": "cough cold chlorpheniramine menthol Respiratory & Allergy",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "2 mg + 0.2%"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "R06AB04, Substituted alkylamines"
+   }
+  ]
+ },
+ {
+  "name": "Paracetamol Oral Suspension",
+  "group": "liquids",
+  "image": "ff-paracetamol-oral-suspension.svg",
+  "structure": true,
+  "structureOf": "paracetamol",
+  "dosageForm": "Oral suspension",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edcbbf",
+   "glow": "#f8e8e2",
+   "ink": "#4e2112",
+   "mid": "#b5644a"
+  },
+  "keywords": "acetaminophen paracetamol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "250 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "N02BE01, Anilides"
+   }
+  ]
+ },
+ {
+  "name": "Ferric Ammonium Citrate, Cyanocobalamin, Folic Acid and Zinc Syrup",
+  "group": "liquids",
+  "image": "ff-ferric-ammonium-citrate-cyanocobalamin-folic-acid-and-zinc-syrup.svg",
+  "dosageForm": "Syrup",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfd3",
+   "glow": "#f8e2eb",
+   "ink": "#4e122c",
+   "mid": "#b54a77"
+  },
+  "keywords": "iron tonic ferric ammonium citrate cyanocobalamin folic acid zinc sulfate Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "160 mg (32 mg elemental iron) + 7.5 mcg + 5 mg + 7 mg/5 ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "V08CA07, Paramagnetic contrast media"
+   }
+  ]
+ },
+ {
+  "name": "Ferrous Ascorbate, Zinc, Folic Acid and Vitamin B12 Syrup",
+  "group": "liquids",
+  "image": "ff-ferrous-ascorbate-zinc-folic-acid-and-vitamin-b12-syrup.svg",
+  "dosageForm": "Syrup",
+  "therapy": "Blood & iron",
+  "tone": {
+   "bg": "#edbfc7",
+   "glow": "#f8e2e6",
+   "ink": "#4e121d",
+   "mid": "#b54a5d"
+  },
+  "keywords": "iron tonic ferrous ascorbate zinc sulfate folic acid cyanocobalamin Blood & Iron",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "iron 30 mg + zinc 8 mg + 500 mcg + 1 mcg/5 ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "B03AA10, Iron bivalent, oral preparations"
+   }
+  ]
+ },
+ {
+  "name": "Multivitamin, Multimineral and Amino Acid Syrup",
+  "group": "liquids",
+  "image": "ff-multivitamin-multimineral-and-amino-acid-syrup.svg",
+  "dosageForm": "Syrup",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#ede6bf",
+   "glow": "#f8f5e2",
+   "ink": "#4e4512",
+   "mid": "#b5a44a"
+  },
+  "keywords": "multivitamin tonic lysine multivitamin Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   }
+  ]
+ },
+ {
+  "name": "Multivitamin Syrup",
+  "group": "liquids",
+  "image": "ff-multivitamin-syrup.svg",
+  "dosageForm": "Syrup",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#ecedbf",
+   "glow": "#f8f8e2",
+   "ink": "#4d4e12",
+   "mid": "#b3b54a"
+  },
+  "keywords": "vitamin tonic multivitamin Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Composition",
+    "value": "Vitamins A, D3, B1, B2, B6, B12 and C with niacinamide and D-panthenol, per 10 ml"
+   }
+  ]
+ },
+ {
+  "name": "Calcium, Vitamin D3 and Minerals Suspension",
+  "group": "liquids",
+  "image": "ff-calcium-vitamin-d3-and-minerals-suspension.svg",
+  "dosageForm": "Oral suspension",
+  "therapy": "Vitamins",
+  "tone": {
+   "bg": "#eddcbf",
+   "glow": "#f8f0e2",
+   "ink": "#4e3812",
+   "mid": "#b58d4a"
+  },
+  "keywords": "calcium carbonate cholecalciferol Vitamins & Minerals",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral suspension"
+   },
+   {
+    "label": "Strength",
+    "value": "625 mg + 200 IU/5 ml"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "A12AA04, Calcium"
+   }
+  ]
+ },
+ {
+  "name": "Fungal Diastase and Pepsin Syrup",
+  "group": "liquids",
+  "image": "ff-fungal-diastase-and-pepsin-syrup.svg",
+  "dosageForm": "Syrup",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#dfedbf",
+   "glow": "#f2f8e2",
+   "ink": "#3d4e12",
+   "mid": "#95b54a"
+  },
+  "keywords": "digestive enzyme diastase pepsin Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Syrup"
+   },
+   {
+    "label": "Strength",
+    "value": "50 mg + 10 mg/5 ml"
+   }
+  ]
+ },
+ {
+  "name": "Chlorhexidine Gluconate Mouthwash",
+  "group": "liquids",
+  "image": "ff-chlorhexidine-gluconate-mouthwash.svg",
+  "structure": true,
+  "structureOf": "chlorhexidine",
+  "dosageForm": "Mouthwash",
+  "therapy": "Gastro",
+  "tone": {
+   "bg": "#ebedbf",
+   "glow": "#f7f8e2",
+   "ink": "#4c4e12",
+   "mid": "#b1b54a"
+  },
+  "keywords": "chlorhexidine Gastrointestinal",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Mouthwash"
+   },
+   {
+    "label": "Strength",
+    "value": "0.2% w/v"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "A01AB03, Antiinfectives and antiseptics for local oral treatment"
+   }
+  ]
+ },
+ {
+  "name": "Dextrose, Sucrose, Zinc and Vitamin C Oral Powder",
+  "group": "dry-powders",
+  "image": "ff-dextrose-sucrose-zinc-and-vitamin-c-oral-powder.svg",
+  "structure": true,
+  "structureOf": "dextrose",
+  "dosageForm": "Oral powder",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#ede9bf",
+   "glow": "#f8f6e2",
+   "ink": "#4e4912",
+   "mid": "#b5ab4a"
+  },
+  "keywords": "energy drink glucose dextrose sucrose zinc sulfate ascorbic acid Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral powder"
+   },
+   {
+    "label": "Strength",
+    "value": "17.5 g + 14 g + 32.5 mg + 40 mg per 35 g"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "V06DC01, Carbohydrates"
+   }
+  ]
+ },
+ {
+  "name": "Chocolate-flavoured Protein Powder",
+  "group": "dry-powders",
+  "image": "ff-chocolate-flavoured-protein-powder.svg",
+  "dosageForm": "Oral powder",
+  "therapy": "Nutrition",
+  "tone": {
+   "bg": "#ede4bf",
+   "glow": "#f8f4e2",
+   "ink": "#4e4212",
+   "mid": "#b59f4a"
+  },
+  "keywords": "nutrition supplement protein Nutrition",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Oral powder"
+   }
+  ]
+ },
+ {
+  "name": "Fusidic Acid Cream",
+  "group": "topicals",
+  "image": "ff-fusidic-acid-cream.svg",
+  "structure": true,
+  "structureOf": "fusidic acid",
+  "dosageForm": "Cream",
+  "therapy": "Skin",
+  "tone": {
+   "bg": "#bfedd6",
+   "glow": "#e2f8ed",
+   "ink": "#124e30",
+   "mid": "#4ab580"
+  },
+  "keywords": "fusidic acid Dermatology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Cream"
+   },
+   {
+    "label": "Strength",
+    "value": "2% w/w"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "D06AX01, Other antibiotics for topical use"
+   }
+  ]
+ },
+ {
+  "name": "Luliconazole Cream",
+  "group": "topicals",
+  "image": "ff-luliconazole-cream.svg",
+  "structure": true,
+  "structureOf": "luliconazole",
+  "dosageForm": "Cream",
+  "therapy": "Skin",
+  "tone": {
+   "bg": "#bfede6",
+   "glow": "#e2f8f5",
+   "ink": "#124e45",
+   "mid": "#4ab5a5"
+  },
+  "keywords": "luliconazole Dermatology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Cream"
+   },
+   {
+    "label": "Strength",
+    "value": "1% w/w"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "D01AC18, Imidazole and triazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Clobetasol, Neomycin and Miconazole Cream",
+  "group": "topicals",
+  "image": "ff-clobetasol-neomycin-and-miconazole-cream.svg",
+  "structure": true,
+  "structureOf": "clobetasol",
+  "dosageForm": "Cream",
+  "therapy": "Skin",
+  "tone": {
+   "bg": "#bfeddc",
+   "glow": "#e2f8f0",
+   "ink": "#124e38",
+   "mid": "#4ab58e"
+  },
+  "keywords": "clobetasol neomycin miconazole Dermatology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Cream"
+   },
+   {
+    "label": "Strength",
+    "value": "0.05% + 0.5% + 2% w/w"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "D07AD01, Corticosteroids, very potent (group IV)"
+   }
+  ]
+ },
+ {
+  "name": "Diclofenac, Linseed Oil, Methyl Salicylate and Menthol Gel",
+  "group": "topicals",
+  "image": "ff-diclofenac-linseed-oil-methyl-salicylate-and-menthol-gel.svg",
+  "structure": true,
+  "structureOf": "diclofenac",
+  "dosageForm": "Gel",
+  "therapy": "Pain",
+  "tone": {
+   "bg": "#edd9bf",
+   "glow": "#f8eee2",
+   "ink": "#4e3412",
+   "mid": "#b5854a"
+  },
+  "keywords": "pain relief gel diclofenac linseed oil methyl salicylate menthol Pain & Inflammation",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Gel"
+   },
+   {
+    "label": "Strength",
+    "value": "diclofenac diethylamine 1.16% (diclofenac sodium 1%) + 3% + 10% + 5% w/w"
+   },
+   {
+    "label": "WHO ATC (main ingredient)",
+    "value": "M02AA15, Antiinflammatory preparations, non-steroids for topical use"
+   }
+  ]
+ },
+ {
+  "name": "Ketoconazole Soap",
+  "group": "topicals",
+  "image": "ff-ketoconazole-soap.svg",
+  "structure": true,
+  "structureOf": "ketoconazole",
+  "dosageForm": "Medicated soap",
+  "therapy": "Skin",
+  "tone": {
+   "bg": "#bfedec",
+   "glow": "#e2f8f8",
+   "ink": "#124e4e",
+   "mid": "#4ab5b3"
+  },
+  "keywords": "ketoconazole Dermatology",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Medicated soap"
+   },
+   {
+    "label": "Strength",
+    "value": "1%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "D01AC08, Imidazole and triazole derivatives"
+   }
+  ]
+ },
+ {
+  "name": "Permethrin Soap",
+  "group": "topicals",
+  "image": "ff-permethrin-soap.svg",
+  "structure": true,
+  "structureOf": "permethrin",
+  "dosageForm": "Medicated soap",
+  "therapy": "Infections",
+  "tone": {
+   "bg": "#bfedda",
+   "glow": "#e2f8ef",
+   "ink": "#124e35",
+   "mid": "#4ab588"
+  },
+  "keywords": "permethrin Anti-infectives",
+  "specs": [
+   {
+    "label": "Dosage form",
+    "value": "Medicated soap"
+   },
+   {
+    "label": "Strength",
+    "value": "1%"
+   },
+   {
+    "label": "WHO ATC",
+    "value": "P03AC04, Pyrethrines, incl. synthetic compounds"
+   }
+  ]
+ }
+]

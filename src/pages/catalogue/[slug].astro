@@ -6,7 +6,7 @@ import EnquiryActions from '../../components/EnquiryActions.astro';
 import EnquiryTray from '../../components/EnquiryTray.astro';
 import Formula from '../../components/Formula.astro';
 import { CATALOGUE, type CatalogueItem } from '../../data/catalogue';
-import { imageFor, itemSlug, itemFacts, itemNote, specValue, placeOf, categoryName, scopeHref, ITEMS } from '../../lib/catalogue';
+import { imageFor, itemSlug, itemFacts, itemNote, specValue, strengthsOf, placeOf, categoryName, scopeHref, ITEMS } from '../../lib/catalogue';
 
 // One page per catalogue item. It exists so an item can be linked from a cold
 // email or a WhatsApp thread and so the enquiry buttons have somewhere to
@@ -48,13 +48,17 @@ const trail = [
 // comma, never mid-word.
 const MAX_DESC = 155;
 const isApi = place.line.id === 'api';
+const isFinished = place.line.id === 'finished';
 const cas = specValue(item, 'CAS number');
 const formula = specValue(item, 'Molecular formula');
 // An API is searched for by name, CAS number and formula, so those lead; the
-// datasheet-style list (weight, UNII) stays on the page.
+// datasheet-style list (weight, UNII) stays on the page. A finished
+// formulation leads with its dosage form and strengths.
 const factText = isApi
   ? [cas && `CAS ${cas}`, formula && `molecular formula ${formula}`].filter(Boolean).join(', ')
-  : facts.map((f) => `${f.label.toLowerCase()} ${f.value}`).join(', ');
+  : isFinished
+    ? [item.dosageForm?.toLowerCase(), ...strengthsOf(item)].filter(Boolean).join(', ')
+    : facts.map((f) => `${f.label.toLowerCase()} ${f.value}`).join(', ');
 const subject = isApi ? `${item.name} API` : item.name;
 let lead = factText ? `${subject}: ${factText}.` : `${subject}.`;
 if (lead.length > MAX_DESC) {
@@ -72,14 +76,24 @@ const description =
 
 // The longest title that fits in 60 characters (search results cut there):
 // "Name | Pharma Packaging | MH PharmaPack" for packaging, "Name API
-// Sourcing | MH PharmaPack" for an API, else "Name | MH PharmaPack".
+// Sourcing | MH PharmaPack" for an API, "Name Sourcing | MH PharmaPack" for a
+// finished formulation, else "Name | MH PharmaPack".
 const titles = isApi
   ? [`${item.name} API Sourcing | MH PharmaPack`, `${item.name} API | MH PharmaPack`]
   : place.line.id === 'packaging'
     ? [`${item.name} | Pharma Packaging | MH PharmaPack`]
-    : [];
+    : isFinished
+      ? [`${item.name} Sourcing | MH PharmaPack`]
+      : [];
 const title = titles.find((t) => t.length <= 60) ?? `${item.name} | MH PharmaPack`;
-const tone = item.structure ? item.tone : undefined;
+const tone = item.tone;
+const tileAlt = item.dosageForm
+  ? item.structure
+    ? `Structural formula of ${item.structureOf}, the main ingredient of ${item.name}`
+    : `${item.name}: ${item.dosageForm.toLowerCase()}, drawing`
+  : item.structureOf
+    ? `Structural formula of ${item.structureOf}, the main component of ${item.name}`
+    : `Structural formula of ${item.name}`;
 ---
 
 <Base
@@ -120,7 +134,7 @@ const tone = item.structure ? item.tone : undefined;
               tone ? (
                 <img
                   src={imageFor(item.image).src}
-                  alt={item.structureOf ? `Structural formula of ${item.structureOf}, the main component of ${item.name}` : `Structural formula of ${item.name}`}
+                  alt={tileAlt}
                   class="h-full w-full object-cover"
                   decoding="async"
                 />

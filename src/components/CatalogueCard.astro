@@ -46,20 +46,32 @@ const PEEK_LABELS: Record<string, string> = {
   'Molecular formula': 'Formula',
   'Molecular weight': 'Mol. weight',
 };
-const peek = item.structure
-  ? facts.filter((f) => PEEK_LABELS[f.label]).map((f) => ({ label: PEEK_LABELS[f.label], value: f.value }))
-  : facts.filter((f) => f.label !== 'Colour').slice(0, 5);
+// A finished formulation's peek: form, strengths, release and use; the
+// composition, ATC class and other presentations stay on the item page.
+const FF_PEEK = new Set(['Dosage form', 'Strength', 'Strengths', 'Release', 'Use']);
+const peek = item.dosageForm
+  ? facts.filter((f) => FF_PEEK.has(f.label))
+  : item.structure
+    ? facts.filter((f) => PEEK_LABELS[f.label]).map((f) => ({ label: PEEK_LABELS[f.label], value: f.value }))
+    : facts.filter((f) => f.label !== 'Colour').slice(0, 5);
 const place = placeOf(item);
 const enq = await enquiryAttrs(item, Astro.site);
 const detail = itemDetail(item);
-// API tiles: the structure drawing fills the square on its own colour, with
-// the class (the filter's own short name) top left and the formula bottom
-// left, both in the tile's ink, which render.mjs holds to 7:1 on its tint.
-const tone = item.structure ? item.tone : undefined;
-const formula = item.structure ? specValue(item, 'Molecular formula') : undefined;
+// Generated tiles fill the square on their own colour, with a label top left
+// and a line bottom left, both in the tile's ink, which the tile scripts hold
+// to 7:1 on its tint. An API shows its class (the filter's own short name)
+// and formula; a finished formulation its therapy area and dosage form, with
+// the form's icon drawn into the tile's top right corner.
+const tone = item.tone;
+const formula = item.structure && !item.dosageForm ? specValue(item, 'Molecular formula') : undefined;
 // Molecular weight as a number, for the API sorts ("392.46 g/mol" -> 392.46).
 const mw = parseFloat(specValue(item, 'Molecular weight') ?? '');
-const classLabel = place.type?.short ?? place.group.name;
+const classLabel = item.therapy ?? place.type?.short ?? place.group.name;
+const tileAlt = item.dosageForm
+  ? item.structure
+    ? `${item.name}: structural formula of ${item.structureOf}, the main ingredient`
+    : `${item.name}: ${item.dosageForm.toLowerCase()}, drawing`
+  : `${item.name}, structural formula`;
 ---
 
 <li
@@ -87,17 +99,18 @@ const classLabel = place.type?.short ?? place.group.name;
           <>
             <img
               src={imageFor(item.image).src}
-              alt={`${item.name}, structural formula`}
+              alt={tileAlt}
               class="h-full w-full object-cover"
               loading="lazy"
               decoding="async"
             />
-            <span class="tile-class">{classLabel}</span>
+            <span class:list={['tile-class', { 'tile-class-ff': item.dosageForm }]}>{classLabel}</span>
             {formula && (
               <span class="tile-formula">
                 <Formula value={formula} />
               </span>
             )}
+            {item.dosageForm && <span class="tile-formula tile-form">{item.dosageForm}</span>}
           </>
         ) : item.illustrative ? (
           <img
@@ -202,6 +215,15 @@ const classLabel = place.type?.short ?? place.group.name;
     bottom: 0.5rem;
     font-size: 0.75rem;
     font-weight: 600;
+  }
+  /* A finished formulation's tile carries its dosage form icon in the top
+     right corner, so the label stops short of it; the form's name may run
+     to two lines at the foot. */
+  .tile-class-ff {
+    right: 18%;
+  }
+  .tile-form {
+    right: 0.6rem;
   }
   @media (min-width: 768px) {
     .tile-class,

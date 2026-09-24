@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Injection: Calcium Gluconate Injection">
+<title>Injection: Calcium Gluconate Injection</title>
+<defs><radialGradient id="g" cx="50%" cy="46%" r="62%"><stop offset="0" stop-color="#f8efe2"/><stop offset="1" stop-color="#edd9bf"/></radialGradient></defs>
+<rect width="600" height="600" fill="url(#g)"/>
+<g transform="translate(170 150) scale(2.6)" fill="none" stroke="#4e3412" stroke-width="1.923076923076923" stroke-linecap="round" stroke-linejoin="round"><rect x="36" y="8" width="28" height="12" rx="3"/><path d="M40 20v8c-8 3-12 8-12 15v39a10 10 0 0 0 10 10h24a10 10 0 0 0 10-10V43c0-7-4-12-12-15v-8"/><path d="M28 56h44"/></g><g></g>
+</svg>

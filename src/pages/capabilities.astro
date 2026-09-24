@@ -56,6 +56,8 @@ const tileArt: Record<string, { images: string[]; photo?: boolean }> = {
 };
 const packaging = TAXONOMY.find((l) => l.id === 'packaging');
 const packagingItems = ITEMS.filter((i) => placeOf(i).line.id === 'packaging');
+const apiCount = ITEMS.filter((i) => placeOf(i).line.id === 'api').length;
+const ffCount = ITEMS.filter((i) => placeOf(i).line.id === 'finished').length;
 const tiles = (packaging?.groups ?? [])
   .map((g) => ({
     ...g,
@@ -221,7 +223,14 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
         }
       </ul>
       <p class="mt-6 text-sm text-steel-deep" data-reveal>
-        API and finished formulations are being added to the catalogue.
+        The same catalogue lists{' '}
+        <a href={scopeHref({ line: 'api' })} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">
+          {apiCount} APIs
+        </a>{' '}
+        and{' '}
+        <a href={scopeHref({ line: 'finished' })} class="font-semibold text-copper-deep underline underline-offset-4 hover:text-copper">
+          {ffCount} finished formulations
+        </a>.
       </p>
     </div>
   </section>

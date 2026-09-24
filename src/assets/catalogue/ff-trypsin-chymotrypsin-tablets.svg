@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Tablets: Trypsin-Chymotrypsin Tablets">
+<title>Tablets: Trypsin-Chymotrypsin Tablets</title>
+<defs><radialGradient id="g" cx="50%" cy="46%" r="62%"><stop offset="0" stop-color="#f8ede2"/><stop offset="1" stop-color="#edd7bf"/></radialGradient></defs>
+<rect width="600" height="600" fill="url(#g)"/>
+<g transform="translate(170 150) scale(2.6)" fill="none" stroke="#4e3112" stroke-width="1.923076923076923" stroke-linecap="round" stroke-linejoin="round"><circle cx="42" cy="48" r="26"/><path d="M24 30l36 36"/><ellipse cx="74" cy="72" rx="16" ry="10" transform="rotate(-30 74 72)"/></g><g></g>
+</svg>

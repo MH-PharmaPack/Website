@@ -1,0 +1,3159 @@
+{
+ "_comment": "Curated from partner product lists (2026-09-24). Generic names only; same actives in the same dosage form = one entry, strengths merged. Edit here, then run fetch.mjs and render.mjs.",
+ "items": [
+  {
+   "form": "injp",
+   "name": "Ceftriaxone for Injection",
+   "actives": [
+    "ceftriaxone"
+   ],
+   "strengths": [
+    "125 mg",
+    "250 mg",
+    "500 mg",
+    "1 g",
+    "2 g"
+   ],
+   "also": "Combipack with lidocaine injection 1% and sterile water for injection",
+   "kw": "ceftriaxone sodium"
+  },
+  {
+   "form": "injp",
+   "name": "Ceftriaxone and Sulbactam for Injection",
+   "actives": [
+    "ceftriaxone",
+    "sulbactam"
+   ],
+   "strengths": [
+    "375 mg",
+    "750 mg",
+    "1 g",
+    "1.5 g"
+   ],
+   "also": "Combipack with lidocaine injection 1%"
+  },
+  {
+   "form": "injp",
+   "name": "Ceftriaxone and Tazobactam for Injection",
+   "actives": [
+    "ceftriaxone",
+    "tazobactam"
+   ],
+   "strengths": [
+    "281.25 mg",
+    "562.5 mg",
+    "1.125 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefotaxime for Injection",
+   "actives": [
+    "cefotaxime"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg",
+    "1 g"
+   ],
+   "kw": "cefotaxime sodium"
+  },
+  {
+   "form": "injp",
+   "name": "Cefotaxime and Sulbactam for Injection",
+   "actives": [
+    "cefotaxime",
+    "sulbactam"
+   ],
+   "strengths": [
+    "1.5 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Ceftazidime for Injection",
+   "actives": [
+    "ceftazidime"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Ceftazidime and Tazobactam for Injection",
+   "actives": [
+    "ceftazidime",
+    "tazobactam"
+   ],
+   "strengths": [
+    "281.25 mg",
+    "562.5 mg",
+    "1.125 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefepime for Injection",
+   "actives": [
+    "cefepime"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg",
+    "1 g"
+   ],
+   "also": "Combipack with sterile water for injection"
+  },
+  {
+   "form": "injp",
+   "name": "Cefepime and Tazobactam for Injection",
+   "actives": [
+    "cefepime",
+    "tazobactam"
+   ],
+   "strengths": [
+    "281.25 mg",
+    "562.5 mg",
+    "1.125 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefuroxime for Injection",
+   "actives": [
+    "cefuroxime"
+   ],
+   "strengths": [
+    "750 mg",
+    "1.5 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefoperazone for Injection",
+   "actives": [
+    "cefoperazone"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefoperazone and Sulbactam for Injection",
+   "actives": [
+    "cefoperazone",
+    "sulbactam"
+   ],
+   "strengths": [
+    "1 g",
+    "1.5 g",
+    "2 g",
+    "3 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefoperazone and Tazobactam for Injection",
+   "actives": [
+    "cefoperazone",
+    "tazobactam"
+   ],
+   "strengths": [
+    "1.125 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefazolin for Injection",
+   "actives": [
+    "cefazolin"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefpirome for Injection",
+   "actives": [
+    "cefpirome"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cefpirome and Sulbactam for Injection",
+   "actives": [
+    "cefpirome",
+    "sulbactam"
+   ],
+   "strengths": [
+    "1.5 g",
+    "3 g"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Cefixime Dispersible Tablets",
+   "actives": [
+    "cefixime"
+   ],
+   "strengths": [
+    "200 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Cefixime and Lactic Acid Bacillus Tablets",
+   "actives": [
+    "cefixime",
+    "lactic acid bacillus"
+   ],
+   "strengths": [
+    "200 mg"
+   ],
+   "kw": "probiotic"
+  },
+  {
+   "form": "tablet",
+   "name": "Cefixime and Ofloxacin Tablets",
+   "actives": [
+    "cefixime",
+    "ofloxacin"
+   ],
+   "strengths": [
+    "200 mg + 200 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Cefpodoxime Dispersible Tablets",
+   "actives": [
+    "cefpodoxime"
+   ],
+   "strengths": [
+    "200 mg"
+   ],
+   "kw": "cefpodoxime proxetil"
+  },
+  {
+   "form": "tablet",
+   "name": "Cefpodoxime and Potassium Clavulanate Tablets",
+   "actives": [
+    "cefpodoxime",
+    "clavulanic acid"
+   ],
+   "strengths": [
+    "200 mg + 125 mg"
+   ],
+   "kw": "clavulanic acid"
+  },
+  {
+   "form": "tablet",
+   "name": "Cefpodoxime and Ofloxacin Tablets",
+   "actives": [
+    "cefpodoxime",
+    "ofloxacin"
+   ],
+   "strengths": [
+    "200 mg + 200 mg"
+   ]
+  },
+  {
+   "form": "liquid",
+   "name": "Cefixime Oral Suspension",
+   "actives": [
+    "cefixime"
+   ],
+   "strengths": [
+    "100 mg/5 ml"
+   ],
+   "kw": "dry syrup"
+  },
+  {
+   "form": "injp",
+   "name": "Meropenem for Injection",
+   "actives": [
+    "meropenem"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg",
+    "1 g",
+    "2 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Meropenem and Sulbactam for Injection",
+   "actives": [
+    "meropenem",
+    "sulbactam"
+   ],
+   "strengths": [
+    "1.5 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Meropenem and Tazobactam for Injection",
+   "actives": [
+    "meropenem",
+    "tazobactam"
+   ],
+   "strengths": [
+    "1.125 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Imipenem and Cilastatin for Injection",
+   "actives": [
+    "imipenem",
+    "cilastatin"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g",
+    "2 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Doripenem for Injection",
+   "actives": [
+    "doripenem"
+   ],
+   "strengths": [
+    "500 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Ertapenem for Injection",
+   "actives": [
+    "ertapenem"
+   ],
+   "strengths": [
+    "1 g"
+   ],
+   "kw": "ertapenem sodium"
+  },
+  {
+   "form": "injp",
+   "name": "Piperacillin and Tazobactam for Injection",
+   "actives": [
+    "piperacillin",
+    "tazobactam"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Amoxicillin and Potassium Clavulanate Tablets",
+   "actives": [
+    "amoxicillin",
+    "clavulanic acid"
+   ],
+   "strengths": [
+    "500 mg + 125 mg"
+   ],
+   "kw": "amoxycillin co-amoxiclav clavulanic acid"
+  },
+  {
+   "form": "liquid",
+   "name": "Amoxicillin and Potassium Clavulanate Oral Suspension",
+   "actives": [
+    "amoxicillin",
+    "clavulanic acid"
+   ],
+   "strengths": [
+    "200 mg + 28.5 mg/5 ml"
+   ],
+   "kw": "amoxycillin co-amoxiclav dry syrup"
+  },
+  {
+   "form": "injp",
+   "name": "Spectinomycin for Injectable Suspension",
+   "actives": [
+    "spectinomycin"
+   ],
+   "strengths": [
+    "2 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Vancomycin for Injection",
+   "actives": [
+    "vancomycin"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Teicoplanin for Injection",
+   "actives": [
+    "teicoplanin"
+   ],
+   "strengths": [
+    "400 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Tigecycline for Infusion",
+   "actives": [
+    "tigecycline"
+   ],
+   "strengths": [
+    "50 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Amikacin Injection",
+   "actives": [
+    "amikacin"
+   ],
+   "strengths": [
+    "100 mg/2 ml",
+    "250 mg/2 ml",
+    "500 mg/2 ml",
+    "250 mg/ml"
+   ],
+   "kw": "amikacin sulphate sulfate"
+  },
+  {
+   "form": "inj",
+   "name": "Netilmicin Injection",
+   "actives": [
+    "netilmicin"
+   ],
+   "strengths": [
+    "50 mg/ml"
+   ],
+   "kw": "netilmicin sulphate sulfate"
+  },
+  {
+   "form": "inj",
+   "name": "Gentamicin Injection",
+   "actives": [
+    "gentamicin"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Lincomycin Injection",
+   "actives": [
+    "lincomycin"
+   ],
+   "strengths": [
+    "600 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Clindamycin Injection",
+   "actives": [
+    "clindamycin"
+   ],
+   "strengths": [
+    "600 mg/4 ml"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Clarithromycin for Injection",
+   "actives": [
+    "clarithromycin"
+   ],
+   "strengths": [
+    "500 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Acyclovir for Injection",
+   "actives": [
+    "acyclovir"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ],
+   "also": "Combipack with sterile water for injection",
+   "kw": "aciclovir"
+  },
+  {
+   "form": "injp",
+   "name": "Ganciclovir for Injection",
+   "actives": [
+    "ganciclovir"
+   ],
+   "strengths": [
+    "500 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Voriconazole for Injection",
+   "actives": [
+    "voriconazole"
+   ],
+   "strengths": [
+    "200 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Artemether Injection",
+   "actives": [
+    "artemether"
+   ],
+   "strengths": [
+    "80 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Meglumine Antimoniate Injection",
+   "actives": [
+    "meglumine antimoniate"
+   ],
+   "strengths": [
+    "1.5 g/5 ml"
+   ],
+   "kw": "leishmaniasis"
+  },
+  {
+   "form": "injp",
+   "name": "Esomeprazole for Injection",
+   "actives": [
+    "esomeprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ],
+   "also": "Combipack with sodium chloride injection 0.9%",
+   "kw": "esomeprazole sodium lyophilized"
+  },
+  {
+   "form": "injp",
+   "name": "Pantoprazole for Injection",
+   "actives": [
+    "pantoprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ],
+   "also": "Combipack with sodium chloride injection 0.9%"
+  },
+  {
+   "form": "injp",
+   "name": "Omeprazole for Injection",
+   "actives": [
+    "omeprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Rabeprazole for Injection",
+   "actives": [
+    "rabeprazole"
+   ],
+   "strengths": [
+    "20 mg"
+   ],
+   "also": "Combipack with sterile water for injection",
+   "kw": "rabeprazole sodium"
+  },
+  {
+   "form": "injp",
+   "name": "Famotidine for Injection",
+   "actives": [
+    "famotidine"
+   ],
+   "strengths": [
+    "20 mg"
+   ],
+   "also": "Combipack with sodium chloride injection 0.9%"
+  },
+  {
+   "form": "inj",
+   "name": "Ondansetron Injection",
+   "actives": [
+    "ondansetron"
+   ],
+   "strengths": [
+    "2 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Ramosetron Injection",
+   "actives": [
+    "ramosetron"
+   ],
+   "strengths": [
+    "0.3 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Metoclopramide Injection",
+   "actives": [
+    "metoclopramide"
+   ],
+   "strengths": [
+    "10 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Hyoscine Butylbromide Injection",
+   "actives": [
+    "butylscopolamine"
+   ],
+   "strengths": [
+    "20 mg/ml"
+   ],
+   "kw": "hyoscine butylbromide scopolamine butylbromide"
+  },
+  {
+   "form": "inj",
+   "name": "Dimenhydrinate Injection",
+   "actives": [
+    "dimenhydrinate"
+   ],
+   "strengths": [
+    "50 mg/ml"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Cerebroprotein Hydrolysate for Injection",
+   "actives": [
+    "cerebroprotein hydrolysate"
+   ],
+   "strengths": [
+    "60 mg"
+   ],
+   "therapy": "cns"
+  },
+  {
+   "form": "injp",
+   "name": "Olanzapine for Injection",
+   "actives": [
+    "olanzapine"
+   ],
+   "strengths": [
+    "10 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Haloperidol Injection",
+   "actives": [
+    "haloperidol"
+   ],
+   "strengths": [
+    "5 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Haloperidol Decanoate Injection",
+   "actives": [
+    "haloperidol decanoate"
+   ],
+   "strengths": [
+    "50 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Chlorpromazine Injection",
+   "actives": [
+    "chlorpromazine"
+   ],
+   "strengths": [
+    "25 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Flupentixol Injection",
+   "actives": [
+    "flupentixol"
+   ],
+   "strengths": [
+    "20 mg/ml",
+    "40 mg/2 ml"
+   ],
+   "kw": "flupenthixol"
+  },
+  {
+   "form": "inj",
+   "name": "Zuclopenthixol Decanoate Injection",
+   "actives": [
+    "zuclopenthixol decanoate"
+   ],
+   "strengths": [
+    "200 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Phenytoin Sodium Injection",
+   "actives": [
+    "phenytoin"
+   ],
+   "strengths": [
+    "50 mg/ml",
+    "250 mg/5 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Sodium Valproate Injection",
+   "actives": [
+    "valproic acid"
+   ],
+   "strengths": [
+    "100 mg",
+    "500 mg/5 ml"
+   ],
+   "kw": "valproate sodium"
+  },
+  {
+   "form": "inj",
+   "name": "Phenobarbital Injection",
+   "actives": [
+    "phenobarbital"
+   ],
+   "strengths": [
+    "100 mg/ml"
+   ],
+   "restricted": true,
+   "kw": "phenobarbitone"
+  },
+  {
+   "form": "inj",
+   "name": "Diazepam Injection",
+   "actives": [
+    "diazepam"
+   ],
+   "strengths": [
+    "10 mg/2 ml"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "inj",
+   "name": "Midazolam Injection",
+   "actives": [
+    "midazolam"
+   ],
+   "strengths": [
+    "5 mg/ml"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "inj",
+   "name": "Piracetam Injection",
+   "actives": [
+    "piracetam"
+   ],
+   "strengths": [
+    "200 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Citicoline Injection",
+   "actives": [
+    "citicoline"
+   ],
+   "strengths": [
+    "250 mg/ml"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Botulinum Toxin for Injection",
+   "actives": [
+    "botulinum toxin type a"
+   ],
+   "strengths": [
+    "100 units"
+   ],
+   "restricted": true,
+   "therapy": "cns",
+   "kw": "clostridium botulinum toxin"
+  },
+  {
+   "form": "injp",
+   "name": "Vecuronium Bromide for Injection",
+   "actives": [
+    "vecuronium"
+   ],
+   "strengths": [
+    "10 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Atracurium Besylate Injection",
+   "actives": [
+    "atracurium"
+   ],
+   "strengths": [
+    "10 mg/ml"
+   ],
+   "kw": "atracurium besilate"
+  },
+  {
+   "form": "inj",
+   "name": "Suxamethonium Chloride Injection",
+   "actives": [
+    "suxamethonium"
+   ],
+   "strengths": [
+    "50 mg/ml"
+   ],
+   "kw": "succinylcholine"
+  },
+  {
+   "form": "inj",
+   "name": "Propofol Injectable Emulsion",
+   "actives": [
+    "propofol"
+   ],
+   "strengths": [
+    "1% w/v (10 mg/ml)"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Etomidate Injection",
+   "actives": [
+    "etomidate"
+   ],
+   "strengths": [
+    "20 mg/10 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Lidocaine Injection",
+   "actives": [
+    "lidocaine"
+   ],
+   "strengths": [
+    "1%",
+    "2%"
+   ],
+   "kw": "lignocaine xylocaine"
+  },
+  {
+   "form": "inj",
+   "name": "Lidocaine and Adrenaline Injection",
+   "actives": [
+    "lidocaine",
+    "epinephrine"
+   ],
+   "strengths": [
+    "2% w/v",
+    "lidocaine hydrochloride 24.64 mg + adrenaline 0.0125 mg per ml"
+   ],
+   "kw": "lignocaine epinephrine dental cartridge"
+  },
+  {
+   "form": "inj",
+   "name": "Bupivacaine Injection",
+   "actives": [
+    "bupivacaine"
+   ],
+   "strengths": [
+    "0.5% w/v"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Bupivacaine in Dextrose Injection",
+   "actives": [
+    "bupivacaine",
+    "dextrose"
+   ],
+   "strengths": [
+    "5 mg + 80 mg per ml"
+   ],
+   "kw": "heavy spinal"
+  },
+  {
+   "form": "inj",
+   "name": "Ropivacaine Injection",
+   "actives": [
+    "ropivacaine"
+   ],
+   "strengths": [
+    "0.5%"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Atropine Sulphate Injection",
+   "actives": [
+    "atropine"
+   ],
+   "strengths": [
+    "0.6 mg"
+   ],
+   "therapy": "critical",
+   "kw": "atropine sulfate"
+  },
+  {
+   "form": "inj",
+   "name": "Naloxone Injection",
+   "actives": [
+    "naloxone"
+   ],
+   "strengths": [
+    "0.4 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Buprenorphine Injection",
+   "actives": [
+    "buprenorphine"
+   ],
+   "strengths": [
+    "0.3 mg/ml"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "inj",
+   "name": "Tramadol Hydrochloride Injection",
+   "actives": [
+    "tramadol"
+   ],
+   "strengths": [
+    "50 mg/ml"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "inj",
+   "name": "Dopamine Hydrochloride Injection",
+   "actives": [
+    "dopamine"
+   ],
+   "strengths": [
+    "200 mg/5 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Dobutamine Injection",
+   "actives": [
+    "dobutamine"
+   ],
+   "strengths": [
+    "250 mg/5 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Isoprenaline Injection",
+   "actives": [
+    "isoproterenol"
+   ],
+   "strengths": [
+    "0.5%"
+   ],
+   "kw": "isoproterenol"
+  },
+  {
+   "form": "injp",
+   "name": "Levosimendan for Injection",
+   "actives": [
+    "levosimendan"
+   ],
+   "strengths": [
+    "12.5 mg"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Lornoxicam for Injection",
+   "actives": [
+    "lornoxicam"
+   ],
+   "strengths": [
+    "8 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Metamizole Sodium Injection",
+   "actives": [
+    "metamizole"
+   ],
+   "strengths": [
+    "500 mg/ml"
+   ],
+   "kw": "dipyrone analgin"
+  },
+  {
+   "form": "inj",
+   "name": "Meloxicam Injection",
+   "actives": [
+    "meloxicam"
+   ],
+   "strengths": [
+    "15 mg/1.5 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Diclofenac Sodium Injection",
+   "actives": [
+    "diclofenac"
+   ],
+   "strengths": [
+    "75 mg/3 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Nefopam Hydrochloride Injection",
+   "actives": [
+    "nefopam"
+   ],
+   "strengths": [
+    "20 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Diclofenac Sodium and Betamethasone Injection",
+   "actives": [
+    "diclofenac",
+    "betamethasone"
+   ],
+   "strengths": [
+    "75 mg + 2 mg"
+   ],
+   "also": "Combipack with thiamine, pyridoxine and cyanocobalamin injection"
+  },
+  {
+   "form": "inj",
+   "name": "Chondroitin Sulfate Injection",
+   "actives": [
+    "chondroitin sulfate"
+   ],
+   "strengths": [
+    "100 mg"
+   ],
+   "kw": "sodium chondroitin sulfate osteoarthritis"
+  },
+  {
+   "form": "inj",
+   "name": "Dexamethasone Sodium Phosphate Injection",
+   "actives": [
+    "dexamethasone"
+   ],
+   "strengths": [
+    "4 mg/ml",
+    "8 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Prednisolone Sodium Phosphate Injection",
+   "actives": [
+    "prednisolone"
+   ],
+   "strengths": [
+    "30 mg/ml"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Hydrocortisone Sodium Succinate for Injection",
+   "actives": [
+    "hydrocortisone"
+   ],
+   "strengths": [
+    "100 mg"
+   ],
+   "also": "With 2 ml water for injection"
+  },
+  {
+   "form": "inj",
+   "name": "Betamethasone Sodium Phosphate and Betamethasone Dipropionate Injectable Suspension",
+   "actives": [
+    "betamethasone",
+    "betamethasone dipropionate"
+   ],
+   "strengths": [
+    "2 mg + 2 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Methylprednisolone Acetate Injectable Suspension",
+   "actives": [
+    "methylprednisolone"
+   ],
+   "strengths": [
+    "40 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Oxytocin Injection",
+   "actives": [
+    "oxytocin"
+   ],
+   "strengths": [],
+   "restricted": true,
+   "note": "With chlorobutanol 0.5% w/v"
+  },
+  {
+   "form": "inj",
+   "name": "Ergometrine Injection",
+   "actives": [
+    "ergometrine"
+   ],
+   "strengths": [
+    "0.5 mg/ml"
+   ],
+   "kw": "ergonovine"
+  },
+  {
+   "form": "inj",
+   "name": "Furosemide Injection",
+   "actives": [
+    "furosemide"
+   ],
+   "strengths": [
+    "10 mg/ml"
+   ],
+   "kw": "frusemide"
+  },
+  {
+   "form": "inj",
+   "name": "Torsemide Injection",
+   "actives": [
+    "torsemide"
+   ],
+   "strengths": [
+    "20 mg/2 ml"
+   ],
+   "kw": "torasemide"
+  },
+  {
+   "form": "inj",
+   "name": "Hydralazine Hydrochloride Injection",
+   "actives": [
+    "hydralazine"
+   ],
+   "strengths": [
+    "20 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Labetalol Injection",
+   "actives": [
+    "labetalol"
+   ],
+   "strengths": [
+    "5 mg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Clonidine Injection",
+   "actives": [
+    "clonidine"
+   ],
+   "strengths": [
+    "150 mcg/ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Heparin Sodium Injection",
+   "actives": [
+    "heparin"
+   ],
+   "strengths": [
+    "5,000 IU/5 ml",
+    "25,000 IU/5 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Protamine Sulphate Injection",
+   "actives": [
+    "protamine"
+   ],
+   "strengths": [
+    "50 mg/5 ml"
+   ],
+   "kw": "protamine sulfate"
+  },
+  {
+   "form": "injp",
+   "name": "Urokinase for Injection",
+   "actives": [
+    "urokinase"
+   ],
+   "strengths": [
+    "60,000 IU"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Phytomenadione Injection",
+   "actives": [
+    "phytonadione"
+   ],
+   "strengths": [
+    "10 mg/ml"
+   ],
+   "kw": "vitamin k1 phytonadione"
+  },
+  {
+   "form": "inj",
+   "name": "Menadione Sodium Bisulphite Injection",
+   "actives": [
+    "menadione sodium bisulfite"
+   ],
+   "strengths": [
+    "10 mg"
+   ],
+   "kw": "menaphthone vitamin k3"
+  },
+  {
+   "form": "inj",
+   "name": "Iron Dextran Injection",
+   "actives": [
+    "iron dextran"
+   ],
+   "strengths": [
+    "100 mg/2 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Iron Sucrose Injection",
+   "actives": [
+    "iron sucrose"
+   ],
+   "strengths": [
+    "20 mg"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Ferric Carboxymaltose Injection",
+   "actives": [
+    "ferric carboxymaltose"
+   ],
+   "strengths": [
+    "50 mg/ml",
+    "500 mg/10 ml"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Sodium Bicarbonate Injection",
+   "actives": [
+    "sodium bicarbonate"
+   ],
+   "strengths": [
+    "7.5% w/v",
+    "8.4% w/v"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Potassium Chloride Injection Concentrate",
+   "actives": [
+    "potassium chloride"
+   ],
+   "strengths": [
+    "15% w/v"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Calcium Gluconate Injection",
+   "actives": [
+    "calcium gluconate"
+   ],
+   "strengths": [
+    "10% w/v"
+   ]
+  },
+  {
+   "form": "inj",
+   "name": "Calcium Glucono-galacto-gluconate Injection",
+   "actives": [
+    "calcium glucoheptonate"
+   ],
+   "strengths": [
+    "137.5 mg"
+   ],
+   "therapy": "vitamins",
+   "kw": "hypocalcaemia"
+  },
+  {
+   "form": "inj",
+   "name": "Glucose Injection",
+   "actives": [
+    "dextrose"
+   ],
+   "strengths": [
+    "25% w/v"
+   ],
+   "kw": "dextrose"
+  },
+  {
+   "form": "inj",
+   "name": "Cholecalciferol Injection",
+   "actives": [
+    "cholecalciferol"
+   ],
+   "strengths": [
+    "200,000 IU/ml"
+   ],
+   "kw": "vitamin d3"
+  },
+  {
+   "form": "inj",
+   "name": "Thiamine Hydrochloride Injection",
+   "actives": [
+    "thiamine"
+   ],
+   "strengths": [
+    "100 mg/2 ml"
+   ],
+   "kw": "vitamin b1"
+  },
+  {
+   "form": "inj",
+   "name": "Pyridoxine Hydrochloride Injection",
+   "actives": [
+    "pyridoxine"
+   ],
+   "strengths": [
+    "100 mg/2 ml"
+   ],
+   "kw": "vitamin b6"
+  },
+  {
+   "form": "inj",
+   "name": "Thiamine and Pyridoxine Injection",
+   "actives": [
+    "thiamine",
+    "pyridoxine"
+   ],
+   "strengths": [
+    "10 mg + 10 mg"
+   ],
+   "kw": "vitamin b1 b6"
+  },
+  {
+   "form": "inj",
+   "name": "Thiamine, Pyridoxine and Cyanocobalamin Injection",
+   "actives": [
+    "thiamine",
+    "pyridoxine",
+    "cyanocobalamin"
+   ],
+   "strengths": [
+    "100 mg + 100 mg + 1 mg (with lidocaine 20 mg)",
+    "100 mg + 100 mg + 10 mg"
+   ],
+   "kw": "vitamin b1 b6 b12 neurobion"
+  },
+  {
+   "form": "inj",
+   "name": "Vitamins B and C Injection",
+   "actives": [
+    "thiamine",
+    "riboflavin",
+    "pyridoxine",
+    "ascorbic acid",
+    "nicotinamide",
+    "dextrose"
+   ],
+   "strengths": [],
+   "note": "Two ampoules: No. 1 thiamine hydrochloride 250 mg, riboflavin 4 mg, pyridoxine hydrochloride 50 mg; No. 2 ascorbic acid 500 mg, nicotinamide 160 mg, glucose 1000 mg",
+   "therapy": "vitamins",
+   "kw": "vitamin b c high potency"
+  },
+  {
+   "form": "inj",
+   "name": "Aminophylline Injection",
+   "actives": [
+    "aminophylline"
+   ],
+   "strengths": [
+    "250 mg/10 ml"
+   ]
+  },
+  {
+   "form": "injp",
+   "name": "Ceftriaxone for Injection (Veterinary)",
+   "actives": [
+    "ceftriaxone"
+   ],
+   "strengths": [
+    "3 g",
+    "4 g"
+   ],
+   "vet": true
+  },
+  {
+   "form": "injp",
+   "name": "Ceftriaxone and Sulbactam for Injection (Veterinary)",
+   "actives": [
+    "ceftriaxone",
+    "sulbactam"
+   ],
+   "strengths": [
+    "3 g",
+    "4.5 g"
+   ],
+   "vet": true
+  },
+  {
+   "form": "injp",
+   "name": "Ceftriaxone and Tazobactam for Injection (Veterinary)",
+   "actives": [
+    "ceftriaxone",
+    "tazobactam"
+   ],
+   "strengths": [
+    "3.375 g",
+    "4.5 g"
+   ],
+   "vet": true
+  },
+  {
+   "form": "injp",
+   "name": "Ceftiofur for Injection (Veterinary)",
+   "actives": [
+    "ceftiofur"
+   ],
+   "strengths": [
+    "1 g"
+   ],
+   "vet": true
+  },
+  {
+   "form": "inj",
+   "name": "Maropitant Citrate Injection (Veterinary)",
+   "actives": [
+    "maropitant"
+   ],
+   "strengths": [
+    "10 mg/ml"
+   ],
+   "vet": true
+  },
+  {
+   "form": "tablet",
+   "name": "Aceclofenac and Paracetamol Tablets",
+   "actives": [
+    "aceclofenac",
+    "paracetamol"
+   ],
+   "strengths": [
+    "100 mg + 325 mg",
+    "100 mg + 500 mg"
+   ],
+   "kw": "acetaminophen"
+  },
+  {
+   "form": "tablet",
+   "name": "Aceclofenac, Paracetamol and Serratiopeptidase Tablets",
+   "actives": [
+    "aceclofenac",
+    "paracetamol",
+    "serrapeptase"
+   ],
+   "strengths": [
+    "100 mg + 325 mg + 15 mg",
+    "100 mg + 500 mg + 10 mg"
+   ],
+   "kw": "serratiopeptidase"
+  },
+  {
+   "form": "tablet",
+   "name": "Aceclofenac, Paracetamol, Trypsin and Chymotrypsin Tablets",
+   "actives": [
+    "aceclofenac",
+    "paracetamol",
+    "trypsin",
+    "chymotrypsin"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Acyclovir Tablets",
+   "actives": [
+    "acyclovir"
+   ],
+   "strengths": [
+    "200 mg"
+   ],
+   "kw": "aciclovir"
+  },
+  {
+   "form": "tablet",
+   "name": "Amitriptyline Hydrochloride Tablets",
+   "actives": [
+    "amitriptyline"
+   ],
+   "strengths": [
+    "25 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Amlodipine Besylate Tablets",
+   "actives": [
+    "amlodipine"
+   ],
+   "strengths": [
+    "5 mg",
+    "10 mg"
+   ],
+   "kw": "amlodipine besilate"
+  },
+  {
+   "form": "tablet",
+   "name": "Amlodipine and Bisoprolol Tablets",
+   "actives": [
+    "amlodipine",
+    "bisoprolol"
+   ],
+   "strengths": [
+    "5 mg + 5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Artemether and Lumefantrine Tablets",
+   "actives": [
+    "artemether",
+    "lumefantrine"
+   ],
+   "strengths": [
+    "20 mg + 120 mg",
+    "40 mg + 240 mg",
+    "80 mg + 480 mg"
+   ],
+   "kw": "antimalarial act"
+  },
+  {
+   "form": "tablet",
+   "name": "Ascorbic Acid Tablets",
+   "actives": [
+    "ascorbic acid"
+   ],
+   "strengths": [
+    "500 mg"
+   ],
+   "kw": "vitamin c"
+  },
+  {
+   "form": "tablet",
+   "name": "Aspirin Gastro-resistant Tablets",
+   "actives": [
+    "aspirin"
+   ],
+   "strengths": [
+    "80 mg"
+   ],
+   "kw": "acetylsalicylic acid"
+  },
+  {
+   "form": "tablet",
+   "name": "Atorvastatin Tablets",
+   "actives": [
+    "atorvastatin"
+   ],
+   "strengths": [
+    "10 mg",
+    "20 mg",
+    "40 mg"
+   ],
+   "kw": "atorvastatin calcium"
+  },
+  {
+   "form": "tablet",
+   "name": "Atorvastatin and Amlodipine Tablets",
+   "actives": [
+    "atorvastatin",
+    "amlodipine"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Azithromycin Tablets",
+   "actives": [
+    "azithromycin"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Benzhexol Hydrochloride Tablets",
+   "actives": [
+    "trihexyphenidyl"
+   ],
+   "strengths": [
+    "5 mg"
+   ],
+   "kw": "trihexyphenidyl"
+  },
+  {
+   "form": "tablet",
+   "name": "Betahistine Tablets",
+   "actives": [
+    "betahistine"
+   ],
+   "strengths": [
+    "8 mg",
+    "16 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Calcium Carbonate and Vitamin D3 Tablets",
+   "actives": [
+    "calcium carbonate",
+    "cholecalciferol"
+   ],
+   "strengths": [
+    "1250 mg (500 mg elemental calcium) + 250 IU"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Carvedilol Tablets",
+   "actives": [
+    "carvedilol"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Cetirizine Tablets",
+   "actives": [
+    "cetirizine"
+   ],
+   "strengths": [
+    "10 mg"
+   ],
+   "kw": "cetirizine dihydrochloride"
+  },
+  {
+   "form": "tablet",
+   "name": "Chlorpheniramine Maleate Tablets",
+   "actives": [
+    "chlorpheniramine"
+   ],
+   "strengths": [
+    "4 mg"
+   ],
+   "kw": "chlorphenamine"
+  },
+  {
+   "form": "tablet",
+   "name": "Ciprofloxacin Tablets",
+   "actives": [
+    "ciprofloxacin"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Clarithromycin Tablets",
+   "actives": [
+    "clarithromycin"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Clopidogrel Tablets",
+   "actives": [
+    "clopidogrel"
+   ],
+   "strengths": [
+    "75 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Dapagliflozin Tablets",
+   "actives": [
+    "dapagliflozin"
+   ],
+   "strengths": [
+    "10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Dexamethasone Tablets",
+   "actives": [
+    "dexamethasone"
+   ],
+   "strengths": [
+    "0.5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Potassium Tablets",
+   "actives": [
+    "diclofenac"
+   ],
+   "strengths": [
+    "50 mg"
+   ],
+   "rel": "Uncoated or film coated"
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Sodium Tablets",
+   "actives": [
+    "diclofenac"
+   ],
+   "strengths": [
+    "50 mg"
+   ],
+   "rel": "Uncoated or film coated"
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Sodium Gastro-resistant Tablets",
+   "actives": [
+    "diclofenac"
+   ],
+   "strengths": [
+    "50 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Potassium and Paracetamol Tablets",
+   "actives": [
+    "diclofenac",
+    "paracetamol"
+   ],
+   "strengths": [
+    "50 mg + 325 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Sodium and Paracetamol Tablets",
+   "actives": [
+    "diclofenac",
+    "paracetamol"
+   ],
+   "strengths": [
+    "50 mg + 500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Potassium, Paracetamol and Chlorzoxazone Tablets",
+   "actives": [
+    "diclofenac",
+    "paracetamol",
+    "chlorzoxazone"
+   ],
+   "strengths": [
+    "50 mg + 325 mg + 250 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Potassium, Paracetamol and Serratiopeptidase Tablets",
+   "actives": [
+    "diclofenac",
+    "paracetamol",
+    "serrapeptase"
+   ],
+   "strengths": [
+    "50 mg + 325 mg + 15 mg"
+   ],
+   "kw": "serratiopeptidase"
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Potassium and Serratiopeptidase Tablets",
+   "actives": [
+    "diclofenac",
+    "serrapeptase"
+   ],
+   "strengths": [
+    "50 mg + 10 mg"
+   ],
+   "kw": "serratiopeptidase"
+  },
+  {
+   "form": "tablet",
+   "name": "Diclofenac Sodium and Misoprostol Tablets",
+   "actives": [
+    "diclofenac",
+    "misoprostol"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Dicyclomine and Paracetamol Tablets",
+   "actives": [
+    "dicyclomine",
+    "paracetamol"
+   ],
+   "strengths": [
+    "20 mg + 325 mg"
+   ],
+   "kw": "dicycloverine"
+  },
+  {
+   "form": "tablet",
+   "name": "Docusate Sodium and Senna Tablets",
+   "actives": [
+    "docusate",
+    "sennosides"
+   ],
+   "strengths": [],
+   "kw": "senna glucosides laxative"
+  },
+  {
+   "form": "tablet",
+   "name": "Doxylamine, Pyridoxine and Folic Acid Tablets",
+   "actives": [
+    "doxylamine",
+    "pyridoxine",
+    "folic acid"
+   ],
+   "strengths": [
+    "10 mg + 10 mg + 2.5 mg",
+    "20 mg + 20 mg + 5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Drotaverine Hydrochloride Tablets",
+   "actives": [
+    "drotaverine"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Erythromycin Stearate Tablets",
+   "actives": [
+    "erythromycin"
+   ],
+   "strengths": [
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Esomeprazole Gastro-resistant Tablets",
+   "actives": [
+    "esomeprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Etoricoxib Tablets",
+   "actives": [
+    "etoricoxib"
+   ],
+   "strengths": [
+    "60 mg",
+    "90 mg",
+    "120 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ferrous Bisglycinate, Zinc Bisglycinate, Folic Acid and Methylcobalamin Tablets",
+   "actives": [
+    "ferrous bisglycinate",
+    "zinc bisglycinate",
+    "folic acid",
+    "mecobalamin"
+   ],
+   "strengths": [],
+   "therapy": "blood"
+  },
+  {
+   "form": "tablet",
+   "name": "Fexofenadine Tablets",
+   "actives": [
+    "fexofenadine"
+   ],
+   "strengths": [
+    "120 mg",
+    "180 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Fexofenadine and Montelukast Tablets",
+   "actives": [
+    "fexofenadine",
+    "montelukast"
+   ],
+   "strengths": [
+    "120 mg + 10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Folic Acid Tablets",
+   "actives": [
+    "folic acid"
+   ],
+   "strengths": [
+    "5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Gliclazide Tablets",
+   "actives": [
+    "gliclazide"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Glimepiride Tablets",
+   "actives": [
+    "glimepiride"
+   ],
+   "strengths": [
+    "1 mg",
+    "2 mg",
+    "3 mg",
+    "4 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Glimepiride and Metformin Tablets",
+   "actives": [
+    "glimepiride",
+    "metformin"
+   ],
+   "strengths": [
+    "1 mg + 500 mg",
+    "2 mg + 500 mg"
+   ],
+   "rel": "Also with sustained-release metformin"
+  },
+  {
+   "form": "tablet",
+   "name": "Griseofulvin Tablets",
+   "actives": [
+    "griseofulvin"
+   ],
+   "strengths": [
+    "125 mg",
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Hydrochlorothiazide Tablets",
+   "actives": [
+    "hydrochlorothiazide"
+   ],
+   "strengths": [
+    "25 mg",
+    "50 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ibuprofen Tablets",
+   "actives": [
+    "ibuprofen"
+   ],
+   "strengths": [
+    "200 mg",
+    "400 mg"
+   ],
+   "rel": "Film coated or sugar coated"
+  },
+  {
+   "form": "tablet",
+   "name": "Ketoconazole Tablets",
+   "actives": [
+    "ketoconazole"
+   ],
+   "strengths": [
+    "200 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ketorolac Tromethamine Dispersible Tablets",
+   "actives": [
+    "ketorolac"
+   ],
+   "strengths": [
+    "10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Labetalol Tablets",
+   "actives": [
+    "labetalol"
+   ],
+   "strengths": [
+    "100 mg",
+    "200 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Letrozole Tablets",
+   "actives": [
+    "letrozole"
+   ],
+   "strengths": [
+    "5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Levocetirizine Tablets",
+   "actives": [
+    "levocetirizine"
+   ],
+   "strengths": [
+    "5 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Levocetirizine and Montelukast Tablets",
+   "actives": [
+    "levocetirizine",
+    "montelukast"
+   ],
+   "strengths": [
+    "5 mg + 10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Levocetirizine and Pseudoephedrine Tablets",
+   "actives": [
+    "levocetirizine",
+    "pseudoephedrine"
+   ],
+   "strengths": [
+    "5 mg + 240 mg"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "tablet",
+   "name": "Levofloxacin Tablets",
+   "actives": [
+    "levofloxacin"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Loperamide Hydrochloride Tablets",
+   "actives": [
+    "loperamide"
+   ],
+   "strengths": [
+    "2 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Loratadine Tablets",
+   "actives": [
+    "loratadine"
+   ],
+   "strengths": [
+    "10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Losartan Potassium Tablets",
+   "actives": [
+    "losartan"
+   ],
+   "strengths": [
+    "25 mg",
+    "50 mg",
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Mebendazole Tablets",
+   "actives": [
+    "mebendazole"
+   ],
+   "strengths": [
+    "100 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Mefenamic Acid and Paracetamol Tablets",
+   "actives": [
+    "mefenamic acid",
+    "paracetamol"
+   ],
+   "strengths": [
+    "500 mg + 325 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Metformin Hydrochloride Tablets",
+   "actives": [
+    "metformin"
+   ],
+   "strengths": [
+    "500 mg",
+    "850 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Metformin Hydrochloride Extended-release Tablets",
+   "actives": [
+    "metformin"
+   ],
+   "strengths": [
+    "500 mg",
+    "1000 mg"
+   ],
+   "kw": "modified release sr er"
+  },
+  {
+   "form": "tablet",
+   "name": "Metformin and Sitagliptin Tablets",
+   "actives": [
+    "sitagliptin",
+    "metformin"
+   ],
+   "strengths": [
+    "metformin 500 mg",
+    "metformin 1000 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Methylcobalamin, Pyridoxine and Folic Acid Tablets",
+   "actives": [
+    "mecobalamin",
+    "pyridoxine",
+    "folic acid"
+   ],
+   "strengths": [
+    "1500 mcg + 20 mg + 5 mg"
+   ],
+   "kw": "methylcobalamin"
+  },
+  {
+   "form": "tablet",
+   "name": "Methylprednisolone Tablets",
+   "actives": [
+    "methylprednisolone"
+   ],
+   "strengths": [
+    "4 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Metronidazole Tablets",
+   "actives": [
+    "metronidazole"
+   ],
+   "strengths": [
+    "200 mg",
+    "250 mg",
+    "400 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Montelukast Tablets",
+   "actives": [
+    "montelukast"
+   ],
+   "strengths": [
+    "5 mg",
+    "10 mg"
+   ],
+   "kw": "montelukast sodium"
+  },
+  {
+   "form": "tablet",
+   "name": "Nifedipine Extended-release Tablets",
+   "actives": [
+    "nifedipine"
+   ],
+   "strengths": [
+    "20 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Nimesulide and Paracetamol Tablets",
+   "actives": [
+    "nimesulide",
+    "paracetamol"
+   ],
+   "strengths": [
+    "100 mg + 325 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Nitrofurantoin Tablets",
+   "actives": [
+    "nitrofurantoin"
+   ],
+   "strengths": [
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Norfloxacin Tablets",
+   "actives": [
+    "norfloxacin"
+   ],
+   "strengths": [
+    "400 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ofloxacin Tablets",
+   "actives": [
+    "ofloxacin"
+   ],
+   "strengths": [
+    "200 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ofloxacin and Ornidazole Tablets",
+   "actives": [
+    "ofloxacin",
+    "ornidazole"
+   ],
+   "strengths": [
+    "200 mg + 500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ondansetron Tablets",
+   "actives": [
+    "ondansetron"
+   ],
+   "strengths": [
+    "4 mg",
+    "8 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ondansetron Orally Disintegrating Tablets",
+   "actives": [
+    "ondansetron"
+   ],
+   "strengths": [
+    "4 mg"
+   ],
+   "kw": "odt"
+  },
+  {
+   "form": "tablet",
+   "name": "Pantoprazole Gastro-resistant Tablets",
+   "actives": [
+    "pantoprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Pantoprazole and Domperidone Tablets",
+   "actives": [
+    "pantoprazole",
+    "domperidone"
+   ],
+   "strengths": [],
+   "rel": "Gastro-resistant pantoprazole, prolonged-release domperidone"
+  },
+  {
+   "form": "tablet",
+   "name": "Paracetamol Tablets",
+   "actives": [
+    "paracetamol"
+   ],
+   "strengths": [
+    "500 mg",
+    "650 mg",
+    "1 g"
+   ],
+   "kw": "acetaminophen"
+  },
+  {
+   "form": "tablet",
+   "name": "Paracetamol, Phenylephrine and Chlorpheniramine Tablets",
+   "actives": [
+    "paracetamol",
+    "phenylephrine",
+    "chlorpheniramine"
+   ],
+   "strengths": [
+    "500 mg + 5 mg + 2 mg"
+   ],
+   "kw": "cold"
+  },
+  {
+   "form": "tablet",
+   "name": "Paracetamol, Caffeine, Phenylephrine and Diphenhydramine Tablets",
+   "actives": [
+    "paracetamol",
+    "caffeine",
+    "phenylephrine",
+    "diphenhydramine"
+   ],
+   "strengths": [
+    "500 mg + 30 mg + 5 mg + 25 mg"
+   ],
+   "kw": "cold"
+  },
+  {
+   "form": "tablet",
+   "name": "Pefloxacin Tablets",
+   "actives": [
+    "pefloxacin"
+   ],
+   "strengths": [
+    "400 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Quetiapine Tablets",
+   "actives": [
+    "quetiapine"
+   ],
+   "strengths": [
+    "25 mg",
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Rabeprazole Sodium Tablets",
+   "actives": [
+    "rabeprazole"
+   ],
+   "strengths": [
+    "20 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Ranitidine and Domperidone Tablets",
+   "actives": [
+    "ranitidine",
+    "domperidone"
+   ],
+   "strengths": [
+    "150 mg + 10 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Risperidone Tablets",
+   "actives": [
+    "risperidone"
+   ],
+   "strengths": [
+    "3 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Rosuvastatin Tablets",
+   "actives": [
+    "rosuvastatin"
+   ],
+   "strengths": [
+    "5 mg",
+    "10 mg",
+    "20 mg",
+    "40 mg"
+   ],
+   "kw": "rosuvastatin calcium"
+  },
+  {
+   "form": "tablet",
+   "name": "Secnidazole Tablets",
+   "actives": [
+    "secnidazole"
+   ],
+   "strengths": [
+    "500 mg",
+    "1 g"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Sildenafil Citrate Tablets",
+   "actives": [
+    "sildenafil"
+   ],
+   "strengths": [
+    "25 mg",
+    "50 mg",
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Sitagliptin Tablets",
+   "actives": [
+    "sitagliptin"
+   ],
+   "strengths": [
+    "50 mg",
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Sodium Valproate and Valproic Acid Prolonged-release Tablets",
+   "actives": [
+    "valproic acid"
+   ],
+   "strengths": [
+    "150 mg",
+    "200 mg",
+    "500 mg"
+   ],
+   "kw": "sodium valproate sr"
+  },
+  {
+   "form": "tablet",
+   "name": "Spironolactone Tablets",
+   "actives": [
+    "spironolactone"
+   ],
+   "strengths": [
+    "25 mg",
+    "100 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Tadalafil Tablets",
+   "actives": [
+    "tadalafil"
+   ],
+   "strengths": [
+    "5 mg",
+    "10 mg",
+    "20 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Tamsulosin Hydrochloride Prolonged-release Tablets",
+   "actives": [
+    "tamsulosin"
+   ],
+   "strengths": [
+    "0.4 mg"
+   ],
+   "kw": "modified release"
+  },
+  {
+   "form": "tablet",
+   "name": "Telmisartan Tablets",
+   "actives": [
+    "telmisartan"
+   ],
+   "strengths": [
+    "20 mg",
+    "40 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Tranexamic Acid Tablets",
+   "actives": [
+    "tranexamic acid"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "tablet",
+   "name": "Tranexamic Acid and Mefenamic Acid Tablets",
+   "actives": [
+    "tranexamic acid",
+    "mefenamic acid"
+   ],
+   "strengths": []
+  },
+  {
+   "form": "tablet",
+   "name": "Trypsin-Chymotrypsin Tablets",
+   "actives": [
+    "trypsin",
+    "chymotrypsin"
+   ],
+   "strengths": [],
+   "therapy": "pain"
+  },
+  {
+   "form": "tablet",
+   "name": "Valacyclovir Tablets",
+   "actives": [
+    "valacyclovir"
+   ],
+   "strengths": [
+    "1 g"
+   ],
+   "kw": "valaciclovir"
+  },
+  {
+   "form": "tablet",
+   "name": "Cyanocobalamin Tablets",
+   "actives": [
+    "cyanocobalamin"
+   ],
+   "strengths": [
+    "500 mcg"
+   ],
+   "kw": "vitamin b12"
+  },
+  {
+   "form": "capsule",
+   "name": "Gabapentin Capsules",
+   "actives": [
+    "gabapentin"
+   ],
+   "strengths": [
+    "100 mg",
+    "300 mg"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "capsule",
+   "name": "Omeprazole Gastro-resistant Capsules",
+   "actives": [
+    "omeprazole"
+   ],
+   "strengths": [
+    "20 mg"
+   ],
+   "kw": "delayed release"
+  },
+  {
+   "form": "capsule",
+   "name": "Omeprazole and Domperidone Capsules",
+   "actives": [
+    "omeprazole",
+    "domperidone"
+   ],
+   "strengths": [
+    "20 mg + 10 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Esomeprazole and Domperidone Capsules",
+   "actives": [
+    "esomeprazole",
+    "domperidone"
+   ],
+   "strengths": [],
+   "rel": "Enteric-coated esomeprazole, sustained-release domperidone"
+  },
+  {
+   "form": "capsule",
+   "name": "Itraconazole Capsules",
+   "actives": [
+    "itraconazole"
+   ],
+   "strengths": [
+    "100 mg",
+    "200 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Pantoprazole Capsules",
+   "actives": [
+    "pantoprazole"
+   ],
+   "strengths": [
+    "40 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Pantoprazole and Levosulpiride Capsules",
+   "actives": [
+    "pantoprazole",
+    "levosulpiride"
+   ],
+   "strengths": [
+    "40 mg + 75 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Pantoprazole and Domperidone Capsules",
+   "actives": [
+    "pantoprazole",
+    "domperidone"
+   ],
+   "strengths": [],
+   "rel": "Gastro-resistant pantoprazole, prolonged-release domperidone"
+  },
+  {
+   "form": "capsule",
+   "name": "Pregabalin Capsules",
+   "actives": [
+    "pregabalin"
+   ],
+   "strengths": [
+    "75 mg",
+    "150 mg",
+    "300 mg"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "capsule",
+   "name": "Pregabalin and Methylcobalamin Capsules",
+   "actives": [
+    "pregabalin",
+    "mecobalamin"
+   ],
+   "strengths": [
+    "75 mg pregabalin"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "capsule",
+   "name": "Rabeprazole and Domperidone Capsules",
+   "actives": [
+    "rabeprazole",
+    "domperidone"
+   ],
+   "strengths": [
+    "20 mg + 30 mg"
+   ],
+   "rel": "Enteric-coated rabeprazole, sustained-release domperidone"
+  },
+  {
+   "form": "capsule",
+   "name": "Rabeprazole and Levosulpiride Capsules",
+   "actives": [
+    "rabeprazole",
+    "levosulpiride"
+   ],
+   "strengths": [
+    "20 mg + 75 mg"
+   ],
+   "rel": "Enteric-coated rabeprazole, sustained-release levosulpiride"
+  },
+  {
+   "form": "capsule",
+   "name": "Rabeprazole and Itopride Capsules",
+   "actives": [
+    "rabeprazole",
+    "itopride"
+   ],
+   "strengths": [
+    "20 mg + 150 mg"
+   ],
+   "rel": "Enteric-coated rabeprazole, sustained-release itopride"
+  },
+  {
+   "form": "capsule",
+   "name": "Sodium Valproate Capsules",
+   "actives": [
+    "valproic acid"
+   ],
+   "strengths": [
+    "150 mg",
+    "200 mg",
+    "500 mg"
+   ],
+   "kw": "valproate sodium"
+  },
+  {
+   "form": "capsule",
+   "name": "Valproic Acid Capsules",
+   "actives": [
+    "valproic acid"
+   ],
+   "strengths": [
+    "250 mg",
+    "500 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Tamsulosin Hydrochloride Capsules",
+   "actives": [
+    "tamsulosin"
+   ],
+   "strengths": [
+    "0.4 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Azithromycin Capsules",
+   "actives": [
+    "azithromycin"
+   ],
+   "strengths": [
+    "500 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Fluconazole Capsules",
+   "actives": [
+    "fluconazole"
+   ],
+   "strengths": [
+    "150 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Loperamide Hydrochloride Capsules",
+   "actives": [
+    "loperamide"
+   ],
+   "strengths": [
+    "2 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Piroxicam Capsules",
+   "actives": [
+    "piroxicam"
+   ],
+   "strengths": [
+    "20 mg"
+   ]
+  },
+  {
+   "form": "capsule",
+   "name": "Tramadol Capsules",
+   "actives": [
+    "tramadol"
+   ],
+   "strengths": [
+    "50 mg",
+    "100 mg"
+   ],
+   "restricted": true
+  },
+  {
+   "form": "capsule",
+   "name": "Paracetamol, Ibuprofen and Caffeine Capsules",
+   "actives": [
+    "paracetamol",
+    "ibuprofen",
+    "caffeine"
+   ],
+   "strengths": [
+    "325 mg + 200 mg + 30 mg"
+   ]
+  },
+  {
+   "form": "softgel",
+   "name": "Ginseng, Multivitamin and Multimineral Softgel Capsules",
+   "actives": [
+    "ginseng",
+    "multivitamin"
+   ],
+   "strengths": [],
+   "therapy": "nutrition"
+  },
+  {
+   "form": "softgel",
+   "name": "Omega-3 Fatty Acids with Antioxidants, Multivitamin and Multimineral Softgel Capsules",
+   "actives": [
+    "omega-3-acid ethyl esters",
+    "multivitamin"
+   ],
+   "strengths": [],
+   "note": "With ginseng, ginkgo biloba, citrus bioflavonoids, green tea and grape seed extracts, mixed carotenoids, lycopene, garlic, lutein and amino acids",
+   "therapy": "nutrition",
+   "kw": "omega 3 epa dha"
+  },
+  {
+   "form": "liquid",
+   "name": "Aluminium Hydroxide, Magnesium Hydroxide and Simethicone Suspension",
+   "actives": [
+    "aluminum hydroxide",
+    "magnesium hydroxide",
+    "simethicone"
+   ],
+   "strengths": [
+    "250 mg + 250 mg + 50 mg"
+   ],
+   "kw": "antacid"
+  },
+  {
+   "form": "liquid",
+   "name": "Dextromethorphan, Chlorpheniramine and Phenylephrine Syrup",
+   "actives": [
+    "dextromethorphan",
+    "chlorpheniramine",
+    "phenylephrine"
+   ],
+   "strengths": [
+    "10 mg + 2 mg + 5 mg"
+   ],
+   "kw": "cough"
+  },
+  {
+   "form": "liquid",
+   "name": "Terbutaline, Bromhexine and Guaifenesin Syrup",
+   "actives": [
+    "terbutaline",
+    "bromhexine",
+    "guaifenesin"
+   ],
+   "strengths": [],
+   "note": "Terbutaline 2.5 mg and guaifenesin 100 mg; bromhexine strength on request",
+   "kw": "cough expectorant guaiphenesin"
+  },
+  {
+   "form": "liquid",
+   "name": "Terbutaline, Bromhexine, Guaifenesin and Menthol Syrup",
+   "actives": [
+    "terbutaline",
+    "bromhexine",
+    "guaifenesin",
+    "menthol"
+   ],
+   "strengths": [
+    "1.25 mg + 2 mg + 50 mg + 0.5 mg/5 ml"
+   ],
+   "kw": "cough expectorant guaiphenesin"
+  },
+  {
+   "form": "liquid",
+   "name": "Levosalbutamol, Ambroxol and Guaifenesin Syrup",
+   "actives": [
+    "levalbuterol",
+    "ambroxol",
+    "guaifenesin"
+   ],
+   "strengths": [
+    "1 mg + 30 mg + 50 mg"
+   ],
+   "kw": "levosalbutamol cough guaiphenesin"
+  },
+  {
+   "form": "liquid",
+   "name": "Chlorpheniramine Maleate and Menthol Syrup",
+   "actives": [
+    "chlorpheniramine",
+    "menthol"
+   ],
+   "strengths": [
+    "2 mg + 0.2%"
+   ],
+   "kw": "cough cold"
+  },
+  {
+   "form": "liquid",
+   "name": "Paracetamol Oral Suspension",
+   "actives": [
+    "paracetamol"
+   ],
+   "strengths": [
+    "250 mg/5 ml"
+   ],
+   "kw": "acetaminophen"
+  },
+  {
+   "form": "liquid",
+   "name": "Ferric Ammonium Citrate, Cyanocobalamin, Folic Acid and Zinc Syrup",
+   "actives": [
+    "ferric ammonium citrate",
+    "cyanocobalamin",
+    "folic acid",
+    "zinc sulfate"
+   ],
+   "strengths": [
+    "160 mg (32 mg elemental iron) + 7.5 mcg + 5 mg + 7 mg/5 ml"
+   ],
+   "therapy": "blood",
+   "kw": "iron tonic"
+  },
+  {
+   "form": "liquid",
+   "name": "Ferrous Ascorbate, Zinc, Folic Acid and Vitamin B12 Syrup",
+   "actives": [
+    "ferrous ascorbate",
+    "zinc sulfate",
+    "folic acid",
+    "cyanocobalamin"
+   ],
+   "strengths": [
+    "iron 30 mg + zinc 8 mg + 500 mcg + 1 mcg/5 ml"
+   ],
+   "therapy": "blood",
+   "kw": "iron tonic"
+  },
+  {
+   "form": "liquid",
+   "name": "Multivitamin, Multimineral and Amino Acid Syrup",
+   "actives": [
+    "multivitamin"
+   ],
+   "strengths": [],
+   "therapy": "nutrition",
+   "kw": "multivitamin tonic lysine"
+  },
+  {
+   "form": "liquid",
+   "name": "Multivitamin Syrup",
+   "actives": [
+    "multivitamin"
+   ],
+   "strengths": [],
+   "therapy": "nutrition",
+   "note": "Vitamins A, D3, B1, B2, B6, B12 and C with niacinamide and D-panthenol, per 10 ml",
+   "kw": "vitamin tonic"
+  },
+  {
+   "form": "liquid",
+   "name": "Calcium, Vitamin D3 and Minerals Suspension",
+   "actives": [
+    "calcium carbonate",
+    "cholecalciferol"
+   ],
+   "strengths": [
+    "625 mg + 200 IU/5 ml"
+   ],
+   "therapy": "vitamins"
+  },
+  {
+   "form": "liquid",
+   "name": "Fungal Diastase and Pepsin Syrup",
+   "actives": [
+    "diastase",
+    "pepsin"
+   ],
+   "strengths": [
+    "50 mg + 10 mg/5 ml"
+   ],
+   "therapy": "gastro",
+   "kw": "digestive enzyme"
+  },
+  {
+   "form": "mouthwash",
+   "name": "Chlorhexidine Gluconate Mouthwash",
+   "actives": [
+    "chlorhexidine"
+   ],
+   "strengths": [
+    "0.2% w/v"
+   ]
+  },
+  {
+   "form": "powder",
+   "name": "Dextrose, Sucrose, Zinc and Vitamin C Oral Powder",
+   "actives": [
+    "dextrose",
+    "sucrose",
+    "zinc sulfate",
+    "ascorbic acid"
+   ],
+   "strengths": [
+    "17.5 g + 14 g + 32.5 mg + 40 mg per 35 g"
+   ],
+   "therapy": "nutrition",
+   "kw": "energy drink glucose"
+  },
+  {
+   "form": "powder",
+   "name": "Chocolate-flavoured Protein Powder",
+   "actives": [
+    "protein"
+   ],
+   "strengths": [],
+   "therapy": "nutrition",
+   "kw": "nutrition supplement"
+  },
+  {
+   "form": "topical",
+   "name": "Fusidic Acid Cream",
+   "actives": [
+    "fusidic acid"
+   ],
+   "strengths": [
+    "2% w/w"
+   ]
+  },
+  {
+   "form": "topical",
+   "name": "Luliconazole Cream",
+   "actives": [
+    "luliconazole"
+   ],
+   "strengths": [
+    "1% w/w"
+   ]
+  },
+  {
+   "form": "topical",
+   "name": "Clobetasol, Neomycin and Miconazole Cream",
+   "actives": [
+    "clobetasol",
+    "neomycin",
+    "miconazole"
+   ],
+   "strengths": [
+    "0.05% + 0.5% + 2% w/w"
+   ]
+  },
+  {
+   "form": "topical",
+   "name": "Diclofenac, Linseed Oil, Methyl Salicylate and Menthol Gel",
+   "actives": [
+    "diclofenac",
+    "linseed oil",
+    "methyl salicylate",
+    "menthol"
+   ],
+   "strengths": [
+    "diclofenac diethylamine 1.16% (diclofenac sodium 1%) + 3% + 10% + 5% w/w"
+   ],
+   "kw": "pain relief gel"
+  },
+  {
+   "form": "soap",
+   "name": "Ketoconazole Soap",
+   "actives": [
+    "ketoconazole"
+   ],
+   "strengths": [
+    "1%"
+   ]
+  },
+  {
+   "form": "soap",
+   "name": "Permethrin Soap",
+   "actives": [
+    "permethrin"
+   ],
+   "strengths": [
+    "1%"
+   ]
+  }
+ ]
+}

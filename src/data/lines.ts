@@ -52,6 +52,7 @@ export const SOURCING_LINES: SourcingLine[] = [
       'Tablets and capsules (OSD)',
       'Liquids',
       'Dry powders',
+      'Topicals',
       'Cephalosporins',
       'Beta-lactams',
       'General formulations',

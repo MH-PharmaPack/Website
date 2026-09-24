@@ -1,0 +1,178 @@
+[
+ {
+  "id": "injectables",
+  "name": "Injectables",
+  "types": [
+   {
+    "id": "inj-anti-infectives",
+    "name": "Injectables: Anti-infectives",
+    "short": "Anti-infectives"
+   },
+   {
+    "id": "inj-pain",
+    "name": "Injectables: Pain & Inflammation",
+    "short": "Pain & Inflammation"
+   },
+   {
+    "id": "inj-gastro",
+    "name": "Injectables: Gastrointestinal",
+    "short": "Gastrointestinal"
+   },
+   {
+    "id": "inj-cns",
+    "name": "Injectables: CNS & Psychiatry",
+    "short": "CNS & Psychiatry"
+   },
+   {
+    "id": "inj-critical",
+    "name": "Injectables: Anaesthesia & Critical Care",
+    "short": "Anaesthesia & Critical Care"
+   },
+   {
+    "id": "inj-cardio",
+    "name": "Injectables: Cardiovascular",
+    "short": "Cardiovascular"
+   },
+   {
+    "id": "inj-blood",
+    "name": "Injectables: Blood & Iron",
+    "short": "Blood & Iron"
+   },
+   {
+    "id": "inj-vitamins",
+    "name": "Injectables: Vitamins & Minerals",
+    "short": "Vitamins & Minerals"
+   },
+   {
+    "id": "inj-respiratory",
+    "name": "Injectables: Respiratory & Allergy",
+    "short": "Respiratory & Allergy"
+   },
+   {
+    "id": "inj-hormones",
+    "name": "Injectables: Hormones & Steroids",
+    "short": "Hormones & Steroids"
+   },
+   {
+    "id": "inj-veterinary",
+    "name": "Injectables: Veterinary",
+    "short": "Veterinary"
+   }
+  ]
+ },
+ {
+  "id": "tablets-capsules",
+  "name": "Tablets & Capsules",
+  "types": [
+   {
+    "id": "osd-anti-infectives",
+    "name": "Tablets & Capsules: Anti-infectives",
+    "short": "Anti-infectives"
+   },
+   {
+    "id": "osd-pain",
+    "name": "Tablets & Capsules: Pain & Inflammation",
+    "short": "Pain & Inflammation"
+   },
+   {
+    "id": "osd-gastro",
+    "name": "Tablets & Capsules: Gastrointestinal",
+    "short": "Gastrointestinal"
+   },
+   {
+    "id": "osd-cns",
+    "name": "Tablets & Capsules: CNS & Psychiatry",
+    "short": "CNS & Psychiatry"
+   },
+   {
+    "id": "osd-cardio",
+    "name": "Tablets & Capsules: Cardiovascular",
+    "short": "Cardiovascular"
+   },
+   {
+    "id": "osd-diabetes",
+    "name": "Tablets & Capsules: Diabetes",
+    "short": "Diabetes"
+   },
+   {
+    "id": "osd-blood",
+    "name": "Tablets & Capsules: Blood & Iron",
+    "short": "Blood & Iron"
+   },
+   {
+    "id": "osd-vitamins",
+    "name": "Tablets & Capsules: Vitamins & Minerals",
+    "short": "Vitamins & Minerals"
+   },
+   {
+    "id": "osd-respiratory",
+    "name": "Tablets & Capsules: Respiratory & Allergy",
+    "short": "Respiratory & Allergy"
+   },
+   {
+    "id": "osd-hormones",
+    "name": "Tablets & Capsules: Hormones & Steroids",
+    "short": "Hormones & Steroids"
+   },
+   {
+    "id": "osd-urology",
+    "name": "Tablets & Capsules: Urology",
+    "short": "Urology"
+   },
+   {
+    "id": "osd-oncology",
+    "name": "Tablets & Capsules: Oncology",
+    "short": "Oncology"
+   },
+   {
+    "id": "osd-nutrition",
+    "name": "Tablets & Capsules: Nutrition",
+    "short": "Nutrition"
+   }
+  ]
+ },
+ {
+  "id": "liquids",
+  "name": "Liquids"
+ },
+ {
+  "id": "dry-powders",
+  "name": "Dry Powders"
+ },
+ {
+  "id": "cephalosporins",
+  "name": "Cephalosporins",
+  "types": [
+   {
+    "id": "ceph-injections",
+    "name": "Cephalosporin Injections",
+    "short": "Injections"
+   },
+   {
+    "id": "ceph-oral",
+    "name": "Oral Cephalosporins",
+    "short": "Oral"
+   }
+  ]
+ },
+ {
+  "id": "beta-lactams",
+  "name": "Beta-lactams",
+  "types": [
+   {
+    "id": "bl-injections",
+    "name": "Beta-lactam Injections",
+    "short": "Injections"
+   },
+   {
+    "id": "bl-oral",
+    "name": "Oral Beta-lactams",
+    "short": "Oral"
+   }
+  ]
+ },
+ {
+  "id": "topicals",
+  "name": "Topicals"
+ }
+]

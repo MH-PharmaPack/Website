@@ -70,7 +70,8 @@ const soonAsk: Record<string, string> = {
 const materialCount = (m: string) => ITEMS.filter((i) => materialTokens(i).includes(m)).length;
 
 // Sorts differ by line: packaging sorts by capacity, which an API does not
-// have, so the API line sorts by molecular weight instead. The select is
+// have, so the API line sorts by molecular weight instead; a finished
+// formulation has neither, so that line sorts by name only. The select is
 // rendered with the default line's options; the script swaps them when the
 // line changes (rebuilding the options, because iOS Safari ignores `hidden`
 // on <option>). Sorts not listed for a line fall back to catalogue order.
@@ -86,6 +87,10 @@ const SORTS: Record<string, [string, string][]> = {
     ['name', 'Name, A to Z'],
     ['mw-asc', 'Molecular weight, low to high'],
     ['mw-desc', 'Molecular weight, high to low'],
+  ],
+  finished: [
+    ['', 'Catalogue order'],
+    ['name', 'Name, A to Z'],
   ],
 };
 const defaultSorts = SORTS[DEFAULT_LINE] ?? SORTS.default;

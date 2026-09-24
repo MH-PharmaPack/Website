@@ -230,6 +230,14 @@ export function sortCapacity(item: CatalogueItem): number | undefined {
 
 /** Small print under the facts, when there is any. */
 export function itemNote(item: CatalogueItem): string | undefined {
+  if (item.dosageForm) {
+    const registry = 'the FDA’s public substance registry (UNII)';
+    const atc = item.specs?.some((s) => s.label.startsWith('WHO ATC'));
+    const drawing = item.structure
+      ? `The drawing is the structural formula of ${item.structureOf}, the main ingredient. ${atc ? 'It and the ATC class come' : 'It comes'} from ${registry}.`
+      : `The drawing shows the dosage form, not the product.${atc ? ` The ATC class is from ${registry}.` : ''}`;
+    return `${drawing} Strengths are as the partner plants list them; tell us the pack and the market when you enquire.`;
+  }
   if (item.structure) {
     const what = item.structureOf
       ? `The drawing shows ${item.structureOf}, the main component.`
@@ -245,10 +253,38 @@ export function itemNote(item: CatalogueItem): string | undefined {
 export const specValue = (item: CatalogueItem, label: string): string | undefined =>
   item.specs?.find((s) => s.label === label)?.value;
 
+/** A finished formulation's strengths, as listed ("250 mg, 500 mg"). */
+export const strengthsOf = (item: CatalogueItem): string[] =>
+  (specValue(item, 'Strengths') ?? specValue(item, 'Strength'))?.split(', ') ?? [];
+
+// A short list is shown in full (up to three, and short enough for one line
+// under the name on a phone card); a longer list that runs in one unit family
+// from low to high is shown as its range ("125 mg to 2 g"), and anything else,
+// such as several two-ingredient strengths, as a count. The item page always
+// lists them all.
+const DOSE = /^(\d+(?:\.\d+)?)\s*(mcg|mg|g|IU|MIU)$/;
+const DOSE_SCALE: Record<string, number> = { mcg: 1e-3, mg: 1, g: 1e3, IU: 1, MIU: 1e6 };
+const MASS = new Set(['mcg', 'mg', 'g']);
+
+function strengthSummary(list: string[], sep: string): string {
+  if (list.length === 1 || (list.length <= 3 && list.join(', ').length <= 24)) return list.join(sep);
+  const doses = list.map((v) => v.match(DOSE));
+  const mass = doses.every((m) => m && MASS.has(m[2]));
+  const units = doses.every((m) => m && !MASS.has(m[2]));
+  const values = doses.map((m) => (m ? parseFloat(m[1]) * DOSE_SCALE[m[2]] : NaN));
+  const rising = values.every((v, i) => i === 0 || v > values[i - 1]);
+  return (mass || units) && rising ? `${list[0]} to ${list[list.length - 1]}` : `${list.length} strengths`;
+}
+
 /** The short detail line under a name on cards, in the search suggestions
  *  and the enquiry list: material and unit weight for packaging, the CAS
- *  number for an API. */
+ *  number for an API, the strengths (or, with none listed, the dosage form)
+ *  for a finished formulation. */
 export function itemDetail(item: CatalogueItem, sep = ' · '): string {
+  if (item.dosageForm) {
+    const strengths = strengthsOf(item);
+    return strengths.length ? strengthSummary(strengths, sep) : item.dosageForm;
+  }
   const cas = specValue(item, 'CAS number');
   if (cas) return `CAS ${cas}`;
   return [item.material, item.weight].filter(Boolean).join(sep);
@@ -292,6 +328,9 @@ export function enquiryMailto(item: CatalogueItem, itemUrl?: string): string {
     item.material ? `Material: ${item.material}` : null,
     item.weight ? `Unit weight: ${item.weight}` : null,
     specValue(item, 'CAS number') ? `CAS number: ${specValue(item, 'CAS number')}` : null,
+    item.dosageForm ? `Dosage form: ${item.dosageForm}` : null,
+    // One strength listed: that one. Several: left for the buyer to choose.
+    item.dosageForm ? `Strength: ${strengthsOf(item).length === 1 ? strengthsOf(item)[0] : ''}` : null,
     itemUrl ? `Item page: ${itemUrl}` : null,
     '',
     'Quantity / volume: ',
@@ -323,12 +362,12 @@ export function enquiryRfq(item: CatalogueItem): string {
 
 /** Everything an "Add to enquiry" button hands to the enquiry list
  *  (src/scripts/enquiry-list.ts), as data attributes. The thumbnail is a
- *  96px webp made at build time; drawings (line art, API structures) use
+ *  96px webp made at build time; drawings (line art, generated tiles) use
  *  their SVG as is. */
 export async function enquiryAttrs(item: CatalogueItem, site: URL | undefined): Promise<Record<string, string>> {
   const p = placeOf(item);
   const img = imageFor(item.image);
-  const thumb = item.illustrative || item.structure
+  const thumb = item.illustrative || item.tone
     ? img.src
     : (await getImage({ src: img, width: 96, format: 'webp', quality: 70 })).src;
   return {
