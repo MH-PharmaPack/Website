@@ -74,15 +74,16 @@ export const TURNSTILE_SITE_KEY = '';
 // PostHog product analytics (src/scripts/analytics.ts). The project API key is
 // public by design: it ships in every page, like the Turnstile site key.
 // Empty = analytics off entirely: nothing loads and no consent banner shows.
-// In the PostHog project, "Cookieless server hash mode" (Project settings >
-// Web analytics) must be on, or visitors who decline are silently dropped,
-// and session replay must be switched on for recordings.
-// [NEEDS: the project's phc_ key, and its region below.]
-export const POSTHOG_KEY = '';
+// In the PostHog project, "Enable cookieless tracking" (Settings > Web
+// analytics > Cookieless tracking; it used to be called "Cookieless server
+// hash mode") must be on, or visitors who decline are silently dropped, and
+// session replay must be switched on for recordings.
+// Project created by the client 2026-09-24, US cloud.
+export const POSTHOG_KEY = 'phc_x6ADeYm9n6P9ou62Z9feLhfB2hjEMQfxFPi8dRVjxRiS';
 // The project's ingestion host: EU cloud 'https://eu.i.posthog.com', US cloud
 // 'https://us.i.posthog.com'. It must match the region the project was
 // created in.
-export const POSTHOG_HOST = 'https://eu.i.posthog.com';
+export const POSTHOG_HOST = 'https://us.i.posthog.com';
 
 // Profiles that are unambiguously this company, elsewhere on the web. These
 // feed schema.org sameAs, which is how a search engine decides that the
