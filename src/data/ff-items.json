@@ -25,6 +25,10 @@
     "value": "125 mg, 250 mg, 500 mg, 1 g, 2 g"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial; combipack: 10 ml vial with a 3.5 ml and a 10 ml ampoule"
+   },
+   {
     "label": "Also supplied as",
     "value": "Combipack with lidocaine injection 1% and sterile water for injection"
    },
@@ -58,6 +62,10 @@
    {
     "label": "Strengths",
     "value": "375 mg, 750 mg, 1 g, 1.5 g"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "Also supplied as",
@@ -95,6 +103,10 @@
     "value": "281.25 mg, 562.5 mg, 1.125 g"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "J01DD04, Third-generation cephalosporins"
    }
@@ -124,6 +136,10 @@
    {
     "label": "Strengths",
     "value": "250 mg, 500 mg, 1 g"
+   },
+   {
+    "label": "Pack",
+    "value": "Vial"
    },
    {
     "label": "WHO ATC",
@@ -188,6 +204,10 @@
     "value": "250 mg, 500 mg, 1 g"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01DD02, Third-generation cephalosporins"
    }
@@ -248,6 +268,10 @@
    {
     "label": "Strengths",
     "value": "250 mg, 500 mg, 1 g"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "Also supplied as",
@@ -316,6 +340,10 @@
     "value": "750 mg, 1.5 g"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01DC02, Second-generation cephalosporins"
    }
@@ -347,6 +375,10 @@
     "value": "500 mg, 1 g"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01DD12, Third-generation cephalosporins"
    }
@@ -376,6 +408,10 @@
    {
     "label": "Strengths",
     "value": "1 g, 1.5 g, 2 g, 3 g"
+   },
+   {
+    "label": "Pack",
+    "value": "20 ml vial"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -905,6 +941,10 @@
     "value": "1 g"
    },
    {
+    "label": "Pack",
+    "value": "20 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01DH03, Carbapenems"
    }
@@ -1025,6 +1065,10 @@
     "value": "2 g"
    },
    {
+    "label": "Pack",
+    "value": "Vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01XX04, Other antibacterials"
    }
@@ -1054,6 +1098,10 @@
    {
     "label": "Strengths",
     "value": "500 mg, 1 g"
+   },
+   {
+    "label": "Pack",
+    "value": "20 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -1087,6 +1135,10 @@
     "value": "400 mg"
    },
    {
+    "label": "Pack",
+    "value": "Vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01XA02, Glycopeptide antibacterials"
    }
@@ -1116,6 +1168,10 @@
    {
     "label": "Strength",
     "value": "50 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -1149,6 +1205,10 @@
     "value": "100 mg/2 ml, 250 mg/2 ml, 500 mg/2 ml, 250 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml vial; 1 ml ampoule (250 mg/ml)"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01GB06, Other aminoglycosides"
    }
@@ -1178,6 +1238,10 @@
    {
     "label": "Strength",
     "value": "50 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -1211,6 +1275,10 @@
     "value": "40 mg"
    },
    {
+    "label": "Pack",
+    "value": "2, 10, 30 or 50 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01GB03, Other aminoglycosides"
    }
@@ -1240,6 +1308,10 @@
    {
     "label": "Strength",
     "value": "600 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -1273,6 +1345,10 @@
     "value": "600 mg/4 ml"
    },
    {
+    "label": "Pack",
+    "value": "5 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01FF01, Lincosamides"
    }
@@ -1304,6 +1380,10 @@
     "value": "500 mg"
    },
    {
+    "label": "Pack",
+    "value": "20 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01FA09, Macrolides"
    }
@@ -1333,6 +1413,10 @@
    {
     "label": "Strengths",
     "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "Also supplied as",
@@ -1368,6 +1452,10 @@
    {
     "label": "Strength",
     "value": "500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -1432,6 +1520,10 @@
     "value": "80 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1, 2, 3, 5 or 10 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "P01BE02, Artemisinin and derivatives, plain"
    }
@@ -1463,6 +1555,10 @@
     "value": "1.5 g/5 ml"
    },
    {
+    "label": "Pack",
+    "value": "5 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "P01CB01, Antimony compounds"
    }
@@ -1492,6 +1588,10 @@
    {
     "label": "Strength",
     "value": "40 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "Also supplied as",
@@ -1529,6 +1629,10 @@
     "value": "40 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "Also supplied as",
     "value": "Combipack with sodium chloride injection 0.9%"
    },
@@ -1564,6 +1668,10 @@
     "value": "40 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "A02BC01, Proton pump inhibitors"
    }
@@ -1593,6 +1701,10 @@
    {
     "label": "Strength",
     "value": "20 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "Also supplied as",
@@ -1630,6 +1742,10 @@
     "value": "20 mg"
    },
    {
+    "label": "Pack",
+    "value": "5 ml vial"
+   },
+   {
     "label": "Also supplied as",
     "value": "Combipack with sodium chloride injection 0.9%"
    },
@@ -1665,6 +1781,10 @@
     "value": "2 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 ml or 2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "A04AA01, Serotonin (5HT3) antagonists"
    }
@@ -1694,6 +1814,10 @@
    {
     "label": "Strength",
     "value": "0.3 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    }
   ]
  },
@@ -1721,6 +1845,10 @@
    {
     "label": "Strength",
     "value": "10 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -1754,6 +1882,10 @@
     "value": "20 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "A03BB01, Belladonna alkaloids, semisynthetic, quaternary ammonium compounds"
    }
@@ -1783,6 +1915,10 @@
    {
     "label": "Strength",
     "value": "50 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml vial"
    }
   ]
  },
@@ -1808,6 +1944,10 @@
    {
     "label": "Strength",
     "value": "60 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "Lyophilised vial"
    }
   ]
  },
@@ -1835,6 +1975,10 @@
    {
     "label": "Strength",
     "value": "10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "Lyophilised vial"
    },
    {
     "label": "WHO ATC",
@@ -1868,6 +2012,10 @@
     "value": "5 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml or 5 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N05AD01, Butyrophenone derivatives"
    }
@@ -1897,6 +2045,10 @@
    {
     "label": "Strength",
     "value": "50 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    }
   ]
  },
@@ -1924,6 +2076,10 @@
    {
     "label": "Strength",
     "value": "25 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -1957,6 +2113,10 @@
     "value": "20 mg/ml, 40 mg/2 ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml or 2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N05AF01, Thioxanthene derivatives"
    }
@@ -1986,6 +2146,10 @@
    {
     "label": "Strength",
     "value": "200 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    }
   ]
  },
@@ -2013,6 +2177,10 @@
    {
     "label": "Strengths",
     "value": "50 mg/ml, 250 mg/5 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2, 4 or 5 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2044,6 +2212,10 @@
    {
     "label": "Strengths",
     "value": "100 mg, 500 mg/5 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "4 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2078,6 +2250,10 @@
     "value": "100 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N03AA02, Barbiturates and derivatives"
    }
@@ -2108,6 +2284,10 @@
    {
     "label": "Strength",
     "value": "10 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2142,6 +2322,10 @@
     "value": "5 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "3 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N05CD08, Benzodiazepine derivatives"
    }
@@ -2171,6 +2355,10 @@
    {
     "label": "Strength",
     "value": "200 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2204,6 +2392,10 @@
     "value": "250 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "4 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N06BX06, Other psychostimulants and nootropics"
    }
@@ -2232,6 +2424,10 @@
    {
     "label": "Strength",
     "value": "100 units"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml ampoule"
    }
   ]
  },
@@ -2259,6 +2455,10 @@
    {
     "label": "Strength",
     "value": "10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2292,6 +2492,10 @@
     "value": "10 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "3 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "M03AC04, Other quaternary ammonium compounds"
    }
@@ -2321,6 +2525,10 @@
    {
     "label": "Strength",
     "value": "50 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "50 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -2354,6 +2562,10 @@
     "value": "1% w/v (10 mg/ml)"
    },
    {
+    "label": "Pack",
+    "value": "20 ml or 50 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "N01AX10, Other general anesthetics"
    }
@@ -2383,6 +2595,10 @@
    {
     "label": "Strength",
     "value": "20 mg/10 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml ampoule or vial"
    },
    {
     "label": "WHO ATC",
@@ -2416,6 +2632,10 @@
     "value": "1%, 2%"
    },
    {
+    "label": "Pack",
+    "value": "3.5 ml ampoule (1%); 30 ml or 50 ml vial (2%)"
+   },
+   {
     "label": "WHO ATC",
     "value": "N01BB02, Amides"
    }
@@ -2445,6 +2665,10 @@
    {
     "label": "Strengths",
     "value": "2% w/v, lidocaine hydrochloride 24.64 mg + adrenaline 0.0125 mg per ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1.8 ml ampoule or 30 ml vial"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -2478,6 +2702,10 @@
     "value": "0.5% w/v"
    },
    {
+    "label": "Pack",
+    "value": "20 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "N01BB01, Amides"
    }
@@ -2507,6 +2735,10 @@
    {
     "label": "Strength",
     "value": "5 mg + 80 mg per ml"
+   },
+   {
+    "label": "Pack",
+    "value": "4 ml ampoule"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -2540,6 +2772,10 @@
     "value": "0.5%"
    },
    {
+    "label": "Pack",
+    "value": "10, 20 or 30 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "N01BB09, Amides"
    }
@@ -2571,6 +2807,10 @@
     "value": "0.6 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule or 30 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "A03BA01, Belladonna alkaloids, tertiary amines"
    }
@@ -2600,6 +2840,10 @@
    {
     "label": "Strength",
     "value": "0.4 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2634,6 +2878,10 @@
     "value": "0.3 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N02AE01, Oripavine derivatives"
    }
@@ -2664,6 +2912,10 @@
    {
     "label": "Strength",
     "value": "50 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml or 2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2697,6 +2949,10 @@
     "value": "200 mg/5 ml"
    },
    {
+    "label": "Pack",
+    "value": "5 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "C01CA04, Adrenergic and dopaminergic agents"
    }
@@ -2726,6 +2982,10 @@
    {
     "label": "Strength",
     "value": "250 mg/5 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2759,6 +3019,10 @@
     "value": "0.5%"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "C01CA02, Adrenergic and dopaminergic agents"
    }
@@ -2788,6 +3052,10 @@
    {
     "label": "Strength",
     "value": "12.5 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "Vial"
    },
    {
     "label": "WHO ATC",
@@ -2821,6 +3089,10 @@
     "value": "8 mg"
    },
    {
+    "label": "Pack",
+    "value": "2 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "M01AC05, Oxicams"
    }
@@ -2850,6 +3122,10 @@
    {
     "label": "Strength",
     "value": "500 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml or 15 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2883,6 +3159,10 @@
     "value": "15 mg/1.5 ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "M01AC06, Oxicams"
    }
@@ -2912,6 +3192,10 @@
    {
     "label": "Strength",
     "value": "75 mg/3 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "3 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -2945,6 +3229,10 @@
     "value": "20 mg/2 ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "N02BG06, Other analgesics and antipyretics"
    }
@@ -2974,6 +3262,10 @@
    {
     "label": "Strength",
     "value": "75 mg + 2 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "3 ml ampoule"
    },
    {
     "label": "Also supplied as",
@@ -3007,6 +3299,10 @@
    {
     "label": "Strength",
     "value": "100 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    }
   ]
  },
@@ -3034,6 +3330,10 @@
    {
     "label": "Strengths",
     "value": "4 mg/ml, 8 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml or 2 ml ampoule or vial"
    },
    {
     "label": "WHO ATC",
@@ -3067,6 +3367,10 @@
     "value": "30 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "H02AB06, Glucocorticoids"
    }
@@ -3096,6 +3400,10 @@
    {
     "label": "Strength",
     "value": "100 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "Vial, with 2 ml water for injection"
    },
    {
     "label": "Also supplied as",
@@ -3133,6 +3441,10 @@
     "value": "2 mg + 2 mg"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "R03BA04, Glucocorticoids"
    }
@@ -3164,6 +3476,10 @@
     "value": "40 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1, 2 or 5 ml vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "H02AB04, Glucocorticoids"
    }
@@ -3188,6 +3504,10 @@
    {
     "label": "Dosage form",
     "value": "Injection"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    },
    {
     "label": "Composition",
@@ -3225,6 +3545,10 @@
     "value": "0.5 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "G02AB03, Ergot alkaloids"
    }
@@ -3254,6 +3578,10 @@
    {
     "label": "Strength",
     "value": "10 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3287,6 +3615,10 @@
     "value": "20 mg/2 ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule or vial"
+   },
+   {
     "label": "WHO ATC",
     "value": "C03CA04, Sulfonamides, plain"
    }
@@ -3316,6 +3648,10 @@
    {
     "label": "Strength",
     "value": "20 mg/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1, 2 or 5 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3349,6 +3685,10 @@
     "value": "5 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "4 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "C07AG01, Alpha and beta blocking agents"
    }
@@ -3380,6 +3720,10 @@
     "value": "150 mcg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "C02AC01, Imidazoline receptor agonists"
    }
@@ -3407,6 +3751,10 @@
    {
     "label": "Strengths",
     "value": "5,000 IU/5 ml, 25,000 IU/5 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -3438,6 +3786,10 @@
     "value": "50 mg/5 ml"
    },
    {
+    "label": "Pack",
+    "value": "5 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "V03AB14, Antidotes"
    }
@@ -3465,6 +3817,10 @@
    {
     "label": "Strength",
     "value": "60,000 IU"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml vial"
    },
    {
     "label": "WHO ATC",
@@ -3498,6 +3854,10 @@
     "value": "10 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "1 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "B02BA01, Vitamin K"
    }
@@ -3527,6 +3887,10 @@
    {
     "label": "Strength",
     "value": "10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    }
   ]
  },
@@ -3552,6 +3916,10 @@
    {
     "label": "Strength",
     "value": "100 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    }
   ]
  },
@@ -3577,6 +3945,10 @@
    {
     "label": "Strength",
     "value": "20 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3606,6 +3978,10 @@
    {
     "label": "Strengths",
     "value": "50 mg/ml, 500 mg/10 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml or 10 ml vial"
    }
   ]
  },
@@ -3631,6 +4007,10 @@
    {
     "label": "Strengths",
     "value": "7.5% w/v, 8.4% w/v"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml or 25 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3662,6 +4042,10 @@
     "value": "15% w/v"
    },
    {
+    "label": "Pack",
+    "value": "10 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "B05XA01, Electrolyte solutions"
    }
@@ -3691,6 +4075,10 @@
     "value": "10% w/v"
    },
    {
+    "label": "Pack",
+    "value": "10 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "A12AA03, Calcium"
    }
@@ -3718,6 +4106,10 @@
    {
     "label": "Strength",
     "value": "137.5 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3751,6 +4143,10 @@
     "value": "25% w/v"
    },
    {
+    "label": "Pack",
+    "value": "20 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "V06DC01, Carbohydrates"
    }
@@ -3780,6 +4176,10 @@
    {
     "label": "Strength",
     "value": "200,000 IU/ml"
+   },
+   {
+    "label": "Pack",
+    "value": "1 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3813,6 +4213,10 @@
     "value": "100 mg/2 ml"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule"
+   },
+   {
     "label": "WHO ATC",
     "value": "A11DA01, Vitamin B1, plain"
    }
@@ -3842,6 +4246,10 @@
    {
     "label": "Strength",
     "value": "100 mg/2 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "2 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -3875,6 +4283,10 @@
     "value": "10 mg + 10 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 ml vial"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "A11DA01, Vitamin B1, plain"
    }
@@ -3906,6 +4318,10 @@
     "value": "100 mg + 100 mg + 1 mg (with lidocaine 20 mg), 100 mg + 100 mg + 10 mg"
    },
    {
+    "label": "Pack",
+    "value": "2 ml ampoule (with lidocaine) or 3 ml ampoule"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "A11DA01, Vitamin B1, plain"
    }
@@ -3931,6 +4347,10 @@
    {
     "label": "Dosage form",
     "value": "Injection"
+   },
+   {
+    "label": "Pack",
+    "value": "5 ml ampoule"
    },
    {
     "label": "Composition",
@@ -3966,6 +4386,10 @@
    {
     "label": "Strength",
     "value": "250 mg/10 ml"
+   },
+   {
+    "label": "Pack",
+    "value": "10 ml ampoule"
    },
    {
     "label": "WHO ATC",
@@ -4135,6 +4559,10 @@
     "value": "10 mg/ml"
    },
    {
+    "label": "Pack",
+    "value": "10, 20, 25, 30, 50 or 100 ml vial"
+   },
+   {
     "label": "Use",
     "value": "Veterinary"
    }
@@ -4166,6 +4594,10 @@
     "value": "100 mg + 325 mg, 100 mg + 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (100 mg + 500 mg)"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "M01AB16, Acetic acid derivatives and related substances"
    }
@@ -4195,6 +4627,10 @@
    {
     "label": "Strengths",
     "value": "100 mg + 325 mg + 15 mg, 100 mg + 500 mg + 10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (100 mg + 500 mg + 10 mg)"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -4253,6 +4689,10 @@
    {
     "label": "Strength",
     "value": "200 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4317,6 +4757,10 @@
     "value": "5 mg, 10 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "C08CA01, Dihydropyridine derivatives"
    }
@@ -4379,6 +4823,10 @@
     "value": "20 mg + 120 mg, 40 mg + 240 mg, 80 mg + 480 mg"
    },
    {
+    "label": "Pack",
+    "value": "Alu-PVC blister: 1 x 6 (20 mg + 120 mg, 80 mg + 480 mg); 10 x 10 (40 mg + 240 mg)"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "P01BE02, Artemisinin and derivatives, plain"
    }
@@ -4408,6 +4856,10 @@
    {
     "label": "Strength",
     "value": "500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4441,6 +4893,10 @@
     "value": "80 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-Alu blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "B01AC06, Platelet aggregation inhibitors excl. heparin"
    }
@@ -4470,6 +4926,10 @@
    {
     "label": "Strengths",
     "value": "10 mg, 20 mg, 40 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10 blister: Alu-Alu (10 mg, 20 mg); Alu-PVC (40 mg)"
    },
    {
     "label": "WHO ATC",
@@ -4530,6 +4990,10 @@
     "value": "250 mg, 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "Alu-PVC blister: 1 x 6 (250 mg); 1 x 3 (500 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01FA10, Macrolides"
    }
@@ -4559,6 +5023,10 @@
    {
     "label": "Strength",
     "value": "5 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 20, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4679,6 +5147,10 @@
     "value": "10 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "R06AE07, Piperazine derivatives"
    }
@@ -4708,6 +5180,10 @@
    {
     "label": "Strength",
     "value": "4 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10 or 2 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4741,6 +5217,10 @@
     "value": "250 mg, 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01MA02, Fluoroquinolones"
    }
@@ -4770,6 +5250,10 @@
    {
     "label": "Strengths",
     "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4803,6 +5287,10 @@
     "value": "75 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "B01AC04, Platelet aggregation inhibitors excl. heparin"
    }
@@ -4832,6 +5320,10 @@
    {
     "label": "Strength",
     "value": "10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -4865,6 +5357,10 @@
     "value": "0.5 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "H02AB02, Glucocorticoids"
    }
@@ -4894,6 +5390,10 @@
    {
     "label": "Strength",
     "value": "50 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "Release",
@@ -4931,6 +5431,10 @@
     "value": "50 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "Release",
     "value": "Uncoated or film coated"
    },
@@ -4966,6 +5470,10 @@
     "value": "50 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "M01AB05, Acetic acid derivatives and related substances"
    }
@@ -4997,6 +5505,10 @@
     "value": "50 mg + 325 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "M01AB05, Acetic acid derivatives and related substances"
    }
@@ -5026,6 +5538,10 @@
    {
     "label": "Strength",
     "value": "50 mg + 500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -5119,6 +5635,10 @@
    {
     "label": "Strength",
     "value": "50 mg + 10 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -5268,6 +5788,10 @@
     "value": "40 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "A03AD02, Papaverine and derivatives"
    }
@@ -5297,6 +5821,10 @@
    {
     "label": "Strength",
     "value": "500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -5330,6 +5858,10 @@
     "value": "40 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "A02BC05, Proton pump inhibitors"
    }
@@ -5359,6 +5891,10 @@
    {
     "label": "Strengths",
     "value": "60 mg, 90 mg, 120 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -5475,6 +6011,10 @@
     "value": "5 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "B03BB01, Folic acid and derivatives"
    }
@@ -5504,6 +6044,10 @@
    {
     "label": "Strength",
     "value": "40 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -5568,6 +6112,10 @@
     "value": "1 mg + 500 mg, 2 mg + 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "Release",
     "value": "Also with sustained-release metformin"
    },
@@ -5603,6 +6151,10 @@
     "value": "125 mg, 250 mg, 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "D01AA08, Antibiotics"
    }
@@ -5634,6 +6186,10 @@
     "value": "25 mg, 50 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "C03AA03, Thiazides, plain"
    }
@@ -5663,6 +6219,10 @@
    {
     "label": "Strengths",
     "value": "200 mg, 400 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "Release",
@@ -5698,6 +6258,10 @@
    {
     "label": "Strength",
     "value": "200 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -5887,6 +6451,10 @@
     "value": "5 mg + 240 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "R06AE09, Piperazine derivatives"
    }
@@ -5916,6 +6484,10 @@
    {
     "label": "Strengths",
     "value": "250 mg, 500 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -5949,6 +6521,10 @@
     "value": "2 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "A07DA03, Antipropulsives"
    }
@@ -5980,6 +6556,10 @@
     "value": "10 mg"
    },
    {
+    "label": "Pack",
+    "value": "2 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "R06AX13, Other antihistamines for systemic use"
    }
@@ -6009,6 +6589,10 @@
    {
     "label": "Strengths",
     "value": "25 mg, 50 mg, 100 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (25 mg, 50 mg)"
    },
    {
     "label": "WHO ATC",
@@ -6104,6 +6688,10 @@
     "value": "500 mg, 850 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (500 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "A10BA02, Biguanides"
    }
@@ -6135,6 +6723,10 @@
     "value": "500 mg, 1000 mg"
    },
    {
+    "label": "Pack",
+    "value": "Alu-PVC blister: 10 x 10 (500 mg); 10 x 15 (1000 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "A10BA02, Biguanides"
    }
@@ -6164,6 +6756,10 @@
    {
     "label": "Strengths",
     "value": "metformin 500 mg, metformin 1000 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "Alu-PVC blister: 5 x 2 x 15 (metformin 500 mg); 10 x 10 (metformin 1000 mg)"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -6259,6 +6855,10 @@
     "value": "200 mg, 250 mg, 400 mg, 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "P01AB01, Nitroimidazole derivatives"
    }
@@ -6319,6 +6919,10 @@
    {
     "label": "Strength",
     "value": "20 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -6383,6 +6987,10 @@
     "value": "100 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01XE01, Nitrofuran derivatives"
    }
@@ -6412,6 +7020,10 @@
    {
     "label": "Strength",
     "value": "400 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -6631,6 +7243,10 @@
     "value": "500 mg, 650 mg, 1 g"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (500 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "N02BE01, Anilides"
    }
@@ -6724,6 +7340,10 @@
     "value": "400 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01MA03, Fluoroquinolones"
    }
@@ -6784,6 +7404,10 @@
    {
     "label": "Strength",
     "value": "20 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -6879,6 +7503,10 @@
     "value": "5 mg, 10 mg, 20 mg, 40 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (10 mg, 20 mg, 40 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "C10AA07, HMG CoA reductase inhibitors"
    }
@@ -6941,6 +7569,10 @@
     "value": "25 mg, 50 mg, 100 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister (50 mg, 100 mg)"
+   },
+   {
     "label": "WHO ATC",
     "value": "G04BE03, Drugs used in erectile dysfunction"
    }
@@ -6970,6 +7602,10 @@
    {
     "label": "Strengths",
     "value": "50 mg, 100 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "3 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -7096,6 +7732,10 @@
     "value": "0.4 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "G04CA02, Alpha-adrenoreceptor antagonists"
    }
@@ -7125,6 +7765,10 @@
    {
     "label": "Strengths",
     "value": "20 mg, 40 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -7158,6 +7802,10 @@
     "value": "250 mg, 500 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-Alu blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "B02AA02, Amino acids"
    }
@@ -7185,6 +7833,10 @@
     "value": "Tablets"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC (main ingredient)",
     "value": "B02AA02, Amino acids"
    }
@@ -7208,6 +7860,10 @@
    {
     "label": "Dosage form",
     "value": "Tablets"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC (main ingredient)",
@@ -7335,6 +7991,10 @@
     "value": "20 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10 or 10 x 10, Alu-Alu blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "A02BC01, Proton pump inhibitors"
    }
@@ -7393,6 +8053,10 @@
     "value": "Capsules"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "Release",
     "value": "Enteric-coated esomeprazole, sustained-release domperidone"
    },
@@ -7428,6 +8092,10 @@
     "value": "100 mg, 200 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "J02AC02, Triazole derivatives"
    }
@@ -7457,6 +8125,10 @@
    {
     "label": "Strength",
     "value": "40 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -7616,6 +8288,10 @@
     "value": "20 mg + 30 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
+   },
+   {
     "label": "Release",
     "value": "Enteric-coated rabeprazole, sustained-release domperidone"
    },
@@ -7651,6 +8327,10 @@
     "value": "20 mg + 75 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
+   },
+   {
     "label": "Release",
     "value": "Enteric-coated rabeprazole, sustained-release levosulpiride"
    },
@@ -7684,6 +8364,10 @@
    {
     "label": "Strength",
     "value": "20 mg + 150 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
    },
    {
     "label": "Release",
@@ -7814,6 +8498,10 @@
     "value": "500 mg"
    },
    {
+    "label": "Pack",
+    "value": "1 x 6, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "J01FA10, Macrolides"
    }
@@ -7843,6 +8531,10 @@
    {
     "label": "Strength",
     "value": "150 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",
@@ -7876,6 +8568,10 @@
     "value": "2 mg"
    },
    {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
+   },
+   {
     "label": "WHO ATC",
     "value": "A07DA03, Antipropulsives"
    }
@@ -7905,6 +8601,10 @@
    {
     "label": "Strength",
     "value": "20 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "10 x 10, Alu-PVC blister"
    },
    {
     "label": "WHO ATC",
@@ -7937,6 +8637,10 @@
    {
     "label": "Strengths",
     "value": "50 mg, 100 mg"
+   },
+   {
+    "label": "Pack",
+    "value": "1 x 10, Alu-Alu blister"
    },
    {
     "label": "WHO ATC",

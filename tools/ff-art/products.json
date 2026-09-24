@@ -15,7 +15,8 @@
     "2 g"
    ],
    "also": "Combipack with lidocaine injection 1% and sterile water for injection",
-   "kw": "ceftriaxone sodium"
+   "kw": "ceftriaxone sodium",
+   "pack": "10 ml vial; combipack: 10 ml vial with a 3.5 ml and a 10 ml ampoule"
   },
   {
    "form": "injp",
@@ -30,7 +31,8 @@
     "1 g",
     "1.5 g"
    ],
-   "also": "Combipack with lidocaine injection 1%"
+   "also": "Combipack with lidocaine injection 1%",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -43,7 +45,8 @@
     "281.25 mg",
     "562.5 mg",
     "1.125 g"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -56,7 +59,8 @@
     "500 mg",
     "1 g"
    ],
-   "kw": "cefotaxime sodium"
+   "kw": "cefotaxime sodium",
+   "pack": "Vial"
   },
   {
    "form": "injp",
@@ -79,7 +83,8 @@
     "250 mg",
     "500 mg",
     "1 g"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -105,7 +110,8 @@
     "500 mg",
     "1 g"
    ],
-   "also": "Combipack with sterile water for injection"
+   "also": "Combipack with sterile water for injection",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -129,7 +135,8 @@
    "strengths": [
     "750 mg",
     "1.5 g"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -140,7 +147,8 @@
    "strengths": [
     "500 mg",
     "1 g"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -154,7 +162,8 @@
     "1.5 g",
     "2 g",
     "3 g"
-   ]
+   ],
+   "pack": "20 ml vial"
   },
   {
    "form": "injp",
@@ -346,7 +355,8 @@
    "strengths": [
     "1 g"
    ],
-   "kw": "ertapenem sodium"
+   "kw": "ertapenem sodium",
+   "pack": "20 ml vial"
   },
   {
    "form": "injp",
@@ -389,7 +399,8 @@
    ],
    "strengths": [
     "2 g"
-   ]
+   ],
+   "pack": "Vial"
   },
   {
    "form": "injp",
@@ -400,7 +411,8 @@
    "strengths": [
     "500 mg",
     "1 g"
-   ]
+   ],
+   "pack": "20 ml vial"
   },
   {
    "form": "injp",
@@ -410,7 +422,8 @@
    ],
    "strengths": [
     "400 mg"
-   ]
+   ],
+   "pack": "Vial"
   },
   {
    "form": "injp",
@@ -420,7 +433,8 @@
    ],
    "strengths": [
     "50 mg"
-   ]
+   ],
+   "pack": "5 ml vial"
   },
   {
    "form": "inj",
@@ -434,7 +448,8 @@
     "500 mg/2 ml",
     "250 mg/ml"
    ],
-   "kw": "amikacin sulphate sulfate"
+   "kw": "amikacin sulphate sulfate",
+   "pack": "2 ml vial; 1 ml ampoule (250 mg/ml)"
   },
   {
    "form": "inj",
@@ -445,7 +460,8 @@
    "strengths": [
     "50 mg/ml"
    ],
-   "kw": "netilmicin sulphate sulfate"
+   "kw": "netilmicin sulphate sulfate",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -455,7 +471,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "2, 10, 30 or 50 ml vial"
   },
   {
    "form": "inj",
@@ -465,7 +482,8 @@
    ],
    "strengths": [
     "600 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml vial"
   },
   {
    "form": "inj",
@@ -475,7 +493,8 @@
    ],
    "strengths": [
     "600 mg/4 ml"
-   ]
+   ],
+   "pack": "5 ml vial"
   },
   {
    "form": "injp",
@@ -485,7 +504,8 @@
    ],
    "strengths": [
     "500 mg"
-   ]
+   ],
+   "pack": "20 ml vial"
   },
   {
    "form": "injp",
@@ -498,7 +518,8 @@
     "500 mg"
    ],
    "also": "Combipack with sterile water for injection",
-   "kw": "aciclovir"
+   "kw": "aciclovir",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -508,7 +529,8 @@
    ],
    "strengths": [
     "500 mg"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -528,7 +550,8 @@
    ],
    "strengths": [
     "80 mg/ml"
-   ]
+   ],
+   "pack": "1, 2, 3, 5 or 10 ml ampoule"
   },
   {
    "form": "inj",
@@ -539,7 +562,8 @@
    "strengths": [
     "1.5 g/5 ml"
    ],
-   "kw": "leishmaniasis"
+   "kw": "leishmaniasis",
+   "pack": "5 ml vial"
   },
   {
    "form": "injp",
@@ -551,7 +575,8 @@
     "40 mg"
    ],
    "also": "Combipack with sodium chloride injection 0.9%",
-   "kw": "esomeprazole sodium lyophilized"
+   "kw": "esomeprazole sodium lyophilized",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -562,7 +587,8 @@
    "strengths": [
     "40 mg"
    ],
-   "also": "Combipack with sodium chloride injection 0.9%"
+   "also": "Combipack with sodium chloride injection 0.9%",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -572,7 +598,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -584,7 +611,8 @@
     "20 mg"
    ],
    "also": "Combipack with sterile water for injection",
-   "kw": "rabeprazole sodium"
+   "kw": "rabeprazole sodium",
+   "pack": "10 ml vial"
   },
   {
    "form": "injp",
@@ -595,7 +623,8 @@
    "strengths": [
     "20 mg"
    ],
-   "also": "Combipack with sodium chloride injection 0.9%"
+   "also": "Combipack with sodium chloride injection 0.9%",
+   "pack": "5 ml vial"
   },
   {
    "form": "inj",
@@ -605,7 +634,8 @@
    ],
    "strengths": [
     "2 mg"
-   ]
+   ],
+   "pack": "1 ml or 2 ml ampoule"
   },
   {
    "form": "inj",
@@ -615,7 +645,8 @@
    ],
    "strengths": [
     "0.3 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -625,7 +656,8 @@
    ],
    "strengths": [
     "10 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -636,7 +668,8 @@
    "strengths": [
     "20 mg/ml"
    ],
-   "kw": "hyoscine butylbromide scopolamine butylbromide"
+   "kw": "hyoscine butylbromide scopolamine butylbromide",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -646,7 +679,8 @@
    ],
    "strengths": [
     "50 mg/ml"
-   ]
+   ],
+   "pack": "5 ml vial"
   },
   {
    "form": "injp",
@@ -657,7 +691,8 @@
    "strengths": [
     "60 mg"
    ],
-   "therapy": "cns"
+   "therapy": "cns",
+   "pack": "Lyophilised vial"
   },
   {
    "form": "injp",
@@ -667,7 +702,8 @@
    ],
    "strengths": [
     "10 mg"
-   ]
+   ],
+   "pack": "Lyophilised vial"
   },
   {
    "form": "inj",
@@ -677,7 +713,8 @@
    ],
    "strengths": [
     "5 mg/ml"
-   ]
+   ],
+   "pack": "1 ml or 5 ml ampoule"
   },
   {
    "form": "inj",
@@ -687,7 +724,8 @@
    ],
    "strengths": [
     "50 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -697,7 +735,8 @@
    ],
    "strengths": [
     "25 mg/ml"
-   ]
+   ],
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -709,7 +748,8 @@
     "20 mg/ml",
     "40 mg/2 ml"
    ],
-   "kw": "flupenthixol"
+   "kw": "flupenthixol",
+   "pack": "1 ml or 2 ml ampoule"
   },
   {
    "form": "inj",
@@ -719,7 +759,8 @@
    ],
    "strengths": [
     "200 mg/ml"
-   ]
+   ],
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -730,7 +771,8 @@
    "strengths": [
     "50 mg/ml",
     "250 mg/5 ml"
-   ]
+   ],
+   "pack": "2, 4 or 5 ml ampoule"
   },
   {
    "form": "inj",
@@ -742,7 +784,8 @@
     "100 mg",
     "500 mg/5 ml"
    ],
-   "kw": "valproate sodium"
+   "kw": "valproate sodium",
+   "pack": "4 ml ampoule"
   },
   {
    "form": "inj",
@@ -754,7 +797,8 @@
     "100 mg/ml"
    ],
    "restricted": true,
-   "kw": "phenobarbitone"
+   "kw": "phenobarbitone",
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -765,7 +809,8 @@
    "strengths": [
     "10 mg/2 ml"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -776,7 +821,8 @@
    "strengths": [
     "5 mg/ml"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "3 ml ampoule"
   },
   {
    "form": "inj",
@@ -786,7 +832,8 @@
    ],
    "strengths": [
     "200 mg"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -796,7 +843,8 @@
    ],
    "strengths": [
     "250 mg/ml"
-   ]
+   ],
+   "pack": "4 ml ampoule"
   },
   {
    "form": "injp",
@@ -809,7 +857,8 @@
    ],
    "restricted": true,
    "therapy": "cns",
-   "kw": "clostridium botulinum toxin"
+   "kw": "clostridium botulinum toxin",
+   "pack": "5 ml ampoule"
   },
   {
    "form": "injp",
@@ -819,7 +868,8 @@
    ],
    "strengths": [
     "10 mg"
-   ]
+   ],
+   "pack": "10 ml ampoule"
   },
   {
    "form": "inj",
@@ -830,7 +880,8 @@
    "strengths": [
     "10 mg/ml"
    ],
-   "kw": "atracurium besilate"
+   "kw": "atracurium besilate",
+   "pack": "3 ml ampoule"
   },
   {
    "form": "inj",
@@ -841,7 +892,8 @@
    "strengths": [
     "50 mg/ml"
    ],
-   "kw": "succinylcholine"
+   "kw": "succinylcholine",
+   "pack": "50 ml vial"
   },
   {
    "form": "inj",
@@ -851,7 +903,8 @@
    ],
    "strengths": [
     "1% w/v (10 mg/ml)"
-   ]
+   ],
+   "pack": "20 ml or 50 ml vial"
   },
   {
    "form": "inj",
@@ -861,7 +914,8 @@
    ],
    "strengths": [
     "20 mg/10 ml"
-   ]
+   ],
+   "pack": "10 ml ampoule or vial"
   },
   {
    "form": "inj",
@@ -873,7 +927,8 @@
     "1%",
     "2%"
    ],
-   "kw": "lignocaine xylocaine"
+   "kw": "lignocaine xylocaine",
+   "pack": "3.5 ml ampoule (1%); 30 ml or 50 ml vial (2%)"
   },
   {
    "form": "inj",
@@ -886,7 +941,8 @@
     "2% w/v",
     "lidocaine hydrochloride 24.64 mg + adrenaline 0.0125 mg per ml"
    ],
-   "kw": "lignocaine epinephrine dental cartridge"
+   "kw": "lignocaine epinephrine dental cartridge",
+   "pack": "1.8 ml ampoule or 30 ml vial"
   },
   {
    "form": "inj",
@@ -896,7 +952,8 @@
    ],
    "strengths": [
     "0.5% w/v"
-   ]
+   ],
+   "pack": "20 ml vial"
   },
   {
    "form": "inj",
@@ -908,7 +965,8 @@
    "strengths": [
     "5 mg + 80 mg per ml"
    ],
-   "kw": "heavy spinal"
+   "kw": "heavy spinal",
+   "pack": "4 ml ampoule"
   },
   {
    "form": "inj",
@@ -918,7 +976,8 @@
    ],
    "strengths": [
     "0.5%"
-   ]
+   ],
+   "pack": "10, 20 or 30 ml vial"
   },
   {
    "form": "inj",
@@ -930,7 +989,8 @@
     "0.6 mg"
    ],
    "therapy": "critical",
-   "kw": "atropine sulfate"
+   "kw": "atropine sulfate",
+   "pack": "1 ml ampoule or 30 ml vial"
   },
   {
    "form": "inj",
@@ -940,7 +1000,8 @@
    ],
    "strengths": [
     "0.4 mg/ml"
-   ]
+   ],
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -951,7 +1012,8 @@
    "strengths": [
     "0.3 mg/ml"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -962,7 +1024,8 @@
    "strengths": [
     "50 mg/ml"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "1 ml or 2 ml ampoule"
   },
   {
    "form": "inj",
@@ -972,7 +1035,8 @@
    ],
    "strengths": [
     "200 mg/5 ml"
-   ]
+   ],
+   "pack": "5 ml vial"
   },
   {
    "form": "inj",
@@ -982,7 +1046,8 @@
    ],
    "strengths": [
     "250 mg/5 ml"
-   ]
+   ],
+   "pack": "5 ml ampoule"
   },
   {
    "form": "inj",
@@ -993,7 +1058,8 @@
    "strengths": [
     "0.5%"
    ],
-   "kw": "isoproterenol"
+   "kw": "isoproterenol",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "injp",
@@ -1003,7 +1069,8 @@
    ],
    "strengths": [
     "12.5 mg"
-   ]
+   ],
+   "pack": "Vial"
   },
   {
    "form": "injp",
@@ -1013,7 +1080,8 @@
    ],
    "strengths": [
     "8 mg"
-   ]
+   ],
+   "pack": "2 ml vial"
   },
   {
    "form": "inj",
@@ -1024,7 +1092,8 @@
    "strengths": [
     "500 mg/ml"
    ],
-   "kw": "dipyrone analgin"
+   "kw": "dipyrone analgin",
+   "pack": "5 ml or 15 ml ampoule"
   },
   {
    "form": "inj",
@@ -1034,7 +1103,8 @@
    ],
    "strengths": [
     "15 mg/1.5 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1044,7 +1114,8 @@
    ],
    "strengths": [
     "75 mg/3 ml"
-   ]
+   ],
+   "pack": "3 ml ampoule"
   },
   {
    "form": "inj",
@@ -1054,7 +1125,8 @@
    ],
    "strengths": [
     "20 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1066,7 +1138,8 @@
    "strengths": [
     "75 mg + 2 mg"
    ],
-   "also": "Combipack with thiamine, pyridoxine and cyanocobalamin injection"
+   "also": "Combipack with thiamine, pyridoxine and cyanocobalamin injection",
+   "pack": "3 ml ampoule"
   },
   {
    "form": "inj",
@@ -1077,7 +1150,8 @@
    "strengths": [
     "100 mg"
    ],
-   "kw": "sodium chondroitin sulfate osteoarthritis"
+   "kw": "sodium chondroitin sulfate osteoarthritis",
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1088,7 +1162,8 @@
    "strengths": [
     "4 mg/ml",
     "8 mg/2 ml"
-   ]
+   ],
+   "pack": "1 ml or 2 ml ampoule or vial"
   },
   {
    "form": "inj",
@@ -1098,7 +1173,8 @@
    ],
    "strengths": [
     "30 mg/ml"
-   ]
+   ],
+   "pack": "1 ml ampoule"
   },
   {
    "form": "injp",
@@ -1109,7 +1185,8 @@
    "strengths": [
     "100 mg"
    ],
-   "also": "With 2 ml water for injection"
+   "also": "With 2 ml water for injection",
+   "pack": "Vial, with 2 ml water for injection"
   },
   {
    "form": "inj",
@@ -1120,7 +1197,8 @@
    ],
    "strengths": [
     "2 mg + 2 mg"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1130,7 +1208,8 @@
    ],
    "strengths": [
     "40 mg/ml"
-   ]
+   ],
+   "pack": "1, 2 or 5 ml vial"
   },
   {
    "form": "inj",
@@ -1140,7 +1219,8 @@
    ],
    "strengths": [],
    "restricted": true,
-   "note": "With chlorobutanol 0.5% w/v"
+   "note": "With chlorobutanol 0.5% w/v",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1151,7 +1231,8 @@
    "strengths": [
     "0.5 mg/ml"
    ],
-   "kw": "ergonovine"
+   "kw": "ergonovine",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1162,7 +1243,8 @@
    "strengths": [
     "10 mg/ml"
    ],
-   "kw": "frusemide"
+   "kw": "frusemide",
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1173,7 +1255,8 @@
    "strengths": [
     "20 mg/2 ml"
    ],
-   "kw": "torasemide"
+   "kw": "torasemide",
+   "pack": "2 ml ampoule or vial"
   },
   {
    "form": "inj",
@@ -1183,7 +1266,8 @@
    ],
    "strengths": [
     "20 mg/ml"
-   ]
+   ],
+   "pack": "1, 2 or 5 ml ampoule"
   },
   {
    "form": "inj",
@@ -1193,7 +1277,8 @@
    ],
    "strengths": [
     "5 mg/ml"
-   ]
+   ],
+   "pack": "4 ml ampoule"
   },
   {
    "form": "inj",
@@ -1203,7 +1288,8 @@
    ],
    "strengths": [
     "150 mcg/ml"
-   ]
+   ],
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1214,7 +1300,8 @@
    "strengths": [
     "5,000 IU/5 ml",
     "25,000 IU/5 ml"
-   ]
+   ],
+   "pack": "5 ml vial"
   },
   {
    "form": "inj",
@@ -1225,7 +1312,8 @@
    "strengths": [
     "50 mg/5 ml"
    ],
-   "kw": "protamine sulfate"
+   "kw": "protamine sulfate",
+   "pack": "5 ml ampoule"
   },
   {
    "form": "injp",
@@ -1235,7 +1323,8 @@
    ],
    "strengths": [
     "60,000 IU"
-   ]
+   ],
+   "pack": "10 ml vial"
   },
   {
    "form": "inj",
@@ -1246,7 +1335,8 @@
    "strengths": [
     "10 mg/ml"
    ],
-   "kw": "vitamin k1 phytonadione"
+   "kw": "vitamin k1 phytonadione",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1257,7 +1347,8 @@
    "strengths": [
     "10 mg"
    ],
-   "kw": "menaphthone vitamin k3"
+   "kw": "menaphthone vitamin k3",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1267,7 +1358,8 @@
    ],
    "strengths": [
     "100 mg/2 ml"
-   ]
+   ],
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1277,7 +1369,8 @@
    ],
    "strengths": [
     "20 mg"
-   ]
+   ],
+   "pack": "5 ml ampoule"
   },
   {
    "form": "inj",
@@ -1288,7 +1381,8 @@
    "strengths": [
     "50 mg/ml",
     "500 mg/10 ml"
-   ]
+   ],
+   "pack": "2 ml or 10 ml vial"
   },
   {
    "form": "inj",
@@ -1299,7 +1393,8 @@
    "strengths": [
     "7.5% w/v",
     "8.4% w/v"
-   ]
+   ],
+   "pack": "10 ml or 25 ml ampoule"
   },
   {
    "form": "inj",
@@ -1309,7 +1404,8 @@
    ],
    "strengths": [
     "15% w/v"
-   ]
+   ],
+   "pack": "10 ml ampoule"
   },
   {
    "form": "inj",
@@ -1319,7 +1415,8 @@
    ],
    "strengths": [
     "10% w/v"
-   ]
+   ],
+   "pack": "10 ml ampoule"
   },
   {
    "form": "inj",
@@ -1331,7 +1428,8 @@
     "137.5 mg"
    ],
    "therapy": "vitamins",
-   "kw": "hypocalcaemia"
+   "kw": "hypocalcaemia",
+   "pack": "10 ml ampoule"
   },
   {
    "form": "inj",
@@ -1342,7 +1440,8 @@
    "strengths": [
     "25% w/v"
    ],
-   "kw": "dextrose"
+   "kw": "dextrose",
+   "pack": "20 ml ampoule"
   },
   {
    "form": "inj",
@@ -1353,7 +1452,8 @@
    "strengths": [
     "200,000 IU/ml"
    ],
-   "kw": "vitamin d3"
+   "kw": "vitamin d3",
+   "pack": "1 ml ampoule"
   },
   {
    "form": "inj",
@@ -1364,7 +1464,8 @@
    "strengths": [
     "100 mg/2 ml"
    ],
-   "kw": "vitamin b1"
+   "kw": "vitamin b1",
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1375,7 +1476,8 @@
    "strengths": [
     "100 mg/2 ml"
    ],
-   "kw": "vitamin b6"
+   "kw": "vitamin b6",
+   "pack": "2 ml ampoule"
   },
   {
    "form": "inj",
@@ -1387,7 +1489,8 @@
    "strengths": [
     "10 mg + 10 mg"
    ],
-   "kw": "vitamin b1 b6"
+   "kw": "vitamin b1 b6",
+   "pack": "10 ml vial"
   },
   {
    "form": "inj",
@@ -1401,7 +1504,8 @@
     "100 mg + 100 mg + 1 mg (with lidocaine 20 mg)",
     "100 mg + 100 mg + 10 mg"
    ],
-   "kw": "vitamin b1 b6 b12 neurobion"
+   "kw": "vitamin b1 b6 b12 neurobion",
+   "pack": "2 ml ampoule (with lidocaine) or 3 ml ampoule"
   },
   {
    "form": "inj",
@@ -1417,7 +1521,8 @@
    "strengths": [],
    "note": "Two ampoules: No. 1 thiamine hydrochloride 250 mg, riboflavin 4 mg, pyridoxine hydrochloride 50 mg; No. 2 ascorbic acid 500 mg, nicotinamide 160 mg, glucose 1000 mg",
    "therapy": "vitamins",
-   "kw": "vitamin b c high potency"
+   "kw": "vitamin b c high potency",
+   "pack": "5 ml ampoule"
   },
   {
    "form": "inj",
@@ -1427,7 +1532,8 @@
    ],
    "strengths": [
     "250 mg/10 ml"
-   ]
+   ],
+   "pack": "10 ml ampoule"
   },
   {
    "form": "injp",
@@ -1487,7 +1593,8 @@
    "strengths": [
     "10 mg/ml"
    ],
-   "vet": true
+   "vet": true,
+   "pack": "10, 20, 25, 30, 50 or 100 ml vial"
   },
   {
    "form": "tablet",
@@ -1500,7 +1607,8 @@
     "100 mg + 325 mg",
     "100 mg + 500 mg"
    ],
-   "kw": "acetaminophen"
+   "kw": "acetaminophen",
+   "pack": "10 x 10, Alu-PVC blister (100 mg + 500 mg)"
   },
   {
    "form": "tablet",
@@ -1514,7 +1622,8 @@
     "100 mg + 325 mg + 15 mg",
     "100 mg + 500 mg + 10 mg"
    ],
-   "kw": "serratiopeptidase"
+   "kw": "serratiopeptidase",
+   "pack": "10 x 10, Alu-PVC blister (100 mg + 500 mg + 10 mg)"
   },
   {
    "form": "tablet",
@@ -1536,7 +1645,8 @@
    "strengths": [
     "200 mg"
    ],
-   "kw": "aciclovir"
+   "kw": "aciclovir",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1558,7 +1668,8 @@
     "5 mg",
     "10 mg"
    ],
-   "kw": "amlodipine besilate"
+   "kw": "amlodipine besilate",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1583,7 +1694,8 @@
     "40 mg + 240 mg",
     "80 mg + 480 mg"
    ],
-   "kw": "antimalarial act"
+   "kw": "antimalarial act",
+   "pack": "Alu-PVC blister: 1 x 6 (20 mg + 120 mg, 80 mg + 480 mg); 10 x 10 (40 mg + 240 mg)"
   },
   {
    "form": "tablet",
@@ -1594,7 +1706,8 @@
    "strengths": [
     "500 mg"
    ],
-   "kw": "vitamin c"
+   "kw": "vitamin c",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1605,7 +1718,8 @@
    "strengths": [
     "80 mg"
    ],
-   "kw": "acetylsalicylic acid"
+   "kw": "acetylsalicylic acid",
+   "pack": "10 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -1618,7 +1732,8 @@
     "20 mg",
     "40 mg"
    ],
-   "kw": "atorvastatin calcium"
+   "kw": "atorvastatin calcium",
+   "pack": "10 x 10 blister: Alu-Alu (10 mg, 20 mg); Alu-PVC (40 mg)"
   },
   {
    "form": "tablet",
@@ -1638,7 +1753,8 @@
    "strengths": [
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "Alu-PVC blister: 1 x 6 (250 mg); 1 x 3 (500 mg)"
   },
   {
    "form": "tablet",
@@ -1649,7 +1765,8 @@
    "strengths": [
     "5 mg"
    ],
-   "kw": "trihexyphenidyl"
+   "kw": "trihexyphenidyl",
+   "pack": "1 x 20, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1690,7 +1807,8 @@
    "strengths": [
     "10 mg"
    ],
-   "kw": "cetirizine dihydrochloride"
+   "kw": "cetirizine dihydrochloride",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1701,7 +1819,8 @@
    "strengths": [
     "4 mg"
    ],
-   "kw": "chlorphenamine"
+   "kw": "chlorphenamine",
+   "pack": "10 x 10 or 2 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1712,7 +1831,8 @@
    "strengths": [
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1723,7 +1843,8 @@
    "strengths": [
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1733,7 +1854,8 @@
    ],
    "strengths": [
     "75 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1743,7 +1865,8 @@
    ],
    "strengths": [
     "10 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1753,7 +1876,8 @@
    ],
    "strengths": [
     "0.5 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1764,7 +1888,8 @@
    "strengths": [
     "50 mg"
    ],
-   "rel": "Uncoated or film coated"
+   "rel": "Uncoated or film coated",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1775,7 +1900,8 @@
    "strengths": [
     "50 mg"
    ],
-   "rel": "Uncoated or film coated"
+   "rel": "Uncoated or film coated",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1785,7 +1911,8 @@
    ],
    "strengths": [
     "50 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1796,7 +1923,8 @@
    ],
    "strengths": [
     "50 mg + 325 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1807,7 +1935,8 @@
    ],
    "strengths": [
     "50 mg + 500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1844,7 +1973,8 @@
    "strengths": [
     "50 mg + 10 mg"
    ],
-   "kw": "serratiopeptidase"
+   "kw": "serratiopeptidase",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1898,7 +2028,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1908,7 +2039,8 @@
    ],
    "strengths": [
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1918,7 +2050,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1930,7 +2063,8 @@
     "60 mg",
     "90 mg",
     "120 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1974,7 +2108,8 @@
    ],
    "strengths": [
     "5 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -1984,7 +2119,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2010,7 +2146,8 @@
     "1 mg + 500 mg",
     "2 mg + 500 mg"
    ],
-   "rel": "Also with sustained-release metformin"
+   "rel": "Also with sustained-release metformin",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2022,7 +2159,8 @@
     "125 mg",
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2033,7 +2171,8 @@
    "strengths": [
     "25 mg",
     "50 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2045,7 +2184,8 @@
     "200 mg",
     "400 mg"
    ],
-   "rel": "Film coated or sugar coated"
+   "rel": "Film coated or sugar coated",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2055,7 +2195,8 @@
    ],
    "strengths": [
     "200 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2119,7 +2260,8 @@
    "strengths": [
     "5 mg + 240 mg"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2130,7 +2272,8 @@
    "strengths": [
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2140,7 +2283,8 @@
    ],
    "strengths": [
     "2 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2150,7 +2294,8 @@
    ],
    "strengths": [
     "10 mg"
-   ]
+   ],
+   "pack": "2 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2162,7 +2307,8 @@
     "25 mg",
     "50 mg",
     "100 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister (25 mg, 50 mg)"
   },
   {
    "form": "tablet",
@@ -2195,7 +2341,8 @@
    "strengths": [
     "500 mg",
     "850 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister (500 mg)"
   },
   {
    "form": "tablet",
@@ -2207,7 +2354,8 @@
     "500 mg",
     "1000 mg"
    ],
-   "kw": "modified release sr er"
+   "kw": "modified release sr er",
+   "pack": "Alu-PVC blister: 10 x 10 (500 mg); 10 x 15 (1000 mg)"
   },
   {
    "form": "tablet",
@@ -2219,7 +2367,8 @@
    "strengths": [
     "metformin 500 mg",
     "metformin 1000 mg"
-   ]
+   ],
+   "pack": "Alu-PVC blister: 5 x 2 x 15 (metformin 500 mg); 10 x 10 (metformin 1000 mg)"
   },
   {
    "form": "tablet",
@@ -2255,7 +2404,8 @@
     "250 mg",
     "400 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2277,7 +2427,8 @@
    ],
    "strengths": [
     "20 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2298,7 +2449,8 @@
    ],
    "strengths": [
     "100 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2308,7 +2460,8 @@
    ],
    "strengths": [
     "400 mg"
-   ]
+   ],
+   "pack": "1 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2384,7 +2537,8 @@
     "650 mg",
     "1 g"
    ],
-   "kw": "acetaminophen"
+   "kw": "acetaminophen",
+   "pack": "10 x 10, Alu-PVC blister (500 mg)"
   },
   {
    "form": "tablet",
@@ -2421,7 +2575,8 @@
    ],
    "strengths": [
     "400 mg"
-   ]
+   ],
+   "pack": "1 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2442,7 +2597,8 @@
    ],
    "strengths": [
     "20 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2477,7 +2633,8 @@
     "20 mg",
     "40 mg"
    ],
-   "kw": "rosuvastatin calcium"
+   "kw": "rosuvastatin calcium",
+   "pack": "10 x 10, Alu-PVC blister (10 mg, 20 mg, 40 mg)"
   },
   {
    "form": "tablet",
@@ -2500,7 +2657,8 @@
     "25 mg",
     "50 mg",
     "100 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister (50 mg, 100 mg)"
   },
   {
    "form": "tablet",
@@ -2511,7 +2669,8 @@
    "strengths": [
     "50 mg",
     "100 mg"
-   ]
+   ],
+   "pack": "3 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2558,7 +2717,8 @@
    "strengths": [
     "0.4 mg"
    ],
-   "kw": "modified release"
+   "kw": "modified release",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2569,7 +2729,8 @@
    "strengths": [
     "20 mg",
     "40 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2580,7 +2741,8 @@
    "strengths": [
     "250 mg",
     "500 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-Alu blister"
   },
   {
    "form": "tablet",
@@ -2589,7 +2751,8 @@
     "tranexamic acid",
     "mefenamic acid"
    ],
-   "strengths": []
+   "strengths": [],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2599,7 +2762,8 @@
     "chymotrypsin"
    ],
    "strengths": [],
-   "therapy": "pain"
+   "therapy": "pain",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "tablet",
@@ -2644,7 +2808,8 @@
    "strengths": [
     "20 mg"
    ],
-   "kw": "delayed release"
+   "kw": "delayed release",
+   "pack": "1 x 10 or 10 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2665,7 +2830,8 @@
     "domperidone"
    ],
    "strengths": [],
-   "rel": "Enteric-coated esomeprazole, sustained-release domperidone"
+   "rel": "Enteric-coated esomeprazole, sustained-release domperidone",
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "capsule",
@@ -2676,7 +2842,8 @@
    "strengths": [
     "100 mg",
     "200 mg"
-   ]
+   ],
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2686,7 +2853,8 @@
    ],
    "strengths": [
     "40 mg"
-   ]
+   ],
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2744,7 +2912,8 @@
    "strengths": [
     "20 mg + 30 mg"
    ],
-   "rel": "Enteric-coated rabeprazole, sustained-release domperidone"
+   "rel": "Enteric-coated rabeprazole, sustained-release domperidone",
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2756,7 +2925,8 @@
    "strengths": [
     "20 mg + 75 mg"
    ],
-   "rel": "Enteric-coated rabeprazole, sustained-release levosulpiride"
+   "rel": "Enteric-coated rabeprazole, sustained-release levosulpiride",
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2768,7 +2938,8 @@
    "strengths": [
     "20 mg + 150 mg"
    ],
-   "rel": "Enteric-coated rabeprazole, sustained-release itopride"
+   "rel": "Enteric-coated rabeprazole, sustained-release itopride",
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2812,7 +2983,8 @@
    ],
    "strengths": [
     "500 mg"
-   ]
+   ],
+   "pack": "1 x 6, Alu-PVC blister"
   },
   {
    "form": "capsule",
@@ -2822,7 +2994,8 @@
    ],
    "strengths": [
     "150 mg"
-   ]
+   ],
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",
@@ -2832,7 +3005,8 @@
    ],
    "strengths": [
     "2 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "capsule",
@@ -2842,7 +3016,8 @@
    ],
    "strengths": [
     "20 mg"
-   ]
+   ],
+   "pack": "10 x 10, Alu-PVC blister"
   },
   {
    "form": "capsule",
@@ -2854,7 +3029,8 @@
     "50 mg",
     "100 mg"
    ],
-   "restricted": true
+   "restricted": true,
+   "pack": "1 x 10, Alu-Alu blister"
   },
   {
    "form": "capsule",

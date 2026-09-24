@@ -13,7 +13,8 @@
 //
 // products.json holds generic names only. It was curated from partner price
 // lists; no partner, brand or product code is carried into it, and nothing
-// here may add one.
+// here may add one. `pack` (container or blister, as two of the lists give
+// it) is shown as the item's Pack line.
 //
 // Where a product goes: the main ingredient's WHO ATC code decides. Its
 // cephalosporins (J01D B/C/D/E/I) and carbapenems and penicillins (J01DH,
@@ -365,6 +366,7 @@ for (const x of placed) {
   const form = formLabel(p);
   const specs = [{ label: 'Dosage form', value: form }];
   if (p.strengths.length) specs.push({ label: p.strengths.length > 1 ? 'Strengths' : 'Strength', value: p.strengths.join(', ') });
+  if (p.pack) specs.push({ label: 'Pack', value: p.pack });
   if (p.rel) specs.push({ label: 'Release', value: p.rel });
   if (p.note) specs.push({ label: 'Composition', value: p.note });
   if (p.also) specs.push({ label: 'Also supplied as', value: p.also });

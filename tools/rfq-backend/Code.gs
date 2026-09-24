@@ -38,6 +38,9 @@ var WHATSAPP = '919825012519';
 var ADDRESS = 'C-303, Siddhivinayak Towers, Makarba, Ahmedabad, Gujarat, 380051';
 var LOGO = SITE + '/email/mh-logo.png';
 var TIMEZONE = 'Asia/Kolkata';
+// Tag on the buyer confirmation's links to the site, so analytics can count
+// the visits it brings back (utm_content tells the button from the footer).
+var CONFIRM_UTM = 'utm_source=quote_confirmation&utm_medium=email';
 
 // Every key the form may send. Anything else is refused.
 var KEYS = [
@@ -628,7 +631,7 @@ function confirmationHtml(enq, when) {
     '<p style="margin:0;font:15px/1.6 ' + FONT + ';color:' + C.steelDeep + ';">Need to add something, or have a specification sheet? Simply reply to this email and it reaches the same desk.</p>' +
     '<div style="margin-top:16px;">' +
     button('https://wa.me/' + WHATSAPP, 'WhatsApp us', true) +
-    button(SITE + '/catalogue/', 'Browse the catalogue', false) +
+    button(SITE + '/catalogue/?' + CONFIRM_UTM + '&utm_content=catalogue_button', 'Browse the catalogue', false) +
     '</div>' +
     '<p style="margin:18px 0 0;font:15px/1.6 ' + FONT + ';color:' + C.ink + ';">Regards,<br><strong>Sales Desk</strong><br>MH PharmaPack</p>' +
     '</td></tr>';
@@ -640,7 +643,7 @@ function confirmationHtml(enq, when) {
     '<div style="margin-top:4px;font:13px/1.6 ' + FONT + ';color:' + C.steelDeep + ';">' +
     '<a href="mailto:' + SALES_EMAIL_DEFAULT + '" style="color:' + C.copperDeep + ';text-decoration:none;">' + SALES_EMAIL_DEFAULT + '</a> &nbsp;·&nbsp; ' +
     '<a href="tel:' + PHONE_TEL + '" style="color:' + C.copperDeep + ';text-decoration:none;">' + esc(PHONE_DISPLAY) + '</a> &nbsp;·&nbsp; ' +
-    '<a href="' + SITE + '" style="color:' + C.copperDeep + ';text-decoration:none;">mhpharmapack.com</a></div>' +
+    '<a href="' + esc(SITE + '/?' + CONFIRM_UTM + '&utm_content=footer_link') + '" style="color:' + C.copperDeep + ';text-decoration:none;">mhpharmapack.com</a></div>' +
     '<div style="margin-top:12px;font:12px/1.5 ' + FONT + ';color:' + C.muted + ';">You are receiving this email because you sent an enquiry through mhpharmapack.com.</div>' +
     '</td></tr>';
 

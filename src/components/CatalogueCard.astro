@@ -46,9 +46,9 @@ const PEEK_LABELS: Record<string, string> = {
   'Molecular formula': 'Formula',
   'Molecular weight': 'Mol. weight',
 };
-// A finished formulation's peek: form, strengths, release and use; the
+// A finished formulation's peek: form, strengths, pack, release and use; the
 // composition, ATC class and other presentations stay on the item page.
-const FF_PEEK = new Set(['Dosage form', 'Strength', 'Strengths', 'Release', 'Use']);
+const FF_PEEK = new Set(['Dosage form', 'Strength', 'Strengths', 'Pack', 'Release', 'Use']);
 const peek = item.dosageForm
   ? facts.filter((f) => FF_PEEK.has(f.label))
   : item.structure

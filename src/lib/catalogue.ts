@@ -236,7 +236,8 @@ export function itemNote(item: CatalogueItem): string | undefined {
     const drawing = item.structure
       ? `The drawing is the structural formula of ${item.structureOf}, the main ingredient. ${atc ? 'It and the ATC class come' : 'It comes'} from ${registry}.`
       : `The drawing shows the dosage form, not the product.${atc ? ` The ATC class is from ${registry}.` : ''}`;
-    return `${drawing} Strengths are as the partner plants list them; tell us the pack and the market when you enquire.`;
+    const listed = specValue(item, 'Pack') ? 'Strengths and packs are' : 'Strengths are';
+    return `${drawing} ${listed} as the partner plants list them; tell us the pack and the market you need when you enquire.`;
   }
   if (item.structure) {
     const what = item.structureOf
