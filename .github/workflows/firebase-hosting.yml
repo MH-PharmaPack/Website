@@ -1,0 +1,47 @@
+name: Deploy to Firebase Hosting
+
+# Manual runs only while the site is tested on Firebase's own address; the push
+# trigger is added once a test deploy works, and the GitHub Pages workflow is
+# removed after the DNS switch (OPEN-DECISIONS.md section 6).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # lets the job prove to Google Cloud that it is this repository
+
+concurrency:
+  group: firebase-hosting
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Keyless sign-in through Workload Identity Federation: no stored key. Google
+      # accepts only this repository's main branch (attribute condition on the provider).
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          workload_identity_provider: projects/1057935811679/locations/global/workloadIdentityPools/github/providers/mh-website
+          service_account: github-deploy@mh-pharmapack-web.iam.gserviceaccount.com
+          create_credentials_file: true
+
+      - name: Deploy to Firebase Hosting
+        run: npx --yes firebase-tools@15.32.1 deploy --only hosting --project mh-pharmapack-web --non-interactive
