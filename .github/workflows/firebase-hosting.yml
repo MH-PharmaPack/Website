@@ -1,9 +1,11 @@
 name: Deploy to Firebase Hosting
 
-# Manual runs only while the site is tested on Firebase's own address; the push
-# trigger is added once a test deploy works, and the GitHub Pages workflow is
-# removed after the DNS switch (OPEN-DECISIONS.md section 6).
+# mhpharmapack.com is served from Firebase since 2026-10-03 (OPEN-DECISIONS.md
+# section 6). Every push to main publishes; the GitHub Pages workflow goes once www
+# has moved too.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
