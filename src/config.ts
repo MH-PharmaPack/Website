@@ -108,7 +108,8 @@ export const ORG_SAME_AS: string[] = [LINKEDIN_URL];
 // It also normalises page links to the trailing-slash form, which is the one the
 // build actually emits (astro.config.mjs sets trailingSlash: 'always' with a
 // directory-format build). Without this, every nav click hit /contact, which
-// GitHub Pages answers with a 301 to /contact/: a wasted round trip on a mobile
+// the host answers with a 301 to /contact/ (firebase.json trailingSlash: true;
+// GitHub Pages did the same before 2026-10-03): a wasted round trip on a mobile
 // connection, and two URL shapes for one page in anything that reads our links.
 // Asset paths are left alone; anything with a file extension is not a page.
 const HAS_EXTENSION = /\.[a-z0-9]+$/i;

@@ -2,8 +2,8 @@
 import Base from '../layouts/Base.astro';
 import { NAV, MAILTO_HREF, WHATSAPP_HREF, TEL_HREF, withBase } from '../config';
 
-// GitHub Pages serves a root-level 404.html for any unmatched path, with a real
-// 404 status. Astro emits this route as 404.html even under directory build
+// Firebase Hosting (GitHub Pages before 2026-10-03) serves a root-level 404.html
+// for any unmatched path, with a real 404 status. Astro emits this route as 404.html even under directory build
 // format, so the two conventions line up with no extra config.
 //
 // A dead link from a cold email is the worst possible first impression, and

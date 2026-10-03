@@ -15,7 +15,8 @@ import { SALES_EMAIL, FORM_ENDPOINT, TURNSTILE_SITE_KEY, POSTHOG_KEY, POSTHOG_HO
 //  (client, 2026-09-23): when a buyer's contact details are shared with a
 //  manufacturer, and how long enquiries are kept.] Add them here once set.
 
-const UPDATED = POSTHOG_KEY ? '24 September 2026' : '23 September 2026';
+// Last change: the hosting line (GitHub Pages to Firebase Hosting, 2026-10-03).
+const UPDATED = '3 October 2026';
 const posthogRegion = POSTHOG_HOST.includes('eu.') ? 'the European Union' : 'the United States';
 const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy request')}`;
 ---
@@ -162,8 +163,9 @@ const privacyMail = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent('Privacy
         <h2>Other services this site uses</h2>
         <ul>
           <li>
-            <strong>Hosting.</strong> The site is hosted on GitHub Pages. GitHub states that when a GitHub
-            Pages site is visited, the visitor's IP address is logged and stored for security purposes.
+            <strong>Hosting.</strong> The site is hosted on Firebase Hosting, a Google service. Google
+            states that Firebase Hosting uses the IP addresses of incoming requests to detect abuse and
+            to give site owners usage statistics, and keeps that IP data for a few months.
           </li>
           <li>
             <strong>Map.</strong> The office map at the foot of each page is a Google Maps embed. It
